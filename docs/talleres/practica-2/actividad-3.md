@@ -17,6 +17,7 @@
       y el [**F1**](../../ayudas/f1.md).
 
     **¿Cuántos clientes que abandonan detecta el modelo? ¿Cuántas falsas alarmas genera?**
+
 4. [**Entrene un árbol de decisión**](../../ayudas/arbol-decision.md) y optimice con GridSearchCV:
    `max_depth` ∈ {3, 5, 7, 10, `None`}, `min_samples_leaf` ∈ {1, 5, 20, 50} y
    `class_weight` ∈ {`None`, `"balanced"`}. **¿Qué profundidad resultó mejor? ¿Qué variables
@@ -29,6 +30,7 @@
 
     **¿Hay diferencia entre entrenamiento y validación? ¿Hay señales de
     [sobreajuste](../../glosario.md#sobreajuste)?**
+
 6. [**Entrene un modelo KNN**](../../ayudas/knn.md) y optimice con GridSearchCV:
    `n_neighbors` ∈ {3, 5, 11, 21, 41} y `weights` ∈ {`"uniform"`, `"distance"`}.
    **¿Por qué KNN necesita [escalar las variables](../../ayudas/escalar-variables.md)? ¿Qué número
@@ -40,6 +42,7 @@
       y el [**F1**](../../ayudas/f1.md).
 
     **¿Qué ocurre con las métricas de entrenamiento? ¿Qué explica ese resultado?**
+
 8. Grafique las [**curvas ROC**](../../ayudas/curva-roc.md) de los tres modelos, una figura para
    entrenamiento y otra para validación. **¿Qué modelo tiene el mayor
    [AUC](../../glosario.md#auc) en validación? ¿Qué modelo cambia más entre entrenamiento y
