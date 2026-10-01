@@ -11,11 +11,11 @@ desde la preparación de los datos hasta la evaluación de los modelos.
 
 <div class="grid cards" markdown>
 
--   :material-numeric-1-circle:{ .lg .middle } **Práctica 1**
+-   :material-numeric-1-circle:{ .lg .middle } **Práctica 1: Regresión lineal**
 
     ---
 
-    _Tema por definir_
+    Incendios forestales en Montesinho: entendimiento, calidad y tratamiento de los datos.
 
     [:octicons-arrow-right-24: Ir a la práctica](talleres/practica-1.md)
 
@@ -57,11 +57,19 @@ desde la preparación de los datos hasta la evaluación de los modelos.
 
 <div class="grid cards" markdown>
 
+-   :material-code-braces:{ .lg .middle } **Fragmentos de código**
+
+    ---
+
+    Cómo cargar datos, graficar, medir la calidad de los datos y tratarlos.
+
+    [:octicons-arrow-right-24: Empezar por cargar un dataset](ayudas/cargar-datos.md)
+
 -   :material-book-open-variant:{ .lg .middle } **Glosario**
 
     ---
 
-    Términos clave y fragmentos de código de ayuda para resolver los ejercicios.
+    Definiciones de los términos que se usan en las prácticas.
 
     [:octicons-arrow-right-24: Consultar](ayudas/glosario.md)
 
@@ -69,19 +77,13 @@ desde la preparación de los datos hasta la evaluación de los modelos.
 
 ## Cómo está organizada cada práctica
 
-Todas las prácticas siguen la misma estructura:
-
-1. **Objetivos**: lo que debe saber hacer al terminar.
-2. **Ejercicios guiados**: cada uno tiene
-    - un _enunciado_ con la tarea,
-    - un _fundamento_ con el concepto y sus fórmulas,
-    - un _código_ de partida para completar,
-    - un _resultado esperado_ para comprobar su solución.
-3. **Ejercicio de síntesis**: integra lo visto en la práctica sobre un dataset nuevo.
+Cada práctica parte de un **dataset de trabajo** y se divide en **actividades**.
+Cada actividad es una secuencia de pasos numerados con instrucciones y preguntas que debe
+resolver en su notebook.
 
 !!! tip "Si se atasca"
-    Los recuadros de **Ayuda** de cada ejercicio remiten al [Glosario](ayudas/glosario.md),
-    donde hay fragmentos de código listos para adaptar.
+    Las acciones de cada paso enlazan a una página de **Ayudas** con el código necesario,
+    y los términos clave enlazan al [Glosario](ayudas/glosario.md).
 
 ## Antes de empezar
 

@@ -84,4 +84,12 @@ nav:
       - Práctica 4: talleres/practica-4.md
       - Práctica 5: talleres/practica-5.md
   - Ayudas:
+      - Cargar un dataset: ayudas/cargar-datos.md
+      - Explorar la estructura: ayudas/explorar-estructura.md
+      - Gráficos de variables continuas: ayudas/graficos-continuos.md
+      - Gráficos de variables categóricas: ayudas/graficos-categoricos.md
+      - Calidad de los datos: ayudas/calidad-datos.md
+      - Tratar valores nulos: ayudas/tratar-nulos.md
+      - Tratar duplicados: ayudas/tratar-duplicados.md
+      - Clipping de outliers: ayudas/clipping.md
       - Glosario: ayudas/glosario.md
