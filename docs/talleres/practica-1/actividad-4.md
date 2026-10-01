@@ -9,10 +9,10 @@
    **¿Por qué la [regularización](../../glosario.md#regularizacion) exige que todas las variables
    estén en la misma escala?**
 3. [**Entrene un modelo de regresión Lasso**](../../ayudas/lasso-ridge.md#lasso) con tres valores del
-   [hiperparámetro](../../glosario.md#hiperparametro) alfa: **α = 0,1**, **α = 0,5** y **α = 1**.
+   [hiperparámetro](../../glosario.md#hiperparametro) alfa: **α = 1.000**, **α = 5.000** y **α = 10.000**.
 4. Revise los [**coeficientes**](../../ayudas/ver-coeficientes.md) de cada modelo Lasso.
    **¿Se eliminó algún coeficiente (quedó exactamente en 0)? ¿Cuáles variables sobreviven al
-   aumentar alfa? ¿Coinciden con las que parecían más relacionadas con el área quemada en la
+   aumentar alfa? ¿Coinciden con las que parecían más relacionadas con el precio en la
    Actividad 2?**
 5. Calcule el [**R²**](../../ayudas/r2.md), el [**MAE**](../../ayudas/mae.md) y el
    [**RMSE**](../../ayudas/rmse.md) de los tres modelos Lasso en entrenamiento y en prueba, y
@@ -20,7 +20,7 @@
    Actividad 2. **¿Qué valor de alfa da el mejor resultado en prueba? ¿Qué pasa con las métricas
    cuando alfa crece demasiado?**
 6. [**Entrene un modelo de regresión Ridge**](../../ayudas/lasso-ridge.md#ridge) con tres valores de alfa:
-   **α = 1**, **α = 100** y **α = 1000**.
+   **α = 10**, **α = 1.000** y **α = 10.000**.
 7. Revise los [**coeficientes**](../../ayudas/ver-coeficientes.md) de cada modelo Ridge.
    **¿Se eliminó algún coeficiente? ¿Cómo cambian sus magnitudes al aumentar alfa? ¿En qué se
    diferencia este comportamiento del de Lasso?**
@@ -37,7 +37,7 @@
    borde de la grilla?**
 10. Reporte el mejor modelo de cada tipo (Lasso y Ridge) **solo con el conjunto de prueba**.
     **¿Qué tan lejos está el mejor modelo de predecir siempre la media? ¿Qué concluye sobre la
-    capacidad de las variables meteorológicas para predecir el área quemada? ¿Cuál modelo
+    capacidad de las características de la casa y de su ubicación para predecir el precio? ¿Cuál modelo
     escogería y por qué?**
 
 !!! success "Fin de la Práctica 1"

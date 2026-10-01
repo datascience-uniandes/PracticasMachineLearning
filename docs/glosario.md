@@ -6,13 +6,27 @@ Términos usados en las prácticas, en orden alfabético.
 
 ## A
 
-_Sin términos por ahora._
+### Árbol de decisión { #arbol-decision }
+
+Modelo que clasifica mediante una secuencia de preguntas sobre las variables (por ejemplo, ¿edad > 45?), organizadas como un árbol. Cada hoja asigna una clase. Los árboles muy profundos tienden al [sobreajuste](#sobreajuste).
+
+### AUC { #auc }
+
+Área bajo la [curva ROC](#curva-roc) (_Area Under the Curve_). Resume en un número entre 0 y 1 la capacidad de un clasificador para ordenar los positivos por encima de los negativos: 0,5 equivale a adivinar al azar y 1 a un clasificador perfecto.
 
 ## B
 
 _Sin términos por ahora._
 
 ## C
+
+### Chi-cuadrado { #chi-cuadrado }
+
+Prueba estadística que evalúa si dos variables categóricas son independientes, comparando las frecuencias observadas en una tabla de contingencia con las que se esperarían si no hubiera relación.
+
+### Clasificación { #clasificacion }
+
+Tarea de aprendizaje supervisado en la que la [variable objetivo](#variable-objetivo) es categórica, por ejemplo, si un cliente abandona o no un banco.
 
 ### Clipping { #clipping }
 
@@ -58,6 +72,14 @@ Medida de qué tanto varían juntas dos variables. El coeficiente de Pearson (\(
 (relación lineal inversa perfecta) a 1 (relación lineal directa perfecta); 0 indica que no hay
 relación lineal.
 
+### Curva de precisión-sensibilidad { #curva-precision-sensibilidad }
+
+Gráfico de la [precisión](#precision) frente a la [sensibilidad](#sensibilidad) de un clasificador para todos los [umbrales de decisión](#umbral-decision). Es más informativa que la curva ROC cuando hay [desbalance de clases](#desbalance-de-clases).
+
+### Curva ROC { #curva-roc }
+
+Gráfico de la tasa de verdaderos positivos frente a la tasa de falsos positivos de un clasificador para todos los [umbrales de decisión](#umbral-decision). Su área es el [AUC](#auc).
+
 ## D
 
 ### Desbalance de clases { #desbalance-de-clases }
@@ -83,9 +105,19 @@ Transformación que lleva cada variable a media 0 y desviación estándar 1:
 \(z = (x - ar{x}) / s\). Es necesaria antes de regularizar, porque la penalización depende de
 la escala de cada coeficiente.
 
+### Estratificación { #estratificacion }
+
+Forma de dividir los datos que conserva en cada conjunto la misma proporción de clases que en el dataset completo.
+
+### Exactitud { #exactitud }
+
+Proporción de predicciones correctas de un clasificador (_accuracy_). Con [desbalance de clases](#desbalance-de-clases) puede ser alta aunque el modelo no detecte la clase minoritaria.
+
 ## F
 
-_Sin términos por ahora._
+### F1 { #f1 }
+
+Media armónica de la [precisión](#precision) y la [sensibilidad](#sensibilidad). Solo es alta cuando ambas lo son.
 
 ## G
 
@@ -118,6 +150,10 @@ _Sin términos por ahora._
 
 Ver [validación cruzada](#validacion-cruzada).
 
+### KNN { #knn }
+
+K vecinos más cercanos (_K-Nearest Neighbors_): clasifica cada registro según la clase mayoritaria de los \(k\) registros de entrenamiento más cercanos. Requiere [estandarizar](#estandarizacion) las variables.
+
 ## L
 
 ### Lasso { #lasso }
@@ -132,6 +168,10 @@ que también selecciona variables.
 
 Error absoluto medio (_Mean Absolute Error_): promedio de las diferencias absolutas entre los
 valores reales y los predichos. Se expresa en las mismas unidades que la variable objetivo.
+
+### Matriz de confusión { #matriz-confusion }
+
+Tabla que cruza las clases reales con las predichas y cuenta los verdaderos positivos, verdaderos negativos, falsos positivos y falsos negativos de un clasificador.
 
 ### Multicolinealidad { #multicolinealidad }
 
@@ -158,7 +198,13 @@ fuera de los bigotes, a más de 1,5 veces el rango intercuartílico de la caja.
 
 ## P
 
-_Sin términos por ahora._
+### Precisión { #precision }
+
+De los registros que el modelo predijo como positivos, proporción que realmente lo son: \(VP / (VP + FP)\).
+
+### Prueba t { #prueba-t }
+
+Prueba estadística que compara la media de una variable continua entre dos grupos, por ejemplo, entre los clientes que abandonaron y los que no.
 
 ## Q
 
@@ -175,6 +221,10 @@ el modelo. Vale 1 si el modelo predice perfectamente y 0 si no mejora a predecir
 
 Modelo que predice una variable continua como una combinación lineal de las variables
 independientes: \(\hat{y} = \beta_0 + \beta_1 x_1 + \dots + \beta_p x_p\).
+
+### Regresión logística { #regresion-logistica }
+
+Modelo de [clasificación](#clasificacion) que estima la probabilidad de la clase positiva aplicando la función sigmoide a una combinación lineal de las variables.
 
 ### Regresión polinomial { #regresion-polinomial }
 
@@ -206,6 +256,10 @@ mismas unidades que la variable objetivo.
 
 ## S
 
+### Sensibilidad { #sensibilidad }
+
+De los registros realmente positivos, proporción que el modelo detecta (_recall_): \(VP / (VP + FN)\).
+
 ### Sesgo { #sesgo }
 
 Asimetría de una distribución. Con sesgo a la derecha, la mayoría de valores son pequeños
@@ -231,7 +285,9 @@ de una variable dependa del valor de la otra.
 
 ## U
 
-_Sin términos por ahora._
+### Umbral de decisión { #umbral-decision }
+
+Probabilidad a partir de la cual un clasificador asigna la clase positiva. Por defecto es 0,5; moverlo cambia el equilibrio entre [precisión](#precision) y [sensibilidad](#sensibilidad).
 
 ## V
 

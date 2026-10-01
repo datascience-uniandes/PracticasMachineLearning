@@ -4,11 +4,11 @@
 
 1. **Ingeniería de características:** realice [**gráficos de dispersión**](../../ayudas/grafico-dispersion.md)
    entre cada variable continua y la [variable objetivo](../../glosario.md#variable-objetivo)
-   tratada en la actividad anterior. **¿Qué variables muestran una relación lineal con el área
-   quemada? ¿Alguna muestra una relación no lineal o ninguna relación?**
+   tratada en la actividad anterior. **¿Qué variables muestran una relación lineal con el precio?
+   ¿Alguna muestra una relación no lineal o ninguna relación?**
 2. Calcule la [**matriz de correlación**](../../ayudas/correlacion.md) entre las variables
    independientes y con la variable objetivo. Seleccione las variables con una
-   [correlación](../../glosario.md#correlacion) de al menos **|r| ≥ 0,05** con la variable objetivo.
+   [correlación](../../glosario.md#correlacion) de al menos **|r| ≥ 0,3** con la variable objetivo.
    **¿Hay pares de variables independientes muy correlacionadas entre sí (|r| > 0,7)?** Si las hay,
    conserve solo una de cada par para evitar [multicolinealidad](../../glosario.md#multicolinealidad).
 3. Aplique [**codificación one-hot**](../../ayudas/one-hot.md) a las variables categóricas.
@@ -18,8 +18,8 @@
    variables seleccionadas.
 5. [**Interprete los coeficientes**](../../ayudas/interpretar-coeficientes.md) del modelo.
    **¿Qué variables aumentan el área predicha y cuáles la disminuyen? ¿Cuánto cambia la
-   predicción por cada unidad de cada variable? ¿Qué significan los coeficientes de los meses
-   respecto a la categoría de referencia? ¿Se pueden comparar las magnitudes directamente?**
+   predicción por cada unidad de cada variable? ¿Qué significan los coeficientes de los códigos
+   postales respecto a la categoría de referencia? ¿Se pueden comparar las magnitudes directamente?**
 6. Calcule el [**R²**](../../ayudas/r2.md), el [**MAE**](../../ayudas/mae.md) y el
    [**RMSE**](../../ayudas/rmse.md) en el conjunto de entrenamiento. **¿Qué tan grande es el
    error frente al rango de la variable objetivo?**

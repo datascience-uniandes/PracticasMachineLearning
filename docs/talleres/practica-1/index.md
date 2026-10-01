@@ -1,9 +1,10 @@
 # Práctica 1: Regresión lineal
 
-En esta práctica se analizan los incendios forestales del Parque Natural de Montesinho (Portugal)
-para entender qué factores meteorológicos, temporales y espaciales influyen en el **área quemada**.
+En esta práctica se analizan las ventas de casas del condado de King (Washington, Estados Unidos)
+para entender qué características de una casa y de su ubicación influyen en su **precio de venta**,
+y construir modelos que lo predigan.
 
-### Datos de trabajo: [forestfires.csv](../../datos/forestfires.md)
+### Datos de trabajo: [inmuebles.csv](../../datos/inmuebles.md)
 
 En la página del dataset encontrará el enlace de descarga y el diccionario de datos.
 

@@ -1,6 +1,6 @@
 # Abandono de clientes bancarios (churn)
 
-Registros de 1.000 clientes de un banco con su información demográfica y financiera, y si
+Registros de 10.000 clientes de un banco con su información demográfica y financiera, y si
 abandonaron o no el banco (_churn_).
 
 [:material-download: Descargar churn.csv](churn.csv){ .md-button .md-button--primary }
@@ -14,7 +14,7 @@ df = pd.read_csv("https://datascience-uniandes.github.io/PracticasMachineLearnin
 ```
 
 !!! warning "Versión adaptada para el curso"
-    Este archivo es una versión modificada de una muestra del dataset original: incluye a propósito
+    Este archivo es una versión modificada del dataset original: incluye a propósito
     problemas de calidad (nulos, duplicados, valores inválidos e inconsistencias) para practicar su
     revisión y tratamiento. Úselo en lugar del original.
 
@@ -36,7 +36,7 @@ df = pd.read_csv("https://datascience-uniandes.github.io/PracticasMachineLearnin
 
 ## Fuente
 
-Muestra del _Bank Customer Churn Dataset_ publicado en
+_Bank Customer Churn Dataset_ publicado en
 [Kaggle](https://www.kaggle.com/datasets/gauravtopre/bank-customer-churn-dataset).
 
 ## Usado en

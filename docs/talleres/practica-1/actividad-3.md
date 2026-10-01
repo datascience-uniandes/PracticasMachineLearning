@@ -14,7 +14,7 @@
    realice [**gráficos de dispersión**](../../ayudas/grafico-dispersion.md) de cada término al
    cuadrado y de cada término de interacción contra la
    [variable objetivo](../../glosario.md#variable-objetivo).
-   **¿Algún término muestra una relación más clara con el área quemada que las variables
+   **¿Algún término muestra una relación más clara con el precio que las variables
    originales? ¿Cuáles parecen no aportar?**
 4. Calcule el [**R²**](../../ayudas/r2.md), el [**MAE**](../../ayudas/mae.md) y el
    [**RMSE**](../../ayudas/rmse.md) del modelo polinomial en entrenamiento y en prueba, y
@@ -48,7 +48,7 @@
    [**R²**](../../ayudas/r2.md), [**MAE**](../../ayudas/mae.md) y
    [**RMSE**](../../ayudas/rmse.md). Compare el MAE y el RMSE con la media, la
    [**desviación estándar y el rango**](../../ayudas/explorar-estructura.md) de la variable
-   objetivo. **¿Qué tan grande es el error frente a la variación natural del área quemada? ¿El
+   objetivo. **¿Qué tan grande es el error frente a la variación natural del precio? ¿El
    modelo elegido es mejor que el modelo lineal de la actividad anterior?**
 8. Revise de nuevo los supuestos sobre los [residuos](../../glosario.md#residuo) del modelo
    polinomial elegido y compárelos con los del modelo lineal de la actividad anterior:

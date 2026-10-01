@@ -15,7 +15,7 @@ desde la preparación de los datos hasta la evaluación de los modelos.
 
     ---
 
-    Incendios forestales en Montesinho: entendimiento y tratamiento de los datos, y modelos de regresión lineal, polinomial y regularizada.
+    Predicción del precio de venta de casas: entendimiento y tratamiento de los datos, y modelos de regresión lineal, polinomial y regularizada.
 
     [:octicons-arrow-right-24: Ir a la práctica](talleres/practica-1/index.md)
 
@@ -23,7 +23,7 @@ desde la preparación de los datos hasta la evaluación de los modelos.
 
     ---
 
-    Abandono de clientes bancarios: entendimiento y tratamiento de los datos.
+    Abandono de clientes bancarios: ingeniería de características, regresión logística, árboles de decisión y KNN.
 
     [:octicons-arrow-right-24: Ir a la práctica](talleres/practica-2/index.md)
 
@@ -75,17 +75,17 @@ desde la preparación de los datos hasta la evaluación de los modelos.
 
     ---
 
-    1.000 clientes de un banco con datos demográficos y financieros, y si abandonaron el banco.
+    10.000 clientes de un banco con datos demográficos y financieros, y si abandonaron el banco.
 
     [:octicons-arrow-right-24: Ver el dataset](datos/churn.md)
 
--   :material-database:{ .lg .middle } **Incendios forestales de Montesinho**
+-   :material-database:{ .lg .middle } **Venta de inmuebles**
 
     ---
 
-    517 incendios en Portugal con condiciones meteorológicas y área quemada. Diccionario de datos y descarga.
+    21.600 ventas de casas en el condado de King (EE. UU.) con sus características y precio. Diccionario de datos y descarga.
 
-    [:octicons-arrow-right-24: Ver el dataset](datos/forestfires.md)
+    [:octicons-arrow-right-24: Ver el dataset](datos/inmuebles.md)
 
 </div>
 

@@ -89,36 +89,51 @@ nav:
       - Práctica 2:
           - talleres/practica-2/index.md
           - "Actividad 1: Entendimiento de datos": talleres/practica-2/actividad-1.md
+          - "Actividad 2: Ingeniería de características": talleres/practica-2/actividad-2.md
+          - "Actividad 3: Modelos de clasificación": talleres/practica-2/actividad-3.md
+          - "Actividad 4: Evaluación en prueba": talleres/practica-2/actividad-4.md
       - Práctica 3: talleres/practica-3.md
       - Práctica 4: talleres/practica-4.md
       - Práctica 5: talleres/practica-5.md
   - Ayudas:
+      - Árbol de decisión: ayudas/arbol-decision.md
       - Cargar un dataset: ayudas/cargar-dataset.md
       - Codificación one-hot: ayudas/one-hot.md
       - Coeficiente de determinación (R²): ayudas/r2.md
       - Comparar métricas entre conjuntos: ayudas/comparar-metricas.md
       - Compromiso sesgo-varianza: ayudas/compromiso-sesgo-varianza.md
+      - Curva de precisión-sensibilidad: ayudas/curva-precision-sensibilidad.md
+      - Curva ROC: ayudas/curva-roc.md
       - Dimensiones de calidad de los datos: ayudas/dimensiones-calidad.md
       - Dividir en entrenamiento y prueba: ayudas/division-datos.md
       - Error absoluto medio (MAE): ayudas/mae.md
       - Escalar con RobustScaler: ayudas/robust-scaler.md
       - Escalar variables: ayudas/escalar-variables.md
       - Estandarizar variables: ayudas/estandarizar.md
+      - Exactitud (accuracy): ayudas/exactitud.md
       - Explorar la estructura de un dataset: ayudas/explorar-estructura.md
+      - F1: ayudas/f1.md
       - Gráfico de barras: ayudas/grafico-barras.md
       - Gráfico de cajas: ayudas/grafico-cajas.md
       - Gráfico de dispersión: ayudas/grafico-dispersion.md
       - Gráfico Q-Q: ayudas/grafico-qq.md
       - Histograma: ayudas/histograma.md
       - Interpretar los coeficientes: ayudas/interpretar-coeficientes.md
+      - K vecinos más cercanos (KNN): ayudas/knn.md
+      - Matriz de confusión: ayudas/matriz-confusion.md
       - Matriz de correlación: ayudas/correlacion.md
       - Normalidad de los residuos: ayudas/normalidad-residuos.md
       - Optimizar hiperparámetros con GridSearchCV: ayudas/gridsearchcv.md
+      - Precisión: ayudas/precision.md
+      - Prueba chi-cuadrado de independencia: ayudas/chi-cuadrado.md
       - Prueba de Shapiro-Wilk: ayudas/shapiro-wilk.md
+      - Prueba t de Student: ayudas/prueba-t.md
       - Raíz del error cuadrático medio (RMSE): ayudas/rmse.md
       - Regresión Lasso y Ridge: ayudas/lasso-ridge.md
       - Regresión lineal: ayudas/regresion-lineal.md
+      - Regresión logística: ayudas/regresion-logistica.md
       - Regresión polinomial: ayudas/regresion-polinomial.md
+      - Relación de una variable con una clase: ayudas/graficos-por-clase.md
       - Residuos vs. valores predichos: ayudas/residuos-vs-predichos.md
       - Revisar la linealidad de los términos polinomiales: ayudas/linealidad-terminos.md
       - Revisar y tratar duplicados: ayudas/duplicados.md
@@ -127,10 +142,11 @@ nav:
       - Revisar y tratar valores atípicos: ayudas/valores-atipicos.md
       - Revisar y tratar valores inválidos: ayudas/valores-invalidos.md
       - Seleccionar hiperparámetros con validación: ayudas/seleccion-hiperparametros.md
+      - Sensibilidad (recall): ayudas/sensibilidad.md
       - Validación cruzada K-fold: ayudas/validacion-cruzada.md
       - Valores reales vs. predichos: ayudas/reales-vs-predichos.md
       - Ver los coeficientes: ayudas/ver-coeficientes.md
   - Conjuntos de datos:
       - Abandono de clientes bancarios: datos/churn.md
-      - Incendios forestales de Montesinho: datos/forestfires.md
+      - Venta de inmuebles: datos/inmuebles.md
   - Glosario: glosario.md

@@ -78,3 +78,39 @@ Cada conjunto tiene un papel distinto:
     Si compara modelos con el conjunto de prueba y se queda con el mejor, la elección se adapta
     a esos datos y la métrica de prueba deja de ser una estimación honesta del desempeño con
     datos nuevos. Elija siempre con validación y use prueba solo al final.
+
+## División estratificada { #estratificada }
+
+En [clasificación](../glosario.md#clasificacion), una división aleatoria puede dejar
+proporciones de clases distintas en cada conjunto, sobre todo cuando hay
+[desbalance de clases](../glosario.md#desbalance-de-clases): si solo el 10 % de los registros es
+de la clase positiva, el conjunto de prueba podría quedar con el 6 % o el 14 %. La
+[estratificación](../glosario.md#estratificacion) evita esto: con `stratify=y`, cada conjunto
+conserva la misma proporción de clases que el dataset completo.
+
+```python
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42, stratify=y
+)
+```
+
+En la división en tres conjuntos (60 % / 20 % / 20 %), estratifique en las dos llamadas, cada una
+con su propia variable objetivo:
+
+```python
+X_temp, X_test, y_temp, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42, stratify=y
+)
+X_train, X_val, y_train, y_val = train_test_split(
+    X_temp, y_temp, test_size=0.25, random_state=42, stratify=y_temp
+)
+```
+
+Para comprobarlo, compare las proporciones de cada clase en los conjuntos; deben ser casi iguales:
+
+```python
+print(y_train.value_counts(normalize=True), y_test.value_counts(normalize=True))
+```
+
+La estratificación solo aplica a clasificación: en regresión la variable objetivo es continua y
+no tiene clases que conservar.
