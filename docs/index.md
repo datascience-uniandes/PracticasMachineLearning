@@ -19,13 +19,13 @@ desde la preparación de los datos hasta la evaluación de los modelos.
 
     [:octicons-arrow-right-24: Ir a la práctica](talleres/practica-1/index.md)
 
--   :material-numeric-2-circle:{ .lg .middle } **Práctica 2**
+-   :material-numeric-2-circle:{ .lg .middle } **Práctica 2: Clasificación**
 
     ---
 
-    _Tema por definir_
+    Abandono de clientes bancarios: entendimiento y tratamiento de los datos.
 
-    [:octicons-arrow-right-24: Ir a la práctica](talleres/practica-2.md)
+    [:octicons-arrow-right-24: Ir a la práctica](talleres/practica-2/index.md)
 
 -   :material-numeric-3-circle:{ .lg .middle } **Práctica 3**
 
@@ -70,6 +70,14 @@ desde la preparación de los datos hasta la evaluación de los modelos.
 ## Conjuntos de datos
 
 <div class="grid cards" markdown>
+
+-   :material-database:{ .lg .middle } **Abandono de clientes bancarios**
+
+    ---
+
+    1.000 clientes de un banco con datos demográficos y financieros, y si abandonaron el banco.
+
+    [:octicons-arrow-right-24: Ver el dataset](datos/churn.md)
 
 -   :material-database:{ .lg .middle } **Incendios forestales de Montesinho**
 

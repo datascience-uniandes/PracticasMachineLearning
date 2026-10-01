@@ -86,7 +86,9 @@ nav:
           - "Actividad 2: Regresión lineal": talleres/practica-1/actividad-2.md
           - "Actividad 3: Regresión polinomial": talleres/practica-1/actividad-3.md
           - "Actividad 4: Regularización": talleres/practica-1/actividad-4.md
-      - Práctica 2: talleres/practica-2.md
+      - Práctica 2:
+          - talleres/practica-2/index.md
+          - "Actividad 1: Entendimiento de datos": talleres/practica-2/actividad-1.md
       - Práctica 3: talleres/practica-3.md
       - Práctica 4: talleres/practica-4.md
       - Práctica 5: talleres/practica-5.md
@@ -129,5 +131,6 @@ nav:
       - Valores reales vs. predichos: ayudas/reales-vs-predichos.md
       - Ver los coeficientes: ayudas/ver-coeficientes.md
   - Conjuntos de datos:
+      - Abandono de clientes bancarios: datos/churn.md
       - Incendios forestales de Montesinho: datos/forestfires.md
   - Glosario: glosario.md

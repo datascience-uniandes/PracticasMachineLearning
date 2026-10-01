@@ -60,6 +60,12 @@ relación lineal.
 
 ## D
 
+### Desbalance de clases { #desbalance-de-clases }
+
+En un problema de clasificación, situación en la que una clase tiene muchos más registros que la
+otra. Un modelo puede obtener una exactitud alta prediciendo siempre la clase mayoritaria, así que
+hay que evaluarlo con métricas que consideren ambas clases.
+
 ### Distribución { #distribucion }
 
 Forma en que se reparten los valores de una variable: dónde se concentran, qué tan dispersos están
