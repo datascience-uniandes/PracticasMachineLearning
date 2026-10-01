@@ -15,7 +15,7 @@ desde la preparación de los datos hasta la evaluación de los modelos.
 
     ---
 
-    Incendios forestales en Montesinho: entendimiento y tratamiento de los datos, y modelos de regresión lineal y polinomial.
+    Incendios forestales en Montesinho: entendimiento y tratamiento de los datos, y modelos de regresión lineal, polinomial y regularizada.
 
     [:octicons-arrow-right-24: Ir a la práctica](talleres/practica-1/index.md)
 

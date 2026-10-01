@@ -84,6 +84,7 @@ nav:
           - "Actividad 1: Entendimiento de datos": talleres/practica-1/actividad-1.md
           - "Actividad 2: Regresión lineal": talleres/practica-1/actividad-2.md
           - "Actividad 3: Regresión polinomial": talleres/practica-1/actividad-3.md
+          - "Actividad 4: Regularización": talleres/practica-1/actividad-4.md
       - Práctica 2: talleres/practica-2.md
       - Práctica 3: talleres/practica-3.md
       - Práctica 4: talleres/practica-4.md
@@ -96,6 +97,7 @@ nav:
       - Dimensiones de calidad de los datos: ayudas/dimensiones-calidad.md
       - Dividir en entrenamiento y prueba: ayudas/division-datos.md
       - Error absoluto medio (MAE): ayudas/mae.md
+      - Estandarizar variables: ayudas/estandarizar.md
       - Explorar la estructura de un dataset: ayudas/explorar-estructura.md
       - Gráfico de barras: ayudas/grafico-barras.md
       - Gráfico de cajas: ayudas/grafico-cajas.md
@@ -106,8 +108,10 @@ nav:
       - Matriz de correlación: ayudas/correlacion.md
       - Normalidad de los residuos: ayudas/normalidad-residuos.md
       - Raíz del error cuadrático medio (RMSE): ayudas/rmse.md
+      - Regresión Lasso: ayudas/lasso.md
       - Regresión lineal: ayudas/regresion-lineal.md
       - Regresión polinomial: ayudas/regresion-polinomial.md
+      - Regresión Ridge: ayudas/ridge.md
       - Residuos vs. valores predichos: ayudas/residuos-vs-predichos.md
       - Revisar y tratar duplicados: ayudas/duplicados.md
       - Revisar y tratar inconsistencias: ayudas/inconsistencias.md
@@ -115,6 +119,7 @@ nav:
       - Revisar y tratar valores atípicos: ayudas/valores-atipicos.md
       - Revisar y tratar valores inválidos: ayudas/valores-invalidos.md
       - Seleccionar hiperparámetros con validación: ayudas/seleccion-hiperparametros.md
+      - Validación cruzada K-fold: ayudas/validacion-cruzada.md
       - Valores reales vs. predichos: ayudas/reales-vs-predichos.md
   - Conjuntos de datos:
       - Incendios forestales de Montesinho: datos/forestfires.md

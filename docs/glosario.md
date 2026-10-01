@@ -71,7 +71,11 @@ Registro idéntico a otro en todas sus columnas, o en las columnas que se compar
 
 ## E
 
-_Sin términos por ahora._
+### Estandarización { #estandarizacion }
+
+Transformación que lleva cada variable a media 0 y desviación estándar 1:
+\(z = (x - ar{x}) / s\). Es necesaria antes de regularizar, porque la penalización depende de
+la escala de cada coeficiente.
 
 ## F
 
@@ -104,11 +108,17 @@ _Sin términos por ahora._
 
 ## K
 
-_Sin términos por ahora._
+### K-fold { #k-fold }
+
+Ver [validación cruzada](#validacion-cruzada).
 
 ## L
 
-_Sin términos por ahora._
+### Lasso { #lasso }
+
+[Regularización](#regularizacion) que penaliza la suma de los valores absolutos de los coeficientes
+(penalización L1). Con un alfa suficientemente grande lleva algunos coeficientes exactamente a 0, así
+que también selecciona variables.
 
 ## M
 
@@ -166,9 +176,21 @@ independientes: \(\hat{y} = \beta_0 + \beta_1 x_1 + \dots + \beta_p x_p\).
 [interacciones](#termino-interaccion)). Con una variable y grado 2:
 \(\hat{y} = \beta_0 + \beta_1 x + \beta_2 x^2\). Sigue siendo lineal en los coeficientes.
 
+### Regularización { #regularizacion }
+
+Técnica que agrega al error del modelo una penalización por el tamaño de los coeficientes, para
+reducir el [sobreajuste](#sobreajuste). Su fuerza se controla con el hiperparámetro alfa (\(lpha\)):
+con \(lpha = 0\) se obtiene la regresión lineal sin regularizar. Ver [Lasso](#lasso) y [Ridge](#ridge).
+
 ### Residuo { #residuo }
 
 Diferencia entre el valor real y el valor predicho por el modelo: \(e = y - \hat{y}\).
+
+### Ridge { #ridge }
+
+[Regularización](#regularizacion) que penaliza la suma de los cuadrados de los coeficientes
+(penalización L2). Reduce los coeficientes hacia 0 sin anularlos y ayuda con la
+[multicolinealidad](#multicolinealidad).
 
 ### RMSE { #rmse }
 
@@ -206,6 +228,12 @@ de una variable dependa del valor de la otra.
 _Sin términos por ahora._
 
 ## V
+
+### Validación cruzada { #validacion-cruzada }
+
+Técnica que divide el conjunto de entrenamiento en \(K\) partes (_folds_), entrena \(K\) veces
+dejando una parte distinta para validar y promedia las métricas. Permite elegir
+[hiperparámetros](#hiperparametro) sin gastar el conjunto de prueba.
 
 ### Valor nulo { #valor-nulo }
 
