@@ -25,38 +25,21 @@ plt.show()
 de la distribución, que facilita ver su forma. Vea más opciones en
 [histograma](histograma.md).
 
-## Prueba de Shapiro–Wilk
+## Prueba de Shapiro-Wilk
+
+Para complementar el histograma, aplique la [prueba de Shapiro-Wilk](shapiro-wilk.md) a los
+residuos. Si \( p < 0{,}05 \), rechace la hipótesis de normalidad:
 
 ```python
 from scipy import stats
 
 estadistico, p_valor = stats.shapiro(residuos)
-print(f"Shapiro-Wilk: estadístico = {estadistico:.4f}, p-valor = {p_valor:.4f}")
 ```
 
-Las hipótesis de la prueba son:
-
-- \( H_0 \): los residuos provienen de una distribución normal.
-- \( H_1 \): los residuos no provienen de una distribución normal.
-
-Si \( p < 0{,}05 \), rechace \( H_0 \): los residuos **no** son normales. Si
-\( p \geq 0{,}05 \), no hay evidencia en contra de la normalidad (esto no demuestra que los
-residuos sean normales, solo que los datos son compatibles con esa hipótesis).
-
-!!! tip "Alternativa para muestras grandes: D'Agostino–Pearson"
-    Shapiro–Wilk es la prueba más potente para muestras pequeñas y medianas. Con miles de
-    observaciones puede usar la prueba de D'Agostino–Pearson, que se basa en la asimetría y la
-    curtosis de los residuos y se lee igual:
-
-    ```python
-    estadistico, p_valor = stats.normaltest(residuos)
-    ```
-
-!!! warning "Con muestras grandes, combine la prueba con los gráficos"
-    Con muchas observaciones las pruebas detectan desviaciones mínimas, sin importancia
-    práctica, y dan \( p < 0{,}05 \) aunque el histograma se vea casi normal. Con muestras
-    pequeñas ocurre lo contrario: la prueba puede no rechazar \( H_0 \) aunque haya problemas.
-    Decida siempre mirando también el histograma y el [gráfico Q-Q](grafico-qq.md).
+Vea en [prueba de Shapiro-Wilk](shapiro-wilk.md) las hipótesis, cómo leer el estadístico, las
+precauciones con muestras grandes y la alternativa de D'Agostino-Pearson (`stats.normaltest`).
+Con muestras grandes, decida siempre mirando también el histograma y el
+[gráfico Q-Q](grafico-qq.md).
 
 ## Cómo interpretarlo
 

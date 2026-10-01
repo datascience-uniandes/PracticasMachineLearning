@@ -60,18 +60,8 @@ y_pred = modelo.predict(X_test)
 
 ## Ver los coeficientes
 
-```python
-import pandas as pd
-
-coef = pd.Series(modelo[-1].coef_, index=X_train.columns)
-print(coef.sort_values())
-```
-
-- `modelo[-1]` es el último paso del pipeline, el `Ridge` entrenado; `coef_` tiene un
-  coeficiente por columna de `X_train`.
-- Los coeficientes están en la escala **estandarizada**: cada uno es el cambio en la predicción
-  por cada desviación estándar de su variable (vea
-  [interpretar los coeficientes](interpretar-coeficientes.md)).
+Los coeficientes están en `modelo[-1].coef_`, en la escala **estandarizada**. Para mostrarlos con
+el nombre de cada variable, vea [ver los coeficientes](ver-coeficientes.md).
 
 ## Comparar varios valores de alfa
 
@@ -122,71 +112,3 @@ print(pd.DataFrame(resultados).round(3))     # una fila por alfa
 
 Las dos necesitan estandarizar y las dos tienen un alfa que se elige con validación. Si no
 tiene claro cuál usar, entrene ambas y compare sus métricas en validación.
-
-## Ejemplo
-
-Con 200 registros y 6 variables, en las que `x2` es casi igual a `x1` y solo `x1`, `x2` y `x3`
-influyen en `y`:
-
-```python
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-from sklearn.pipeline import make_pipeline
-from sklearn.preprocessing import StandardScaler
-from sklearn.linear_model import LinearRegression, Ridge, Lasso
-
-rng = np.random.default_rng(0)
-n = 200
-X = pd.DataFrame(rng.normal(0, 1, (n, 6)), columns=[f"x{i}" for i in range(1, 7)])
-X["x2"] = X["x1"] + rng.normal(0, 0.1, n)      # x2 casi igual a x1
-y = 3 * X["x1"] + 3 * X["x2"] + 2 * X["x3"] + rng.normal(0, 1.5, n)
-print("Correlación x1-x2:", round(X["x1"].corr(X["x2"]), 3))
-
-alfas = np.logspace(-2, 4, 40)
-coeficientes = {}
-for alfa in alfas:
-    modelo = make_pipeline(StandardScaler(), Ridge(alpha=alfa))
-    modelo.fit(X, y)
-    coeficientes[alfa] = pd.Series(modelo[-1].coef_, index=X.columns)
-coeficientes = pd.DataFrame(coeficientes).T
-
-comparacion = pd.DataFrame({
-    "lineal": make_pipeline(StandardScaler(), LinearRegression()).fit(X, y)[-1].coef_,
-    "ridge_10": make_pipeline(StandardScaler(), Ridge(alpha=10)).fit(X, y)[-1].coef_,
-    "lasso_0.5": make_pipeline(StandardScaler(), Lasso(alpha=0.5, max_iter=10000)).fit(X, y)[-1].coef_,
-}, index=X.columns)
-print(comparacion.round(2))
-
-coeficientes.plot(logx=True, figsize=(8, 4.5))
-plt.axhline(0, color="black", linewidth=0.8)
-plt.xlabel("alfa (escala logarítmica)")
-plt.ylabel("Coeficiente")
-plt.title("Coeficientes de Ridge según alfa")
-plt.show()
-```
-
-Salida:
-
-```text
-Correlación x1-x2: 0.994
-    lineal  ridge_10  lasso_0.5
-x1    2.28      2.70       1.91
-x2    3.39      2.83       3.28
-x3    1.92      1.84       1.45
-x4    0.08      0.07       0.00
-x5    0.10      0.11       0.00
-x6    0.07      0.07       0.00
-```
-
-![Coeficientes de Ridge en función de alfa: todos bajan suavemente hacia 0 y los de x1 y x2 se igualan](../assets/img/ayudas/ridge.png)
-
-- `x1` y `x2` tienen el mismo efecto real (3 cada una), pero como su correlación es 0,994 la
-  regresión lineal los reparte de forma desigual: 2,28 y 3,39.
-- Con Ridge (alfa = 10) los dos coeficientes se acercan entre sí (2,70 y 2,83). En el gráfico,
-  a partir de alfa ≈ 100 las curvas de `x1` y `x2` quedan una encima de la otra.
-- Todos los coeficientes bajan **suavemente** al aumentar alfa y ninguno llega a 0, ni siquiera
-  los de `x4`, `x5` y `x6`, que no influyen en `y`. Con alfa = 10.000 todos son casi 0 (subajuste).
-- Lasso (alfa = 0,5) sí deja en **exactamente 0** a `x4`, `x5` y `x6`, pero mantiene el reparto
-  desigual entre `x1` y `x2` (1,91 y 3,28): entre variables muy correlacionadas tiende a
-  favorecer a una de ellas.

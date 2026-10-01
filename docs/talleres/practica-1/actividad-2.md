@@ -32,7 +32,7 @@
    **¿Se cumple el supuesto de [homocedasticidad](../../glosario.md#homocedasticidad)? ¿Qué patrón
    observa?**
 10. Revise la [**distribución de los residuos**](../../ayudas/normalidad-residuos.md) y aplique la
-    prueba de Shapiro-Wilk. **¿Se cumple el supuesto de [normalidad](../../glosario.md#normalidad)?
+    [**prueba de Shapiro-Wilk**](../../ayudas/shapiro-wilk.md). **¿Se cumple el supuesto de [normalidad](../../glosario.md#normalidad)?
     ¿Qué indica el [valor p](../../glosario.md#valor-p)?**
 11. Realice el [**gráfico Q-Q**](../../ayudas/grafico-qq.md) de los residuos.
     **¿Los puntos siguen la línea de referencia? ¿Qué dice la forma de los extremos sobre las

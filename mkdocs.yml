@@ -72,6 +72,7 @@ markdown_extensions:
 extra_javascript:
   - assets/js/mathjax.js
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+  - assets/js/glosario-tooltips.js
 
 extra_css:
   - assets/css/extra.css
@@ -107,12 +108,15 @@ nav:
       - Interpretar los coeficientes: ayudas/interpretar-coeficientes.md
       - Matriz de correlación: ayudas/correlacion.md
       - Normalidad de los residuos: ayudas/normalidad-residuos.md
+      - Optimizar hiperparámetros con GridSearchCV: ayudas/gridsearchcv.md
+      - Prueba de Shapiro-Wilk: ayudas/shapiro-wilk.md
       - Raíz del error cuadrático medio (RMSE): ayudas/rmse.md
       - Regresión Lasso: ayudas/lasso.md
       - Regresión lineal: ayudas/regresion-lineal.md
       - Regresión polinomial: ayudas/regresion-polinomial.md
       - Regresión Ridge: ayudas/ridge.md
       - Residuos vs. valores predichos: ayudas/residuos-vs-predichos.md
+      - Revisar la linealidad de los términos polinomiales: ayudas/linealidad-terminos.md
       - Revisar y tratar duplicados: ayudas/duplicados.md
       - Revisar y tratar inconsistencias: ayudas/inconsistencias.md
       - Revisar y tratar nulos: ayudas/nulos.md
@@ -121,6 +125,7 @@ nav:
       - Seleccionar hiperparámetros con validación: ayudas/seleccion-hiperparametros.md
       - Validación cruzada K-fold: ayudas/validacion-cruzada.md
       - Valores reales vs. predichos: ayudas/reales-vs-predichos.md
+      - Ver los coeficientes: ayudas/ver-coeficientes.md
   - Conjuntos de datos:
       - Incendios forestales de Montesinho: datos/forestfires.md
   - Glosario: glosario.md

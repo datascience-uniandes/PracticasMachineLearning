@@ -60,40 +60,28 @@ perder información.
 
 ## Ejemplo
 
-Con un dataset de 300 registros con una ciudad y un precio:
+Suponga un dataset de 300 viviendas con la ciudad (Bogotá, Cali o Medellín), una variable
+numérica `x1` y el precio, al que se le aplica `pd.get_dummies` sobre la columna `ciudad` con
+`drop_first=True`. Las primeras cinco filas antes de codificar:
 
-```python
-import numpy as np
-import pandas as pd
+| ciudad   | x1  | precio |
+|----------|-----|--------|
+| Medellín | 0.1 | 111.2  |
+| Cali     | 3.7 | 115.9  |
+| Cali     | 0.8 | 111.5  |
+| Bogotá   | 6.5 | 130.0  |
+| Bogotá   | 2.7 | 116.2  |
 
-rng = np.random.default_rng(0)
-df = pd.DataFrame({
-    "ciudad": rng.choice(["Bogotá", "Cali", "Medellín"], 300),
-    "x1": rng.uniform(0, 10, 300).round(1),
-    "precio": rng.normal(100, 15, 300).round(1),
-})
-print(df.head())
+Las mismas filas después de codificar:
 
-df = pd.get_dummies(df, columns=["ciudad"], drop_first=True, dtype=int)
-print(df.head())
-```
+| x1  | precio | ciudad_Cali | ciudad_Medellín |
+|-----|--------|-------------|-----------------|
+| 0.1 | 111.2  | 0 | 1 |
+| 3.7 | 115.9  | 1 | 0 |
+| 0.8 | 111.5  | 1 | 0 |
+| 6.5 | 130.0  | 0 | 0 |
+| 2.7 | 116.2  | 0 | 0 |
 
-Salida:
-
-```text
-     ciudad   x1  precio
-0  Medellín  0.1   111.2
-1      Cali  3.7   115.9
-2      Cali  0.8   111.5
-3    Bogotá  6.5   130.0
-4    Bogotá  2.7   116.2
-    x1  precio  ciudad_Cali  ciudad_Medellín
-0  0.1   111.2            0                1
-1  3.7   115.9            1                0
-2  0.8   111.5            1                0
-3  6.5   130.0            0                0
-4  2.7   116.2            0                0
-```
-
-La columna `ciudad` se reemplazó por `ciudad_Cali` y `ciudad_Medellín`. Las filas de Bogotá
-tienen 0 en las dos columnas.
+La columna `ciudad` se reemplazó por `ciudad_Cali` y `ciudad_Medellín`. Bogotá, la primera en
+orden alfabético, se eliminó y quedó como categoría de referencia: una fila con 0 en las dos
+columnas (filas 4 y 5) corresponde a una vivienda en Bogotá.

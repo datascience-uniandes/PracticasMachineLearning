@@ -83,16 +83,6 @@ La curva de validación muestra el error de entrenamiento y el de validación pa
 hiperparámetro. Si los valores de validación crecen mucho, agregue `plt.yscale("log")` antes de
 `plt.show()` para ver mejor la zona de errores pequeños.
 
-## Elegir el mejor valor
-
-```python
-mejor_grado = tabla.loc[tabla["RMSE_val"].idxmin(), "grado"]
-```
-
-`idxmin()` devuelve la fila con el menor RMSE de validación y `.loc[..., "grado"]` toma su grado.
-Si prefiere usar el R², elija el máximo: `tabla.loc[tabla["R2_val"].idxmax(), "grado"]`. Si dos
-grados tienen errores de validación muy parecidos, prefiera el más simple (el de menor grado).
-
 ## Leer la curva: compromiso sesgo-varianza
 
 | Zona de la curva | Entrenamiento | Validación | Diagnóstico |
@@ -120,7 +110,8 @@ print("R² prueba:", r2_score(y_test, y_pred))
 print("RMSE prueba:", np.sqrt(mean_squared_error(y_test, y_pred)))
 ```
 
-Se entrena el modelo con el grado elegido y se evalúa **una vez** en el
+`mejor_grado` es el grado elegido con las métricas de validación, por ejemplo el de menor RMSE
+de validación: `tabla.loc[tabla["RMSE_val"].idxmin(), "grado"]`. Se entrena el modelo con ese grado y se evalúa **una vez** en el
 [conjunto de prueba](../glosario.md#conjunto-prueba). Esa es la métrica que se reporta como
 desempeño esperado con datos nunca vistos.
 

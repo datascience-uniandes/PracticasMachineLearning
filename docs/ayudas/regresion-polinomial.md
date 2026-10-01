@@ -107,32 +107,8 @@ y_pred = modelo.predict(X_test)
 
 ## Revisar la linealidad de los nuevos términos
 
-El modelo polinomial sigue suponiendo una relación **lineal** entre cada término nuevo y la
-variable objetivo. Para revisarlo, realice un [gráfico de dispersión](grafico-dispersion.md) de
-cada término (al cuadrado o de interacción) contra `y`:
-
-```python
-import matplotlib.pyplot as plt
-
-terminos = pd.DataFrame(poly.fit_transform(X_train[continuas]),
-                        columns=poly.get_feature_names_out(), index=X_train.index)
-nuevos = [c for c in terminos.columns if c not in continuas]
-
-fig, axes = plt.subplots(1, len(nuevos), figsize=(4 * len(nuevos), 4))
-for ax, columna in zip(axes, nuevos):
-    ax.scatter(terminos[columna], y_train, alpha=0.5)
-    ax.set_xlabel(columna)
-    ax.set_ylabel("y")
-plt.tight_layout()
-plt.show()
-```
-
-- `nuevos` contiene solo los términos generados (los que no estaban en `continuas`).
-- Cada panel muestra un término contra `y_train`. Si los puntos siguen una tendencia
-  (creciente o decreciente), ese término aporta; si forman una nube sin forma, aporta poco.
-
-Con muchos términos, calcule también su [correlación](correlacion.md) con `y`:
-`terminos.corrwith(y_train)`.
+Para revisar si cada término nuevo tiene una relación lineal con la variable objetivo, vea
+[revisar la linealidad de los términos polinomiales](linealidad-terminos.md).
 
 ## Ejemplo
 

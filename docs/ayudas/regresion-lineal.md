@@ -41,22 +41,8 @@ y_pred = modelo.predict(X_test)
 `fit` calcula los coeficientes que minimizan la suma de los errores al cuadrado en el conjunto
 de entrenamiento. `predict` aplica la ecuación a nuevos datos.
 
-## Ver los coeficientes
-
-```python
-import pandas as pd
-
-coeficientes = pd.Series(modelo.coef_, index=X.columns)
-print("Intercepto:", modelo.intercept_)
-print(coeficientes)
-```
-
-`modelo.coef_` tiene un coeficiente por columna de `X`, en el mismo orden; la `Series` los
-etiqueta con el nombre de cada columna.
-
-!!! warning "Compare coeficientes con cuidado"
-    El tamaño de un coeficiente depende de las unidades de su variable. Un coeficiente pequeño
-    en una variable medida en miles puede pesar más que uno grande en una variable entre 0 y 1.
+Para ver el intercepto y los coeficientes del modelo entrenado, vea
+[ver los coeficientes](ver-coeficientes.md).
 
 Evalúe el modelo con el [R²](r2.md), el [MAE](mae.md) y el [RMSE](rmse.md), y
 [compare las métricas de entrenamiento y prueba](comparar-metricas.md). Revise también las

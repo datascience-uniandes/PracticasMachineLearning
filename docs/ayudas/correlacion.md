@@ -85,61 +85,20 @@ seleccionadas = [c for c in seleccionadas if c not in eliminar]
 
 ## Ejemplo
 
-Con un dataset de 400 registros en el que `x2` es casi una copia de `x1`:
-
-```python
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
-
-rng = np.random.default_rng(0)
-n = 400
-df = pd.DataFrame({
-    "x1": rng.normal(0, 1, n),
-    "x3": rng.normal(0, 1, n),
-    "x4": rng.normal(0, 1, n),
-    "x5": rng.normal(0, 1, n),
-})
-df["x2"] = df["x1"] + rng.normal(0, 0.3, n)
-df["precio"] = 100 + 10 * df["x1"] - 6 * df["x3"] + 2 * df["x4"] + rng.normal(0, 8, n)
-df = df[["x1", "x2", "x3", "x4", "x5", "precio"]]
-
-corr = df.corr(numeric_only=True)
-
-plt.figure(figsize=(8, 6))
-sns.heatmap(corr, annot=True, fmt=".2f", cmap="coolwarm", vmin=-1, vmax=1)
-plt.title("Matriz de correlación")
-plt.show()
-
-corr_objetivo = corr["precio"].drop("precio")
-corr_objetivo = corr_objetivo.reindex(corr_objetivo.abs().sort_values(ascending=False).index)
-print(corr_objetivo.round(2))
-
-umbral = 0.3
-seleccionadas = corr_objetivo[corr_objetivo.abs() >= umbral].index.tolist()
-
-corr_x = df[seleccionadas].corr().abs()
-superior = corr_x.where(np.triu(np.ones(corr_x.shape, dtype=bool), k=1))
-pares = superior.stack()
-print(pares[pares > 0.7].round(2))
-```
+Suponga un dataset sintético de 400 registros con cinco variables independientes (`x1` a `x5`)
+y el objetivo `precio`. El precio depende con fuerza de `x1` (de forma positiva), de `x3` (de
+forma negativa) y levemente de `x4`; `x5` no tiene relación con él. Además, `x2` es casi una
+copia de `x1` con un poco de ruido.
 
 ![Matriz de correlación de x1 a x5 y precio](../assets/img/ayudas/correlacion.png)
 
-Salida:
+- **Correlación con el objetivo.** En la fila de `precio`, `x1` (\( r \approx 0{,}68 \)) y `x2`
+  (\( r \approx 0{,}66 \)) tienen una correlación positiva moderada a fuerte, y `x3`
+  (\( r \approx -0{,}38 \)) una negativa moderada. Las tres superan el umbral de 0,3.
+- **Variables cerca de 0.** `x4` (\( r \approx 0{,}14 \)) queda por debajo del umbral y `x5`
+  (\( r \approx 0{,}00 \)) no muestra relación lineal con `precio`. Entre las variables
+  independientes, casi todas las celdas están cerca de 0.
+- **Multicolinealidad.** `x1` y `x2` tienen \( r \approx 0{,}95 \) entre sí: aportan casi la
+  misma información. Basta con conservar `x1`, que tiene mayor correlación con `precio`.
 
-```text
-x1    0.68
-x2    0.66
-x3   -0.38
-x4    0.14
-x5   -0.00
-Name: precio, dtype: float64
-x1  x2    0.95
-dtype: float64
-```
-
-`x1`, `x2` y `x3` superan el umbral; `x4` y `x5` no. Sin embargo, `x1` y `x2` tienen
-\( r \approx 0{,}95 \) entre sí: basta con conservar `x1`, que tiene mayor correlación con
-`precio`. Las variables finales serían `x1` y `x3`.
+Las variables finales serían `x1` y `x3`.

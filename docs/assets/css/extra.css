@@ -27,3 +27,39 @@
   max-height: 100%;
   width: 100%;
 }
+
+/* Enlaces al glosario: subrayado punteado para indicar que tienen definición */
+.md-typeset a.glosario-link {
+  text-decoration: underline dotted;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  cursor: help;
+}
+
+/* Tooltip con la definición del glosario */
+.glosario-tooltip {
+  position: fixed;
+  z-index: 10;
+  max-width: 22rem;
+  padding: 0.6rem 0.8rem;
+  border-radius: 0.2rem;
+  background-color: var(--md-default-bg-color);
+  color: var(--md-default-fg-color);
+  box-shadow: var(--md-shadow-z2);
+  border: 1px solid var(--md-default-fg-color--lightest);
+  font-size: 0.7rem;
+  line-height: 1.5;
+  pointer-events: none;
+}
+.glosario-tooltip[hidden] {
+  display: none;
+}
+.glosario-tooltip__term {
+  display: block;
+  margin-bottom: 0.2rem;
+  color: var(--md-default-fg-color);
+}
+.glosario-tooltip__def {
+  display: block;
+  color: var(--md-default-fg-color--light);
+}
