@@ -2,7 +2,15 @@
 
 Términos usados en las prácticas, en orden alfabético.
 
-[C](#c) · [D](#d) · [H](#h) · [M](#m) · [N](#n) · [O](#o) · [R](#r) · [S](#s) · [V](#v)
+[A](#a) · [B](#b) · [C](#c) · [D](#d) · [E](#e) · [F](#f) · [G](#g) · [H](#h) · [I](#i) · [J](#j) · [K](#k) · [L](#l) · [M](#m) · [N](#n) · [Ñ](#enie) · [O](#o) · [P](#p) · [Q](#q) · [R](#r) · [S](#s) · [T](#t) · [U](#u) · [V](#v) · [W](#w) · [X](#x) · [Y](#y) · [Z](#z)
+
+## A
+
+_Sin términos por ahora._
+
+## B
+
+_Sin términos por ahora._
 
 ## C
 
@@ -16,6 +24,20 @@ límites. Cuando los límites son percentiles también se le llama _winsorizaci�
 Transformación de una variable categórica en varias columnas binarias (0 o 1), una por categoría,
 para que un modelo pueda usarla sin suponer un orden entre categorías.
 
+### Coeficiente { #coeficiente }
+
+En una [regresión lineal](#regresion-lineal), peso de cada variable: cuánto cambia la predicción
+cuando esa variable aumenta en una unidad y las demás se mantienen constantes. El intercepto
+(\(\beta_0\)) es la predicción cuando todas las variables valen 0.
+
+### Compromiso sesgo-varianza { #compromiso-sesgo-varianza }
+
+Tensión entre el _sesgo_ (error por usar un modelo demasiado simple, que lleva al
+[subajuste](#subajuste)) y la _varianza_ (sensibilidad del modelo a los datos de entrenamiento,
+que lleva al [sobreajuste](#sobreajuste)). Al aumentar la complejidad baja el sesgo y sube la
+varianza, por lo que el punto adecuado se elige con un [conjunto de validación](#conjunto-validacion).
+Este sesgo es distinto del [sesgo](#sesgo) de una distribución.
+
 ### Conjunto de entrenamiento { #conjunto-entrenamiento }
 
 Parte de los datos con la que se ajusta el modelo.
@@ -24,6 +46,11 @@ Parte de los datos con la que se ajusta el modelo.
 
 Parte de los datos que se reserva para evaluar el modelo con registros que no vio durante el
 entrenamiento.
+
+### Conjunto de validación { #conjunto-validacion }
+
+Parte de los datos que se usa para comparar modelos o elegir [hiperparámetros](#hiperparametro),
+separada del conjunto de entrenamiento y del de prueba.
 
 ### Correlación { #correlacion }
 
@@ -42,13 +69,46 @@ y si son simétricos.
 
 Registro idéntico a otro en todas sus columnas, o en las columnas que se comparan.
 
+## E
+
+_Sin términos por ahora._
+
+## F
+
+_Sin términos por ahora._
+
+## G
+
+_Sin términos por ahora._
+
 ## H
+
+### Hiperparámetro { #hiperparametro }
+
+Configuración del modelo que se elige antes de entrenar y no se aprende de los datos, como el
+grado de una [regresión polinomial](#regresion-polinomial).
 
 ### Homocedasticidad { #homocedasticidad }
 
 Supuesto de la regresión lineal según el cual la varianza de los residuos es constante para todos
 los valores predichos. Si la dispersión cambia (por ejemplo, forma un embudo), hay
 _heterocedasticidad_.
+
+## I
+
+_Sin términos por ahora._
+
+## J
+
+_Sin términos por ahora._
+
+## K
+
+_Sin términos por ahora._
+
+## L
+
+_Sin términos por ahora._
 
 ## M
 
@@ -69,12 +129,24 @@ Hace inestables los coeficientes de una regresión y difícil su interpretación
 Supuesto de la regresión lineal según el cual los residuos siguen una distribución normal
 (en forma de campana, simétrica y centrada en cero).
 
+## Ñ { #enie }
+
+_Sin términos por ahora._
+
 ## O
 
 ### Outlier { #outlier }
 
 Valor atípico: un registro muy alejado del resto. En un gráfico de caja aparece como un punto
 fuera de los bigotes, a más de 1,5 veces el rango intercuartílico de la caja.
+
+## P
+
+_Sin términos por ahora._
+
+## Q
+
+_Sin términos por ahora._
 
 ## R
 
@@ -87,6 +159,12 @@ el modelo. Vale 1 si el modelo predice perfectamente y 0 si no mejora a predecir
 
 Modelo que predice una variable continua como una combinación lineal de las variables
 independientes: \(\hat{y} = \beta_0 + \beta_1 x_1 + \dots + \beta_p x_p\).
+
+### Regresión polinomial { #regresion-polinomial }
+
+[Regresión lineal](#regresion-lineal) sobre términos polinomiales de las variables (cuadrados,
+[interacciones](#termino-interaccion)). Con una variable y grado 2:
+\(\hat{y} = \beta_0 + \beta_1 x + \beta_2 x^2\). Sigue siendo lineal en los coeficientes.
 
 ### Residuo { #residuo }
 
@@ -108,7 +186,24 @@ y unos pocos muy grandes alargan la cola derecha.
 ### Sobreajuste { #sobreajuste }
 
 Cuando un modelo se ajusta demasiado a los datos de entrenamiento y no generaliza: tiene un error
-bajo en entrenamiento y mucho más alto en prueba.
+bajo en entrenamiento y mucho más alto en prueba. Ver
+[compromiso sesgo-varianza](#compromiso-sesgo-varianza).
+
+### Subajuste { #subajuste }
+
+Cuando un modelo es demasiado simple para capturar la relación en los datos: tiene un error alto
+tanto en entrenamiento como en prueba.
+
+## T
+
+### Término de interacción { #termino-interaccion }
+
+Producto de dos variables, por ejemplo \(x_1 x_2\), que se agrega a un modelo para que el efecto
+de una variable dependa del valor de la otra.
+
+## U
+
+_Sin términos por ahora._
 
 ## V
 
@@ -133,3 +228,19 @@ Variable numérica que puede tomar cualquier valor dentro de un intervalo, como 
 ### Variable objetivo { #variable-objetivo }
 
 Variable que el modelo intenta predecir a partir de las demás. También se llama variable dependiente.
+
+## W
+
+_Sin términos por ahora._
+
+## X
+
+_Sin términos por ahora._
+
+## Y
+
+_Sin términos por ahora._
+
+## Z
+
+_Sin términos por ahora._

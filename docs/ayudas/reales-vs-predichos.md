@@ -2,8 +2,8 @@
 
 Después de entrenar un modelo de [regresión lineal](regresion-lineal.md), compare los valores
 reales del [conjunto de prueba](../glosario.md#conjunto-prueba) con las predicciones. Estos
-gráficos muestran lo que resumen las [métricas de regresión](metricas-regresion.md): dónde
-acierta el modelo y dónde se equivoca.
+gráficos muestran lo que resumen las métricas [R²](r2.md), [MAE](mae.md) y [RMSE](rmse.md):
+dónde acierta el modelo y dónde se equivoca.
 
 ## Gráfico de dispersión con la diagonal
 

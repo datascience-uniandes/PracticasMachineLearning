@@ -11,3 +11,4 @@ En la página del dataset encontrará el enlace de descarga y el diccionario de 
 
 1. [Actividad 1: Entendimiento de datos](actividad-1.md)
 2. [Actividad 2: Regresión lineal](actividad-2.md)
+3. [Actividad 3: Regresión polinomial](actividad-3.md)

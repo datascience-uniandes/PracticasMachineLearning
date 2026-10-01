@@ -63,7 +63,8 @@ residuos sean normales, solo que los datos son compatibles con esa hipótesis).
 | Forma del histograma | Qué indica |
 |----------------------|------------|
 | Campana simétrica centrada en 0 | Residuos aproximadamente normales |
-| Cola larga hacia la derecha (o la izquierda) | [Sesgo](../glosario.md#sesgo): el modelo comete errores grandes en una sola dirección |
+| Cola larga hacia la derecha | [Sesgo](../glosario.md#sesgo) a la derecha: hay errores grandes en la dirección positiva, es decir, el modelo subestima el valor real en algunos casos |
+| Cola larga hacia la izquierda | [Sesgo](../glosario.md#sesgo) a la izquierda: hay errores grandes en la dirección negativa, es decir, el modelo sobreestima el valor real en algunos casos |
 | Pico muy alto y colas largas en ambos lados | Colas pesadas: hay más errores extremos de los que permite la normal |
 | Dos picos | Puede haber dos grupos de datos que el modelo trata igual (por ejemplo, una [variable categórica](../glosario.md#variable-categorica) que falta en el modelo) |
 | Algunas barras aisladas lejos del resto | [Valores atípicos](../glosario.md#outlier) en los residuos |
@@ -74,7 +75,8 @@ acercarlos a la normalidad.
 
 ## Ejemplo
 
-Con dos conjuntos de 200 residuos sintéticos, uno normal y otro con sesgo a la derecha:
+Con tres conjuntos de 200 residuos sintéticos, uno normal, otro con sesgo a la derecha y otro con
+sesgo a la izquierda:
 
 ```python
 import numpy as np
@@ -86,9 +88,10 @@ rng = np.random.default_rng(0)
 casos = {
     "Residuos normales": rng.normal(0, 1, 200),
     "Residuos con sesgo a la derecha": rng.exponential(1, 200) - 1,
+    "Residuos con sesgo a la izquierda": 1 - rng.exponential(1, 200),
 }
 
-fig, axes = plt.subplots(1, 2, figsize=(10, 3.5))
+fig, axes = plt.subplots(1, 3, figsize=(14, 3.5))
 for ax, (titulo, residuos) in zip(axes, casos.items()):
     sns.histplot(residuos, kde=True, ax=ax)
     ax.set_title(titulo)
@@ -104,11 +107,16 @@ plt.show()
 ```text
 Residuos normales: Shapiro-Wilk p = 0.1255 | D'Agostino-Pearson p = 0.2546
 Residuos con sesgo a la derecha: Shapiro-Wilk p = 0.0000 | D'Agostino-Pearson p = 0.0000
+Residuos con sesgo a la izquierda: Shapiro-Wilk p = 0.0000 | D'Agostino-Pearson p = 0.0000
 ```
 
-![Histogramas de residuos normales y de residuos con sesgo a la derecha](../assets/img/ayudas/normalidad-residuos.png)
+![Histogramas de residuos normales, de residuos con sesgo a la derecha y de residuos con sesgo a la izquierda](../assets/img/ayudas/normalidad-residuos.png)
 
-El histograma de la izquierda tiene forma de campana alrededor de 0 y las dos pruebas dan
-\( p \geq 0{,}05 \): no hay evidencia en contra de la normalidad. El de la derecha concentra
-los residuos cerca de −1 y tiene una cola larga hacia la derecha; las dos pruebas dan
-\( p < 0{,}05 \), así que se rechaza la normalidad.
+El primer histograma tiene forma de campana alrededor de 0 y las dos pruebas dan
+\( p \geq 0{,}05 \): no hay evidencia en contra de la normalidad. El segundo concentra los
+residuos cerca de −1 y tiene una cola larga hacia la derecha: hay algunos errores grandes en la
+dirección positiva, es decir, casos en los que el modelo subestima el valor real. El tercero es su
+imagen en espejo: concentra los residuos cerca de 1 y tiene una cola larga hacia la izquierda, con
+errores grandes en la dirección negativa, es decir, casos en los que el modelo sobreestima el valor
+real. En los dos casos con sesgo las pruebas dan \( p < 0{,}05 \), así que se rechaza la
+normalidad.

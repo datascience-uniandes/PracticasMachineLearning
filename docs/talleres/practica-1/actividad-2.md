@@ -13,24 +13,28 @@
    conserve solo una de cada par para evitar [multicolinealidad](../../glosario.md#multicolinealidad).
 3. Aplique [**codificación one-hot**](../../ayudas/one-hot.md) a las variables categóricas.
    **¿Cuántas columnas nuevas se generan? ¿Por qué se elimina una categoría de cada variable?**
-4. Divida los datos en [conjuntos de entrenamiento](../../glosario.md#conjunto-entrenamiento) y de
-   [prueba](../../glosario.md#conjunto-prueba) y [**genere el modelo de regresión
-   lineal**](../../ayudas/regresion-lineal.md) con las variables seleccionadas.
-   **¿Qué coeficientes son positivos y cuáles negativos? ¿Cómo se interpretan?**
-5. [**Calcule el R², el MAE y el RMSE**](../../ayudas/metricas-regresion.md) en el conjunto de
-   entrenamiento. **¿Qué tan grande es el error frente al rango de la variable objetivo?**
-6. Calcule las mismas [**métricas**](../../ayudas/metricas-regresion.md) en el conjunto de prueba y
-   compárelas con las de entrenamiento. **¿Qué significa la diferencia? ¿Hay señales de
-   [sobreajuste](../../glosario.md#sobreajuste)?**
-7. [**Compare los valores reales con los predichos**](../../ayudas/reales-vs-predichos.md).
+4. Divida los datos en [**conjuntos de entrenamiento y de prueba**](../../ayudas/division-datos.md)
+   y [**genere el modelo de regresión lineal**](../../ayudas/regresion-lineal.md) con las
+   variables seleccionadas.
+5. [**Interprete los coeficientes**](../../ayudas/interpretar-coeficientes.md) del modelo.
+   **¿Qué variables aumentan el área predicha y cuáles la disminuyen? ¿Cuánto cambia la
+   predicción por cada unidad de cada variable? ¿Qué significan los coeficientes de los meses
+   respecto a la categoría de referencia? ¿Se pueden comparar las magnitudes directamente?**
+6. Calcule el [**R²**](../../ayudas/r2.md), el [**MAE**](../../ayudas/mae.md) y el
+   [**RMSE**](../../ayudas/rmse.md) en el conjunto de entrenamiento. **¿Qué tan grande es el
+   error frente al rango de la variable objetivo?**
+7. Calcule las mismas métricas en el conjunto de prueba y
+   [**compárelas con las de entrenamiento**](../../ayudas/comparar-metricas.md). **¿Qué
+   significa la diferencia? ¿Hay señales de [sobreajuste](../../glosario.md#sobreajuste)?**
+8. [**Compare los valores reales con los predichos**](../../ayudas/reales-vs-predichos.md).
    **¿Las predicciones siguen a los valores reales o se concentran alrededor de la media?**
-8. Realice el [**gráfico de residuos vs. valores predichos**](../../ayudas/residuos-vs-predichos.md).
+9. Realice el [**gráfico de residuos vs. valores predichos**](../../ayudas/residuos-vs-predichos.md).
    **¿Se cumple el supuesto de [homocedasticidad](../../glosario.md#homocedasticidad)? ¿Qué patrón
    observa?**
-9. Revise la [**distribución de los residuos**](../../ayudas/normalidad-residuos.md) y aplique la
-   prueba de Shapiro-Wilk. **¿Se cumple el supuesto de [normalidad](../../glosario.md#normalidad)?
-   ¿Qué indica el [valor p](../../glosario.md#valor-p)?**
-10. Realice el [**gráfico Q-Q**](../../ayudas/grafico-qq.md) de los residuos.
+10. Revise la [**distribución de los residuos**](../../ayudas/normalidad-residuos.md) y aplique la
+    prueba de Shapiro-Wilk. **¿Se cumple el supuesto de [normalidad](../../glosario.md#normalidad)?
+    ¿Qué indica el [valor p](../../glosario.md#valor-p)?**
+11. Realice el [**gráfico Q-Q**](../../ayudas/grafico-qq.md) de los residuos.
     **¿Los puntos siguen la línea de referencia? ¿Qué dice la forma de los extremos sobre las
     colas de la distribución?**
 

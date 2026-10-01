@@ -23,19 +23,8 @@ y = df["columna_objetivo"]
   [one-hot](one-hot.md)).
 - `y` es la variable que quiere predecir; `columna_objetivo` es su nombre.
 
-## Dividir en entrenamiento y prueba
-
-```python
-from sklearn.model_selection import train_test_split
-
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-```
-
-- El [conjunto de entrenamiento](../glosario.md#conjunto-entrenamiento) (80 %) se usa para
-  ajustar el modelo.
-- El [conjunto de prueba](../glosario.md#conjunto-prueba) (20 %, `test_size=0.2`) se reserva
-  para evaluar el modelo con datos que no vio.
-- `random_state=42` fija la división aleatoria para que el resultado sea reproducible.
+Antes de entrenar, separe los datos en `X_train`, `X_test`, `y_train` y `y_test`; vea
+[dividir en entrenamiento y prueba](division-datos.md).
 
 ## Entrenar y predecir
 
@@ -69,7 +58,8 @@ etiqueta con el nombre de cada columna.
     El tamaño de un coeficiente depende de las unidades de su variable. Un coeficiente pequeño
     en una variable medida en miles puede pesar más que uno grande en una variable entre 0 y 1.
 
-Evalúe el modelo con las [métricas de regresión](metricas-regresion.md) y revise las
+Evalúe el modelo con el [R²](r2.md), el [MAE](mae.md) y el [RMSE](rmse.md), y
+[compare las métricas de entrenamiento y prueba](comparar-metricas.md). Revise también las
 predicciones con el gráfico de [valores reales vs. predichos](reales-vs-predichos.md) y el de
 [residuos vs. predichos](residuos-vs-predichos.md).
 
