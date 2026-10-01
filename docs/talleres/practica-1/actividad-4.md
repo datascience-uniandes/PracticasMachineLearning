@@ -8,7 +8,7 @@
 2. [**Estandarice las variables**](../../ayudas/estandarizar.md) antes de entrenar.
    **¿Por qué la [regularización](../../glosario.md#regularizacion) exige que todas las variables
    estén en la misma escala?**
-3. [**Entrene un modelo de regresión Lasso**](../../ayudas/lasso.md) con tres valores del
+3. [**Entrene un modelo de regresión Lasso**](../../ayudas/lasso-ridge.md#lasso) con tres valores del
    [hiperparámetro](../../glosario.md#hiperparametro) alfa: **α = 0,1**, **α = 0,5** y **α = 1**.
 4. Revise los [**coeficientes**](../../ayudas/ver-coeficientes.md) de cada modelo Lasso.
    **¿Se eliminó algún coeficiente (quedó exactamente en 0)? ¿Cuáles variables sobreviven al
@@ -19,7 +19,7 @@
    [**compárelos**](../../ayudas/comparar-metricas.md) con los del modelo de regresión lineal de la
    Actividad 2. **¿Qué valor de alfa da el mejor resultado en prueba? ¿Qué pasa con las métricas
    cuando alfa crece demasiado?**
-6. [**Entrene un modelo de regresión Ridge**](../../ayudas/ridge.md) con tres valores de alfa:
+6. [**Entrene un modelo de regresión Ridge**](../../ayudas/lasso-ridge.md#ridge) con tres valores de alfa:
    **α = 1**, **α = 100** y **α = 1000**.
 7. Revise los [**coeficientes**](../../ayudas/ver-coeficientes.md) de cada modelo Ridge.
    **¿Se eliminó algún coeficiente? ¿Cómo cambian sus magnitudes al aumentar alfa? ¿En qué se

@@ -1,7 +1,7 @@
 # Ver los coeficientes
 
-Un modelo lineal entrenado ([regresión lineal](regresion-lineal.md), [Lasso](lasso.md) o
-[Ridge](ridge.md)) guarda el intercepto en `intercept_` y un
+Un modelo lineal entrenado ([regresión lineal](regresion-lineal.md), [Lasso](lasso-ridge.md#lasso) o
+[Ridge](lasso-ridge.md#ridge)) guarda el intercepto en `intercept_` y un
 [coeficiente](../glosario.md#coeficiente) por variable en `coef_`.
 
 ## Intercepto y coeficientes
@@ -42,7 +42,7 @@ variable.
 ## Lasso y Ridge
 
 `Lasso` y `Ridge` tienen los mismos atributos `intercept_` y `coef_`, así que el código es el
-mismo. Con [Lasso](lasso.md) es útil contar cuántos coeficientes valen exactamente 0, es decir,
+mismo. Con [Lasso](lasso-ridge.md#lasso) es útil contar cuántos coeficientes valen exactamente 0, es decir,
 cuántas variables eliminó el modelo:
 
 ```python
@@ -51,7 +51,7 @@ print("Variables eliminadas:", list(coef[coef == 0].index))
 ```
 
 `coef == 0` da `True` para cada coeficiente igual a 0, y `.sum()` cuenta los `True`. Con
-[Ridge](ridge.md) el resultado es siempre 0: sus coeficientes se acercan a 0, pero no llegan.
+[Ridge](lasso-ridge.md#ridge) el resultado es siempre 0: sus coeficientes se acercan a 0, pero no llegan.
 
 ## Gráfico de barras
 
@@ -77,53 +77,3 @@ positivos.
 
 Para saber qué significa cada coeficiente (signo, unidades, variables categóricas), vea
 [interpretar los coeficientes](interpretar-coeficientes.md).
-
-## Ejemplo
-
-Con 200 registros y 5 variables, de las cuales solo `x1`, `x2` y `x3` influyen en `y`:
-
-```python
-import numpy as np
-import pandas as pd
-from sklearn.pipeline import make_pipeline
-from sklearn.preprocessing import StandardScaler
-from sklearn.linear_model import LinearRegression, Lasso
-
-rng = np.random.default_rng(0)
-n = 200
-X = pd.DataFrame(rng.normal(0, 1, (n, 5)), columns=["x1", "x2", "x3", "x4", "x5"])
-y = 10 + 4 * X["x1"] - 3 * X["x2"] + 1 * X["x3"] + rng.normal(0, 1, n)
-
-lineal = LinearRegression().fit(X, y)
-coef = pd.Series(lineal.coef_, index=X.columns).sort_values()
-print("Intercepto:", round(lineal.intercept_, 2))
-print(coef.round(2))
-
-lasso = make_pipeline(StandardScaler(), Lasso(alpha=0.5)).fit(X, y)
-coef_lasso = pd.Series(lasso[-1].coef_, index=X.columns).sort_values()
-print(coef_lasso.round(2))
-print("Coeficientes en 0:", (coef_lasso == 0).sum())
-```
-
-Salida:
-
-```text
-Intercepto: 10.04
-x2   -3.08
-x4    0.05
-x5    0.10
-x3    0.97
-x1    4.08
-dtype: float64
-x2   -2.28
-x4    0.00
-x5    0.00
-x3    0.34
-x1    3.15
-dtype: float64
-Coeficientes en 0: 2
-```
-
-- La regresión lineal recupera valores cercanos a los usados para generar los datos: intercepto
-  10, y coeficientes 4, −3 y 1 para `x1`, `x2` y `x3`. Los de `x4` y `x5` son cercanos a 0.
-- Lasso (alfa = 0,5) deja `x4` y `x5` en exactamente 0 y reduce los demás coeficientes hacia 0.

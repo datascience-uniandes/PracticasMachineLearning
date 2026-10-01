@@ -12,6 +12,9 @@ Un valor estandarizado indica a cuántas desviaciones estándar está el dato de
 es dos desviaciones por encima y \( z = -1 \), una por debajo. La forma de la
 [distribución](../glosario.md#distribucion) no cambia; solo cambian su centro y su escala.
 
+La estandarización es una de las formas de [escalar variables](escalar-variables.md); esa página
+compara `StandardScaler` con `MinMaxScaler` y [`RobustScaler`](robust-scaler.md).
+
 ## Estandarizar con `StandardScaler`
 
 ```python
@@ -44,7 +47,7 @@ X_test_est = pd.DataFrame(scaler.transform(X_test),
 
 ## Por qué estandarizar
 
-- **Regularización.** [Lasso](lasso.md) y [Ridge](ridge.md) penalizan el tamaño de los
+- **Regularización.** [Lasso](lasso-ridge.md#lasso) y [Ridge](lasso-ridge.md#ridge) penalizan el tamaño de los
   [coeficientes](../glosario.md#coeficiente). Como el tamaño de un coeficiente depende de las
   unidades de su variable (vea [interpretar los coeficientes](interpretar-coeficientes.md)), sin
   estandarizar la penalización castiga más a unas variables que a otras solo por su escala.
@@ -58,85 +61,5 @@ X_test_est = pd.DataFrame(scaler.transform(X_test),
 La [regresión lineal](regresion-lineal.md) sin regularización no necesita estandarizar: sus
 predicciones y su [R²](r2.md) son los mismos; solo cambian los coeficientes.
 
-## Estandarizar dentro de un pipeline
-
-```python
-from sklearn.pipeline import make_pipeline
-from sklearn.preprocessing import StandardScaler
-
-modelo = make_pipeline(StandardScaler(), modelo_base)
-modelo.fit(X_train, y_train)
-y_pred = modelo.predict(X_test)
-```
-
-- `modelo_base` es el modelo que quiere entrenar, por ejemplo `Lasso(alpha=0.1)` o
-  `Ridge(alpha=1)`.
-- `make_pipeline` encadena los pasos: `fit` ajusta el `StandardScaler` con `X_train` y luego
-  entrena el modelo con los datos ya estandarizados; `predict` estandariza `X_test` con lo
-  aprendido y predice.
-- `y_train` es la [variable objetivo](../glosario.md#variable-objetivo); no se estandariza.
-
-!!! tip "Prefiera el pipeline"
-    Con `make_pipeline` no tiene que acordarse de usar `transform` en lugar de `fit_transform`, y
-    la [validación cruzada](validacion-cruzada.md) ajusta el escalador en cada partición solo con
-    los datos de entrenamiento de esa partición.
-
 Si hay columnas de la [codificación one-hot](one-hot.md), estandarice solo las continuas con un
 `ColumnTransformer`, como se muestra en la [regresión polinomial](regresion-polinomial.md).
-
-## Ejemplo
-
-Con 200 registros de tres variables en escalas muy distintas:
-
-```python
-import numpy as np
-import pandas as pd
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
-
-rng = np.random.default_rng(0)
-n = 200
-X = pd.DataFrame({
-    "area": rng.uniform(40, 200, n),
-    "habitaciones": rng.integers(1, 6, n),
-    "distancia_km": rng.exponential(5, n),
-})
-
-X_train, X_test = train_test_split(X, test_size=0.2, random_state=42)
-
-scaler = StandardScaler()
-X_train_est = pd.DataFrame(scaler.fit_transform(X_train),
-                           columns=X.columns, index=X_train.index)
-X_test_est = pd.DataFrame(scaler.transform(X_test),
-                          columns=X.columns, index=X_test.index)
-
-print(X_train.describe().loc[["mean", "std", "min", "max"]].round(2))
-print(X_train_est.describe().loc[["mean", "std", "min", "max"]].round(2))
-print(X_test_est.describe().loc[["mean", "std"]].round(2))
-```
-
-Salida:
-
-```text
-        area  habitaciones  distancia_km
-mean  127.60          3.11          4.70
-std    48.55          1.43          5.02
-min    40.44          1.00          0.03
-max   199.55          5.00         40.64
-      area  habitaciones  distancia_km
-mean -0.00          0.00         -0.00
-std   1.00          1.00          1.00
-min  -1.80         -1.48         -0.93
-max   1.49          1.33          7.18
-      area  habitaciones  distancia_km
-mean -0.13         -0.31          0.47
-std   0.99          0.99          1.17
-```
-
-- Antes de estandarizar, `area` tiene una desviación estándar de 48,55 y `habitaciones` de 1,43.
-  Después, las tres variables del entrenamiento tienen media 0 y desviación estándar 1.
-- El máximo de `distancia_km` estandarizado es 7,18: ese registro está a más de 7 desviaciones
-  estándar de la media, un posible [valor atípico](../glosario.md#outlier). La estandarización
-  no elimina el [sesgo](../glosario.md#sesgo) ni los atípicos.
-- En `X_test_est` las medias no son exactamente 0 ni las desviaciones exactamente 1, porque se
-  usaron la media y la desviación del entrenamiento. Es lo esperado.

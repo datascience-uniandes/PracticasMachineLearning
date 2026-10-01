@@ -29,18 +29,24 @@
    [conjunto de entrenamiento](../../glosario.md#conjunto-entrenamiento).
    **¿Cuántas columnas genera cada grado? ¿Por qué no se debe usar el conjunto de prueba para
    comparar los grados?**
-6. **Elija el mejor modelo con las métricas de validación:** construya una tabla con el R², el
-   MAE y el RMSE de cada grado en entrenamiento y en
-   [validación](../../glosario.md#conjunto-validacion), y grafique la
-   [**curva de validación**](../../ayudas/seleccion-hiperparametros.md#graficar-la-curva-de-validacion).
-   Elija el grado con el **menor RMSE de validación**; si dos grados tienen un RMSE de validación
-   muy parecido, elija el más simple (el de menor grado).
-   **¿Qué grado obtiene el menor error de validación? ¿Cómo cambian los errores de entrenamiento y
-   de validación al subir el grado? Explique el resultado en términos del
-   [compromiso sesgo-varianza](../../glosario.md#compromiso-sesgo-varianza): ¿qué grados muestran
-   [subajuste](../../glosario.md#subajuste) y cuáles [sobreajuste](../../glosario.md#sobreajuste)?**
-7. [**Evalúe el mejor modelo en el conjunto de prueba**](../../ayudas/seleccion-hiperparametros.md#evaluar-el-modelo-elegido-en-prueba)
-   (datos nunca vistos) y reporte su R², MAE y RMSE. Compare el MAE y el RMSE con la media, la
+6. **Elija el mejor modelo con las métricas de validación:**
+
+    - **a)** [**Construya una tabla**](../../ayudas/seleccion-hiperparametros.md#recorrer-los-valores-del-hiperparametro)
+      con el R², el MAE y el RMSE de cada grado en entrenamiento y en
+      [validación](../../glosario.md#conjunto-validacion).
+    - **b)** [**Grafique la curva de entrenamiento y validación**](../../ayudas/seleccion-hiperparametros.md#graficar-la-curva-de-validacion)
+      (RMSE de entrenamiento y de validación) contra el grado del polinomio.
+    - **c)** Elija el grado con el **menor RMSE de validación**; si dos grados tienen un RMSE de
+      validación muy parecido, elija el más simple (el de menor grado).
+
+    **¿Qué grado obtiene el menor error de validación? ¿Cómo cambian los errores de entrenamiento y
+    de validación al subir el grado? Explique el resultado en términos del
+    [compromiso sesgo-varianza](../../glosario.md#compromiso-sesgo-varianza): ¿qué grados muestran
+    [subajuste](../../glosario.md#subajuste) y cuáles [sobreajuste](../../glosario.md#sobreajuste)?**
+
+7. **Evalúe el mejor modelo en el conjunto de prueba** (datos nunca vistos) y reporte su
+   [**R²**](../../ayudas/r2.md), [**MAE**](../../ayudas/mae.md) y
+   [**RMSE**](../../ayudas/rmse.md). Compare el MAE y el RMSE con la media, la
    [**desviación estándar y el rango**](../../ayudas/explorar-estructura.md) de la variable
    objetivo. **¿Qué tan grande es el error frente a la variación natural del área quemada? ¿El
    modelo elegido es mejor que el modelo lineal de la actividad anterior?**

@@ -95,9 +95,12 @@ nav:
       - Codificación one-hot: ayudas/one-hot.md
       - Coeficiente de determinación (R²): ayudas/r2.md
       - Comparar métricas entre conjuntos: ayudas/comparar-metricas.md
+      - Compromiso sesgo-varianza: ayudas/compromiso-sesgo-varianza.md
       - Dimensiones de calidad de los datos: ayudas/dimensiones-calidad.md
       - Dividir en entrenamiento y prueba: ayudas/division-datos.md
       - Error absoluto medio (MAE): ayudas/mae.md
+      - Escalar con RobustScaler: ayudas/robust-scaler.md
+      - Escalar variables: ayudas/escalar-variables.md
       - Estandarizar variables: ayudas/estandarizar.md
       - Explorar la estructura de un dataset: ayudas/explorar-estructura.md
       - Gráfico de barras: ayudas/grafico-barras.md
@@ -111,10 +114,9 @@ nav:
       - Optimizar hiperparámetros con GridSearchCV: ayudas/gridsearchcv.md
       - Prueba de Shapiro-Wilk: ayudas/shapiro-wilk.md
       - Raíz del error cuadrático medio (RMSE): ayudas/rmse.md
-      - Regresión Lasso: ayudas/lasso.md
+      - Regresión Lasso y Ridge: ayudas/lasso-ridge.md
       - Regresión lineal: ayudas/regresion-lineal.md
       - Regresión polinomial: ayudas/regresion-polinomial.md
-      - Regresión Ridge: ayudas/ridge.md
       - Residuos vs. valores predichos: ayudas/residuos-vs-predichos.md
       - Revisar la linealidad de los términos polinomiales: ayudas/linealidad-terminos.md
       - Revisar y tratar duplicados: ayudas/duplicados.md
