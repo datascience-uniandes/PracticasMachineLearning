@@ -9,6 +9,7 @@ docs/
   index.md          Inicio
   talleres/         Prácticas (practica-1/ con una página por actividad)
   ayudas/           Ayudas genéricas con código
+  datos/            Conjuntos de datos (CSV y diccionario)
   glosario.md       Términos de las prácticas
   assets/img/       Imágenes de los ejemplos
 mkdocs.yml          Configuración y navegación

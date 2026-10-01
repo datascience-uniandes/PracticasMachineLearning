@@ -1,6 +1,6 @@
 # Actividad 1: Entendimiento de datos
 
-### Datos de trabajo: [forestfires.csv](https://archive.ics.uci.edu/dataset/162/forest+fires) ([diccionario de datos](index.md))
+### Datos de trabajo: [forestfires.csv](../../datos/forestfires.md) ([diccionario de datos](../../datos/forestfires.md#diccionario-de-datos))
 
 1. Cree un nuevo notebook y [**cargue el dataset**](../../ayudas/cargar-dataset.md) de trabajo.
 2. [**Explore la estructura del dataset**](../../ayudas/explorar-estructura.md).

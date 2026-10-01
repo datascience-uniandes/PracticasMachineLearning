@@ -15,7 +15,7 @@ desde la preparación de los datos hasta la evaluación de los modelos.
 
     ---
 
-    Incendios forestales en Montesinho: entendimiento, calidad y tratamiento de los datos.
+    Incendios forestales en Montesinho: entendimiento y tratamiento de los datos, y un primer modelo de regresión lineal.
 
     [:octicons-arrow-right-24: Ir a la práctica](talleres/practica-1/index.md)
 
@@ -61,9 +61,23 @@ desde la preparación de los datos hasta la evaluación de los modelos.
 
     ---
 
-    Código genérico, con ejemplos, para cargar datos, graficarlos y revisar y tratar su calidad.
+    Código genérico, con ejemplos, para explorar y tratar datos, construir modelos y revisar sus supuestos.
 
     [:octicons-arrow-right-24: Empezar por cargar un dataset](ayudas/cargar-dataset.md)
+
+</div>
+
+## Conjuntos de datos
+
+<div class="grid cards" markdown>
+
+-   :material-database:{ .lg .middle } **Incendios forestales de Montesinho**
+
+    ---
+
+    517 incendios en Portugal con condiciones meteorológicas y área quemada. Diccionario de datos y descarga.
+
+    [:octicons-arrow-right-24: Ver el dataset](datos/forestfires.md)
 
 </div>
 

@@ -82,20 +82,32 @@ nav:
       - Práctica 1:
           - talleres/practica-1/index.md
           - "Actividad 1: Entendimiento de datos": talleres/practica-1/actividad-1.md
+          - "Actividad 2: Regresión lineal": talleres/practica-1/actividad-2.md
       - Práctica 2: talleres/practica-2.md
       - Práctica 3: talleres/practica-3.md
       - Práctica 4: talleres/practica-4.md
       - Práctica 5: talleres/practica-5.md
   - Ayudas:
       - Cargar un dataset: ayudas/cargar-dataset.md
+      - Codificación one-hot: ayudas/one-hot.md
       - Dimensiones de calidad de los datos: ayudas/dimensiones-calidad.md
       - Explorar la estructura de un dataset: ayudas/explorar-estructura.md
       - Gráfico de barras: ayudas/grafico-barras.md
       - Gráfico de cajas: ayudas/grafico-cajas.md
+      - Gráfico de dispersión: ayudas/grafico-dispersion.md
+      - Gráfico Q-Q: ayudas/grafico-qq.md
       - Histograma: ayudas/histograma.md
+      - Matriz de correlación: ayudas/correlacion.md
+      - Métricas de regresión: ayudas/metricas-regresion.md
+      - Normalidad de los residuos: ayudas/normalidad-residuos.md
+      - Regresión lineal: ayudas/regresion-lineal.md
+      - Residuos vs. valores predichos: ayudas/residuos-vs-predichos.md
       - Revisar y tratar duplicados: ayudas/duplicados.md
       - Revisar y tratar inconsistencias: ayudas/inconsistencias.md
       - Revisar y tratar nulos: ayudas/nulos.md
       - Revisar y tratar valores atípicos: ayudas/valores-atipicos.md
       - Revisar y tratar valores inválidos: ayudas/valores-invalidos.md
+      - Valores reales vs. predichos: ayudas/reales-vs-predichos.md
+  - Conjuntos de datos:
+      - Incendios forestales de Montesinho: datos/forestfires.md
   - Glosario: glosario.md
