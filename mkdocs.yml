@@ -77,9 +77,11 @@ extra_css:
 
 nav:
   - Inicio: index.md
-  - Práctica 1: practica-1.md
-  - Práctica 2: practica-2.md
-  - Práctica 3: practica-3.md
-  - Práctica 4: practica-4.md
-  - Práctica 5: practica-5.md
-  - Glosario: glosario.md
+  - Talleres:
+      - Práctica 1: talleres/practica-1.md
+      - Práctica 2: talleres/practica-2.md
+      - Práctica 3: talleres/practica-3.md
+      - Práctica 4: talleres/practica-4.md
+      - Práctica 5: talleres/practica-5.md
+  - Ayudas:
+      - Glosario: ayudas/glosario.md

@@ -1,4 +1,4 @@
-# Práctica 1: _Título de la práctica_
+# Práctica 4: _Título de la práctica_
 
 ## Objetivos
 
@@ -29,7 +29,7 @@ from sklearn.model_selection import train_test_split
 ```
 
 !!! tip "Ayuda"
-    Ver [Glosario](glosario.md).
+    Ver [Glosario](../ayudas/glosario.md).
 
 ### Resultado esperado
 

@@ -4,10 +4,10 @@ Talleres prácticos del curso de **Ciencia de Datos** de la Universidad de los A
 En cada práctica se trabaja con datos reales en Python, usando **pandas**, **scikit-learn** y **Keras**,
 desde la preparación de los datos hasta la evaluación de los modelos.
 
-[Empezar con la Práctica 1 :material-arrow-right:](practica-1.md){ .md-button .md-button--primary }
-[Ver el glosario](glosario.md){ .md-button }
+[Empezar con la Práctica 1 :material-arrow-right:](talleres/practica-1.md){ .md-button .md-button--primary }
+[Ver el glosario](ayudas/glosario.md){ .md-button }
 
-## Prácticas
+## Talleres
 
 <div class="grid cards" markdown>
 
@@ -17,7 +17,7 @@ desde la preparación de los datos hasta la evaluación de los modelos.
 
     _Tema por definir_
 
-    [:octicons-arrow-right-24: Ir a la práctica](practica-1.md)
+    [:octicons-arrow-right-24: Ir a la práctica](talleres/practica-1.md)
 
 -   :material-numeric-2-circle:{ .lg .middle } **Práctica 2**
 
@@ -25,7 +25,7 @@ desde la preparación de los datos hasta la evaluación de los modelos.
 
     _Tema por definir_
 
-    [:octicons-arrow-right-24: Ir a la práctica](practica-2.md)
+    [:octicons-arrow-right-24: Ir a la práctica](talleres/practica-2.md)
 
 -   :material-numeric-3-circle:{ .lg .middle } **Práctica 3**
 
@@ -33,7 +33,7 @@ desde la preparación de los datos hasta la evaluación de los modelos.
 
     _Tema por definir_
 
-    [:octicons-arrow-right-24: Ir a la práctica](practica-3.md)
+    [:octicons-arrow-right-24: Ir a la práctica](talleres/practica-3.md)
 
 -   :material-numeric-4-circle:{ .lg .middle } **Práctica 4**
 
@@ -41,7 +41,7 @@ desde la preparación de los datos hasta la evaluación de los modelos.
 
     _Tema por definir_
 
-    [:octicons-arrow-right-24: Ir a la práctica](practica-4.md)
+    [:octicons-arrow-right-24: Ir a la práctica](talleres/practica-4.md)
 
 -   :material-numeric-5-circle:{ .lg .middle } **Práctica 5**
 
@@ -49,7 +49,13 @@ desde la preparación de los datos hasta la evaluación de los modelos.
 
     _Tema por definir_
 
-    [:octicons-arrow-right-24: Ir a la práctica](practica-5.md)
+    [:octicons-arrow-right-24: Ir a la práctica](talleres/practica-5.md)
+
+</div>
+
+## Ayudas
+
+<div class="grid cards" markdown>
 
 -   :material-book-open-variant:{ .lg .middle } **Glosario**
 
@@ -57,7 +63,7 @@ desde la preparación de los datos hasta la evaluación de los modelos.
 
     Términos clave y fragmentos de código de ayuda para resolver los ejercicios.
 
-    [:octicons-arrow-right-24: Consultar](glosario.md)
+    [:octicons-arrow-right-24: Consultar](ayudas/glosario.md)
 
 </div>
 
@@ -74,7 +80,7 @@ Todas las prácticas siguen la misma estructura:
 3. **Ejercicio de síntesis**: integra lo visto en la práctica sobre un dataset nuevo.
 
 !!! tip "Si se atasca"
-    Los recuadros de **Ayuda** de cada ejercicio remiten al [Glosario](glosario.md),
+    Los recuadros de **Ayuda** de cada ejercicio remiten al [Glosario](ayudas/glosario.md),
     donde hay fragmentos de código listos para adaptar.
 
 ## Antes de empezar
