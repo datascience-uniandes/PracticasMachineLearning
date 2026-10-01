@@ -16,3 +16,14 @@
 .md-typeset .grid.cards > ul > li {
   border-radius: 0.4rem;
 }
+
+/* Iconos grandes en las tarjetas */
+.md-typeset .lg {
+  height: 2em;
+  width: 2em;
+  vertical-align: middle;
+}
+.md-typeset .lg svg {
+  max-height: 100%;
+  width: 100%;
+}
