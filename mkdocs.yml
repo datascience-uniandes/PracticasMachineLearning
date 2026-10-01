@@ -26,6 +26,7 @@ theme:
         icon: material/weather-sunny
         name: Modo claro
   features:
+    - navigation.indexes
     - navigation.top
     - navigation.footer
     - navigation.instant
@@ -78,18 +79,21 @@ extra_css:
 nav:
   - Inicio: index.md
   - Talleres:
-      - Práctica 1: talleres/practica-1.md
+      - Práctica 1:
+          - talleres/practica-1/index.md
+          - "Actividad 1: Entendimiento de datos": talleres/practica-1/actividad-1.md
       - Práctica 2: talleres/practica-2.md
       - Práctica 3: talleres/practica-3.md
       - Práctica 4: talleres/practica-4.md
       - Práctica 5: talleres/practica-5.md
   - Ayudas:
-      - Cargar un dataset: ayudas/cargar-datos.md
-      - Explorar la estructura: ayudas/explorar-estructura.md
-      - Gráficos de variables continuas: ayudas/graficos-continuos.md
-      - Gráficos de variables categóricas: ayudas/graficos-categoricos.md
-      - Calidad de los datos: ayudas/calidad-datos.md
-      - Tratar valores nulos: ayudas/tratar-nulos.md
-      - Tratar duplicados: ayudas/tratar-duplicados.md
-      - Clipping de outliers: ayudas/clipping.md
+      - Cargar un dataset: ayudas/cargar-dataset.md
+      - Explorar la estructura de un dataset: ayudas/explorar-estructura.md
       - Glosario: ayudas/glosario.md
+      - Gráfico de barras: ayudas/grafico-barras.md
+      - Gráfico de cajas: ayudas/grafico-cajas.md
+      - Histograma: ayudas/histograma.md
+      - Revisar y tratar duplicados: ayudas/duplicados.md
+      - Revisar y tratar nulos: ayudas/nulos.md
+      - Revisar y tratar valores atípicos: ayudas/valores-atipicos.md
+      - Revisar y tratar valores inválidos: ayudas/valores-invalidos.md

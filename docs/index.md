@@ -4,7 +4,7 @@ Talleres prácticos del curso de **Ciencia de Datos** de la Universidad de los A
 En cada práctica se trabaja con datos reales en Python, usando **pandas**, **scikit-learn** y **Keras**,
 desde la preparación de los datos hasta la evaluación de los modelos.
 
-[Empezar con la Práctica 1 :material-arrow-right:](talleres/practica-1.md){ .md-button .md-button--primary }
+[Empezar con la Práctica 1 :material-arrow-right:](talleres/practica-1/index.md){ .md-button .md-button--primary }
 [Ver el glosario](ayudas/glosario.md){ .md-button }
 
 ## Talleres
@@ -17,7 +17,7 @@ desde la preparación de los datos hasta la evaluación de los modelos.
 
     Incendios forestales en Montesinho: entendimiento, calidad y tratamiento de los datos.
 
-    [:octicons-arrow-right-24: Ir a la práctica](talleres/practica-1.md)
+    [:octicons-arrow-right-24: Ir a la práctica](talleres/practica-1/index.md)
 
 -   :material-numeric-2-circle:{ .lg .middle } **Práctica 2**
 
@@ -61,9 +61,9 @@ desde la preparación de los datos hasta la evaluación de los modelos.
 
     ---
 
-    Cómo cargar datos, graficar, medir la calidad de los datos y tratarlos.
+    Código genérico, con ejemplos, para cargar datos, graficarlos y revisar y tratar su calidad.
 
-    [:octicons-arrow-right-24: Empezar por cargar un dataset](ayudas/cargar-datos.md)
+    [:octicons-arrow-right-24: Empezar por cargar un dataset](ayudas/cargar-dataset.md)
 
 -   :material-book-open-variant:{ .lg .middle } **Glosario**
 
