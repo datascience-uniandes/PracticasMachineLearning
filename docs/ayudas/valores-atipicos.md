@@ -1,8 +1,8 @@
 # Revisar y tratar valores atípicos
 
-**Dimensión de calidad: exactitud.** Un [valor atípico](glosario.md#outlier) (_outlier_) es un
-valor posible pero muy alejado del resto. Puede ser real o un error de registro, y puede
-distorsionar las estadísticas y los modelos.
+Un [valor atípico](../glosario.md#outlier) (_outlier_) es un valor posible pero muy alejado del
+resto. Puede ser real o un error de registro, y puede distorsionar las estadísticas y los modelos.
+No es una [dimensión de calidad](dimensiones-calidad.md), pero se revisa junto con ellas.
 
 ## Revisar
 
@@ -21,7 +21,7 @@ inferior, superior = q1 - 1.5 * iqr, q3 + 1.5 * iqr
 
 ## Tratar con clipping
 
-El [clipping](glosario.md#clipping) limita los valores a un rango: lo que está por debajo del
+El [clipping](../glosario.md#clipping) limita los valores a un rango: lo que está por debajo del
 límite inferior toma ese límite y lo que está por encima toma el límite superior. A diferencia de
 eliminar filas, no se pierden registros.
 

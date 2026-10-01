@@ -2,7 +2,7 @@
 
 **Dimensión de calidad: validez.** Un valor es inválido cuando no cumple las reglas de su
 variable: está fuera del rango posible (una edad negativa, un porcentaje mayor a 100) o no
-pertenece a las categorías esperadas (`"Bogota"` y `"bogotá"` en lugar de `"Bogotá"`).
+pertenece a las categorías permitidas (un mes `"abc"`).
 
 ## Revisar
 
@@ -15,31 +15,27 @@ df.describe().loc[["min", "max"]].T
 Cuente los registros que incumplen una regla:
 
 ```python
-(df["columna"] < 0).sum()                       # valores negativos
-(~df["columna"].between(minimo, maximo)).sum()  # valores fuera del rango [minimo, maximo]
-df["columna_categorica"].unique()               # categorías presentes
+(df["columna"] < 0).sum()                                     # valores negativos
+(~df["columna"].between(minimo, maximo)).sum()                # fuera del rango [minimo, maximo]
+(~df["columna_categorica"].isin(categorias_validas)).sum()    # categorías no permitidas
 ```
 
-`columna` es una variable numérica, `minimo` y `maximo` son los límites válidos, y
-`columna_categorica` es una variable de texto.
+- `columna` es una variable numérica, y `minimo` y `maximo` son sus límites válidos.
+- `columna_categorica` es una variable de texto y `categorias_validas` es la lista de valores
+  permitidos, por ejemplo `["lun", "mar", "mié", "jue", "vie", "sáb", "dom"]`.
 
 ## Tratar
 
-**Corregir** las categorías mal escritas:
-
-```python
-df["columna_categorica"] = df["columna_categorica"].str.strip().str.lower()     # espacios y mayúsculas
-df["columna_categorica"] = df["columna_categorica"].replace({"bogota": "bogotá"})  # unificar
-```
-
-**Marcar como nulo** un valor numérico imposible, para luego
-[tratarlo como nulo](nulos.md):
+Marque el valor inválido como nulo y luego [trátelo como nulo](nulos.md):
 
 ```python
 import numpy as np
 
 df.loc[~df["columna"].between(minimo, maximo), "columna"] = np.nan
 ```
+
+Si el valor se puede corregir con certeza (por ejemplo, un porcentaje registrado como `0.45`
+en vez de `45`), corríjalo en lugar de borrarlo.
 
 !!! warning "Inválido no es lo mismo que atípico"
     Un valor muy grande pero posible (un ingreso muy alto) no es inválido: es un

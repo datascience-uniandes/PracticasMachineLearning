@@ -1,7 +1,7 @@
 # Gráfico de barras
 
 El gráfico de barras muestra cuántos registros hay en cada categoría de una
-[variable categórica](glosario.md#variable-categorica).
+[variable categórica](../glosario.md#variable-categorica).
 
 ```python
 import matplotlib.pyplot as plt

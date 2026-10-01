@@ -1,7 +1,7 @@
 # Histograma
 
-El histograma muestra la [distribución](glosario.md#distribucion) de una
-[variable continua](glosario.md#variable-continua): divide el rango de valores en intervalos
+El histograma muestra la [distribución](../glosario.md#distribucion) de una
+[variable continua](../glosario.md#variable-continua): divide el rango de valores en intervalos
 (_bins_) y dibuja una barra con la cantidad de registros que cae en cada uno.
 
 ```python
@@ -56,7 +56,7 @@ plt.show()
 ![Histogramas de edad e ingreso](../assets/img/ayudas/histograma.png)
 
 `edad` tiene forma de campana y es simétrica. `ingreso` se concentra en valores bajos y tiene
-una cola larga hacia la derecha ([sesgo](glosario.md#sesgo) a la derecha).
+una cola larga hacia la derecha ([sesgo](../glosario.md#sesgo) a la derecha).
 
 !!! tip "Distribuciones muy sesgadas"
     Si casi todos los valores se concentran cerca de cero, grafique el logaritmo:

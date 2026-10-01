@@ -1,6 +1,6 @@
 # Revisar y tratar duplicados
 
-**Dimensión de calidad: unicidad.** Un [duplicado](glosario.md#duplicado) es un registro
+**Dimensión de calidad: unicidad.** Un [duplicado](../glosario.md#duplicado) es un registro
 idéntico a otro. Si no se elimina, ese registro pesa doble en el análisis.
 
 ## Revisar

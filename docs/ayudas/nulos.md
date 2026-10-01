@@ -1,6 +1,6 @@
 # Revisar y tratar nulos
 
-**Dimensión de calidad: completitud.** Un [valor nulo](glosario.md#valor-nulo) es un dato
+**Dimensión de calidad: completitud.** Un [valor nulo](../glosario.md#valor-nulo) es un dato
 faltante. En pandas aparece como `NaN`.
 
 ## Revisar
@@ -15,26 +15,66 @@ df[df["columna"].isna()]   # filas con nulo en una columna
 
 ## Tratar
 
-Hay dos estrategias principales.
+La estrategia depende de la proporción de nulos:
 
-**Eliminar** las filas con nulos. Es adecuado cuando son pocas y no siguen un patrón.
+| Nulos en la columna | Estrategia |
+|---------------------|------------|
+| Menos del 5 % | **Imputar**: reemplazar cada nulo por un valor representativo |
+| Demasiados (la columna aporta poca información) | **Eliminar** la columna o los registros |
 
-```python
-df = df.dropna()                       # elimina las filas con algún nulo
-df = df.dropna(subset=["columna"])     # solo las filas con nulo en esa columna
-```
-
-**Imputar**: reemplazar el nulo por un valor representativo de la columna.
+### Imputar con la media o la mediana
 
 ```python
-df["columna"] = df["columna"].fillna(df["columna"].median())   # numérica: mediana
-df["columna"] = df["columna"].fillna(df["columna"].mode()[0])  # categórica: moda
+df["columna_media"] = df["columna"].fillna(df["columna"].mean())       # media
+df["columna_mediana"] = df["columna"].fillna(df["columna"].median())   # mediana
+df["columna_categorica"] = df["columna_categorica"].fillna(df["columna_categorica"].mode()[0])  # moda
 ```
 
-!!! tip "¿Media o mediana?"
-    La mediana no se ve afectada por los [valores atípicos](glosario.md#outlier),
-    así que es la opción más segura en distribuciones con [sesgo](glosario.md#sesgo).
+- La **media** conserva el promedio de la columna, pero en distribuciones con
+  [sesgo](../glosario.md#sesgo) cae lejos de la mayoría de los datos y desplaza la mediana.
+- La **mediana** conserva el valor central y no se ve afectada por los
+  [valores atípicos](../glosario.md#outlier), pero cambia el promedio.
+- En las dos, todos los nulos reciben el mismo valor: la distribución gana un pico en ese
+  punto y la desviación estándar disminuye.
+- Las variables categóricas se imputan con la **moda** (la categoría más frecuente).
 
-!!! warning "Columnas casi vacías"
-    Si una columna tiene una gran proporción de nulos (por ejemplo, más del 50 %), puede ser
-    mejor eliminarla: `df = df.drop(columns=["columna"])`.
+Guarde cada opción en una columna nueva y vuelva a graficar el [histograma](histograma.md) y el
+[gráfico de cajas](grafico-cajas.md) para comparar el efecto antes de decidir.
+
+### Eliminar
+
+```python
+df = df.drop(columns=["columna"])      # elimina la columna completa
+df = df.dropna(subset=["columna"])     # elimina los registros con nulo en esa columna
+```
+
+## Ejemplo
+
+Con un dataset de 500 ingresos en el que faltan 20 valores (4 %):
+
+```python
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+rng = np.random.default_rng(0)
+df = pd.DataFrame({"ingreso": rng.lognormal(8, 0.6, 500)})
+df.loc[rng.choice(500, 20, replace=False), "ingreso"] = np.nan   # 4 % de nulos
+
+df["ingreso_media"] = df["ingreso"].fillna(df["ingreso"].mean())
+df["ingreso_mediana"] = df["ingreso"].fillna(df["ingreso"].median())
+
+fig, axes = plt.subplots(1, 3, figsize=(15, 3), sharey=True)
+for ax, columna in zip(axes, ["ingreso", "ingreso_media", "ingreso_mediana"]):
+    sns.histplot(df[columna], bins=40, ax=ax)
+    ax.set_title(columna)
+plt.tight_layout()
+plt.show()
+```
+
+![Histogramas del ingreso original e imputado con la media y la mediana](../assets/img/ayudas/nulos.png)
+
+Cada imputación agrega un pico en un punto distinto: cerca de 3.500 con la media y cerca de
+2.900 con la mediana. Como `ingreso` tiene sesgo a la derecha, la media queda por encima de la
+mayoría de los datos. Compare también `df[["ingreso", "ingreso_media", "ingreso_mediana"]].describe()`.

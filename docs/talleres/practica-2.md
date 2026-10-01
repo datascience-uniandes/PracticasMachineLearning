@@ -29,7 +29,7 @@ from sklearn.model_selection import train_test_split
 ```
 
 !!! tip "Ayuda"
-    Ver [Glosario](../ayudas/glosario.md).
+    Ver [Glosario](../glosario.md).
 
 ### Resultado esperado
 

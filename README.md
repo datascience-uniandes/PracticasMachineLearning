@@ -8,7 +8,8 @@ Sitio de talleres prácticos (Python, scikit-learn, Keras) construido con [MkDoc
 docs/
   index.md          Inicio
   talleres/         Prácticas (practica-1/ con una página por actividad)
-  ayudas/           Ayudas genéricas con código y glosario
+  ayudas/           Ayudas genéricas con código
+  glosario.md       Términos de las prácticas
   assets/img/       Imágenes de los ejemplos
 mkdocs.yml          Configuración y navegación
 ```

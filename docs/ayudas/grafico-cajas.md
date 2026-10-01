@@ -1,11 +1,11 @@
 # Gráfico de cajas
 
-El gráfico de cajas (_boxplot_) resume una [variable continua](glosario.md#variable-continua):
+El gráfico de cajas (_boxplot_) resume una [variable continua](../glosario.md#variable-continua):
 
 - la **caja** va del primer cuartil (25 %) al tercer cuartil (75 %);
 - la **línea** dentro de la caja es la mediana;
 - los **bigotes** llegan hasta 1,5 veces el rango intercuartílico;
-- los **puntos** fuera de los bigotes son [valores atípicos](glosario.md#outlier).
+- los **puntos** fuera de los bigotes son [valores atípicos](../glosario.md#outlier).
 
 ```python
 import matplotlib.pyplot as plt
@@ -61,5 +61,5 @@ plt.show()
 ![Gráficos de cajas de edad e ingreso](../assets/img/ayudas/grafico-cajas.png)
 
 La caja de `edad` es simétrica y tiene pocos atípicos. La de `ingreso` está cargada a la
-izquierda y tiene muchos atípicos a la derecha, lo que indica [sesgo](glosario.md#sesgo)
+izquierda y tiene muchos atípicos a la derecha, lo que indica [sesgo](../glosario.md#sesgo)
 a la derecha.

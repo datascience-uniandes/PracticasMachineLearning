@@ -5,7 +5,7 @@ En cada práctica se trabaja con datos reales en Python, usando **pandas**, **sc
 desde la preparación de los datos hasta la evaluación de los modelos.
 
 [Empezar con la Práctica 1 :material-arrow-right:](talleres/practica-1/index.md){ .md-button .md-button--primary }
-[Ver el glosario](ayudas/glosario.md){ .md-button }
+[Ver el glosario](glosario.md){ .md-button }
 
 ## Talleres
 
@@ -65,13 +65,19 @@ desde la preparación de los datos hasta la evaluación de los modelos.
 
     [:octicons-arrow-right-24: Empezar por cargar un dataset](ayudas/cargar-dataset.md)
 
+</div>
+
+## Glosario
+
+<div class="grid cards" markdown>
+
 -   :material-book-open-variant:{ .lg .middle } **Glosario**
 
     ---
 
     Definiciones de los términos que se usan en las prácticas.
 
-    [:octicons-arrow-right-24: Consultar](ayudas/glosario.md)
+    [:octicons-arrow-right-24: Consultar](glosario.md)
 
 </div>
 
@@ -83,7 +89,7 @@ resolver en su notebook.
 
 !!! tip "Si se atasca"
     Las acciones de cada paso enlazan a una página de **Ayudas** con el código necesario,
-    y los términos clave enlazan al [Glosario](ayudas/glosario.md).
+    y los términos clave enlazan al [Glosario](glosario.md).
 
 ## Antes de empezar
 
