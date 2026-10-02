@@ -79,48 +79,12 @@ y_prob = modelo.predict_proba(X_val)[:, 1]
     sobreajuste: compare con el desempeño en validación cruzada o en validación, que es el que
     importa. Si la diferencia es grande, aumente `min_samples_leaf` o limite `max_depth`.
 
-## Importancia de las variables
-
-```python
-import pandas as pd
-
-importancias = pd.Series(modelo.feature_importances_, index=X_train.columns)
-print(importancias.sort_values(ascending=False))
-```
-
-- `feature_importances_` promedia, sobre todos los árboles, cuánto reduce la impureza cada
-  variable. Los valores suman 1.
-- Como en el árbol individual, la importancia no tiene signo: indica cuánto usa el bosque la
-  variable, no en qué dirección afecta la probabilidad de la clase positiva.
-- Tiende a favorecer a las variables continuas o con muchos valores distintos, y cuando dos
-  variables están muy correlacionadas, la importancia se reparte entre ambas. Úsela como una
-  guía, no como una medida exacta.
-
-## Score *out-of-bag* (opcional)
-
-Cada árbol deja fuera alrededor de un tercio de los registros de entrenamiento (los registros
-*out-of-bag*). Esos registros pueden usarse para evaluar el bosque sin un conjunto aparte:
-
-```python
-modelo = RandomForestClassifier(n_estimators=numero_arboles, oob_score=True,
-                                random_state=42, n_jobs=-1)
-modelo.fit(X_train, y_train)
-print(modelo.oob_score_)
-```
-
-- `oob_score_` es la *accuracy* calculada prediciendo cada registro solo con los árboles que no
-  lo vieron. Es una estimación rápida del desempeño fuera de muestra, parecida a la de la
-  [validación cruzada](../glosario.md#validacion-cruzada).
-- Con desbalance de clases, la *accuracy* es poco informativa; para comparar modelos prefiera
-  la validación cruzada con una métrica como [F1](f1.md) o el área bajo la curva ROC.
-
 ## Cómo interpretar y precauciones
 
 - El random forest es una buena opción "por defecto": funciona razonablemente bien con pocos
   ajustes y es difícil que sobreajuste gravemente.
 - A cambio, se pierde la interpretabilidad del árbol individual: no se puede dibujar un solo
-  árbol que explique las predicciones. Las importancias de las variables son la principal
-  herramienta para entender qué usa el modelo.
+  árbol que explique las predicciones.
 - Con desbalance de clases, además de `class_weight`, puede ajustar el umbral de decisión usando
   `y_prob` y la [curva de precisión-sensibilidad](curva-precision-sensibilidad.md).
 - Evalúe siempre con la [matriz de confusión](matriz-confusion.md) y métricas adecuadas en el

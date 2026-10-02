@@ -25,9 +25,9 @@
     - **b)** Calcule y grafique la [**exactitud**](../../ayudas/exactitud.md), la
       [**precisión**](../../ayudas/precision.md), la [**sensibilidad**](../../ayudas/sensibilidad.md)
       y el [**F1**](../../ayudas/f1.md).
-    - **c)** Grafique su [**curva de precisión-sensibilidad**](../../ayudas/curva-precision-sensibilidad.md)
-      y su [**curva ROC**](../../ayudas/curva-roc.md) en entrenamiento y en validación. Como la red
-      no es un estimador de scikit-learn, [**grafíquelas desde las predicciones**](../../ayudas/curvas-desde-predicciones.md).
+    - **c)** Grafique su [**curva de precisión-sensibilidad**](../../ayudas/curva-precision-sensibilidad.md#desde-predicciones)
+      y su [**curva ROC**](../../ayudas/curva-roc.md#desde-predicciones) en entrenamiento y en validación. Como la red
+      no es un estimador de scikit-learn, grafíquelas desde las predicciones.
 
 5. **Comparación final en validación:** construya una tabla con la exactitud, la precisión, la
    sensibilidad, el F1, el AUC y el AP en validación del mejor modelo básico (Actividad 3), del

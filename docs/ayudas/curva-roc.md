@@ -62,8 +62,8 @@ y la clase real del [conjunto de validación](../glosario.md#conjunto-validacion
 probabilidad estimada de la clase positiva (la segunda columna de `predict_proba`). La curva y
 el AUC usan probabilidades, no las clases de `predict`. La leyenda muestra el AUC de cada curva.
 
-Si ya tiene las probabilidades, o si el modelo no es de scikit-learn (por ejemplo, una red
-neuronal de Keras), vea [graficar curvas desde las predicciones](curvas-desde-predicciones.md).
+Si ya tiene las probabilidades, o si el modelo no es de scikit-learn, vea
+[graficarla desde las predicciones](#desde-predicciones).
 
 ## Comparar varios modelos en entrenamiento y validación
 
@@ -94,6 +94,53 @@ plt.show()
 en la leyenda. `X_train` y `y_train` son los datos del
 [conjunto de entrenamiento](../glosario.md#conjunto-entrenamiento). `sharey=True` hace que los
 dos gráficos compartan el eje vertical para compararlos a simple vista.
+
+## Graficarla desde las predicciones { #desde-predicciones }
+
+`from_estimator` solo funciona con modelos de scikit-learn, porque calcula las probabilidades
+internamente. `from_predictions` recibe las clases reales y las probabilidades que usted ya
+calculó, así que funciona con **cualquier** modelo, por ejemplo, una
+[red neuronal](red-neuronal.md) de Keras.
+
+La curva recorre todos los [umbrales de decisión](../glosario.md#umbral-decision), así que
+necesita la **probabilidad de la clase positiva**, no la clase predicha:
+
+| Modelo | Cómo obtener las probabilidades |
+|--------|---------------------------------|
+| Clasificador de scikit-learn | `modelo.predict_proba(X)[:, 1]` |
+| Red neuronal de Keras con salida sigmoide | `modelo.predict(X, verbose=0).ravel()` |
+
+!!! warning "No use las clases predichas"
+    Con `modelo.predict(X)` de scikit-learn se obtienen clases 0 o 1, no probabilidades. La curva
+    queda reducida a un solo punto y el AUC pierde sentido. Pase también siempre `ax=ax`: sin
+    ese parámetro, cada llamada crea una figura nueva y las curvas no quedan en sus gráficos.
+
+```python
+modelos = {
+    "Red de 1 capa": modelo_1,
+    "Red de 2 capas": modelo_2,
+}
+
+fig, axes = plt.subplots(1, 2, figsize=(12, 5), sharey=True)
+conjuntos = [("Entrenamiento", X_train, y_train), ("Validación", X_val, y_val)]
+
+for ax, (titulo, X, y) in zip(axes, conjuntos):
+    for nombre, modelo in modelos.items():
+        y_prob = modelo.predict(X, verbose=0).ravel()
+        RocCurveDisplay.from_predictions(y, y_prob, ax=ax, name=nombre)
+    ax.plot([0, 1], [0, 1], "k--", label="Azar")
+    ax.set_title(titulo)
+    ax.legend(loc="lower right")
+
+plt.tight_layout()
+plt.show()
+```
+
+- `y_prob` es la probabilidad de la clase positiva de cada registro. La línea corresponde a una
+  red de Keras; con un modelo de scikit-learn, cámbiela por `y_prob = modelo.predict_proba(X)[:, 1]`.
+- `RocCurveDisplay.from_predictions(y, y_prob, ...)` recibe primero las clases reales y luego las
+  probabilidades. El resto (`ax`, `name`, la leyenda con el AUC) funciona igual que con
+  `from_estimator`.
 
 ## Cómo interpretarla
 
