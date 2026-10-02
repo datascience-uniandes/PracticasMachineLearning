@@ -126,6 +126,7 @@ nav:
       - Explorar la estructura de un dataset: ayudas/explorar-estructura.md
       - F1: ayudas/f1.md
       - Gradient Boosting: ayudas/gradient-boosting.md
+      - Graficar curvas desde las predicciones: ayudas/curvas-desde-predicciones.md
       - Gráfico de barras: ayudas/grafico-barras.md
       - Gráfico de cajas: ayudas/grafico-cajas.md
       - Gráfico de dispersión: ayudas/grafico-dispersion.md

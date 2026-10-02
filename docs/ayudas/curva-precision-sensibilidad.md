@@ -57,8 +57,8 @@ ap = average_precision_score(y_val, y_prob)
 `X_val` y `y_val` son las variables y la clase real del
 [conjunto de validación](../glosario.md#conjunto-validacion), y `y_prob` la probabilidad
 estimada de la clase positiva. La leyenda muestra la AP de cada curva. Si ya tiene las
-probabilidades, puede usar
-`PrecisionRecallDisplay.from_predictions(y_val, y_prob, ax=ax, name="Modelo")`.
+probabilidades, o si el modelo no es de scikit-learn (por ejemplo, una red neuronal de Keras),
+vea [graficar curvas desde las predicciones](curvas-desde-predicciones.md).
 
 ## Comparar varios modelos en entrenamiento y validación
 

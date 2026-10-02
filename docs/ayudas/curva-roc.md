@@ -62,8 +62,8 @@ y la clase real del [conjunto de validación](../glosario.md#conjunto-validacion
 probabilidad estimada de la clase positiva (la segunda columna de `predict_proba`). La curva y
 el AUC usan probabilidades, no las clases de `predict`. La leyenda muestra el AUC de cada curva.
 
-Si ya tiene las probabilidades, puede usar
-`RocCurveDisplay.from_predictions(y_val, y_prob, ax=ax, name="Modelo")`.
+Si ya tiene las probabilidades, o si el modelo no es de scikit-learn (por ejemplo, una red
+neuronal de Keras), vea [graficar curvas desde las predicciones](curvas-desde-predicciones.md).
 
 ## Comparar varios modelos en entrenamiento y validación
 
