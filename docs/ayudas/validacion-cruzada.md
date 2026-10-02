@@ -35,38 +35,64 @@ usados son K = 5 y K = 10.
     [conjunto de prueba](../glosario.md#conjunto-prueba) se separa antes con
     `train_test_split` y se usa una sola vez, al final, con el modelo ya elegido.
 
-## Evaluar un modelo con `cross_val_score`
+## Regresión y clasificación
+
+La validación cruzada funciona igual con cualquier modelo. Solo cambian dos cosas según el tipo de
+problema:
+
+| | Regresión | Clasificación |
+|---|---|---|
+| Cómo partir los datos | `KFold` | `StratifiedKFold`: cada fold conserva la proporción de clases del conjunto de entrenamiento, algo importante con [desbalance de clases](../glosario.md#desbalance-de-clases) |
+| Ejemplos de `scoring` | `"neg_root_mean_squared_error"` ([RMSE](rmse.md)), `"neg_mean_absolute_error"` ([MAE](mae.md)), `"r2"` ([R²](r2.md)) | `"accuracy"` ([exactitud](exactitud.md)), `"f1"` ([F1](f1.md)), `"precision"`, `"recall"`, `"roc_auc"` ([AUC](curva-roc.md)) |
+
+Si pasa un número entero (`cv=5`) en lugar de un objeto, scikit-learn usa `StratifiedKFold` en
+clasificación y `KFold` en regresión, pero sin mezclar los registros antes de partirlos. Por eso
+conviene crear el objeto explícitamente con `shuffle=True`.
+
+### Por qué algunas métricas salen negativas
+
+scikit-learn siempre **maximiza** el *score*: un valor más grande significa un modelo mejor. En
+las métricas de error, como el RMSE o el MAE, un valor más pequeño es mejor, así que se usan con
+el signo cambiado: `"neg_root_mean_squared_error"` devuelve \( -	ext{RMSE} \). Multiplique por
+−1 para volver a la escala original. Las métricas en las que más alto ya es mejor (R², exactitud,
+F1, AUC) se leen directamente.
+
+## Código: regresión
 
 ```python
-import numpy as np
 from sklearn.model_selection import KFold, cross_val_score
 
 kf = KFold(n_splits=5, shuffle=True, random_state=42)
-scores = cross_val_score(modelo, X_train, y_train, cv=kf,
-                         scoring="neg_root_mean_squared_error")
+scores = cross_val_score(modelo, X_train, y_train, cv=kf, scoring="metrica")
 
-rmse = -scores
-print("RMSE por fold:", rmse.round(3))
-print("RMSE promedio:", rmse.mean().round(3))
-print("Desviación estándar:", rmse.std().round(3))
+print("Métrica por fold:", scores.round(3))
+print("Promedio:", scores.mean().round(3))
+print("Desviación estándar:", scores.std().round(3))
 ```
 
-- `KFold` define cómo se parten los datos: `n_splits=5` es el número de folds (K),
-  `shuffle=True` mezcla los registros antes de partirlos y `random_state=42` fija la semilla
-  para que la partición sea reproducible.
-- `cross_val_score` entrena una copia de `modelo` en cada iteración y devuelve un arreglo con
-  las K métricas, una por fold. Si el modelo necesita datos escalados, pase a
-  `cross_val_score` los datos ya [escalados](escalar-variables.md).
-- `scoring="neg_root_mean_squared_error"` indica que la métrica es el [RMSE](rmse.md).
-- `rmse.mean()` es la estimación del error; `rmse.std()` indica cuánto varía entre folds.
+## Código: clasificación
 
-!!! tip "Por qué el RMSE sale negativo"
-    scikit-learn siempre **maximiza** el *score*: un valor más grande significa un modelo mejor.
-    Como en el RMSE y el [MAE](mae.md) un valor más pequeño es mejor, se usan con signo
-    cambiado: `"neg_root_mean_squared_error"` y `"neg_mean_absolute_error"` devuelven
-    \( -\text{RMSE} \) y \( -\text{MAE} \). Multiplique por −1 (`-scores`) para volver a la
-    escala original. Con `scoring="r2"` no hace falta cambiar el signo, porque en el [R²](r2.md)
-    un valor más grande ya es mejor.
+```python
+from sklearn.model_selection import StratifiedKFold, cross_val_score
 
-Para optimizar varios hiperparámetros a la vez, vea
+skf = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
+scores = cross_val_score(modelo, X_train, y_train, cv=skf, scoring="metrica")
+
+print("Métrica por fold:", scores.round(3))
+print("Promedio:", scores.mean().round(3))
+print("Desviación estándar:", scores.std().round(3))
+```
+
+- `modelo` es el modelo sin entrenar, de regresión o de clasificación.
+- `n_splits=5` es el número de folds (K); `shuffle=True` mezcla los registros antes de partirlos
+  y `random_state=42` fija la semilla para que la partición sea reproducible.
+- `"metrica"` es el nombre de la métrica que quiere usar (vea la tabla de arriba). Si empieza por
+  `neg_`, use `-scores` para leer el error con su signo habitual.
+- `cross_val_score` entrena una copia de `modelo` en cada iteración y devuelve un arreglo con las
+  K métricas, una por fold. Si el modelo necesita datos escalados, páselos ya
+  [escalados](escalar-variables.md).
+- `scores.mean()` es la estimación del desempeño con datos nuevos y `scores.std()` indica cuánto
+  varía entre folds.
+
+Para elegir el mejor valor de un hiperparámetro con validación cruzada, vea
 [Optimizar hiperparámetros con GridSearchCV](gridsearchcv.md).
