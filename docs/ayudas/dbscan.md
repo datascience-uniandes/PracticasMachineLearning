@@ -68,7 +68,8 @@ marcan más registros como ruido; valores más bajos producen más grupos peque�
 
 ## Elegir `eps` con el gráfico de distancia k
 
-Fijado `min_samples`, el **gráfico de distancia k** ayuda a elegir `eps`:
+Fijado `min_samples`, el **gráfico de distancia k** ayuda a elegir `eps`. Use en él el mismo
+valor de `min_samples` que usará en DBSCAN:
 
 1. Para cada registro, calcule la distancia a su vecino número `min_samples` (contando el propio
    registro como el primero).
@@ -105,7 +106,7 @@ grupos no tienen un centro.
     - decenas de grupos diminutos.
 
     Prefiera configuraciones con un número razonable de grupos, poco ruido y buenas métricas, y
-    confirme que los grupos tienen sentido [interpretándolos](interpretar-grupos.md).
+    confirme que los grupos tienen sentido revisando qué caracteriza a cada uno.
 
 ## Código: agrupar con DBSCAN
 
@@ -132,84 +133,3 @@ print(pd.Series(etiquetas).value_counts().sort_index())
 - `n_grupos` cuenta los grupos sin contar el ruido y `pct_ruido` es el porcentaje de registros
   marcados como ruido.
 - `value_counts()` muestra cuántos registros hay en cada grupo y en el ruido (fila −1).
-
-## Código: gráfico de distancia k
-
-```python
-import numpy as np
-import matplotlib.pyplot as plt
-from sklearn.neighbors import NearestNeighbors
-
-min_samples = 6
-
-vecinos = NearestNeighbors(n_neighbors=min_samples).fit(X_esc)
-distancias, _ = vecinos.kneighbors(X_esc)
-k_distancias = np.sort(distancias[:, -1])
-
-plt.plot(k_distancias)
-plt.xlabel("Registros ordenados por distancia")
-plt.ylabel(f"Distancia al vecino número {min_samples}")
-plt.grid(alpha=0.3)
-plt.show()
-```
-
-- `min_samples` debe ser el mismo valor que usará en DBSCAN.
-- `kneighbors(X_esc)` devuelve, para cada registro, las distancias a sus `min_samples` vecinos más
-  cercanos. Como se consulta con los mismos datos del ajuste, el primer vecino es el propio
-  registro (distancia 0), igual que en el conteo de DBSCAN.
-- `distancias[:, -1]` es la distancia al último de esos vecinos, es decir, al vecino número
-  `min_samples`.
-- `k_distancias` son esas distancias ordenadas de menor a mayor. El valor en el codo de la curva
-  es un buen punto de partida para `eps`.
-
-## Código: comparar varias configuraciones
-
-```python
-import numpy as np
-import pandas as pd
-from sklearn.cluster import DBSCAN
-from sklearn.metrics import silhouette_score, davies_bouldin_score
-
-valores_eps = [0.1, 0.15, 0.2, 0.3, 0.5]
-valores_min_samples = [4, 6, 10]
-
-resultados = []
-for eps in valores_eps:
-    for min_samples in valores_min_samples:
-        etiquetas = DBSCAN(eps=eps, min_samples=min_samples).fit_predict(X_esc)
-        sin_ruido = etiquetas != -1
-        n_grupos = len(set(etiquetas[sin_ruido]))
-        fila = {
-            "eps": eps,
-            "min_samples": min_samples,
-            "n_grupos": n_grupos,
-            "pct_ruido": 100 * np.mean(~sin_ruido),
-            "pct_grupo_mayor": np.nan,
-            "silueta": np.nan,
-            "davies_bouldin": np.nan,
-        }
-        if n_grupos >= 1:
-            tamanos = pd.Series(etiquetas[sin_ruido]).value_counts(normalize=True)
-            fila["pct_grupo_mayor"] = 100 * tamanos.max()
-        if n_grupos >= 2:
-            fila["silueta"] = silhouette_score(X_esc[sin_ruido], etiquetas[sin_ruido])
-            fila["davies_bouldin"] = davies_bouldin_score(X_esc[sin_ruido], etiquetas[sin_ruido])
-        resultados.append(fila)
-
-tabla = pd.DataFrame(resultados)
-print(tabla.round(3))
-```
-
-- `valores_eps` y `valores_min_samples` son los valores a probar; elija los de `eps` alrededor
-  del codo del gráfico de distancia k.
-- `sin_ruido` vale `True` en los registros que pertenecen a algún grupo; con él se excluye el
-  ruido de las métricas.
-- `pct_ruido` es el porcentaje de ruido y `pct_grupo_mayor`, el porcentaje de registros (sin
-  ruido) que cae en el grupo más grande.
-- `silueta` (más alta es mejor) y `davies_bouldin` (más bajo es mejor) quedan vacías (`NaN`)
-  cuando hay menos de dos grupos.
-- `tabla` tiene una fila por combinación. Descarte primero las filas con demasiado ruido, con un
-  grupo gigante o con muchos grupos diminutos, y compare las métricas solo entre las restantes.
-
-Para describir los grupos de la configuración elegida, vea
-[interpretar grupos](interpretar-grupos.md).

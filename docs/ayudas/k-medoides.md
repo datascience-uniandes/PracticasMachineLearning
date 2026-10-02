@@ -79,14 +79,13 @@ pip install kmedoids
 
 \( K \) es un [hiperparámetro](../glosario.md#hiperparametro). Pruebe varios valores y
 compárelos con el [método del codo](metodo-codo.md) (usando la suma de distancias en lugar de la
-inercia) y con el [coeficiente de silueta](silueta.md). Una vez elegido \( K \),
-[interprete los grupos](interpretar-grupos.md) a partir de sus medoides y de los valores de las
-variables en cada grupo.
+inercia) y con el [coeficiente de silueta](silueta.md). Una vez elegido \( K \), describa cada
+grupo a partir de su medoide y de los valores de las variables en el grupo. Como los medoides son
+registros reales, se leen directamente en las unidades originales, sin deshacer el escalado.
 
 ## Código: entrenar el modelo
 
 ```python
-import pandas as pd
 import kmedoids
 from sklearn.preprocessing import StandardScaler
 
@@ -95,9 +94,6 @@ X_esc = escalador.fit_transform(X)
 
 modelo = kmedoids.KMedoids(n_clusters=k, metric="euclidean", method="fasterpam", random_state=42)
 etiquetas = modelo.fit_predict(X_esc)
-
-print(pd.Series(etiquetas).value_counts().sort_index())
-print("Suma de distancias:", modelo.inertia_)
 ```
 
 - `X` es un DataFrame con las variables numéricas que quiere usar para agrupar, y `X_esc` el
@@ -108,36 +104,3 @@ print("Suma de distancias:", modelo.inertia_)
 - `method="fasterpam"` elige el algoritmo FasterPAM.
 - `etiquetas` es un arreglo con el número de grupo (de 0 a `k - 1`) de cada registro, en el mismo
   orden que las filas de `X`.
-- `modelo.inertia_` es la suma de las distancias (**sin elevar al cuadrado**) de cada registro a
-  su medoide, en unidades escaladas. No es comparable con la inercia de K-medias.
-
-## Código: ver los medoides
-
-```python
-medoides = X.iloc[modelo.medoid_indices_]
-print(medoides)
-```
-
-- `modelo.medoid_indices_` son las posiciones de fila de los medoides, uno por grupo, en el orden
-  de los grupos 0, 1, 2…
-- Como los medoides son registros reales, basta con buscarlos en `X` con `iloc` para verlos en
-  sus **unidades originales**; no hace falta deshacer el escalado.
-- `medoides` muestra el registro representativo de cada grupo, por ejemplo el cliente más típico
-  de cada segmento.
-
-## Código: probar varios valores de K
-
-```python
-valores_k = range(2, 11)
-sumas = []
-for k in valores_k:
-    modelo = kmedoids.KMedoids(n_clusters=k, metric="euclidean", method="fasterpam", random_state=42)
-    modelo.fit(X_esc)
-    sumas.append(modelo.inertia_)
-
-print(pd.DataFrame({"k": valores_k, "suma_distancias": sumas}))
-```
-
-- `sumas` guarda la suma de distancias de cada valor de \( K \). Grafíquela contra `k` para
-  aplicar el [método del codo](metodo-codo.md).
-- Al terminar, vuelva a entrenar el modelo con el valor de \( K \) elegido.

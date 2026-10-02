@@ -40,7 +40,7 @@ apenas cambia: el codo está en \( K = 4 \).
     valores distintos. Por eso el método del codo no debe ser el único criterio: combínelo con el
     [coeficiente de silueta](silueta.md) y el [índice de Davies-Bouldin](davies-bouldin.md), que
     tienen un óptimo claro (máximo y mínimo, respectivamente), y con la utilidad práctica de los
-    grupos (vea [interpretar los grupos](interpretar-grupos.md)).
+    grupos.
 
 ## Cómo usarlo para elegir
 
@@ -49,6 +49,15 @@ apenas cambia: el codo está en \( K = 4 \).
 3. Identifique uno o dos valores candidatos donde la curva se aplana.
 4. Entre los candidatos, prefiera el que tenga mejor [silueta](silueta.md) y mejor
    [Davies-Bouldin](davies-bouldin.md), y cuyos grupos tengan sentido para el problema.
+
+El código de abajo usa `KMeans`, cuyo atributo `inertia_` da la inercia directamente. Con otros
+algoritmos, `inertia_` no existe o no se calcula igual (vea [inercia media](inercia.md)): en
+cada vuelta obtenga las etiquetas con el algoritmo que esté usando y calcule la inercia media a
+partir de ellas.
+
+En DBSCAN y HDBSCAN el número de grupos no se fija directamente; si quiere una curva parecida,
+recorra los valores de su hiperparámetro principal en lugar de \( K \) (vea [DBSCAN](dbscan.md) y
+[HDBSCAN](hdbscan.md)).
 
 ## Código: curva del codo con KMeans
 
@@ -74,57 +83,3 @@ plt.show()
 - En cada vuelta se entrena un `KMeans` con `k` grupos y se guarda su `inertia_` en la lista
   `inercias` (vea [K-medias](k-medias.md)).
 - `marker="o"` dibuja un punto en cada valor de \( K \) para ubicar el codo con facilidad.
-
-## Código: curva del codo para cualquier algoritmo
-
-`inertia_` solo existe en algunos modelos y no siempre se calcula igual (vea
-[inercia media](inercia.md)). Para que la curva funcione con cualquier algoritmo, calcule la
-inercia media a partir de las etiquetas:
-
-```python
-import numpy as np
-import matplotlib.pyplot as plt
-from sklearn.cluster import AgglomerativeClustering
-
-def calcular_inercia_media(X_esc, etiquetas):
-    X_esc = np.asarray(X_esc)
-    etiquetas = np.asarray(etiquetas)
-    mascara = etiquetas != -1
-    X_grupos = X_esc[mascara]
-    etiquetas_grupos = etiquetas[mascara]
-
-    inercia = 0.0
-    for grupo in np.unique(etiquetas_grupos):
-        puntos = X_grupos[etiquetas_grupos == grupo]
-        centroide = puntos.mean(axis=0)
-        inercia += ((puntos - centroide) ** 2).sum()
-
-    return inercia / len(X_grupos)
-
-valores_k = range(2, 11)
-inercias_medias = []
-for k in valores_k:
-    modelo = AgglomerativeClustering(n_clusters=k)
-    etiquetas = modelo.fit_predict(X_esc)
-    inercias_medias.append(calcular_inercia_media(X_esc, etiquetas))
-
-plt.plot(valores_k, inercias_medias, marker="o")
-plt.xlabel("Número de grupos (K)")
-plt.ylabel("Inercia media")
-plt.show()
-```
-
-- `calcular_inercia_media` recorre cada grupo, calcula su centroide como la media de sus puntos
-  y devuelve la distancia al cuadrado promedio de los puntos a su centroide. Excluye los puntos
-  de ruido (etiqueta −1).
-- `modelo` puede ser cualquier algoritmo con un número de grupos fijo: cambie las dos líneas que
-  crean el modelo y obtienen `etiquetas` por las del algoritmo que esté usando, por ejemplo
-  `KMeans(n_clusters=k, n_init=10, random_state=42)` o el `KMedoids` de
-  [K-medoides](k-medoides.md). En [K-medianas](k-medianas.md), obtenga las etiquetas como se
-  explica en su página.
-- `etiquetas` es el grupo asignado a cada registro y `inercias_medias` guarda la inercia media
-  de cada valor de \( K \).
-
-En DBSCAN y HDBSCAN el número de grupos no se fija directamente; si quiere una curva parecida,
-recorra los valores de su hiperparámetro principal en lugar de \( K \) (vea [DBSCAN](dbscan.md) y
-[HDBSCAN](hdbscan.md)).

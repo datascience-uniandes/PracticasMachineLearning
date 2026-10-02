@@ -48,11 +48,15 @@ puntos de ruido**: el ruido no es un grupo y, si lo incluye, distorsiona ambas m
 además de las métricas, revise siempre el número de grupos y el porcentaje de ruido: una silueta
 alta con el 60 % de los datos como ruido describe solo una pequeña parte de los datos.
 
+Para elegir los hiperparámetros, pruebe varias combinaciones de `min_cluster_size` y
+`min_samples` (por ejemplo, tres valores de cada uno) y registre para cada una el número de
+grupos, el porcentaje de ruido, la silueta y el índice de Davies-Bouldin. Recuerde que estas dos
+métricas necesitan al menos dos grupos. Busque una silueta alta, un índice de Davies-Bouldin bajo
+y un porcentaje de ruido razonable, y prefiera combinaciones vecinas que den resultados
+parecidos: indican una solución estable.
+
 No compare la [inercia](inercia.md) entre HDBSCAN y K-means: la inercia mide qué tan compactos
 son los grupos alrededor de un centro, y HDBSCAN no busca grupos con esa forma.
-
-Una vez elegidos los hiperparámetros, describa cada grupo como se explica en
-[interpretar grupos](interpretar-grupos.md).
 
 ## Código: agrupar con HDBSCAN
 
@@ -67,7 +71,6 @@ n_grupos = len(set(etiquetas)) - (1 if -1 in etiquetas else 0)
 porc_ruido = np.mean(etiquetas == -1) * 100
 print(f"Número de grupos: {n_grupos}")
 print(f"Ruido: {porc_ruido:.1f} % de los registros")
-print("Probabilidad media de pertenencia:", modelo.probabilities_.mean().round(3))
 ```
 
 - `X_esc` son las variables ya [escaladas](escalar-variables.md).
@@ -75,46 +78,3 @@ print("Probabilidad media de pertenencia:", modelo.probabilities_.mean().round(3
 - `etiquetas` tiene el grupo de cada registro: 0, 1, 2, ... y −1 para el ruido.
 - `n_grupos` cuenta los grupos sin contar el ruido.
 - `porc_ruido` es el porcentaje de registros marcados como ruido.
-- `modelo.probabilities_` tiene la fuerza de pertenencia de cada registro a su grupo.
-
-## Código: probar varias combinaciones de hiperparámetros
-
-```python
-import numpy as np
-import pandas as pd
-from sklearn.cluster import HDBSCAN
-from sklearn.metrics import silhouette_score, davies_bouldin_score
-
-resultados = []
-for min_cluster_size in [20, 50, 100]:
-    for min_samples in [5, 10, 20]:
-        etiquetas = HDBSCAN(min_cluster_size=min_cluster_size,
-                            min_samples=min_samples).fit_predict(X_esc)
-        sin_ruido = etiquetas != -1
-        n_grupos = len(set(etiquetas[sin_ruido]))
-        fila = {
-            "min_cluster_size": min_cluster_size,
-            "min_samples": min_samples,
-            "n_grupos": n_grupos,
-            "porc_ruido": 100 * (1 - sin_ruido.mean()),
-            "silueta": np.nan,
-            "davies_bouldin": np.nan,
-        }
-        if n_grupos >= 2:
-            fila["silueta"] = silhouette_score(X_esc[sin_ruido], etiquetas[sin_ruido])
-            fila["davies_bouldin"] = davies_bouldin_score(X_esc[sin_ruido], etiquetas[sin_ruido])
-        resultados.append(fila)
-
-tabla = pd.DataFrame(resultados)
-print(tabla.round(3))
-```
-
-- Las listas de `min_cluster_size` y `min_samples` son los valores a probar; ajústelas al tamaño
-  de sus datos.
-- `sin_ruido` vale `True` en los registros que pertenecen a algún grupo. Las métricas se
-  calculan solo con ellos.
-- La silueta y el índice de Davies-Bouldin necesitan al menos dos grupos; si hay menos, quedan
-  como `NaN`.
-- `tabla` tiene una fila por combinación. Busque una silueta alta, un índice de Davies-Bouldin
-  bajo y un porcentaje de ruido razonable, y prefiera combinaciones vecinas que den resultados
-  parecidos: indican una solución estable.

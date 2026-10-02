@@ -80,8 +80,9 @@ Algunos modelos entregan la inercia directamente, pero no todos la calculan igua
   `KMeans`.
 - DBSCAN, HDBSCAN, MeanShift y el agrupamiento aglomerativo no tienen `inertia_`.
 
+En `KMeans`, dividir `inertia_` entre el número de registros da exactamente la inercia media.
 Para comparar algoritmos, calcule la inercia media de todos con la misma función, a partir de
-sus etiquetas.
+sus etiquetas, como se muestra al final de esta página.
 
 ## Cómo usarla para elegir
 
@@ -123,33 +124,3 @@ print(f"Inercia media: {inercia_media:.3f}")
 - El ciclo recorre cada grupo, calcula su `centroide` como la media de sus puntos y suma las
   distancias al cuadrado de esos puntos al centroide.
 - La función devuelve la inercia dividida entre el número de puntos agrupados.
-
-## Código: contar los puntos de ruido
-
-```python
-n_ruido = (etiquetas == -1).sum()
-print(f"Puntos de ruido excluidos: {n_ruido} de {len(etiquetas)}")
-```
-
-- `n_ruido` es el número de puntos con etiqueta −1. En algoritmos sin ruido, como K-medias, vale 0.
-
-## Código: inercia de KMeans
-
-```python
-from sklearn.cluster import KMeans
-
-modelo = KMeans(n_clusters=4, n_init=10, random_state=42)
-modelo.fit(X_esc)
-
-print(f"Inercia: {modelo.inertia_:.2f}")
-print(f"Inercia media: {modelo.inertia_ / len(X_esc):.3f}")
-```
-
-- `n_clusters` es el número de grupos y `n_init=10` repite el algoritmo con 10 inicializaciones
-  distintas y conserva la mejor (vea [K-medias](k-medias.md)).
-- `modelo.inertia_` es la inercia total. Dividida entre `len(X_esc)` da el mismo valor que
-  `calcular_inercia_media(X_esc, modelo.labels_)`.
-
-Para los demás algoritmos ([K-medianas](k-medianas.md), [K-medoides](k-medoides.md),
-[DBSCAN](dbscan.md), [HDBSCAN](hdbscan.md)) use `calcular_inercia_media`. Para describir qué
-caracteriza a cada grupo, vea [interpretar los grupos](interpretar-grupos.md).

@@ -24,23 +24,22 @@
 6. **Elija la mejor configuración aglomerativa** con la mayor silueta entre las que no dejen más
    del 80 % de los clientes en un mismo grupo, y compruebe que el número de grupos sea coherente
    con su dendrograma. **¿El número de grupos elegido coincide con el que sugería el dendrograma?**
-7. [**Interprete los grupos**](../../ayudas/interpretar-grupos.md) del mejor modelo jerárquico:
-
-    - **a)** Calcule el tamaño de cada grupo.
-    - **b)** Construya el perfil de cada grupo con la mediana de cada variable en las unidades
-      originales, y grafique el perfil relativo en un mapa de calor.
-    - **c)** Visualice los grupos en dos dimensiones con PCA.
-    - **d)** Compare los grupos con los del mejor modelo de la Actividad 2 con una tabla cruzada
-      de etiquetas.
-
-    **¿Los dos modelos encuentran segmentos parecidos? ¿Qué segmentos se mantienen y cuáles cambian?**
-
-8. **Comparación final:** construya una tabla con la silueta, el índice de Davies-Bouldin, la
-   inercia media, el número de grupos y el porcentaje de ruido del mejor modelo de cada familia
-   (centroides, densidad y jerárquico), y elija la **segmentación final**.
-   **¿Qué familia de algoritmos funciona mejor con estos datos y por qué? ¿Qué segmentación le
-   entregaría al banco, considerando las métricas, el tamaño de los grupos y qué tan fácil es
-   interpretarlos?**
+7. **Tamaño de los grupos:** calcule cuántos clientes hay en cada grupo del mejor modelo
+   jerárquico y qué porcentaje representan. **¿Los grupos tienen tamaños útiles?**
+8. **Perfil de los grupos:** calcule la mediana de cada variable por grupo en las unidades
+   originales y grafique el perfil relativo en un mapa de calor. **¿Qué variables distinguen a cada
+   grupo?**
+9. **Visualice los grupos en dos dimensiones** con las dos primeras componentes de PCA.
+   **¿Los grupos se ven separados?**
+10. **Compare con la Actividad 2:** construya una tabla cruzada entre las etiquetas de este modelo y
+    las del mejor modelo de la Actividad 2. **¿Los dos modelos encuentran segmentos parecidos? ¿Qué
+    segmentos se mantienen y cuáles cambian?**
+11. **Comparación final:** construya una tabla con la silueta, el índice de Davies-Bouldin, la
+    inercia media, el número de grupos y el porcentaje de ruido del mejor modelo de cada familia
+    (centroides, densidad y jerárquico), y elija la **segmentación final**.
+    **¿Qué familia de algoritmos funciona mejor con estos datos y por qué? ¿Qué segmentación le
+    entregaría al banco, considerando las métricas, el tamaño de los grupos y qué tan fácil es
+    interpretarlos?**
 
 !!! success "Fin de la Práctica 3"
     Guarde los cambios en el notebook. Ha terminado la última actividad de la Práctica 3.

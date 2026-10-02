@@ -32,8 +32,8 @@ dentro de ese salto y cruza tres líneas verticales, así que deja tres grupos.
 3. El número de líneas verticales que cruza la línea horizontal es el número de grupos.
 
 Si hay varios saltos parecidos, pruebe los números de grupos correspondientes y compárelos con
-la [silueta](silueta.md), el [índice de Davies-Bouldin](davies-bouldin.md) y la
-[interpretación de los grupos](interpretar-grupos.md). Con `"ward"`, la altura de las uniones
+la [silueta](silueta.md) y el [índice de Davies-Bouldin](davies-bouldin.md), y revise si los
+grupos tienen sentido para su problema. Con `"ward"`, la altura de las uniones
 está relacionada con el aumento de la [inercia](inercia.md), así que un salto grande en el
 dendrograma equivale al codo de la curva de inercia.
 
@@ -57,6 +57,11 @@ scikit-learn no dibuja dendrogramas; se usan las funciones de `scipy.cluster.hie
 el mismo criterio de enlace, así que cortar el dendrograma en \( k \) grupos da la misma
 partición que `AgglomerativeClustering(n_clusters=k)` (solo cambia la numeración de los grupos).
 
+Para obtener las etiquetas de los grupos después de elegir el corte, puede usar
+`AgglomerativeClustering` con ese número de grupos o con `distance_threshold` igual a la altura
+de corte. SciPy ofrece también la función `fcluster`, que corta la jerarquía a una altura o en un
+número de grupos dado; tenga en cuenta que numera los grupos desde 1, no desde 0.
+
 ## Código: dibujar el dendrograma
 
 ```python
@@ -67,7 +72,6 @@ Z = linkage(X_esc, method="ward")
 
 plt.figure(figsize=(10, 5))
 dendrogram(Z, truncate_mode="lastp", p=30)
-plt.axhline(altura, color="gray", linestyle="--")
 plt.xlabel("Grupos (entre paréntesis, número de registros)")
 plt.ylabel("Distancia de unión")
 plt.show()
@@ -80,21 +84,3 @@ plt.show()
   de la unión y el número de registros del grupo resultante.
 - `truncate_mode="lastp"` y `p=30` muestran solo las últimas 30 uniones. Con pocos registros
   (menos de unos 50) puede quitar ambos para ver todas las hojas.
-- `altura` es la altura donde quiere cortar, elegida mirando el gráfico; `plt.axhline` dibuja la
-  línea de corte. Puede dibujar primero sin esa línea y agregarla después.
-
-## Código: obtener los grupos
-
-```python
-from scipy.cluster.hierarchy import fcluster
-
-etiquetas = fcluster(Z, t=altura, criterion="distance")
-# o bien, indicando el número de grupos:
-etiquetas = fcluster(Z, t=k, criterion="maxclust")
-```
-
-- `criterion="distance"` corta el árbol a la altura `t=altura`: cada grupo reúne los registros
-  que se unieron por debajo de esa altura.
-- `criterion="maxclust"` corta el árbol de modo que queden `t=k` grupos.
-- `etiquetas` tiene el grupo de cada registro, numerado desde **1** (no desde 0, como en
-  scikit-learn).

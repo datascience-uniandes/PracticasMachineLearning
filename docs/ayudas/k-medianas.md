@@ -85,13 +85,12 @@ Tenga en cuenta que:
 \( K \) es un [hiperparámetro](../glosario.md#hiperparametro). Pruebe varios valores y
 compárelos con el [método del codo](metodo-codo.md) (usando la suma de distancias en lugar de la
 [inercia](../glosario.md#inercia)) y con el [coeficiente de silueta](silueta.md). Una vez
-elegido \( K \), [interprete los grupos](interpretar-grupos.md) comparando sus medianas.
+elegido \( K \), compare las medianas de cada grupo para describir qué caracteriza a cada uno.
 
 ## Código: entrenar el modelo
 
 ```python
 import numpy as np
-import pandas as pd
 from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import kmeans_plusplus
 from pyclustering.cluster.kmedians import kmedians
@@ -109,9 +108,6 @@ modelo.process()
 etiquetas = np.empty(len(X_esc), dtype=int)
 for grupo, indices in enumerate(modelo.get_clusters()):
     etiquetas[indices] = grupo
-
-print(pd.Series(etiquetas).value_counts().sort_index())
-print("Suma de distancias:", modelo.get_total_wce())
 ```
 
 - `X` es un DataFrame con las variables numéricas que quiere usar para agrupar, y `X_esc` el
@@ -127,40 +123,3 @@ print("Suma de distancias:", modelo.get_total_wce())
   grupo en esas posiciones.
 - `etiquetas` es un arreglo con el número de grupo (de 0 a `k - 1`) de cada registro, en el mismo
   orden que las filas de `X`.
-- `modelo.get_total_wce()` es la suma de las distancias manhattan de cada registro a la mediana
-  de su grupo, en unidades escaladas.
-
-## Código: ver las medianas en unidades originales
-
-```python
-medianas = pd.DataFrame(
-    escalador.inverse_transform(modelo.get_medians()),
-    columns=X.columns,
-)
-print(medianas.round(2))
-```
-
-- `modelo.get_medians()` devuelve una lista con el centro de cada grupo, en unidades escaladas.
-- `escalador.inverse_transform` deshace el escalado: `medianas` tiene una fila por grupo con la
-  mediana de cada variable en sus unidades originales.
-
-## Código: probar varios valores de K
-
-```python
-valores_k = range(2, 11)
-sumas = []
-for k in valores_k:
-    centros_iniciales, _ = kmeans_plusplus(X_esc, n_clusters=k, random_state=42)
-    modelo = kmedians(X_esc.tolist(), centros_iniciales.tolist(), metric=manhattan)
-    modelo.process()
-    sumas.append(modelo.get_total_wce())
-
-print(pd.DataFrame({"k": valores_k, "suma_distancias": sumas}))
-```
-
-- `sumas` guarda la suma de distancias de cada valor de \( K \). Grafíquela contra `k` para
-  aplicar el [método del codo](metodo-codo.md).
-- A diferencia de la inercia de K-medias, esta suma puede no bajar en todos los pasos, porque
-  cada valor de \( K \) se ejecuta una sola vez y puede quedar en un mínimo local. Fíjese en la
-  tendencia general.
-- Al terminar, vuelva a entrenar el modelo con el valor de \( K \) elegido.

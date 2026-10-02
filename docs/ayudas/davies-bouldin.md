@@ -54,7 +54,7 @@ El índice es siempre mayor o igual que 0 y **más bajo es mejor**:
 | Costo | Alto: \( O(n^2) \), lento con muchos registros | Bajo: rápido incluso con muchos registros |
 
 Las dos métricas suelen coincidir. Cuando no coinciden, revise el gráfico de silueta y la
-utilidad práctica de los grupos (vea [interpretar los grupos](interpretar-grupos.md)). Por su
+utilidad práctica de los grupos. Por su
 bajo costo, Davies-Bouldin es una buena alternativa cuando la silueta es demasiado lenta.
 
 ## Puntos de ruido
@@ -89,35 +89,5 @@ print(f"Índice de Davies-Bouldin: {indice_db:.3f}")
   K-medias, todos los valores son `True` y no cambia nada.
 - `indice_db` es el índice de Davies-Bouldin de los puntos agrupados.
 
-## Código: elegir el número de grupos
-
-```python
-import numpy as np
-import matplotlib.pyplot as plt
-from sklearn.cluster import KMeans
-from sklearn.metrics import davies_bouldin_score
-
-valores_k = range(2, 11)
-indices_db = []
-for k in valores_k:
-    modelo = KMeans(n_clusters=k, n_init=10, random_state=42)
-    etiquetas = modelo.fit_predict(X_esc)
-    indices_db.append(davies_bouldin_score(X_esc, etiquetas))
-
-mejor_k = valores_k[np.argmin(indices_db)]
-print(f"K con menor Davies-Bouldin: {mejor_k}")
-
-plt.plot(valores_k, indices_db, marker="o")
-plt.xlabel("Número de grupos (K)")
-plt.ylabel("Índice de Davies-Bouldin")
-plt.show()
-```
-
-- `valores_k` son los números de grupos a probar, de 2 a 10 (el índice no existe con 1 grupo).
-- `modelo` puede ser cualquier algoritmo con un número de grupos fijo; cambie las dos líneas que
-  crean el modelo y obtienen `etiquetas` por las del algoritmo que esté usando (vea [K-medias](k-medias.md), [K-medianas](k-medianas.md) o
-  [K-medoides](k-medoides.md)).
-- `indices_db` guarda el índice de cada valor de \( K \) y `np.argmin` ubica el menor.
-
-Si usa [DBSCAN](dbscan.md) o [HDBSCAN](hdbscan.md), recorra los valores de su hiperparámetro
-principal en lugar de \( K \) y excluya el ruido en cada vuelta, como en el primer bloque.
+Si usa [DBSCAN](dbscan.md) o [HDBSCAN](hdbscan.md), recuerde excluir el ruido como se muestra
+arriba.

@@ -25,15 +25,15 @@
    [Actividad 2](actividad-2.md). **¿Los algoritmos por densidad mejoran a los basados en
    centroides con estos datos? ¿Qué características del dataset (número de variables, forma de
    las distribuciones) pueden explicar el resultado?**
-7. [**Interprete los grupos**](../../ayudas/interpretar-grupos.md) del mejor modelo por densidad:
-
-    - **a)** Calcule el tamaño de cada grupo, incluido el ruido como una categoría aparte.
-    - **b)** Construya el perfil de cada grupo y del ruido con la mediana de cada variable en las
-      unidades originales, y grafique el perfil relativo en un mapa de calor.
-    - **c)** Visualice los grupos y el ruido en dos dimensiones con PCA.
-
-    **¿Qué tipo de clientes quedan marcados como ruido? ¿Los grupos se parecen a algún segmento
-    de la Actividad 2?**
+7. **Tamaño de los grupos:** calcule cuántos clientes hay en cada grupo del mejor modelo por
+   densidad y qué porcentaje representan, incluido el [ruido](../../glosario.md#ruido) como una
+   categoría aparte. **¿Qué proporción de clientes no quedó en ningún grupo?**
+8. **Perfil de los grupos:** calcule la mediana de cada variable por grupo, y también la del ruido,
+   en las unidades originales, y grafique el perfil relativo en un mapa de calor.
+   **¿Qué tipo de clientes quedan marcados como ruido? ¿Los grupos se parecen a algún segmento de
+   la Actividad 2?**
+9. **Visualice los grupos y el ruido en dos dimensiones** con las dos primeras componentes de PCA.
+   **¿Dónde se ubican los puntos de ruido frente a los grupos?**
 
 !!! success "Fin de la Actividad 3"
     Guarde los cambios en el notebook. Ya estamos listos para continuar con la siguiente actividad.

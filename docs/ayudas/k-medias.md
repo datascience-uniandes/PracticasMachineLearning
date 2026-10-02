@@ -85,14 +85,13 @@ agrupar.
 
 Pruebe varios valores de \( K \) y compárelos con el [método del codo](metodo-codo.md) (inercia
 contra \( K \)) y con el [coeficiente de silueta](silueta.md); el
-[índice de Davies-Bouldin](davies-bouldin.md) es otra opción. Una vez elegido \( K \),
-[interprete los grupos](interpretar-grupos.md) comparando sus centroides y los valores de las
-variables en cada grupo.
+[índice de Davies-Bouldin](davies-bouldin.md) es otra opción. Una vez elegido \( K \), compare
+los centroides de los grupos (en las unidades originales de cada variable) y los valores de las
+variables en cada grupo para describir qué caracteriza a cada uno.
 
 ## Código: entrenar el modelo
 
 ```python
-import pandas as pd
 from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import KMeans
 
@@ -101,9 +100,6 @@ X_esc = escalador.fit_transform(X)
 
 modelo = KMeans(n_clusters=k, n_init=10, random_state=42)
 etiquetas = modelo.fit_predict(X_esc)
-
-print(pd.Series(etiquetas).value_counts().sort_index())
-print("Inercia:", modelo.inertia_)
 ```
 
 - `X` es un DataFrame con las variables numéricas que quiere usar para agrupar.
@@ -111,40 +107,3 @@ print("Inercia:", modelo.inertia_)
 - `k` es el número de grupos.
 - `fit_predict` ejecuta el algoritmo y devuelve `etiquetas`, un arreglo con el número de grupo
   (de 0 a `k - 1`) de cada registro, en el mismo orden que las filas de `X`.
-- `value_counts` muestra cuántos registros quedaron en cada grupo.
-- `modelo.inertia_` es la inercia del mejor de los `n_init` intentos, en unidades escaladas.
-
-## Código: ver los centroides en unidades originales
-
-```python
-centroides = pd.DataFrame(
-    escalador.inverse_transform(modelo.cluster_centers_),
-    columns=X.columns,
-)
-print(centroides.round(2))
-```
-
-- `modelo.cluster_centers_` tiene una fila por grupo y una columna por variable, pero en
-  **unidades escaladas** (por ejemplo, desviaciones estándar respecto a la media), difíciles de
-  leer.
-- `escalador.inverse_transform` deshace el escalado y devuelve los centroides en las unidades
-  originales de cada variable.
-- `centroides` tiene una fila por grupo: es el "registro promedio" de cada grupo.
-
-## Código: probar varios valores de K
-
-```python
-valores_k = range(2, 11)
-inercias = []
-for k in valores_k:
-    modelo = KMeans(n_clusters=k, n_init=10, random_state=42)
-    modelo.fit(X_esc)
-    inercias.append(modelo.inertia_)
-
-print(pd.DataFrame({"k": valores_k, "inercia": inercias}))
-```
-
-- `valores_k` son los valores de \( K \) que quiere comparar.
-- `inercias` guarda la inercia de cada valor. Grafíquela contra `k` para aplicar el
-  [método del codo](metodo-codo.md).
-- Al terminar, vuelva a entrenar el modelo con el valor de \( K \) elegido.

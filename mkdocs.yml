@@ -134,7 +134,6 @@ nav:
       - Índice de Davies-Bouldin: ayudas/davies-bouldin.md
       - Inercia media: ayudas/inercia.md
       - Interpretar los coeficientes: ayudas/interpretar-coeficientes.md
-      - Interpretar los grupos: ayudas/interpretar-grupos.md
       - K vecinos más cercanos (KNN): ayudas/knn.md
       - K-medianas (K-medians): ayudas/k-medianas.md
       - K-medias (K-means): ayudas/k-medias.md
