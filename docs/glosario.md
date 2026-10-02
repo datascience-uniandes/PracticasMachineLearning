@@ -353,6 +353,11 @@ Variable numérica que puede tomar cualquier valor dentro de un intervalo, como 
 
 Variable que el modelo intenta predecir a partir de las demás. También se llama variable dependiente.
 
+### Votación { #votacion }
+
+[Ensamble](#ensamble) que combina varios modelos por mayoría de votos (votación dura) o
+promediando sus probabilidades (votación suave), sin aprender cómo combinarlos.
+
 ## W
 
 _Sin términos por ahora._

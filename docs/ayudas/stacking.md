@@ -102,24 +102,12 @@ print(modelo.final_estimator_.coef_)
 - `modelo.named_estimators_["arbol"]` da acceso a cada modelo base reentrenado con todo el
   conjunto de entrenamiento.
 
-## Comparación con `VotingClassifier`
+## Stacking o votación
 
-`VotingClassifier` es una forma más simple de combinar modelos, sin meta-modelo:
-
-```python
-from sklearn.ensemble import VotingClassifier
-
-votacion = VotingClassifier(estimators=modelos_base, voting="soft")
-votacion.fit(X_train, y_train)
-```
-
-- `voting="hard"`: cada modelo vota por una clase y gana la mayoritaria. No da probabilidades
-  (`predict_proba` no está disponible).
-- `voting="soft"`: promedia las probabilidades de los modelos, todos con el mismo peso (o con
-  pesos fijos dados en `weights`).
-- La votación no aprende los pesos, así que es más rápida y no necesita validación cruzada
-  interna. El stacking puede aprender a dar menos peso a un modelo débil, pero tiene más
-  riesgo de sobreajuste con pocos datos y es más costoso.
+La [votación](votacion.md) (`VotingClassifier`) combina los mismos modelos sin meta-modelo: es más
+rápida, pero no aprende a dar menos peso a un modelo débil. El stacking sí lo aprende, a cambio de
+más tiempo de entrenamiento y más riesgo de [sobreajuste](../glosario.md#sobreajuste) con pocos
+datos.
 
 ## Hiperparámetros principales
 

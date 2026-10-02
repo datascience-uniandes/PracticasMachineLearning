@@ -80,13 +80,13 @@ extra_css:
 nav:
   - Inicio: index.md
   - Talleres:
-      - Práctica 1:
+      - "Práctica 1: Regresión lineal":
           - talleres/practica-1/index.md
           - "Actividad 1: Entendimiento de datos": talleres/practica-1/actividad-1.md
           - "Actividad 2: Regresión lineal": talleres/practica-1/actividad-2.md
           - "Actividad 3: Regresión polinomial": talleres/practica-1/actividad-3.md
           - "Actividad 4: Regularización": talleres/practica-1/actividad-4.md
-      - Práctica 2:
+      - "Práctica 2: Clasificación":
           - talleres/practica-2/index.md
           - "Actividad 1: Entendimiento de datos": talleres/practica-2/actividad-1.md
           - "Actividad 2: Ingeniería de características": talleres/practica-2/actividad-2.md
@@ -153,6 +153,7 @@ nav:
       - Validación cruzada K-fold: ayudas/validacion-cruzada.md
       - Valores reales vs. predichos: ayudas/reales-vs-predichos.md
       - Ver los coeficientes: ayudas/ver-coeficientes.md
+      - Votación (VotingClassifier): ayudas/votacion.md
   - Conjuntos de datos:
       - Abandono de clientes bancarios: datos/churn.md
       - Venta de inmuebles: datos/inmuebles.md

@@ -1,199 +1,121 @@
 # Optimizar hiperparámetros con GridSearchCV
 
-Cuando un modelo tiene varios [hiperparámetros](../glosario.md#hiperparametro), probarlos uno
-por uno con [validación cruzada](../glosario.md#validacion-cruzada) se vuelve largo y propenso a
-errores. `GridSearchCV` automatiza esa búsqueda y funciona con cualquier estimador de
-scikit-learn, sea de regresión o de clasificación. Antes de leer esta página, conviene conocer
-`KFold`, `cross_val_score` y la convención de signo de los *scores* `neg_`, explicados en
+`GridSearchCV` prueba varios valores de un [hiperparámetro](../glosario.md#hiperparametro), evalúa
+cada uno con [validación cruzada](../glosario.md#validacion-cruzada) sobre el
+[conjunto de entrenamiento](../glosario.md#conjunto-entrenamiento) y se queda con el mejor. Un uso
+típico es elegir la **fuerza de la regularización** de un modelo: el `alpha` de
+[Lasso o Ridge](lasso-ridge.md), o el `C` de una [regresión logística](regresion-logistica.md).
+
+Antes de leer esta página, conviene conocer `KFold` y `cross_val_score`, explicados en
 [validación cruzada K-fold](validacion-cruzada.md), y cómo separar los datos en
 [entrenamiento y prueba](division-datos.md).
 
-## Buscar en una grilla con `GridSearchCV`
+## Cómo funciona
 
-`GridSearchCV` prueba **todas las combinaciones** de una grilla de valores y evalúa cada una con
-validación cruzada sobre el [conjunto de entrenamiento](../glosario.md#conjunto-entrenamiento):
+1. Usted define una lista de valores para el hiperparámetro, por ejemplo
+   `alpha` ∈ {0,01; 0,1; 1; 10; 100}.
+2. Para cada valor, `GridSearchCV` entrena el modelo K veces con la validación cruzada y promedia
+   la métrica de los K folds de validación.
+3. Elige el valor con la mejor métrica promedio y, al final, vuelve a entrenar el modelo con ese
+   valor usando todo el conjunto de entrenamiento.
 
-```python
-import pandas as pd
-from sklearn.model_selection import KFold, GridSearchCV
-from sklearn.pipeline import make_pipeline
+Con 5 valores y 5 folds se entrenan 25 modelos, más el entrenamiento final.
 
-pipeline = make_pipeline(preprocesamiento, modelo)
-param_grid = {
-    "paso__hiperparametro1": [valor1, valor2, valor3],
-    "paso__hiperparametro2": [valorA, valorB],
-}
-kf = KFold(n_splits=5, shuffle=True, random_state=42)
-busqueda = GridSearchCV(pipeline, param_grid, cv=kf, scoring="metrica")
-busqueda.fit(X_train, y_train)
+!!! warning "Escale antes de buscar"
+    La regularización depende de la escala de las variables, así que
+    [escale las variables](escalar-variables.md) antes de la búsqueda: ajuste el escalador con
+    `X_train` y transforme con él `X_train` y `X_test`.
 
-print("Mejores hiperparámetros:", busqueda.best_params_)
-print("Score de validación cruzada:", busqueda.best_score_)
-```
+## Elegir `scoring`
 
-- `preprocesamiento` es el paso que prepara los datos (por ejemplo, un `StandardScaler()`) y
-  `modelo` es el estimador que se quiere ajustar (por ejemplo, un regresor o un clasificador).
-  Si no necesita preprocesamiento, puede pasar `modelo` directamente a `GridSearchCV`.
-- `pipeline` encadena ambos pasos. Usar un pipeline garantiza que el preprocesamiento se ajuste
-  solo con los folds de entrenamiento de cada partición, sin filtrar información del fold de
-  validación.
-- `param_grid` es un diccionario: cada clave es un hiperparámetro y cada valor, la lista de
-  valores a probar. Aquí hay 3 × 2 = 6 combinaciones; con 5 folds se entrenan 30 modelos.
-- `kf` define las particiones de la validación cruzada. También puede pasar un entero
-  (`cv=5`); en clasificación, scikit-learn usa entonces particiones estratificadas
-  (`StratifiedKFold`), que conservan la proporción de clases en cada fold.
-- `"metrica"` es el nombre del *score* con el que se comparan las combinaciones (vea la sección
-  siguiente).
-- `busqueda` es el objeto `GridSearchCV`. Al llamar `fit`, recorre las combinaciones, hace la
-  validación cruzada de cada una y guarda los resultados.
-- `busqueda.best_params_` es el diccionario con la mejor combinación, y `busqueda.best_score_`
-  su *score* promedio de validación cruzada.
-
-### Elegir `scoring`
-
-`scoring` debe corresponder al tipo de problema y a la métrica que le interesa. `GridSearchCV`
-siempre elige la combinación con el **mayor** *score*, por eso las métricas de error se usan
-con signo negativo:
+`scoring` es la métrica con la que se comparan los valores. `GridSearchCV` siempre elige el
+**mayor** *score*, por eso las métricas de error se usan con signo negativo:
 
 | Tipo de problema | Ejemplos de `scoring` | Lectura de `best_score_` |
 |------------------|-----------------------|--------------------------|
 | Regresión | `"neg_root_mean_squared_error"`, `"neg_mean_absolute_error"`, `"r2"` | Con `neg_`, cambie el signo (`-busqueda.best_score_`) para obtener el error |
-| Clasificación | `"accuracy"`, `"f1"`, `"f1_macro"`, `"roc_auc"` | Se lee directamente: más alto es mejor |
+| Clasificación | `"accuracy"`, `"f1"`, `"roc_auc"` | Se lee directamente: más alto es mejor |
 
-Si no indica `scoring`, se usa el método `score` del estimador (R² en regresión, *accuracy* en
+Si no indica `scoring`, se usa el método `score` del modelo (R² en regresión, exactitud en
 clasificación). La lista completa de nombres está en la
 [documentación de scikit-learn sobre *scorers*](https://scikit-learn.org/stable/modules/model_evaluation.html#string-name-scorers).
 
-### Nombres `paso__hiperparametro`
+## Cómo leer los resultados
 
-Dentro de un pipeline, cada hiperparámetro se nombra con el **nombre del paso**, dos guiones
-bajos y el **nombre del parámetro**. `make_pipeline` nombra cada paso con el nombre de su clase
-en minúsculas: si el último paso es `NombreDelModelo(...)`, sus hiperparámetros se escriben
-`"nombredelmodelo__hiperparametro"`. Si pasa el estimador directamente, sin pipeline, la clave es
-solo el nombre del hiperparámetro (`"hiperparametro"`).
+- La mejor métrica promedio indica el valor que mejor equilibra
+  [subajuste](../glosario.md#subajuste) y [sobreajuste](../glosario.md#sobreajuste) (vea
+  [compromiso sesgo-varianza](compromiso-sesgo-varianza.md)). Con una regularización **muy
+  fuerte** el modelo se vuelve demasiado simple y la métrica empeora por subajuste; con una **muy
+  débil**, puede empeorar por sobreajuste.
+- Si varios valores tienen métricas muy parecidas (diferencias menores que su desviación estándar
+  entre folds), prefiera el que da el modelo más simple, es decir, la regularización más fuerte.
+- En los resultados, «test» se refiere al fold de validación de cada partición, no al
+  [conjunto de prueba](../glosario.md#conjunto-prueba). El conjunto de prueba se usa **una sola
+  vez**, al final, con el modelo elegido: si lo consultara para elegir el hiperparámetro, dejaría
+  de ser una estimación honesta del desempeño con datos nuevos.
 
-Si no recuerda un nombre, `pipeline.get_params().keys()` lista todos los hiperparámetros
-disponibles. Lo mismo funciona con pipelines de varios pasos o anidados: el nombre encadena
-todos los niveles con `__`.
+!!! warning "Si el mejor valor está en el borde de la lista, amplíela"
+    Si el mejor valor es el más pequeño o el más grande de la lista, el verdadero óptimo puede
+    estar **fuera** de ella. Agregue valores más allá de ese extremo y repita la búsqueda hasta
+    que el mejor valor quede rodeado por valores con peor métrica.
 
-### Revisar todos los resultados
+## Código: buscar el mejor valor
 
 ```python
-resultados = pd.DataFrame(busqueda.cv_results_)
-columnas = ["params", "mean_test_score", "std_test_score", "rank_test_score"]
-print(resultados[columnas].sort_values("rank_test_score").head(10))
+from sklearn.model_selection import KFold, GridSearchCV
+
+param_grid = {"alpha": [0.01, 0.1, 1, 10, 100]}
+kf = KFold(n_splits=5, shuffle=True, random_state=42)
+
+busqueda = GridSearchCV(modelo, param_grid, cv=kf, scoring="neg_root_mean_squared_error")
+busqueda.fit(X_train, y_train)
+
+print("Mejor valor:", busqueda.best_params_)
+print("Métrica de validación cruzada:", -busqueda.best_score_)
 ```
 
-`busqueda.cv_results_` tiene una fila por combinación. Las columnas de interés son:
+- `modelo` es el modelo sin entrenar, por ejemplo `Ridge()` o `Lasso(max_iter=10000)`.
+- `param_grid` es un diccionario: la clave es el **nombre exacto** del hiperparámetro en
+  scikit-learn (`"alpha"` en Lasso y Ridge, `"C"` en regresión logística) y el valor, la lista de
+  valores a probar.
+- `kf` define las particiones de la validación cruzada. También puede escribir `cv=5`; en
+  clasificación, scikit-learn usa entonces particiones estratificadas.
+- `X_train` e `y_train` son los datos de entrenamiento, ya escalados.
+- `busqueda.best_params_` es el mejor valor encontrado y `busqueda.best_score_` su métrica
+  promedio de validación cruzada (con signo negativo si la métrica empieza por `neg_`).
 
-| Columna | Contenido |
-|---------|-----------|
-| `param_<hiperparámetro>` | Valor de cada hiperparámetro en esa combinación |
-| `params` | La combinación completa, como diccionario |
-| `mean_test_score` | Promedio del *score* en los K folds de validación (negativo si la métrica empieza por `neg_`) |
-| `std_test_score` | Desviación estándar del *score* entre los folds |
-| `rank_test_score` | Posición de la combinación: 1 es la mejor |
-| `split0_test_score`, `split1_test_score`, ... | *Score* de cada fold por separado |
-
-En este contexto, "test" se refiere al fold de validación de cada partición, no al
-[conjunto de prueba](../glosario.md#conjunto-prueba).
-
-### Evaluar una sola vez en prueba
-
-Con `refit=True` (valor por defecto), al terminar la búsqueda `GridSearchCV` **reentrena la mejor
-combinación con todo `X_train`**. Ese modelo final queda en `busqueda.best_estimator_`, y
-`busqueda` puede usarse directamente como modelo:
+## Código: graficar la métrica para cada valor
 
 ```python
-y_pred = busqueda.predict(X_test)
-print("Score en prueba:", busqueda.score(X_test, y_test))
-```
-
-- `busqueda.predict` usa `busqueda.best_estimator_` para predecir.
-- `busqueda.score` calcula, sobre `X_test`, la misma métrica indicada en `scoring` (con el mismo
-  signo). Con `y_pred` puede calcular además cualquier otra métrica de `sklearn.metrics`.
-
-Este es el único momento en que se usa `X_test`. Si consultara el conjunto de prueba para elegir
-hiperparámetros, este dejaría de ser una estimación honesta del desempeño con datos nuevos: esa
-función la cumplen los folds de validación, que actúan como
-[conjunto de validación](../glosario.md#conjunto-validacion).
-
-## Graficar los resultados de la validación cruzada
-
-**Un hiperparámetro**
-
-```python
+import pandas as pd
 import matplotlib.pyplot as plt
 
 resultados = pd.DataFrame(busqueda.cv_results_)
-valores = resultados["param_paso__hiperparametro1"].astype(float)
-media = resultados["mean_test_score"]
+valores = resultados["param_alpha"].astype(float)
+media = -resultados["mean_test_score"]
 desv = resultados["std_test_score"]
 
 plt.plot(valores, media, marker="o")
 plt.fill_between(valores, media - desv, media + desv, alpha=0.15)
-plt.xlabel("hiperparametro1")
-plt.ylabel("Score promedio de validación cruzada")
+plt.xscale("log")
+plt.xlabel("alpha")
+plt.ylabel("RMSE promedio de validación cruzada")
 plt.show()
 ```
 
-- `valores` son los valores probados del hiperparámetro; `media` y `desv`, el promedio y la
-  desviación estándar del *score* entre folds para cada uno.
-- `fill_between` (opcional) sombrea una banda de ± una desviación estándar.
-- Si los valores crecen en potencias de 10 (por ejemplo, 0.01, 0.1, 1, 10), agregue
-  `plt.xscale("log")` para que queden igualmente espaciados.
-- Si la métrica empieza por `neg_`, grafique `-media` para ver el error con su signo habitual.
+- `busqueda.cv_results_` tiene una fila por valor probado. `mean_test_score` es la métrica
+  promedio de los folds y `std_test_score`, su desviación estándar.
+- `media` cambia el signo para ver el error positivo; si su métrica no empieza por `neg_`, quite
+  el signo menos.
+- `plt.xscale("log")` deja igualmente espaciados valores que crecen en potencias de 10.
+- `fill_between` sombrea una banda de ± una desviación estándar entre folds.
 
-**Dos hiperparámetros: una curva por valor del segundo**
+## Código: evaluar una sola vez en prueba
 
 ```python
-for valor2, grupo in resultados.groupby("param_paso__hiperparametro2"):
-    plt.plot(grupo["param_paso__hiperparametro1"].astype(float), grupo["mean_test_score"],
-             marker="o", label=f"hiperparametro2 = {valor2}")
-plt.xlabel("hiperparametro1")
-plt.ylabel("Score promedio de validación cruzada")
-plt.legend()
-plt.show()
+y_pred = busqueda.predict(X_test)
 ```
 
-`groupby` separa las filas según el valor del segundo hiperparámetro; cada grupo se dibuja como
-una curva del *score* en función del primero.
-
-**Dos hiperparámetros: mapa de calor**
-
-```python
-import seaborn as sns
-
-tabla = resultados.pivot(index="param_paso__hiperparametro1",
-                         columns="param_paso__hiperparametro2", values="mean_test_score")
-sns.heatmap(tabla, annot=True, fmt=".3f")
-plt.show()
-```
-
-`pivot` arma una tabla con un valor del primer hiperparámetro por fila y uno del segundo por
-columna; `annot=True` escribe el *score* en cada celda.
-
-### Cómo leer el gráfico
-
-- La combinación con el mejor *score* promedio es la que mejor equilibra
-  [subajuste](../glosario.md#subajuste) y [sobreajuste](../glosario.md#sobreajuste) (vea
-  [compromiso sesgo-varianza](compromiso-sesgo-varianza.md)).
-- Hacia los valores que hacen el modelo **demasiado simple**, el *score* empeora por subajuste;
-  hacia los que lo hacen **demasiado complejo**, empeora por sobreajuste.
-- Si varias combinaciones tienen *scores* muy parecidos (diferencias menores que
-  `std_test_score`), prefiera la que da el modelo más simple. Vea
-  [seleccionar hiperparámetros](seleccion-hiperparametros.md).
-
-!!! warning "Si el mejor valor está en el borde de la grilla, amplíela"
-    Si el mejor valor de un hiperparámetro es el más pequeño o el más grande de su lista, el
-    verdadero óptimo puede estar **fuera** de la grilla. Agregue valores más allá de ese
-    extremo y repita la búsqueda hasta que el mejor valor quede rodeado por valores con peor
-    *score*.
-
-## Alternativa para grillas grandes: `RandomizedSearchCV`
-
-El número de modelos que entrena `GridSearchCV` es el producto de las longitudes de todas las
-listas por el número de folds, y crece muy rápido al agregar hiperparámetros. `RandomizedSearchCV`
-se usa igual (`param_distributions` en lugar de `param_grid`), pero prueba solo `n_iter`
-combinaciones elegidas al azar, lo que permite explorar rangos amplios con un costo fijo. Una
-vez identificada una zona prometedora, puede refinarla con `GridSearchCV`.
+`busqueda` guarda el modelo ya reentrenado con el mejor valor (también disponible en
+`busqueda.best_estimator_`), así que se usa directamente para predecir `X_test`. Con `y_pred`
+calcule las métricas que necesite.

@@ -3,7 +3,7 @@
 ### Datos de trabajo: el notebook de la [Actividad 3](actividad-3.md)
 
 1. Retome los conjuntos de entrenamiento, validación y prueba, y los tres modelos ya optimizados
-   de la actividad anterior. **Use el conjunto de prueba solo en el paso 9.**
+   de la actividad anterior. **Use el conjunto de prueba solo en el paso 10.**
 2. [**Entrene un Random Forest**](../../ayudas/random-forest.md) y
    [**optimice sus hiperparámetros con GridSearchCV**](../../ayudas/gridsearchcv.md) sobre el
    conjunto de entrenamiento (validación cruzada estratificada de 5 folds, `scoring="f1"`):
@@ -15,12 +15,24 @@
    `max_depth` ∈ {2, 3, 4}. Como este modelo no acepta `class_weight`, use pesos por registro
    balanceados. **¿Qué combinación resultó mejor? ¿Qué relación hay entre `learning_rate` y
    `n_estimators`?**
-4. [**Entrene un modelo de Stacking**](../../ayudas/stacking.md) que combine la regresión
+4. [**Entrene modelos de votación**](../../ayudas/votacion.md) que combinen la regresión
+   logística, el árbol de decisión y el KNN optimizados en la Actividad 3:
+
+    - **a)** una votación dura (`voting="hard"`);
+    - **b)** una votación suave (`voting="soft"`);
+    - **c)** una votación suave que incluya también el Random Forest y el Gradient Boosting de los
+      pasos anteriores.
+
+    **¿Qué votación obtiene el mayor F1 de validación? ¿Por qué la votación suave suele superar a
+    la dura? ¿Agregar más modelos siempre mejora el resultado?** Para los pasos siguientes,
+    conserve la mejor votación suave.
+
+5. [**Entrene un modelo de Stacking**](../../ayudas/stacking.md) que combine la regresión
    logística, el árbol de decisión y el KNN optimizados en la Actividad 3, con una regresión
    logística como modelo final. Optimice con GridSearchCV el modelo final:
    `final_estimator__C` ∈ {0,1; 1; 10} y `final_estimator__class_weight` ∈ {`None`, `"balanced"`}.
    **¿Por qué conviene que los modelos base sean diferentes entre sí?**
-5. **Compare los tres ensambles** en entrenamiento y en
+6. **Compare los cuatro ensambles** (Random Forest, Gradient Boosting, votación y stacking) en entrenamiento y en
    [validación](../../glosario.md#conjunto-validacion):
 
     - **a)** Grafique la [**matriz de confusión**](../../ayudas/matriz-confusion.md) de cada modelo.
@@ -31,18 +43,18 @@
     **¿Cuántos clientes que abandonan detecta cada ensamble y cuántas falsas alarmas genera? ¿Qué
     ensamble muestra más [sobreajuste](../../glosario.md#sobreajuste)?**
 
-6. Grafique las [**curvas de precisión-sensibilidad**](../../ayudas/curva-precision-sensibilidad.md)
-   de los tres ensambles, una figura para entrenamiento y otra para validación.
+7. Grafique las [**curvas de precisión-sensibilidad**](../../ayudas/curva-precision-sensibilidad.md)
+   de los cuatro ensambles, una figura para entrenamiento y otra para validación.
    **¿Qué ensamble tiene la mayor precisión promedio (AP) en validación?**
-7. Grafique las [**curvas ROC**](../../ayudas/curva-roc.md) de los tres ensambles, en
+8. Grafique las [**curvas ROC**](../../ayudas/curva-roc.md) de los cuatro ensambles, en
    entrenamiento y en validación. **¿Qué ensamble tiene el mayor [AUC](../../glosario.md#auc) en
    validación?**
-8. **Elija el mejor ensamble con las métricas de validación:** construya una tabla con la exactitud,
-   la precisión, la sensibilidad, el F1, el AUC y el AP de los tres ensambles en validación y
+9. **Elija el mejor ensamble con las métricas de validación:** construya una tabla con la exactitud,
+   la precisión, la sensibilidad, el F1, el AUC y el AP de los cuatro ensambles en validación y
    agregue el mejor modelo de la Actividad 3. Elija el ensamble con el **mayor F1 de validación**.
    **¿Los ensambles mejoran al mejor modelo básico? ¿La mejora justifica el costo en tiempo de
    entrenamiento y en interpretabilidad?**
-9. **Evalúe el ensamble elegido en el [conjunto de prueba](../../glosario.md#conjunto-prueba):**
+10. **Evalúe el ensamble elegido en el [conjunto de prueba](../../glosario.md#conjunto-prueba):**
 
     - **a)** Grafique su [**matriz de confusión**](../../ayudas/matriz-confusion.md).
     - **b)** Calcule la exactitud, la precisión, la sensibilidad y el F1, y
