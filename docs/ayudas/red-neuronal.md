@@ -51,11 +51,9 @@ permiten representar relaciones más complejas, pero también aumentan el riesgo
 - **Optimizador.** El entrenamiento ajusta los pesos en la dirección que reduce la pérdida
   (descenso de gradiente). `adam` es el optimizador más usado: adapta automáticamente el tamaño
   del paso de cada peso y funciona bien con sus valores por defecto (tasa de aprendizaje 0,001).
-- **Lote (`batch_size`).** Los pesos no se actualizan con todos los registros a la vez, sino con
-  lotes pequeños (por ejemplo, 32 registros). Cada lote produce una actualización.
-- **Época (`epochs`).** Una [época](../glosario.md#epoca) es una pasada completa por todo el
-  [conjunto de entrenamiento](../glosario.md#conjunto-entrenamiento). Con 1.000 registros y
-  `batch_size=32`, cada época tiene 32 actualizaciones (31 lotes completos y uno parcial).
+- **Épocas y lotes.** Los pesos se ajustan por lotes de registros (`batch_size`) y el
+  entrenamiento recorre varias veces todos los datos (`epochs`). Vea
+  [entrenar una red neuronal](entrenar-red-neuronal.md).
 
 ## Preparar los datos
 
@@ -114,23 +112,8 @@ model.summary()
 
 ### Entrenar el modelo
 
-```python
-historia = model.fit(
-    X_train, y_train,
-    validation_data=(X_val, y_val),
-    epochs=50,
-    batch_size=32,
-)
-```
-
-- `validation_data` es el [conjunto de validación](../glosario.md#conjunto-validacion). Keras
-  calcula la pérdida y las métricas en él al final de cada época, pero **no** lo usa para
-  ajustar los pesos.
-- `epochs=50` es el número de pasadas completas por los datos de entrenamiento y `batch_size=32`,
-  el número de registros por actualización de los pesos.
-- `historia.history` es un diccionario con la pérdida y las métricas de cada época, en
-  entrenamiento (`"loss"`, `"auc"`, ...) y en validación (`"val_loss"`, `"val_auc"`, ...). Vea
-  cómo graficarlo en [curva de aprendizaje](curva-aprendizaje.md).
+El entrenamiento con `model.fit`, y cómo elegir `epochs` y `batch_size`, está en
+[entrenar una red neuronal](entrenar-red-neuronal.md).
 
 ### Predecir y evaluar
 
@@ -157,7 +140,7 @@ y_pred = (y_prob >= 0.5).astype(int)
 | `Dropout` | Fracción de salidas que se apagan en cada paso | Valores entre 0,1 y 0,5 reducen el sobreajuste. Demasiado alto: la red no logra aprender (subajuste) |
 | Tasa de aprendizaje (`learning_rate` del optimizador) | Tamaño de cada actualización de los pesos | Muy alta: la pérdida oscila o no baja. Muy baja: el entrenamiento es lento y puede detenerse antes de aprender lo suficiente. El valor por defecto de Adam (0,001) es un buen punto de partida |
 | `batch_size` | Registros por actualización | Lotes pequeños (16, 32): más actualizaciones por época y un entrenamiento más ruidoso, que a veces generaliza mejor. Lotes grandes (128, 256): épocas más rápidas y curvas más suaves |
-| `epochs` y `patience` | Duración del entrenamiento | Demasiadas épocas sin *early stopping*: sobreajuste. Muy pocas, o `patience` muy baja: el entrenamiento se detiene antes de tiempo (subajuste) |
+| `epochs` | Duración del entrenamiento | Muy pocas: la red no alcanza a aprender ([subajuste](../glosario.md#subajuste)). Demasiadas: [sobreajuste](../glosario.md#sobreajuste). Revise la [curva de aprendizaje](curva-aprendizaje.md) |
 
 Para cambiar la tasa de aprendizaje, pase el optimizador como objeto:
 `optimizer=keras.optimizers.Adam(learning_rate=0.0005)`.

@@ -10,7 +10,8 @@
    sigmoide. Compílela con el optimizador Adam y la pérdida `binary_crossentropy`.
    **¿Cuántos parámetros tiene la red? ¿Por qué la salida usa una
    [función de activación](../../glosario.md#funcion-activacion) sigmoide?**
-3. **Pruebe tres arquitecturas** y compárelas en validación:
+3. **Pruebe tres arquitecturas:** [**entrene**](../../ayudas/entrenar-red-neuronal.md) cada una con
+   el conjunto de validación como `validation_data` y compárelas en validación:
 
     - **a)** una capa oculta de 8 neuronas;
     - **b)** dos capas ocultas de 16 y 8 neuronas;

@@ -52,8 +52,7 @@ plt.show()
   `"recall"` y `"val_recall"`).
 - `epocas` empieza en 1 para que el eje horizontal muestre el número de época.
 
-Para identificar la mejor época (la que conserva `EarlyStopping` con
-`restore_best_weights=True`):
+Para identificar la mejor época, la de menor pérdida de validación:
 
 ```python
 import numpy as np
@@ -65,14 +64,15 @@ print("Pérdida de validación mínima:", min(historia.history["val_loss"]))
 
 - `np.argmin` devuelve la posición (desde 0) de la menor pérdida de validación; se suma 1 para
   obtener el número de época.
-- Con *early stopping*, el entrenamiento termina `patience` épocas después de esta mejor época.
+- Si la mejor época está muy antes del final, puede volver a entrenar una red nueva con ese
+  número de épocas.
 
 ## Cómo interpretarla
 
 | Patrón | Qué indica | Qué hacer |
 |--------|-----------|-----------|
 | Ambas curvas bajan y se estabilizan cerca una de la otra | La red está aprendiendo y generaliza bien | Mantener la configuración; si siguen bajando al final, aumentar `epochs` |
-| La pérdida de entrenamiento sigue bajando, pero la de validación llega a un mínimo y luego **sube** | [Sobreajuste](../glosario.md#sobreajuste): la red empieza a memorizar el entrenamiento | Usar [early stopping](../glosario.md#early-stopping) (`EarlyStopping` con `restore_best_weights=True`), aumentar `Dropout`, reducir capas o neuronas |
+| La pérdida de entrenamiento sigue bajando, pero la de validación llega a un mínimo y luego **sube** | [Sobreajuste](../glosario.md#sobreajuste): la red empieza a memorizar el entrenamiento | Entrenar menos épocas (hasta la mejor época), aumentar `Dropout`, reducir capas o neuronas |
 | Ambas curvas se estancan pronto en un valor **alto** | [Subajuste](../glosario.md#subajuste): la red no tiene capacidad suficiente o no termina de aprender | Agregar capas o neuronas, reducir `Dropout`, entrenar más épocas o revisar la tasa de aprendizaje y el preprocesamiento |
 | Las curvas oscilan mucho de una época a otra | Actualizaciones demasiado grandes o ruidosas | Reducir la tasa de aprendizaje o aumentar `batch_size` |
 
@@ -81,9 +81,6 @@ print("Pérdida de validación mínima:", min(historia.history["val_loss"]))
 - Una brecha pequeña y estable entre ambas curvas es normal. Con `Dropout`, la pérdida de
   entrenamiento puede incluso quedar **por encima** de la de validación, porque el *dropout* solo
   se aplica al entrenar.
-- Si usó `class_weight`, la pérdida de entrenamiento está ponderada y la de validación no, así
-  que sus niveles no son directamente comparables; fíjese en la **forma** de las curvas y en la
-  métrica (por ejemplo, el AUC), que no depende de los pesos.
 - Revise también la métrica: a veces `val_loss` empieza a subir mientras `val_auc` se mantiene
-  casi igual. Elegir la época por `val_loss` es lo habitual, pero puede vigilar la métrica con
-  `EarlyStopping(monitor="val_auc", mode="max", ...)` si es la que le interesa.
+  casi igual. Elegir la época por `val_loss` es lo habitual, pero también puede elegirla por la métrica
+  que le interesa.

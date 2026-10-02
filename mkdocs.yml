@@ -117,6 +117,7 @@ nav:
       - Dendrograma: ayudas/dendrograma.md
       - Dimensiones de calidad de los datos: ayudas/dimensiones-calidad.md
       - Dividir en entrenamiento y prueba: ayudas/division-datos.md
+      - Entrenar una red neuronal: ayudas/entrenar-red-neuronal.md
       - Error absoluto medio (MAE): ayudas/mae.md
       - Escalar con RobustScaler: ayudas/robust-scaler.md
       - Escalar variables: ayudas/escalar-variables.md
