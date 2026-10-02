@@ -114,7 +114,7 @@ Una pasada completa de una [red neuronal](#red-neuronal) por todos los datos de 
 ### Estandarización { #estandarizacion }
 
 Transformación que lleva cada variable a media 0 y desviación estándar 1:
-\(z = (x - ar{x}) / s\). Es necesaria antes de regularizar, porque la penalización depende de
+\(z = (x - \bar{x}) / s\). Es necesaria antes de regularizar, porque la penalización depende de
 la escala de cada coeficiente.
 
 ### Estratificación { #estratificacion }
@@ -272,8 +272,8 @@ Modelo de [clasificación](#clasificacion) que estima la probabilidad de la clas
 ### Regularización { #regularizacion }
 
 Técnica que agrega al error del modelo una penalización por el tamaño de los coeficientes, para
-reducir el [sobreajuste](#sobreajuste). Su fuerza se controla con el hiperparámetro alfa (\(lpha\)):
-con \(lpha = 0\) se obtiene la regresión lineal sin regularizar. Ver [Lasso](#lasso) y [Ridge](#ridge).
+reducir el [sobreajuste](#sobreajuste). Su fuerza se controla con el hiperparámetro alfa (\(\alpha\)):
+con \(\alpha = 0\) se obtiene la regresión lineal sin regularizar. Ver [Lasso](#lasso) y [Ridge](#ridge).
 
 ### Residuo { #residuo }
 
