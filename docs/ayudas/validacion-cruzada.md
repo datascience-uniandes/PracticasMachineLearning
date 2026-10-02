@@ -53,7 +53,7 @@ conviene crear el objeto explícitamente con `shuffle=True`.
 
 scikit-learn siempre **maximiza** el *score*: un valor más grande significa un modelo mejor. En
 las métricas de error, como el RMSE o el MAE, un valor más pequeño es mejor, así que se usan con
-el signo cambiado: `"neg_root_mean_squared_error"` devuelve \( -	ext{RMSE} \). Multiplique por
+el signo cambiado: `"neg_root_mean_squared_error"` devuelve \( -\text{RMSE} \). Multiplique por
 −1 para volver a la escala original. Las métricas en las que más alto ya es mejor (R², exactitud,
 F1, AUC) se leen directamente.
 
