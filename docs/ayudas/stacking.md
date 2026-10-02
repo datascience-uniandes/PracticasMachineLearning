@@ -133,39 +133,6 @@ datos.
 | `cv` | Folds para generar las predicciones de los modelos base | Más folds dan predicciones más fiables para el meta-modelo pero multiplican el tiempo |
 | `stack_method` | Qué salida de los modelos base usa el meta-modelo | `"predict_proba"` suele ser la mejor opción en clasificación |
 
-## Búsqueda de hiperparámetros
-
-Lo habitual es ajustar primero cada modelo base por separado y luego ajustar solo el
-meta-modelo. Los hiperparámetros del meta-modelo se nombran con el prefijo `final_estimator__`
-(el nombre del parámetro `final_estimator` de `StackingClassifier`, seguido de dos guiones bajos):
-así, `final_estimator__C` es el `C` de la regresión logística que hace de meta-modelo:
-
-```python
-from sklearn.model_selection import GridSearchCV
-
-param_grid = {
-    "final_estimator__C": [0.01, 0.1, 1, 10],
-    "final_estimator__class_weight": [None, "balanced"],
-}
-busqueda = GridSearchCV(StackingClassifier(estimators=modelos_base,
-                                           final_estimator=LogisticRegression(),
-                                           cv=5, stack_method="predict_proba"),
-                        param_grid, cv=5, scoring="metrica", n_jobs=-1)
-busqueda.fit(X_train_esc, y_train)
-print(busqueda.best_params_, busqueda.best_score_)
-```
-
-- Hay dos niveles de validación cruzada: la externa (`cv=5` de `GridSearchCV`) evalúa cada
-  combinación, y la interna (`cv=5` de `StackingClassifier`) genera las predicciones de los
-  modelos base. El número de modelos entrenados se multiplica, por eso conviene mantener la
-  grilla pequeña.
-- `final_estimator__class_weight="balanced"` es una forma de tener en cuenta el
-  [desbalance de clases](../glosario.md#desbalance-de-clases) en la combinación final.
-- Los hiperparámetros de un modelo base también pueden ajustarse con el nombre del modelo como
-  prefijo, por ejemplo `"arbol__max_depth"`, pero eso hace la búsqueda mucho más lenta.
-- `"metrica"` es el *score* de clasificación que quiere optimizar, por ejemplo `"f1"` o
-  `"roc_auc"`.
-
 ## Cómo interpretar y precauciones
 
 - Compare el stacking con el **mejor modelo base** individual, usando la misma validación

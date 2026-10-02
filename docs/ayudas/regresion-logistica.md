@@ -123,30 +123,3 @@ print(pd.DataFrame({"coeficiente": coeficientes, "odds_ratio": odds_ratio})
     la clase mayoritaria. `class_weight="balanced"` pondera cada clase de forma inversamente
     proporcional a su frecuencia. Evalúe el modelo con métricas como F1 o la curva
     precisión-sensibilidad, no solo con *accuracy*.
-
-## Búsqueda de hiperparámetros
-
-Para elegir los [hiperparámetros](../glosario.md#hiperparametro) con
-[`GridSearchCV`](gridsearchcv.md), aplique la búsqueda directamente sobre el modelo y entrénela
-con los datos de entrenamiento ya escalados (`X_train_esc`):
-
-```python
-from sklearn.model_selection import GridSearchCV
-
-modelo = LogisticRegression(solver="liblinear", max_iter=1000)
-param_grid = {
-    "C": [0.001, 0.01, 0.1, 1, 10, 100],
-    "penalty": ["l1", "l2"],
-    "class_weight": [None, "balanced"],
-}
-busqueda = GridSearchCV(modelo, param_grid, cv=5, scoring="metrica")
-busqueda.fit(X_train_esc, y_train)
-print(busqueda.best_params_, busqueda.best_score_)
-```
-
-- `solver="liblinear"` admite tanto `"l1"` como `"l2"`, de modo que todas las combinaciones de
-  la grilla son válidas.
-- Los valores de `C` crecen en potencias de 10 para cubrir un rango amplio. Si el mejor valor
-  queda en un extremo, amplíe la grilla.
-- `"metrica"` es el *score* de clasificación que quiere optimizar, por ejemplo `"f1"` o
-  `"roc_auc"`.

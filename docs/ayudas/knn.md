@@ -80,28 +80,3 @@ y_prob = modelo.predict_proba(X_val_esc)[:, 1]
     Con muchas filas (o muchas variables) la predicción, y por tanto la validación cruzada, puede
     tardar bastante. Además, con muchas variables las distancias se vuelven parecidas entre sí y
     el modelo pierde capacidad de distinguir vecinos.
-
-## Búsqueda de hiperparámetros
-
-Para elegir los [hiperparámetros](../glosario.md#hiperparametro) con
-[`GridSearchCV`](gridsearchcv.md), aplique la búsqueda directamente sobre el modelo y entrénela
-con los datos de entrenamiento ya escalados (`X_train_esc`):
-
-```python
-from sklearn.model_selection import GridSearchCV
-
-modelo = KNeighborsClassifier()
-param_grid = {
-    "n_neighbors": [1, 3, 5, 7, 11, 15, 21, 31, 51],
-    "weights": ["uniform", "distance"],
-    "p": [1, 2],
-}
-busqueda = GridSearchCV(modelo, param_grid, cv=5, scoring="metrica")
-busqueda.fit(X_train_esc, y_train)
-print(busqueda.best_params_, busqueda.best_score_)
-```
-
-- Los valores de `n_neighbors` son impares y cubren desde modelos muy flexibles (1) hasta muy
-  suaves (51). Si el mejor valor queda en un extremo, amplíe la grilla.
-- `"metrica"` es el *score* de clasificación que quiere optimizar, por ejemplo `"f1"` o
-  `"roc_auc"`.

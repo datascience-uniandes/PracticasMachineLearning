@@ -132,32 +132,6 @@ modelo.fit(X_train, y_train, sample_weight=pesos)
 - `HistGradientBoostingClassifier` sí acepta `class_weight="balanced"` directamente.
 - Con o sin pesos, también puede mover el umbral de decisión usando `y_prob`.
 
-## Búsqueda de hiperparámetros
-
-```python
-from sklearn.model_selection import GridSearchCV
-
-param_grid = {
-    "n_estimators": [100, 300],
-    "learning_rate": [0.05, 0.1],
-    "max_depth": [2, 3, 5],
-    "subsample": [0.8, 1.0],
-}
-busqueda = GridSearchCV(GradientBoostingClassifier(random_state=42), param_grid,
-                        cv=5, scoring="metrica", n_jobs=-1)
-busqueda.fit(X_train, y_train)
-print(busqueda.best_params_, busqueda.best_score_)
-```
-
-- La grilla tiene 2 × 2 × 3 × 2 = 24 combinaciones; con 5 folds se entrenan 120 modelos.
-  `n_jobs=-1` en `GridSearchCV` reparte esos modelos entre los núcleos del procesador; con unas
-  6.000 filas tarda alrededor de un minuto.
-- `"metrica"` es el *score* de clasificación que quiere optimizar, por ejemplo `"f1"` o
-  `"roc_auc"`.
-- Si el mejor valor de un hiperparámetro queda en un extremo de la grilla, amplíela en esa
-  dirección. Vea la [validación cruzada](validacion-cruzada.md) y
-  [`GridSearchCV`](gridsearchcv.md) para revisar todos los resultados.
-
 ## Cómo interpretar y precauciones
 
 - El gradient boosting suele ser de los modelos más precisos en datos tabulares, pero es más

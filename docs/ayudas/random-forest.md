@@ -114,36 +114,6 @@ print(modelo.oob_score_)
 - Con desbalance de clases, la *accuracy* es poco informativa; para comparar modelos prefiera
   la validación cruzada con una métrica como [F1](f1.md) o el área bajo la curva ROC.
 
-## Búsqueda de hiperparámetros
-
-Como no hace falta escalar, el bosque puede pasarse directamente a
-[`GridSearchCV`](gridsearchcv.md):
-
-```python
-from sklearn.model_selection import GridSearchCV
-
-param_grid = {
-    "n_estimators": [200],
-    "max_depth": [None, 5, 10, 20],
-    "min_samples_leaf": [1, 5, 20],
-    "max_features": ["sqrt", 0.5],
-    "class_weight": [None, "balanced_subsample"],
-}
-busqueda = GridSearchCV(RandomForestClassifier(random_state=42, n_jobs=-1), param_grid,
-                        cv=5, scoring="metrica")
-busqueda.fit(X_train, y_train)
-print(busqueda.best_params_, busqueda.best_score_)
-```
-
-- `n_estimators` se deja fijo: no es un hiperparámetro que haya que "optimizar", basta con que
-  sea suficientemente grande. Puede aumentarlo después para el modelo final.
-- La grilla tiene 4 × 3 × 2 × 2 = 48 combinaciones; con 5 folds se entrenan 240 bosques. Con
-  unas 6.000 filas tarda del orden de un par de minutos.
-- `"metrica"` es el *score* de clasificación que quiere optimizar, por ejemplo `"f1"` o
-  `"roc_auc"`.
-- `busqueda.best_estimator_` es el bosque ya reentrenado con los mejores hiperparámetros sobre
-  todo `X_train`.
-
 ## Cómo interpretar y precauciones
 
 - El random forest es una buena opción "por defecto": funciona razonablemente bien con pocos
