@@ -12,6 +12,10 @@ Tarea de aprendizaje no supervisado que reúne los registros en grupos (_cluster
 registros de un mismo grupo se parezcan entre sí y se diferencien de los de otros grupos. No usa
 una [variable objetivo](#variable-objetivo) (_clustering_).
 
+### Agrupación jerárquica { #agrupacion-jerarquica }
+
+[Agrupación](#agrupacion) que construye una jerarquía de grupos anidados, uniendo los registros más parecidos paso a paso (aglomerativa) o dividiendo un grupo grande (divisiva). Se representa con un [dendrograma](#dendrograma).
+
 ### Árbol de decisión { #arbol-decision }
 
 Modelo que clasifica mediante una secuencia de preguntas sobre las variables (por ejemplo, ¿edad > 45?), organizadas como un árbol. Cada hoja asigna una clase. Los árboles muy profundos tienden al [sobreajuste](#sobreajuste).
@@ -25,6 +29,10 @@ Modelo que clasifica mediante una secuencia de preguntas sobre las variables (po
 _Sin términos por ahora._
 
 ## C
+
+### Centroide { #centroide }
+
+Punto que representa a un grupo: el promedio de todos sus registros en cada variable. No tiene por qué coincidir con un registro real.
 
 ### Chi-cuadrado { #chi-cuadrado }
 
@@ -49,6 +57,10 @@ para que un modelo pueda usarla sin suponer un orden entre categorías.
 En una [regresión lineal](#regresion-lineal), peso de cada variable: cuánto cambia la predicción
 cuando esa variable aumenta en una unidad y las demás se mantienen constantes. El intercepto
 (\(\beta_0\)) es la predicción cuando todas las variables valen 0.
+
+### Coeficiente de silueta { #silueta }
+
+Métrica de [agrupación](#agrupacion) que compara, para cada registro, qué tan cerca está de su propio grupo frente al grupo vecino más cercano. Va de −1 a 1: valores cercanos a 1 indican grupos compactos y bien separados.
 
 ### Compromiso sesgo-varianza { #compromiso-sesgo-varianza }
 
@@ -88,6 +100,14 @@ Gráfico de la tasa de verdaderos positivos frente a la tasa de falsos positivos
 
 ## D
 
+### DBSCAN { #dbscan }
+
+Algoritmo de [agrupación](#agrupacion) por densidad: forma grupos con las regiones donde los registros están muy juntos y marca como [ruido](#ruido) los registros aislados. No necesita fijar el número de grupos.
+
+### Dendrograma { #dendrograma }
+
+Diagrama en forma de árbol que muestra en qué orden y a qué distancia se unen los grupos en una [agrupación jerárquica](#agrupacion-jerarquica). Cortarlo a una altura da un número de grupos.
+
 ### Desbalance de clases { #desbalance-de-clases }
 
 En un problema de clasificación, situación en la que una clase tiene muchos más registros que la
@@ -108,6 +128,10 @@ Registro idéntico a otro en todas sus columnas, o en las columnas que se compar
 ### Early stopping { #early-stopping }
 
 Técnica que detiene el entrenamiento de una [red neuronal](#red-neuronal) cuando el error en validación deja de mejorar durante varias [épocas](#epoca), para evitar el [sobreajuste](#sobreajuste).
+
+### Enlace { #enlace }
+
+En la [agrupación jerárquica](#agrupacion-jerarquica), regla que define la distancia entre dos grupos (_linkage_): ward, completo, promedio o simple.
 
 ### Ensamble { #ensamble }
 
@@ -156,6 +180,10 @@ Función que transforma la salida de cada neurona de una [red neuronal](#red-neu
 
 ## H
 
+### HDBSCAN { #hdbscan }
+
+Versión jerárquica de [DBSCAN](#dbscan) que explora todos los niveles de densidad y conserva los grupos más estables. Maneja mejor grupos de densidades distintas y no necesita el radio `eps`.
+
 ### Hiperparámetro { #hiperparametro }
 
 Configuración del modelo que se elige antes de entrenar y no se aprende de los datos, como el
@@ -169,7 +197,13 @@ _heterocedasticidad_.
 
 ## I
 
-_Sin términos por ahora._
+### Índice de Davies-Bouldin { #davies-bouldin }
+
+Métrica de [agrupación](#agrupacion) que promedia, para cada grupo, la relación entre la dispersión de los grupos y la distancia a su grupo más parecido. Es mayor o igual que 0: más bajo es mejor.
+
+### Inercia { #inercia }
+
+Suma de las distancias al cuadrado de cada registro al [centroide](#centroide) de su grupo. Mide qué tan compactos son los grupos; la inercia media la divide por el número de registros.
 
 ## J
 
@@ -180,6 +214,18 @@ _Sin términos por ahora._
 ### K-fold { #k-fold }
 
 Ver [validación cruzada](#validacion-cruzada).
+
+### K-medianas { #k-medianas }
+
+Variante de [K-medias](#k-medias) que representa cada grupo con la mediana de cada variable y usa la distancia de Manhattan. Es más robusta a los valores atípicos.
+
+### K-medias { #k-medias }
+
+Algoritmo de [agrupación](#agrupacion) que divide los registros en K grupos asignando cada uno al [centroide](#centroide) más cercano y recalculando los centroides hasta que no cambian (_K-means_).
+
+### K-medoides { #k-medoides }
+
+Variante de [K-medias](#k-medias) en la que cada grupo se representa con un registro real, el [medoide](#medoide). Admite cualquier distancia y es robusta a los valores atípicos.
 
 ### KNN { #knn }
 
@@ -203,6 +249,18 @@ valores reales y los predichos. Se expresa en las mismas unidades que la variabl
 ### Matriz de confusión { #matriz-confusion }
 
 Tabla que cruza las clases reales con las predichas y cuenta los verdaderos positivos, verdaderos negativos, falsos positivos y falsos negativos de un clasificador.
+
+### Mean Shift { #mean-shift }
+
+Algoritmo de [agrupación](#agrupacion) por densidad que desplaza cada registro hacia la zona más densa de su vecindario; el número de grupos sale del ancho de esa ventana (_bandwidth_).
+
+### Medoide { #medoide }
+
+Registro real de un grupo cuya distancia total a los demás registros del grupo es la menor. A diferencia del [centroide](#centroide), siempre es un dato existente.
+
+### Método del codo { #metodo-codo }
+
+Gráfico de la [inercia](#inercia) frente al número de grupos K. El valor de K donde la curva deja de bajar con fuerza (el codo) es un buen candidato.
 
 ### Multicolinealidad { #multicolinealidad }
 
@@ -296,6 +354,10 @@ Diferencia entre el valor real y el valor predicho por el modelo: \(e = y - \hat
 Raíz del error cuadrático medio (_Root Mean Squared Error_). Como eleva los errores al cuadrado
 antes de promediarlos, penaliza más los errores grandes que el [MAE](#mae). Se expresa en las
 mismas unidades que la variable objetivo.
+
+### Ruido { #ruido }
+
+En los algoritmos de agrupación por densidad, registros que no pertenecen a ningún grupo porque están en zonas poco densas. scikit-learn les asigna la etiqueta −1.
 
 ## S
 

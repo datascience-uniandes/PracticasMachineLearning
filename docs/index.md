@@ -31,7 +31,7 @@ desde la preparación de los datos hasta la evaluación de los modelos.
 
     ---
 
-    Segmentación de clientes de tarjetas de crédito: entendimiento y tratamiento de los datos.
+    Segmentación de clientes de tarjetas de crédito con algoritmos basados en centroides, por densidad y jerárquicos.
 
     [:octicons-arrow-right-24: Ir a la práctica](talleres/practica-3/index.md)
 

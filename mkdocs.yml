@@ -96,18 +96,25 @@ nav:
       - "Práctica 3: Agrupación":
           - talleres/practica-3/index.md
           - "Actividad 1: Entendimiento de datos": talleres/practica-3/actividad-1.md
+          - "Actividad 2: Agrupación basada en centroides": talleres/practica-3/actividad-2.md
+          - "Actividad 3: Agrupación por densidad": talleres/practica-3/actividad-3.md
+          - "Actividad 4: Agrupación jerárquica": talleres/practica-3/actividad-4.md
       - Práctica 4: talleres/practica-4.md
       - Práctica 5: talleres/practica-5.md
   - Ayudas:
+      - Agrupación aglomerativa: ayudas/agrupacion-aglomerativa.md
       - Árbol de decisión: ayudas/arbol-decision.md
       - Cargar un dataset: ayudas/cargar-dataset.md
       - Codificación one-hot: ayudas/one-hot.md
       - Coeficiente de determinación (R²): ayudas/r2.md
+      - Coeficiente de silueta: ayudas/silueta.md
       - Comparar métricas entre conjuntos: ayudas/comparar-metricas.md
       - Compromiso sesgo-varianza: ayudas/compromiso-sesgo-varianza.md
       - Curva de aprendizaje: ayudas/curva-aprendizaje.md
       - Curva de precisión-sensibilidad: ayudas/curva-precision-sensibilidad.md
       - Curva ROC: ayudas/curva-roc.md
+      - DBSCAN: ayudas/dbscan.md
+      - Dendrograma: ayudas/dendrograma.md
       - Dimensiones de calidad de los datos: ayudas/dimensiones-calidad.md
       - Dividir en entrenamiento y prueba: ayudas/division-datos.md
       - Error absoluto medio (MAE): ayudas/mae.md
@@ -122,11 +129,20 @@ nav:
       - Gráfico de cajas: ayudas/grafico-cajas.md
       - Gráfico de dispersión: ayudas/grafico-dispersion.md
       - Gráfico Q-Q: ayudas/grafico-qq.md
+      - HDBSCAN: ayudas/hdbscan.md
       - Histograma: ayudas/histograma.md
+      - Índice de Davies-Bouldin: ayudas/davies-bouldin.md
+      - Inercia media: ayudas/inercia.md
       - Interpretar los coeficientes: ayudas/interpretar-coeficientes.md
+      - Interpretar los grupos: ayudas/interpretar-grupos.md
       - K vecinos más cercanos (KNN): ayudas/knn.md
+      - K-medianas (K-medians): ayudas/k-medianas.md
+      - K-medias (K-means): ayudas/k-medias.md
+      - K-medoides (K-medoids): ayudas/k-medoides.md
       - Matriz de confusión: ayudas/matriz-confusion.md
       - Matriz de correlación: ayudas/correlacion.md
+      - Mean Shift: ayudas/mean-shift.md
+      - Método del codo: ayudas/metodo-codo.md
       - Normalidad de los residuos: ayudas/normalidad-residuos.md
       - Optimizar hiperparámetros con GridSearchCV: ayudas/gridsearchcv.md
       - Precisión: ayudas/precision.md
