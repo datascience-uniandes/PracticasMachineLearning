@@ -25,22 +25,6 @@ plt.show()
 de la distribución, que facilita ver su forma. Vea más opciones en
 [histograma](histograma.md).
 
-## Prueba de Shapiro-Wilk
-
-Para complementar el histograma, aplique la [prueba de Shapiro-Wilk](shapiro-wilk.md) a los
-residuos. Si \( p < 0{,}05 \), rechace la hipótesis de normalidad:
-
-```python
-from scipy import stats
-
-estadistico, p_valor = stats.shapiro(residuos)
-```
-
-Vea en [prueba de Shapiro-Wilk](shapiro-wilk.md) las hipótesis, cómo leer el estadístico, las
-precauciones con muestras grandes y la alternativa de D'Agostino-Pearson (`stats.normaltest`).
-Con muestras grandes, decida siempre mirando también el histograma y el
-[gráfico Q-Q](grafico-qq.md).
-
 ## Cómo interpretarlo
 
 | Forma del histograma | Qué indica |
