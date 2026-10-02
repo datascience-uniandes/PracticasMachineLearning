@@ -6,6 +6,12 @@ Términos usados en las prácticas, en orden alfabético.
 
 ## A
 
+### Agrupación { #agrupacion }
+
+Tarea de aprendizaje no supervisado que reúne los registros en grupos (_clusters_) de modo que los
+registros de un mismo grupo se parezcan entre sí y se diferencien de los de otros grupos. No usa
+una [variable objetivo](#variable-objetivo) (_clustering_).
+
 ### Árbol de decisión { #arbol-decision }
 
 Modelo que clasifica mediante una secuencia de preguntas sobre las variables (por ejemplo, ¿edad > 45?), organizadas como un árbol. Cada hoja asigna una clase. Los árboles muy profundos tienden al [sobreajuste](#sobreajuste).

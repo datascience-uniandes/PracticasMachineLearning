@@ -93,7 +93,9 @@ nav:
           - "Actividad 3: Modelos de clasificación": talleres/practica-2/actividad-3.md
           - "Actividad 4: Ensambles": talleres/practica-2/actividad-4.md
           - "Actividad 5: Red neuronal": talleres/practica-2/actividad-5.md
-      - Práctica 3: talleres/practica-3.md
+      - "Práctica 3: Agrupación":
+          - talleres/practica-3/index.md
+          - "Actividad 1: Entendimiento de datos": talleres/practica-3/actividad-1.md
       - Práctica 4: talleres/practica-4.md
       - Práctica 5: talleres/practica-5.md
   - Ayudas:
@@ -156,5 +158,6 @@ nav:
       - Votación (VotingClassifier): ayudas/votacion.md
   - Conjuntos de datos:
       - Abandono de clientes bancarios: datos/churn.md
+      - Clientes de tarjetas de crédito: datos/tarjetas.md
       - Venta de inmuebles: datos/inmuebles.md
   - Glosario: glosario.md
