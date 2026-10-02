@@ -2,8 +2,8 @@
 
 ### Datos de trabajo: el notebook de la [Actividad 3](actividad-3.md)
 
-1. Retome los conjuntos de entrenamiento, validación y prueba, y los tres modelos ya optimizados
-   de la actividad anterior. **Use el conjunto de prueba solo en el paso 10.**
+1. Retome los conjuntos de entrenamiento, validación y prueba ya escalados, y los tres modelos ya
+   optimizados de la actividad anterior. **Use el conjunto de prueba solo en el paso 10.**
 2. [**Entrene un Random Forest**](../../ayudas/random-forest.md) y
    [**optimice sus hiperparámetros con GridSearchCV**](../../ayudas/gridsearchcv.md) sobre el
    conjunto de entrenamiento (validación cruzada estratificada de 5 folds, `scoring="f1"`):

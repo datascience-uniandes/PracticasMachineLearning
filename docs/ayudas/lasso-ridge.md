@@ -23,10 +23,10 @@ Elija alfa con [validación cruzada](validacion-cruzada.md) (por ejemplo con
     La penalización depende del tamaño de los coeficientes, y este depende de las unidades de
     cada variable. Sin [estandarizar](estandarizar.md) (vea también
     [escalar variables](escalar-variables.md)), la penalización afecta más a unas variables que
-    a otras solo por su escala, no por su importancia. Por eso el código de esta página incluye
-    `StandardScaler` dentro de un pipeline.
+    a otras solo por su escala, no por su importancia. Por eso el código de esta página
+    estandariza las variables con `StandardScaler` antes de entrenar.
 
-Los coeficientes de ambos modelos están en `modelo[-1].coef_`, en la escala estandarizada; para
+Los coeficientes de ambos modelos están en `modelo.coef_`, en la escala estandarizada; para
 mostrarlos con el nombre de cada variable, vea [ver los coeficientes](ver-coeficientes.md).
 
 ## Lasso (penalización L1) { #lasso }
@@ -45,13 +45,16 @@ mostrarlos con el nombre de cada variable, vea [ver los coeficientes](ver-coefic
 salen del modelo, por lo que Lasso hace **selección de variables**.
 
 ```python
-from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import Lasso
 
-modelo = make_pipeline(StandardScaler(), Lasso(alpha=alfa, max_iter=10000))
-modelo.fit(X_train, y_train)
-y_pred = modelo.predict(X_test)
+escalador = StandardScaler()
+X_train_esc = escalador.fit_transform(X_train)
+X_test_esc = escalador.transform(X_test)
+
+modelo = Lasso(alpha=alfa, max_iter=10000)
+modelo.fit(X_train_esc, y_train)
+y_pred = modelo.predict(X_test_esc)
 ```
 
 - `alfa` es el valor de alfa que quiere usar.
@@ -59,8 +62,11 @@ y_pred = modelo.predict(X_test)
   `X_test` las variables del conjunto de prueba.
 - `max_iter=10000` aumenta el número de iteraciones del algoritmo de ajuste. Con el valor por
   defecto (1000), en ocasiones aparece una advertencia `ConvergenceWarning`.
-- `make_pipeline` estandariza con la media y la desviación de `X_train` antes de entrenar y
-  antes de predecir.
+- `escalador` aprende la media y la desviación estándar de cada variable **solo** con `X_train`
+  (`fit_transform`) y aplica esos mismos valores a `X_test` (`transform`); así el conjunto de
+  prueba no influye en el escalado.
+- `X_train_esc` y `X_test_esc` son las variables ya estandarizadas: el modelo se entrena y
+  predice con ellas.
 
 ## Ridge (penalización L2) { #ridge }
 
@@ -81,17 +87,21 @@ muy grandes, de signos opuestos o cambiar mucho con pocos datos. Ridge **estabil
 coeficientes y tiende a repartir el efecto en partes parecidas.
 
 ```python
-from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import Ridge
 
-modelo = make_pipeline(StandardScaler(), Ridge(alpha=alfa))
-modelo.fit(X_train, y_train)
-y_pred = modelo.predict(X_test)
+escalador = StandardScaler()
+X_train_esc = escalador.fit_transform(X_train)
+X_test_esc = escalador.transform(X_test)
+
+modelo = Ridge(alpha=alfa)
+modelo.fit(X_train_esc, y_train)
+y_pred = modelo.predict(X_test_esc)
 ```
 
 - `alfa` es el valor de alfa que quiere usar (el valor por defecto de `Ridge` es 1).
-- `X_train`, `y_train` y `X_test` tienen el mismo significado que en Lasso.
+- `X_train`, `y_train`, `X_test`, `escalador`, `X_train_esc` y `X_test_esc` tienen el mismo
+  significado que en Lasso.
 
 ## Lasso o Ridge { #lasso-o-ridge }
 

@@ -26,10 +26,25 @@ memoriza (por ejemplo, un árbol profundo). Para evitarlo, el stacking usa
 
 ## Escalado
 
-El stacking en sí no escala nada: cada modelo base debe llevar su propio preprocesamiento. Los
-modelos que lo necesitan (regresión logística, KNN) deben ir dentro de un pipeline con
-[escalado](escalar-variables.md); los árboles pueden ir sin él. El meta-modelo recibe
-probabilidades, que ya están entre 0 y 1, así que no necesita escalado adicional.
+El stacking en sí no escala nada. La regresión logística y KNN necesitan variables
+[escaladas](escalar-variables.md), así que escale los datos una sola vez antes de construir el
+ensamble y entréguele los datos escalados:
+
+```python
+from sklearn.preprocessing import StandardScaler
+
+escalador = StandardScaler()
+X_train_esc = escalador.fit_transform(X_train)
+X_val_esc = escalador.transform(X_val)
+```
+
+- `fit_transform` calcula la media y la desviación estándar **solo con el conjunto de
+  entrenamiento** y lo escala; `transform` aplica esas mismas medidas a validación.
+- El árbol de decisión no necesita escalado, pero tampoco lo perjudica: sus umbrales simplemente
+  quedan expresados en la escala nueva. Por eso puede usar los mismos datos escalados para todos
+  los modelos base.
+- El meta-modelo recibe probabilidades, que ya están entre 0 y 1, así que no necesita escalado
+  adicional.
 
 ## Código básico
 
@@ -37,20 +52,18 @@ probabilidades, que ya están entre 0 y 1, así que no necesita escalado adicion
 from sklearn.ensemble import StackingClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.pipeline import make_pipeline
-from sklearn.preprocessing import StandardScaler
 from sklearn.tree import DecisionTreeClassifier
 
 modelos_base = [
-    ("logistica", make_pipeline(StandardScaler(), LogisticRegression(max_iter=1000))),
+    ("logistica", LogisticRegression(max_iter=1000)),
     ("arbol", DecisionTreeClassifier(max_depth=profundidad, random_state=42)),
-    ("knn", make_pipeline(StandardScaler(), KNeighborsClassifier(n_neighbors=k))),
+    ("knn", KNeighborsClassifier(n_neighbors=k)),
 ]
 modelo = StackingClassifier(estimators=modelos_base, final_estimator=LogisticRegression(),
                             cv=5, stack_method="predict_proba", n_jobs=-1)
-modelo.fit(X_train, y_train)
-y_pred = modelo.predict(X_val)
-y_prob = modelo.predict_proba(X_val)[:, 1]
+modelo.fit(X_train_esc, y_train)
+y_pred = modelo.predict(X_val_esc)
+y_prob = modelo.predict_proba(X_val_esc)[:, 1]
 ```
 
 - `modelos_base` es una lista de pares `(nombre, modelo)`. El nombre es libre y sirve para
@@ -65,7 +78,8 @@ y_prob = modelo.predict_proba(X_val)[:, 1]
   modelos base (en clasificación binaria, una columna por modelo con la probabilidad de la clase
   positiva) en lugar de las clases predichas, que contienen menos información.
 - `n_jobs=-1` entrena los modelos base en paralelo.
-- `X_train`, `y_train` son los datos de entrenamiento y `X_val` las variables del
+- `X_train_esc`, `y_train` son los datos de entrenamiento (con las variables escaladas) y
+  `X_val_esc` las variables escaladas del
   [conjunto de validación](../glosario.md#conjunto-validacion). `y_pred` es la clase predicha
   con umbral 0,5 y `y_prob` la probabilidad que da el meta-modelo.
 
@@ -83,8 +97,8 @@ modelos_base = [
 ```
 
 - `busqueda_logistica`, `busqueda_arbol` y `busqueda_knn` son los objetos `GridSearchCV` ya
-  ajustados de cada modelo. `best_estimator_` incluye el pipeline completo con los mejores
-  hiperparámetros.
+  ajustados de cada modelo, con búsquedas hechas sobre los datos escalados (`X_train_esc`).
+  `best_estimator_` es el modelo con los mejores hiperparámetros.
 - `StackingClassifier` hace copias de estos modelos y los vuelve a entrenar; no modifica los
   objetos originales.
 
@@ -122,7 +136,9 @@ datos.
 ## Búsqueda de hiperparámetros
 
 Lo habitual es ajustar primero cada modelo base por separado y luego ajustar solo el
-meta-modelo. Los hiperparámetros del meta-modelo se nombran con el prefijo `final_estimator__`:
+meta-modelo. Los hiperparámetros del meta-modelo se nombran con el prefijo `final_estimator__`
+(el nombre del parámetro `final_estimator` de `StackingClassifier`, seguido de dos guiones bajos):
+así, `final_estimator__C` es el `C` de la regresión logística que hace de meta-modelo:
 
 ```python
 from sklearn.model_selection import GridSearchCV
@@ -135,7 +151,7 @@ busqueda = GridSearchCV(StackingClassifier(estimators=modelos_base,
                                            final_estimator=LogisticRegression(),
                                            cv=5, stack_method="predict_proba"),
                         param_grid, cv=5, scoring="metrica", n_jobs=-1)
-busqueda.fit(X_train, y_train)
+busqueda.fit(X_train_esc, y_train)
 print(busqueda.best_params_, busqueda.best_score_)
 ```
 

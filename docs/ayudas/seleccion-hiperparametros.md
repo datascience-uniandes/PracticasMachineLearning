@@ -30,19 +30,24 @@ divide ese 40 % por la mitad: 20 % para validación (`X_val`, `y_val`) y 20 % pa
 ```python
 import numpy as np
 import pandas as pd
-from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import PolynomialFeatures, StandardScaler
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error, r2_score
 
 resultados = []
 for grado in [1, 2, 3, 4, 5]:
-    modelo = make_pipeline(StandardScaler(),
-                           PolynomialFeatures(degree=grado, include_bias=False),
-                           LinearRegression())
-    modelo.fit(X_train, y_train)
-    y_pred_train = modelo.predict(X_train)
-    y_pred_val = modelo.predict(X_val)
+    polinomio = PolynomialFeatures(degree=grado, include_bias=False)
+    X_poly_train = polinomio.fit_transform(X_train)
+    X_poly_val = polinomio.transform(X_val)
+
+    escalador = StandardScaler()
+    X_train_esc = escalador.fit_transform(X_poly_train)
+    X_val_esc = escalador.transform(X_poly_val)
+
+    modelo = LinearRegression()
+    modelo.fit(X_train_esc, y_train)
+    y_pred_train = modelo.predict(X_train_esc)
+    y_pred_val = modelo.predict(X_val_esc)
     resultados.append({
         "grado": grado,
         "R2_train": r2_score(y_train, y_pred_train),
@@ -55,16 +60,20 @@ tabla = pd.DataFrame(resultados)
 print(tabla.round(3))
 ```
 
-- En cada vuelta se crea un modelo nuevo con el `grado` correspondiente, se entrena **solo** con
-  `X_train` y se evalúa en entrenamiento y en validación.
+- En cada vuelta se generan los términos polinomiales del `grado` correspondiente: `polinomio`
+  se ajusta con `X_train` (`fit_transform`) y transforma `X_val` (`transform`).
+- `escalador` se crea de nuevo en cada vuelta, porque el número de columnas cambia con el grado.
+  También se ajusta **solo** con los datos de entrenamiento; `X_train_esc` y `X_val_esc` son
+  las variables ya estandarizadas.
+- El modelo se entrena **solo** con `X_train_esc` y se evalúa en entrenamiento y en validación.
 - `resultados` es una lista de diccionarios, uno por grado; `pd.DataFrame` la convierte en una
   tabla con una fila por grado.
 - Puede agregar otras métricas, como el [MAE](mae.md) con `mean_absolute_error`. Vea
   [R²](r2.md), [RMSE](rmse.md) y [comparar métricas](comparar-metricas.md).
 
-Si aplica el polinomio solo a las variables continuas, reemplace el `make_pipeline` por el de
-la sección *Aplicar el polinomio solo a las variables continuas* de
-[regresión polinomial](regresion-polinomial.md).
+Si aplica el polinomio solo a las variables continuas, reemplace las líneas de `polinomio` por
+el código con `pd.concat` de la sección *Aplicar el polinomio solo a las variables continuas* de
+[regresión polinomial](regresion-polinomial.md), usando `X_val` en lugar de `X_test`.
 
 ## Graficar la curva de validación
 

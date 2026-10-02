@@ -45,26 +45,34 @@ La regresión logística de scikit-learn aplica [regularización](../glosario.md
 por defecto, y la penalización depende de la escala de cada variable. Además, el algoritmo de
 ajuste converge mejor con variables en rangos parecidos. Por eso conviene
 [escalar las variables](escalar-variables.md) (por ejemplo, [estandarizar](estandarizar.md)) y
-codificar las categóricas con [one-hot](one-hot.md). El código de esta página incluye
-`StandardScaler` dentro de un pipeline.
+codificar las categóricas con [one-hot](one-hot.md). El código de esta página estandariza las
+variables con `StandardScaler` antes de entrenar el modelo.
 
 ## Código básico
 
 ```python
-from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LogisticRegression
 
-modelo = make_pipeline(StandardScaler(), LogisticRegression(max_iter=1000))
-modelo.fit(X_train, y_train)
-y_pred = modelo.predict(X_val)
-y_prob = modelo.predict_proba(X_val)[:, 1]
+escalador = StandardScaler()
+X_train_esc = escalador.fit_transform(X_train)
+X_val_esc = escalador.transform(X_val)
+
+modelo = LogisticRegression(max_iter=1000)
+modelo.fit(X_train_esc, y_train)
+y_pred = modelo.predict(X_val_esc)
+y_prob = modelo.predict_proba(X_val_esc)[:, 1]
 ```
 
 - `X_train`, `y_train` son las variables y la variable objetivo del
   [conjunto de entrenamiento](../glosario.md#conjunto-entrenamiento), y `X_val` las variables del
   [conjunto de validación](../glosario.md#conjunto-validacion) (vea
   [dividir los datos](division-datos.md)).
+- `escalador.fit_transform(X_train)` calcula la media y la desviación estándar de cada variable
+  **solo con el entrenamiento** y estandariza `X_train`; el resultado es `X_train_esc` («esc» de
+  escalado). `escalador.transform(X_val)` aplica esas mismas medias y desviaciones a `X_val`, sin
+  volver a calcularlas. Haga lo mismo con `X_test` (`X_test_esc = escalador.transform(X_test)`)
+  cuando llegue el momento de evaluar en prueba.
 - `max_iter=1000` aumenta el número de iteraciones del algoritmo de ajuste. Con el valor por
   defecto (100), en ocasiones aparece una advertencia `ConvergenceWarning`.
 - `y_pred` contiene la clase predicha (0 o 1) de cada registro, usando el umbral 0,5.
@@ -77,14 +85,14 @@ y_prob = modelo.predict_proba(X_val)[:, 1]
 import numpy as np
 import pandas as pd
 
-coeficientes = pd.Series(modelo[-1].coef_[0], index=X_train.columns)
+coeficientes = pd.Series(modelo.coef_[0], index=X_train.columns)
 odds_ratio = np.exp(coeficientes)
 print(pd.DataFrame({"coeficiente": coeficientes, "odds_ratio": odds_ratio})
       .sort_values("coeficiente"))
 ```
 
-- `modelo[-1]` es el último paso del pipeline (el `LogisticRegression`). `coef_[0]` contiene un
-  coeficiente por variable, y `intercept_[0]` el intercepto.
+- `modelo.coef_[0]` contiene un coeficiente por variable, en el mismo orden de las columnas de
+  `X_train`, y `intercept_[0]` el intercepto.
 - **Signo:** un coeficiente positivo indica que, al aumentar la variable, aumenta la probabilidad
   de la clase positiva; uno negativo, que disminuye.
 - **Odds ratio:** `np.exp(coef)` es el factor por el que se multiplican los *odds* cuando la
@@ -119,21 +127,20 @@ print(pd.DataFrame({"coeficiente": coeficientes, "odds_ratio": odds_ratio})
 ## Búsqueda de hiperparámetros
 
 Para elegir los [hiperparámetros](../glosario.md#hiperparametro) con
-[`GridSearchCV`](gridsearchcv.md), use el pipeline completo para que el escalado se ajuste solo
-con los folds de entrenamiento:
+[`GridSearchCV`](gridsearchcv.md), aplique la búsqueda directamente sobre el modelo y entrénela
+con los datos de entrenamiento ya escalados (`X_train_esc`):
 
 ```python
 from sklearn.model_selection import GridSearchCV
 
-pipeline = make_pipeline(StandardScaler(),
-                         LogisticRegression(solver="liblinear", max_iter=1000))
+modelo = LogisticRegression(solver="liblinear", max_iter=1000)
 param_grid = {
-    "logisticregression__C": [0.001, 0.01, 0.1, 1, 10, 100],
-    "logisticregression__penalty": ["l1", "l2"],
-    "logisticregression__class_weight": [None, "balanced"],
+    "C": [0.001, 0.01, 0.1, 1, 10, 100],
+    "penalty": ["l1", "l2"],
+    "class_weight": [None, "balanced"],
 }
-busqueda = GridSearchCV(pipeline, param_grid, cv=5, scoring="metrica")
-busqueda.fit(X_train, y_train)
+busqueda = GridSearchCV(modelo, param_grid, cv=5, scoring="metrica")
+busqueda.fit(X_train_esc, y_train)
 print(busqueda.best_params_, busqueda.best_score_)
 ```
 

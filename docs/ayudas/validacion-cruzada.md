@@ -55,7 +55,8 @@ print("Desviación estándar:", rmse.std().round(3))
   `shuffle=True` mezcla los registros antes de partirlos y `random_state=42` fija la semilla
   para que la partición sea reproducible.
 - `cross_val_score` entrena una copia de `modelo` en cada iteración y devuelve un arreglo con
-  las K métricas, una por fold. `modelo` puede ser un modelo simple o un pipeline completo.
+  las K métricas, una por fold. Si el modelo necesita datos escalados, pase a
+  `cross_val_score` los datos ya [escalados](escalar-variables.md).
 - `scoring="neg_root_mean_squared_error"` indica que la métrica es el [RMSE](rmse.md).
 - `rmse.mean()` es la estimación del error; `rmse.std()` indica cuánto varía entre folds.
 

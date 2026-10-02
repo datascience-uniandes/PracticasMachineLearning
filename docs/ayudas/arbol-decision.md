@@ -108,8 +108,8 @@ print(importancias.sort_values(ascending=False))
 
 ## Búsqueda de hiperparámetros
 
-Como no hace falta escalar, el árbol puede pasarse directamente a
-[`GridSearchCV`](gridsearchcv.md), sin pipeline:
+Como no hace falta escalar, el árbol se pasa directamente a [`GridSearchCV`](gridsearchcv.md)
+con los datos originales:
 
 ```python
 from sklearn.model_selection import GridSearchCV
@@ -126,7 +126,8 @@ busqueda.fit(X_train, y_train)
 print(busqueda.best_params_, busqueda.best_score_)
 ```
 
-- Sin pipeline, las claves de `param_grid` son solo los nombres de los hiperparámetros.
+- Las claves de `param_grid` son los nombres exactos de los hiperparámetros de
+  `DecisionTreeClassifier`.
 - `"metrica"` es el *score* de clasificación que quiere optimizar, por ejemplo `"f1"` o
   `"roc_auc"`.
 - Si combinaciones con *scores* parecidos difieren en complejidad, prefiera el árbol menos

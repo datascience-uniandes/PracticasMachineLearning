@@ -30,27 +30,34 @@ KNN **necesita escalar** las variables. La distancia suma diferencias de todas l
 modo que una variable medida en miles domina a otra medida en unidades solo por sus unidades.
 [Escale las variables](escalar-variables.md) (por ejemplo, [estandarice](estandarizar.md)) y
 codifique las categóricas con [one-hot](one-hot.md), porque la distancia solo se calcula sobre
-variables numéricas. El código de esta página incluye `StandardScaler` dentro de un pipeline.
+variables numéricas. El código de esta página estandariza las variables con `StandardScaler`
+antes de entrenar el modelo.
 
 ## Código básico
 
 ```python
-from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 from sklearn.neighbors import KNeighborsClassifier
 
-modelo = make_pipeline(StandardScaler(), KNeighborsClassifier(n_neighbors=k))
-modelo.fit(X_train, y_train)
-y_pred = modelo.predict(X_val)
-y_prob = modelo.predict_proba(X_val)[:, 1]
+escalador = StandardScaler()
+X_train_esc = escalador.fit_transform(X_train)
+X_val_esc = escalador.transform(X_val)
+
+modelo = KNeighborsClassifier(n_neighbors=k)
+modelo.fit(X_train_esc, y_train)
+y_pred = modelo.predict(X_val_esc)
+y_prob = modelo.predict_proba(X_val_esc)[:, 1]
 ```
 
 - `k` es el número de vecinos que quiere usar (el valor por defecto es 5).
 - `X_train`, `y_train` son las variables y la variable objetivo del conjunto de entrenamiento, y
   `X_val` las variables del [conjunto de validación](../glosario.md#conjunto-validacion) (vea
   [dividir los datos](division-datos.md)).
-- `make_pipeline` estandariza con la media y la desviación de `X_train` antes de guardar los
-  datos y antes de predecir.
+- `escalador.fit_transform(X_train)` calcula la media y la desviación estándar de cada variable
+  **solo con el entrenamiento** y estandariza `X_train`; el resultado es `X_train_esc` («esc» de
+  escalado). `escalador.transform(X_val)` aplica esas mismas medias y desviaciones a `X_val`, sin
+  volver a calcularlas. Haga lo mismo con `X_test` (`X_test_esc = escalador.transform(X_test)`)
+  cuando llegue el momento de evaluar en prueba.
 - `y_pred` es la clase predicha con el [umbral de decisión](../glosario.md#umbral-decision) 0,5;
   `y_prob` es la proporción de vecinos de la clase positiva.
 
@@ -77,20 +84,20 @@ y_prob = modelo.predict_proba(X_val)[:, 1]
 ## Búsqueda de hiperparámetros
 
 Para elegir los [hiperparámetros](../glosario.md#hiperparametro) con
-[`GridSearchCV`](gridsearchcv.md), use el pipeline completo para que el escalado se ajuste solo
-con los folds de entrenamiento:
+[`GridSearchCV`](gridsearchcv.md), aplique la búsqueda directamente sobre el modelo y entrénela
+con los datos de entrenamiento ya escalados (`X_train_esc`):
 
 ```python
 from sklearn.model_selection import GridSearchCV
 
-pipeline = make_pipeline(StandardScaler(), KNeighborsClassifier())
+modelo = KNeighborsClassifier()
 param_grid = {
-    "kneighborsclassifier__n_neighbors": [1, 3, 5, 7, 11, 15, 21, 31, 51],
-    "kneighborsclassifier__weights": ["uniform", "distance"],
-    "kneighborsclassifier__p": [1, 2],
+    "n_neighbors": [1, 3, 5, 7, 11, 15, 21, 31, 51],
+    "weights": ["uniform", "distance"],
+    "p": [1, 2],
 }
-busqueda = GridSearchCV(pipeline, param_grid, cv=5, scoring="metrica")
-busqueda.fit(X_train, y_train)
+busqueda = GridSearchCV(modelo, param_grid, cv=5, scoring="metrica")
+busqueda.fit(X_train_esc, y_train)
 print(busqueda.best_params_, busqueda.best_score_)
 ```
 

@@ -3,7 +3,9 @@
 ### Datos de trabajo: el notebook de la [Actividad 2](actividad-2.md)
 
 1. Retome las variables seleccionadas y los conjuntos de entrenamiento, validación y prueba de la
-   actividad anterior. **Use el conjunto de prueba solo en el paso 9.**
+   actividad anterior, y [**escale las variables**](../../ayudas/escalar-variables.md) ajustando el
+   escalador solo con el conjunto de entrenamiento. Use los datos escalados para todos los modelos
+   de esta actividad. **Use el conjunto de prueba solo en el paso 9.**
 2. [**Entrene una regresión logística**](../../ayudas/regresion-logistica.md) y
    [**optimice sus hiperparámetros con GridSearchCV**](../../ayudas/gridsearchcv.md) sobre el
    [conjunto de entrenamiento](../../glosario.md#conjunto-entrenamiento), con validación cruzada

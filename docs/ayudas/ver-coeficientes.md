@@ -21,23 +21,24 @@ print(coef)
 - `sort_values()` los ordena de menor a mayor: los más negativos quedan arriba y los más
   positivos abajo.
 
-## Desde un pipeline
+## Con variables estandarizadas
 
-Si el modelo es un `Pipeline` (por ejemplo, `make_pipeline(StandardScaler(), Lasso(...))`), los
-coeficientes están en el último paso:
+Si [estandarizó](estandarizar.md) las variables antes de entrenar (por ejemplo, con
+`X_train_esc = escalador.fit_transform(X_train)`), el modelo se entrenó con `X_train_esc`, que
+es un arreglo de NumPy sin nombres de columnas. Los nombres se toman del `DataFrame` original,
+porque `StandardScaler` conserva las columnas y su orden:
 
 ```python
-coef = pd.Series(modelo[-1].coef_, index=X_train.columns).sort_values()
-print("Intercepto:", modelo[-1].intercept_)
+coef = pd.Series(modelo.coef_, index=X_train.columns).sort_values()
+print("Intercepto:", modelo.intercept_)
 ```
 
-`modelo[-1]` es el último paso del pipeline. También puede pedirlo por su nombre con
-`modelo.named_steps["lasso"]`; `make_pipeline` nombra cada paso con el nombre de su clase en
-minúsculas (`"standardscaler"`, `"lasso"`, `"ridge"`, `"linearregression"`).
+Si las columnas salieron de `PolynomialFeatures`, use como índice
+`polinomio.get_feature_names_out()` o, si unió las columnas one-hot con `pd.concat`, las
+columnas del `DataFrame` resultante (vea [regresión polinomial](regresion-polinomial.md)).
 
-Si el pipeline [estandariza](estandarizar.md), los coeficientes quedan en la escala
-**estandarizada**: cada uno es el cambio en la predicción por cada desviación estándar de su
-variable.
+Con variables estandarizadas, los coeficientes quedan en la escala **estandarizada**: cada uno
+es el cambio en la predicción por cada desviación estándar de su variable.
 
 ## Lasso y Ridge
 

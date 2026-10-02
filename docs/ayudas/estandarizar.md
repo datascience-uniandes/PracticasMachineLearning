@@ -61,5 +61,14 @@ X_test_est = pd.DataFrame(scaler.transform(X_test),
 La [regresión lineal](regresion-lineal.md) sin regularización no necesita estandarizar: sus
 predicciones y su [R²](r2.md) son los mismos; solo cambian los coeficientes.
 
-Si hay columnas de la [codificación one-hot](one-hot.md), estandarice solo las continuas con un
-`ColumnTransformer`, como se muestra en la [regresión polinomial](regresion-polinomial.md).
+Si hay columnas de la [codificación one-hot](one-hot.md), estandarice solo las continuas y deje
+las columnas 0/1 como están:
+
+```python
+X_train_esc = X_train.copy()
+X_test_esc = X_test.copy()
+X_train_esc[columnas_continuas] = escalador.fit_transform(X_train[columnas_continuas])
+X_test_esc[columnas_continuas] = escalador.transform(X_test[columnas_continuas])
+```
+
+`columnas_continuas` es la lista con los nombres de las variables continuas.

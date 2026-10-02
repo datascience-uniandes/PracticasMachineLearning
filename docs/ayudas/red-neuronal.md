@@ -247,5 +247,6 @@ print(resultados)
 
 !!! tip "Alternativa más simple"
     Si prefiere quedarse en scikit-learn, `MLPClassifier` (de `sklearn.neural_network`) entrena
-    una red densa similar y es compatible con `Pipeline` y `GridSearchCV`, aunque ofrece menos
-    control (por ejemplo, no tiene `Dropout` ni `class_weight`).
+    una red densa similar y es compatible con `GridSearchCV` (entrénelo con las variables ya
+    escaladas, igual que la red de esta página), aunque ofrece menos control (por ejemplo, no
+    tiene `Dropout` ni `class_weight`).

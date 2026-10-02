@@ -20,10 +20,10 @@ efecto de \( x_1 \) dependa del valor de \( x_2 \)). El modelo sigue siendo line
 ```python
 from sklearn.preprocessing import PolynomialFeatures
 
-poly = PolynomialFeatures(degree=2, include_bias=False)
-X_poly = poly.fit_transform(X)
+polinomio = PolynomialFeatures(degree=2, include_bias=False)
+X_poly = polinomio.fit_transform(X)
 
-print(poly.get_feature_names_out())
+print(polinomio.get_feature_names_out())
 ```
 
 - `degree=2` es el grado máximo de los términos: con grado 3 también aparecen \( x_1^3 \),
@@ -51,59 +51,61 @@ misma columna y sus productos multiplican el número de términos sin aportar mu
 aplica el polinomio solo a las [variables continuas](../glosario.md#variable-continua) y luego
 se agregan las columnas one-hot sin transformar.
 
-**Opción 1: a mano con `pd.concat`**
-
 ```python
 import pandas as pd
+from sklearn.preprocessing import PolynomialFeatures
 
-continuas = ["columna1", "columna2", "columna3"]
-poly = PolynomialFeatures(degree=2, include_bias=False)
+columnas_continuas = ["columna1", "columna2", "columna3"]
+columnas_onehot = ["categoria_B", "categoria_C"]
 
-X_train_poly = pd.DataFrame(poly.fit_transform(X_train[continuas]),
-                            columns=poly.get_feature_names_out(), index=X_train.index)
-X_test_poly = pd.DataFrame(poly.transform(X_test[continuas]),
-                           columns=poly.get_feature_names_out(), index=X_test.index)
+polinomio = PolynomialFeatures(degree=2, include_bias=False)
+X_poly_train = polinomio.fit_transform(X_train[columnas_continuas])
+X_poly_test = polinomio.transform(X_test[columnas_continuas])
 
-X_train_poly = pd.concat([X_train_poly, X_train.drop(columns=continuas)], axis=1)
-X_test_poly = pd.concat([X_test_poly, X_test.drop(columns=continuas)], axis=1)
+nombres_poly = polinomio.get_feature_names_out()
+X_poly_train = pd.concat([pd.DataFrame(X_poly_train, columns=nombres_poly, index=X_train.index),
+                          X_train[columnas_onehot]], axis=1)
+X_poly_test = pd.concat([pd.DataFrame(X_poly_test, columns=nombres_poly, index=X_test.index),
+                         X_test[columnas_onehot]], axis=1)
 ```
 
-- `continuas` es la lista de columnas a las que se aplica el polinomio.
+- `columnas_continuas` es la lista de columnas a las que se aplica el polinomio y
+  `columnas_onehot`, la de las columnas one-hot, que se conservan sin cambios.
 - `fit_transform` se usa solo con `X_train`; en `X_test` se usa `transform`, para que la
   transformación se aprenda únicamente con los datos de entrenamiento.
+- `nombres_poly` son los nombres de las columnas generadas, que se usan como encabezados del
+  `DataFrame`.
 - `index=...` conserva el índice original para que `pd.concat(..., axis=1)` una bien las filas.
-- `X_train.drop(columns=continuas)` son las columnas restantes (las one-hot), que se pegan al
-  lado sin cambios.
+- El resultado, `X_poly_train` y `X_poly_test`, tiene los términos polinomiales seguidos de las
+  columnas one-hot.
 
-**Opción 2: con `ColumnTransformer` y `make_pipeline`**
+Después, estandarice y entrene el modelo:
 
 ```python
-from sklearn.compose import ColumnTransformer
-from sklearn.pipeline import make_pipeline
-from sklearn.preprocessing import PolynomialFeatures, StandardScaler
+from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LinearRegression
 
-transformador = ColumnTransformer(
-    [("poly", make_pipeline(StandardScaler(),
-                            PolynomialFeatures(degree=2, include_bias=False)), continuas)],
-    remainder="passthrough",
-)
-modelo = make_pipeline(transformador, LinearRegression())
-modelo.fit(X_train, y_train)
-y_pred = modelo.predict(X_test)
+escalador = StandardScaler()
+X_train_esc = escalador.fit_transform(X_poly_train)
+X_test_esc = escalador.transform(X_poly_test)
+
+modelo = LinearRegression()
+modelo.fit(X_train_esc, y_train)
+y_pred = modelo.predict(X_test_esc)
 ```
 
-- `ColumnTransformer` aplica la transformación `"poly"` solo a las columnas de `continuas`.
-- `remainder="passthrough"` deja pasar las demás columnas (las one-hot) sin cambios.
-- `make_pipeline` encadena los pasos: al llamar `fit` o `predict`, los datos pasan por cada
-  paso en orden, y el escalado y el polinomio se ajustan solo con `X_train`.
-- `StandardScaler` estandariza cada variable (media 0, desviación estándar 1) antes de elevarla.
+- `escalador` estandariza cada columna (media 0, desviación estándar 1) con la media y la
+  desviación de `X_poly_train`; a `X_poly_test` se le aplican esos mismos valores con
+  `transform`.
+- `X_train_esc` y `X_test_esc` son arreglos sin nombres de columnas. Para ver cada coeficiente
+  con su nombre, use `pd.Series(modelo.coef_, index=X_poly_train.columns)` (vea
+  [ver los coeficientes](ver-coeficientes.md)).
 
 !!! tip "Estandarice antes de usar grados altos"
     Si una variable toma valores cercanos a 800, su potencia 5 supera \( 10^{14} \), mientras que
     otra columna puede estar entre 0 y 1. Esas diferencias de escala vuelven inestables los
-    cálculos. `StandardScaler` antes de `PolynomialFeatures` mantiene los términos en rangos
-    comparables. Para grado 2 o 3 no siempre es necesario, pero no hace daño.
+    cálculos. Estandarizar las columnas con `StandardScaler`, como en el código anterior,
+    las deja en rangos comparables. Para grado 2 o 3 no siempre es necesario, pero no hace daño.
 
 ## Revisar la linealidad de los nuevos términos
 

@@ -20,10 +20,22 @@ probabilidades, así que con ella no se pueden graficar la
 
 ## Escalado
 
-La votación no escala por sí misma: cada modelo base debe traer su propio preprocesamiento. Use
-un `Pipeline` con `StandardScaler` para los modelos que lo necesitan, como la
-[regresión logística](regresion-logistica.md) y [KNN](knn.md) (vea
-[escalar variables](escalar-variables.md)).
+La votación no escala por sí misma. La [regresión logística](regresion-logistica.md) y
+[KNN](knn.md) necesitan variables escaladas (vea [escalar variables](escalar-variables.md)), así
+que escale los datos una sola vez antes de construir el ensamble y entréguele los datos escalados:
+
+```python
+from sklearn.preprocessing import StandardScaler
+
+escalador = StandardScaler()
+X_train_esc = escalador.fit_transform(X_train)
+X_val_esc = escalador.transform(X_val)
+```
+
+- `fit_transform` calcula la media y la desviación estándar **solo con el conjunto de
+  entrenamiento** y lo escala; `transform` aplica esas mismas medidas a validación.
+- El árbol de decisión no necesita escalado, pero tampoco lo perjudica, así que puede usar los
+  mismos datos escalados para todos los modelos base.
 
 ## Código básico
 
@@ -37,19 +49,20 @@ modelos_base = [
 ]
 
 votacion_dura = VotingClassifier(estimators=modelos_base, voting="hard")
-votacion_dura.fit(X_train, y_train)
-y_pred = votacion_dura.predict(X_val)
+votacion_dura.fit(X_train_esc, y_train)
+y_pred = votacion_dura.predict(X_val_esc)
 
 votacion_suave = VotingClassifier(estimators=modelos_base, voting="soft")
-votacion_suave.fit(X_train, y_train)
-y_prob = votacion_suave.predict_proba(X_val)[:, 1]
+votacion_suave.fit(X_train_esc, y_train)
+y_prob = votacion_suave.predict_proba(X_val_esc)[:, 1]
 ```
 
 - `modelos_base` es una lista de pares `(nombre, modelo)`. Los nombres sirven para identificar
   cada modelo dentro del ensamble.
 - `modelo_logistico`, `modelo_arbol` y `modelo_knn` son modelos ya configurados, por ejemplo,
-  los mejores de una búsqueda con [GridSearchCV](gridsearchcv.md) (`busqueda.best_estimator_`).
-- `fit` vuelve a entrenar cada modelo base con `X_train` e `y_train`.
+  los mejores de una búsqueda con [GridSearchCV](gridsearchcv.md) hecha sobre `X_train_esc`
+  (`busqueda.best_estimator_`).
+- `fit` vuelve a entrenar cada modelo base con `X_train_esc` e `y_train`.
 - `y_pred` son las clases predichas y `y_prob` la probabilidad promedio de la clase positiva.
 
 ### Dar más peso a algunos modelos
