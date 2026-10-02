@@ -79,31 +79,6 @@ y_prob = modelo.predict_proba(X_val_esc)[:, 1]
 - `predict_proba` devuelve una columna por clase; `[:, 1]` toma la probabilidad de la clase
   positiva. `y_prob` es lo que necesitan la curva ROC y la curva precisión-sensibilidad.
 
-## Interpretar los coeficientes
-
-```python
-import numpy as np
-import pandas as pd
-
-coeficientes = pd.Series(modelo.coef_[0], index=X_train.columns)
-odds_ratio = np.exp(coeficientes)
-print(pd.DataFrame({"coeficiente": coeficientes, "odds_ratio": odds_ratio})
-      .sort_values("coeficiente"))
-```
-
-- `modelo.coef_[0]` contiene un coeficiente por variable, en el mismo orden de las columnas de
-  `X_train`, y `intercept_[0]` el intercepto.
-- **Signo:** un coeficiente positivo indica que, al aumentar la variable, aumenta la probabilidad
-  de la clase positiva; uno negativo, que disminuye.
-- **Odds ratio:** `np.exp(coef)` es el factor por el que se multiplican los *odds* cuando la
-  variable aumenta en una unidad, con las demás fijas. Un valor de 1,5 significa que los *odds*
-  aumentan un 50 %; uno de 0,8, que disminuyen un 20 %; un valor de 1, que la variable no tiene
-  efecto.
-- Como las variables están estandarizadas, "una unidad" equivale a una desviación estándar de la
-  variable. Esto permite comparar el tamaño de los coeficientes entre variables.
-- Los coeficientes no se leen como en la regresión lineal: el efecto es sobre los log-odds, no
-  directamente sobre la probabilidad.
-
 ## Hiperparámetros principales
 
 | Hiperparámetro | Qué controla | Efecto |

@@ -1,7 +1,6 @@
 # Ver los coeficientes
 
-Un modelo lineal entrenado ([regresión lineal](regresion-lineal.md), [Lasso](lasso-ridge.md#lasso) o
-[Ridge](lasso-ridge.md#ridge)) guarda el intercepto en `intercept_` y un
+Un modelo de [regresión lineal](regresion-lineal.md) entrenado guarda el intercepto en `intercept_` y un
 [coeficiente](../glosario.md#coeficiente) por variable en `coef_`.
 
 ## Intercepto y coeficientes
@@ -39,20 +38,6 @@ columnas del `DataFrame` resultante (vea [regresión polinomial](regresion-polin
 
 Con variables estandarizadas, los coeficientes quedan en la escala **estandarizada**: cada uno
 es el cambio en la predicción por cada desviación estándar de su variable.
-
-## Lasso y Ridge
-
-`Lasso` y `Ridge` tienen los mismos atributos `intercept_` y `coef_`, así que el código es el
-mismo. Con [Lasso](lasso-ridge.md#lasso) es útil contar cuántos coeficientes valen exactamente 0, es decir,
-cuántas variables eliminó el modelo:
-
-```python
-print("Coeficientes en 0:", (coef == 0).sum())
-print("Variables eliminadas:", list(coef[coef == 0].index))
-```
-
-`coef == 0` da `True` para cada coeficiente igual a 0, y `.sum()` cuenta los `True`. Con
-[Ridge](lasso-ridge.md#ridge) el resultado es siempre 0: sus coeficientes se acercan a 0, pero no llegan.
 
 ## Gráfico de barras
 

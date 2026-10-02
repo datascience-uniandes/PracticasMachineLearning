@@ -90,18 +90,3 @@ plt.show()
   el nodo.
 - Cada nodo muestra la pregunta, la impureza (`gini` o `entropy`), el número de registros
   (`samples`), cuántos hay de cada clase (`value`) y la clase asignada (`class`).
-
-## Importancia de las variables
-
-```python
-import pandas as pd
-
-importancias = pd.Series(modelo.feature_importances_, index=X_train.columns)
-print(importancias.sort_values(ascending=False))
-```
-
-- `feature_importances_` mide cuánto reduce la impureza cada variable, sumando todas las
-  divisiones en que se usa. Los valores suman 1.
-- Una importancia de 0 indica que la variable no se usó en ninguna división.
-- La importancia no tiene signo: dice cuánto usa el árbol la variable, no si aumenta o disminuye
-  la probabilidad de la clase positiva.

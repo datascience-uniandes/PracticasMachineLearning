@@ -8,8 +8,7 @@
    [**optimice sus hiperparámetros con GridSearchCV**](../../ayudas/gridsearchcv.md) sobre el
    conjunto de entrenamiento (validación cruzada estratificada de 5 folds, `scoring="f1"`):
    `n_estimators` ∈ {200, 400}, `max_depth` ∈ {5, 10, `None`}, `min_samples_leaf` ∈ {1, 5, 20}
-   y `class_weight` ∈ {`None`, `"balanced"`}. **¿Qué combinación resultó mejor? ¿Qué variables
-   son las más importantes? ¿Coinciden con las del árbol de decisión?**
+   y `class_weight` ∈ {`None`, `"balanced"`}. **¿Qué combinación resultó mejor?**
 3. [**Entrene un Gradient Boosting**](../../ayudas/gradient-boosting.md) y optimice con
    GridSearchCV: `n_estimators` ∈ {100, 300}, `learning_rate` ∈ {0,05; 0,1} y
    `max_depth` ∈ {2, 3, 4}. Como este modelo no acepta `class_weight`, use pesos por registro

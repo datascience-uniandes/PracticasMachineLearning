@@ -11,11 +11,13 @@
    **¿Cuántos parámetros tiene la red? ¿Por qué la salida usa una
    [función de activación](../../glosario.md#funcion-activacion) sigmoide?**
 3. **Pruebe tres arquitecturas:** [**entrene**](../../ayudas/entrenar-red-neuronal.md) cada una con
-   el conjunto de validación como `validation_data` y compárelas en validación:
+   **100 épocas** (`epochs=100`), un **lote de 32** (`batch_size=32`) y el conjunto de validación como
+   `validation_data`, y compárelas en validación. Agregue `Dropout(0.2)` después de **cada** capa
+   oculta:
 
     - **a)** una capa oculta de 8 neuronas;
     - **b)** dos capas ocultas de 16 y 8 neuronas;
-    - **c)** dos capas ocultas de 32 y 16 neuronas con `Dropout(0.2)`.
+    - **c)** tres capas ocultas de 32, 16 y 8 neuronas.
 
     **¿Qué arquitectura obtiene el mayor F1 de validación? ¿Una red más grande es siempre mejor?**
 

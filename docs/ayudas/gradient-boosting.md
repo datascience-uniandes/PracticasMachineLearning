@@ -139,7 +139,5 @@ modelo.fit(X_train, y_train, sample_weight=pesos)
   bien, y con una tasa alta y muchos árboles sobreajusta.
 - Compare el desempeño de entrenamiento y validación: si el primero es mucho mayor, reduzca
   `learning_rate`, `max_depth` o `n_estimators`, o use `subsample` menor que 1.
-- `feature_importances_` está disponible y se interpreta igual que en el
-  [árbol de decisión](arbol-decision.md): cuánto reduce cada variable la pérdida, sin signo.
 - El entrenamiento es secuencial y, por tanto, más lento que el de un random forest con el mismo
   número de árboles cuando este se paraleliza.

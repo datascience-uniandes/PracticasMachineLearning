@@ -14,8 +14,7 @@
    **¿Qué combinación resultó mejor? ¿Por qué se optimiza el F1 y no la exactitud?**
 3. [**Entrene un árbol de decisión**](../../ayudas/arbol-decision.md) y optimice con GridSearchCV:
    `max_depth` ∈ {3, 5, 7, 10, `None`}, `min_samples_leaf` ∈ {1, 5, 20, 50} y
-   `class_weight` ∈ {`None`, `"balanced"`}. **¿Qué profundidad resultó mejor? ¿Qué variables
-   son las más importantes para el árbol?**
+   `class_weight` ∈ {`None`, `"balanced"`}. **¿Qué profundidad resultó mejor?**
 4. [**Entrene un modelo KNN**](../../ayudas/knn.md) y optimice con GridSearchCV:
    `n_neighbors` ∈ {3, 5, 11, 21, 41} y `weights` ∈ {`"uniform"`, `"distance"`}.
    **¿Por qué KNN necesita [escalar las variables](../../ayudas/escalar-variables.md)? ¿Qué número

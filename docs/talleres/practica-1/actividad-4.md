@@ -33,9 +33,7 @@
    entrenamiento para [**optimizar la fuerza de la regularización con GridSearchCV**](../../ayudas/gridsearchcv.md),
    manteniendo el grado del polinomio elegido en la Actividad 3: una vez con Lasso,
    **α ∈ {10; 100; 1.000; 5.000; 10.000}**, y otra con Ridge,
-   **α ∈ {0,1; 1; 10; 100; 1.000; 10.000}**.
-   [**Grafique la métrica de validación cruzada**](../../ayudas/gridsearchcv.md) para cada valor de
-   alfa. **¿Qué alfa resultó mejor en cada caso? ¿Quedó en el borde de la lista? Si es así, ¿qué
+   **α ∈ {0,1; 1; 10; 100; 1.000; 10.000}**. **¿Qué alfa resultó mejor en cada caso? ¿Quedó en el borde de la lista? Si es así, ¿qué
    debería hacer?**
 10. Reporte el mejor modelo de cada tipo (Lasso y Ridge) **solo con el conjunto de prueba**.
     **¿La regularización mejora al mejor modelo de la Actividad 3? ¿Qué tan lejos está el mejor

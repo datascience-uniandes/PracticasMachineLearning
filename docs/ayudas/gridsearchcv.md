@@ -84,32 +84,6 @@ print("Métrica de validación cruzada:", -busqueda.best_score_)
 - `busqueda.best_params_` es el mejor valor encontrado y `busqueda.best_score_` su métrica
   promedio de validación cruzada (con signo negativo si la métrica empieza por `neg_`).
 
-## Código: graficar la métrica para cada valor
-
-```python
-import pandas as pd
-import matplotlib.pyplot as plt
-
-resultados = pd.DataFrame(busqueda.cv_results_)
-valores = resultados["param_alpha"].astype(float)
-media = -resultados["mean_test_score"]
-desv = resultados["std_test_score"]
-
-plt.plot(valores, media, marker="o")
-plt.fill_between(valores, media - desv, media + desv, alpha=0.15)
-plt.xscale("log")
-plt.xlabel("alpha")
-plt.ylabel("RMSE promedio de validación cruzada")
-plt.show()
-```
-
-- `busqueda.cv_results_` tiene una fila por valor probado. `mean_test_score` es la métrica
-  promedio de los folds y `std_test_score`, su desviación estándar.
-- `media` cambia el signo para ver el error positivo; si su métrica no empieza por `neg_`, quite
-  el signo menos.
-- `plt.xscale("log")` deja igualmente espaciados valores que crecen en potencias de 10.
-- `fill_between` sombrea una banda de ± una desviación estándar entre folds.
-
 ## Código: evaluar una sola vez en prueba
 
 ```python
