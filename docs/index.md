@@ -23,7 +23,7 @@ desde la preparación de los datos hasta la evaluación de los modelos.
 
     ---
 
-    Abandono de clientes bancarios: ingeniería de características, regresión logística, árboles de decisión y KNN.
+    Abandono de clientes bancarios: ingeniería de características, modelos básicos, ensambles y una red neuronal.
 
     [:octicons-arrow-right-24: Ir a la práctica](talleres/practica-2/index.md)
 

@@ -99,6 +99,18 @@ Registro idéntico a otro en todas sus columnas, o en las columnas que se compar
 
 ## E
 
+### Early stopping { #early-stopping }
+
+Técnica que detiene el entrenamiento de una [red neuronal](#red-neuronal) cuando el error en validación deja de mejorar durante varias [épocas](#epoca), para evitar el [sobreajuste](#sobreajuste).
+
+### Ensamble { #ensamble }
+
+Modelo que combina las predicciones de varios modelos para obtener un resultado mejor que el de cada uno por separado. Ver [Random Forest](#random-forest), [Gradient Boosting](#gradient-boosting) y [Stacking](#stacking).
+
+### Época { #epoca }
+
+Una pasada completa de una [red neuronal](#red-neuronal) por todos los datos de entrenamiento.
+
 ### Estandarización { #estandarizacion }
 
 Transformación que lleva cada variable a media 0 y desviación estándar 1:
@@ -119,9 +131,15 @@ Proporción de predicciones correctas de un clasificador (_accuracy_). Con [desb
 
 Media armónica de la [precisión](#precision) y la [sensibilidad](#sensibilidad). Solo es alta cuando ambas lo son.
 
+### Función de activación { #funcion-activacion }
+
+Función que transforma la salida de cada neurona de una [red neuronal](#red-neuronal). ReLU es la más usada en las capas ocultas y la sigmoide en la salida de una clasificación binaria.
+
 ## G
 
-_Sin términos por ahora._
+### Gradient Boosting { #gradient-boosting }
+
+[Ensamble](#ensamble) que entrena árboles de forma secuencial: cada árbol nuevo corrige los errores de los anteriores.
 
 ## H
 
@@ -202,9 +220,13 @@ fuera de los bigotes, a más de 1,5 veces el rango intercuartílico de la caja.
 
 De los registros que el modelo predijo como positivos, proporción que realmente lo son: \(VP / (VP + FP)\).
 
-### Prueba t { #prueba-t }
+### Prueba t-estudiante { #prueba-t }
 
-Prueba estadística que compara la media de una variable continua entre dos grupos, por ejemplo, entre los clientes que abandonaron y los que no.
+También llamada prueba t de Student. Prueba estadística que compara la media de una variable continua entre dos grupos, por ejemplo, entre los clientes que abandonaron y los que no.
+
+### Prueba U de Mann-Whitney { #prueba-u }
+
+Prueba estadística que compara la distribución de una variable entre dos grupos usando rangos, sin suponer [normalidad](#normalidad). Es la alternativa a la [prueba t-estudiante](#prueba-t) para variables con sesgo o con atípicos.
 
 ## Q
 
@@ -216,6 +238,14 @@ _Sin términos por ahora._
 
 Coeficiente de determinación: proporción de la variabilidad de la variable objetivo que explica
 el modelo. Vale 1 si el modelo predice perfectamente y 0 si no mejora a predecir siempre la media.
+
+### Random Forest { #random-forest }
+
+[Ensamble](#ensamble) de muchos [árboles de decisión](#arbol-decision), cada uno entrenado con una muestra distinta de los datos y de las variables. La predicción final es la votación de todos los árboles.
+
+### Red neuronal { #red-neuronal }
+
+Modelo formado por capas de neuronas conectadas. En una red densamente conectada, cada neurona de una capa recibe la salida de todas las neuronas de la capa anterior.
 
 ### Regresión lineal { #regresion-lineal }
 
@@ -270,6 +300,10 @@ y unos pocos muy grandes alargan la cola derecha.
 Cuando un modelo se ajusta demasiado a los datos de entrenamiento y no generaliza: tiene un error
 bajo en entrenamiento y mucho más alto en prueba. Ver
 [compromiso sesgo-varianza](#compromiso-sesgo-varianza).
+
+### Stacking { #stacking }
+
+[Ensamble](#ensamble) que combina varios modelos base con un modelo final (meta-modelo) que aprende a partir de sus predicciones.
 
 ### Subajuste { #subajuste }
 

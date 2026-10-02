@@ -10,11 +10,12 @@
 3. [**Grafique la tasa de abandono por categoría**](../../ayudas/graficos-por-clase.md) para cada
    variable categórica y binaria. **¿En qué países, géneros o número de productos es más alto el
    abandono? ¿Qué pasa con los miembros activos?**
-4. Aplique la [**prueba t de Student**](../../ayudas/prueba-t.md) a cada variable continua para
+4. Aplique la [**prueba t-estudiante**](../../ayudas/prueba-t.md) a cada variable continua para
    comparar su media entre las dos clases, y construya una tabla con los
-   [valores p](../../glosario.md#valor-p). **¿Qué variables tienen una diferencia significativa
-   (p < 0,05)? ¿Coincide con lo que vio en los gráficos? ¿Una diferencia significativa es también
-   una diferencia grande?**
+   [valores p](../../glosario.md#valor-p). Para las variables con [sesgo](../../glosario.md#sesgo)
+   o con muchos atípicos, aplique también la [**prueba U de Mann-Whitney**](../../ayudas/prueba-u.md). **¿Qué variables tienen una diferencia significativa
+   (p < 0,05)? ¿Coincide con lo que vio en los gráficos? ¿Las dos pruebas llegan a la misma
+   conclusión? ¿Una diferencia significativa es también una diferencia grande?**
 5. Aplique la [**prueba chi-cuadrado**](../../ayudas/chi-cuadrado.md) a cada variable categórica y
    binaria frente a `churn`, y calcule la V de Cramér. **¿Qué variables están relacionadas con el
    abandono? ¿Cuál tiene la relación más fuerte?**
