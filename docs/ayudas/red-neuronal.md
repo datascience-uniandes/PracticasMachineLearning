@@ -112,53 +112,25 @@ model.summary()
   (`"auc"`, `"val_auc"`, etc.).
 - `model.summary()` muestra las capas y el número de pesos de cada una.
 
-### Entrenar con early stopping y pesos de clase
-
-Con [desbalance de clases](../glosario.md#desbalance-de-clases), la red tiende a favorecer la
-clase mayoritaria. `class_weight` da más peso en la pérdida a los errores en la clase
-minoritaria. Un cálculo habitual asigna a cada clase un peso inversamente proporcional a su
-frecuencia:
+### Entrenar el modelo
 
 ```python
-import numpy as np
-
-n = len(y_train)
-n1 = np.sum(y_train == 1)
-n0 = n - n1
-w0 = n / (2 * n0)
-w1 = n / (2 * n1)
-
 historia = model.fit(
     X_train, y_train,
     validation_data=(X_val, y_val),
-    epochs=100,
+    epochs=50,
     batch_size=32,
-    callbacks=[keras.callbacks.EarlyStopping(monitor="val_loss", patience=10, restore_best_weights=True)],
-    class_weight={0: w0, 1: w1},
 )
 ```
 
-- `n0` y `n1` son el número de registros de cada clase en el entrenamiento. Si la clase 1 es el
-  20 % de los datos, \( w_1 = 2{,}5 \) y \( w_0 = 0{,}625 \): un error en la clase 1 pesa
-  cuatro veces más que uno en la clase 0. Es el mismo cálculo que hace scikit-learn con
-  `class_weight="balanced"`.
 - `validation_data` es el [conjunto de validación](../glosario.md#conjunto-validacion). Keras
   calcula la pérdida y las métricas en él al final de cada época, pero **no** lo usa para
   ajustar los pesos.
-- `epochs=100` es el **máximo** de épocas; con *early stopping* el entrenamiento suele terminar
-  antes.
-- `EarlyStopping` implementa el [early stopping](../glosario.md#early-stopping): vigila
-  `val_loss` y detiene el entrenamiento si no mejora durante `patience=10` épocas seguidas.
-  `restore_best_weights=True` deja el modelo con los pesos de la época con menor `val_loss`, no
-  con los de la última.
+- `epochs=50` es el número de pasadas completas por los datos de entrenamiento y `batch_size=32`,
+  el número de registros por actualización de los pesos.
 - `historia.history` es un diccionario con la pérdida y las métricas de cada época, en
   entrenamiento (`"loss"`, `"auc"`, ...) y en validación (`"val_loss"`, `"val_auc"`, ...). Vea
   cómo graficarlo en [curva de aprendizaje](curva-aprendizaje.md).
-
-!!! warning "El conjunto de validación ya no es independiente"
-    Como `EarlyStopping` elige la época con el conjunto de validación, las métricas en ese
-    conjunto son algo optimistas. Para reportar el desempeño final, evalúe el modelo elegido en
-    el conjunto de prueba, que no se usó en ninguna decisión.
 
 ### Predecir y evaluar
 
@@ -189,64 +161,3 @@ y_pred = (y_prob >= 0.5).astype(int)
 
 Para cambiar la tasa de aprendizaje, pase el optimizador como objeto:
 `optimizer=keras.optimizers.Adam(learning_rate=0.0005)`.
-
-## Comparar arquitecturas
-
-`GridSearchCV` no funciona directamente con un modelo de Keras, porque no es un estimador de
-scikit-learn. Para comparar unas pocas configuraciones, basta con un ciclo que entrene cada una y
-la evalúe en el conjunto de validación:
-
-```python
-from sklearn.metrics import roc_auc_score
-
-
-def crear_modelo(capas, dropout=0.2, tasa=0.001):
-    model = keras.Sequential([keras.Input(shape=(X_train.shape[1],))])
-    for neuronas in capas:
-        model.add(layers.Dense(neuronas, activation="relu"))
-        model.add(layers.Dropout(dropout))
-    model.add(layers.Dense(1, activation="sigmoid"))
-    model.compile(
-        optimizer=keras.optimizers.Adam(learning_rate=tasa),
-        loss="binary_crossentropy",
-        metrics=[keras.metrics.AUC(name="auc")],
-    )
-    return model
-
-
-arquitecturas = [[8], [16, 8], [32, 16, 8]]
-resultados = {}
-for capas in arquitecturas:
-    keras.utils.set_random_seed(42)
-    model = crear_modelo(capas)
-    model.fit(
-        X_train, y_train,
-        validation_data=(X_val, y_val),
-        epochs=100,
-        batch_size=32,
-        callbacks=[keras.callbacks.EarlyStopping(monitor="val_loss", patience=10, restore_best_weights=True)],
-        class_weight={0: w0, 1: w1},
-        verbose=0,
-    )
-    y_prob = model.predict(X_val, verbose=0).ravel()
-    resultados[str(capas)] = roc_auc_score(y_val, y_prob)
-
-print(resultados)
-```
-
-- `crear_modelo` construye una red nueva con las capas indicadas: `[16, 8]` significa dos capas
-  ocultas de 16 y 8 neuronas, cada una seguida de `Dropout`.
-- Cada configuración debe empezar con una red **nueva**; si reutiliza el mismo `model`, el
-  segundo `fit` continúa desde los pesos ya entrenados.
-- `keras.utils.set_random_seed(42)` dentro del ciclo hace que todas las configuraciones partan de
-  la misma semilla, para que la comparación sea justa.
-- `verbose=0` evita imprimir el progreso de cada época.
-- `resultados` guarda el AUC de validación de cada arquitectura. Puede cambiar `roc_auc_score`
-  por la métrica que le interese (por ejemplo, `f1_score(y_val, (y_prob >= 0.5).astype(int))`).
-  Si dos configuraciones quedan muy cerca, prefiera la más simple.
-
-!!! tip "Alternativa más simple"
-    Si prefiere quedarse en scikit-learn, `MLPClassifier` (de `sklearn.neural_network`) entrena
-    una red densa similar y es compatible con `GridSearchCV` (entrénelo con las variables ya
-    escaladas, igual que la red de esta página), aunque ofrece menos control (por ejemplo, no
-    tiene `Dropout` ni `class_weight`).
