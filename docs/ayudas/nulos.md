@@ -47,34 +47,3 @@ Guarde cada opción en una columna nueva y vuelva a graficar el [histograma](his
 df = df.drop(columns=["columna"])      # elimina la columna completa
 df = df.dropna(subset=["columna"])     # elimina los registros con nulo en esa columna
 ```
-
-## Ejemplo
-
-Con un dataset de 500 ingresos en el que faltan 20 valores (4 %):
-
-```python
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
-
-rng = np.random.default_rng(0)
-df = pd.DataFrame({"ingreso": rng.lognormal(8, 0.6, 500)})
-df.loc[rng.choice(500, 20, replace=False), "ingreso"] = np.nan   # 4 % de nulos
-
-df["ingreso_media"] = df["ingreso"].fillna(df["ingreso"].mean())
-df["ingreso_mediana"] = df["ingreso"].fillna(df["ingreso"].median())
-
-fig, axes = plt.subplots(1, 3, figsize=(15, 3), sharey=True)
-for ax, columna in zip(axes, ["ingreso", "ingreso_media", "ingreso_mediana"]):
-    sns.histplot(df[columna], bins=40, ax=ax)
-    ax.set_title(columna)
-plt.tight_layout()
-plt.show()
-```
-
-![Histogramas del ingreso original e imputado con la media y la mediana](../assets/img/ayudas/nulos.png)
-
-Cada imputación agrega un pico en un punto distinto: cerca de 3.500 con la media y cerca de
-2.900 con la mediana. Como `ingreso` tiene sesgo a la derecha, la media queda por encima de la
-mayoría de los datos. Compare también `df[["ingreso", "ingreso_media", "ingreso_mediana"]].describe()`.
