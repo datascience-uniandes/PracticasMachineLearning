@@ -131,6 +131,13 @@ Proporción de predicciones correctas de un clasificador (_accuracy_). Con [desb
 
 Media armónica de la [precisión](#precision) y la [sensibilidad](#sensibilidad). Solo es alta cuando ambas lo son.
 
+### Fuga de datos { #fuga-de-datos }
+
+Error que ocurre cuando información del conjunto de prueba (o de validación) se usa para preparar
+o entrenar el modelo, por ejemplo, al imputar nulos o escalar con estadísticas calculadas sobre
+todo el dataset. Hace que las métricas parezcan mejores de lo que serán con datos nuevos
+(_data leakage_).
+
 ### Función de activación { #funcion-activacion }
 
 Función que transforma la salida de cada neurona de una [red neuronal](#red-neuronal). ReLU es la más usada en las capas ocultas y la sigmoide en la salida de una clasificación binaria.

@@ -43,9 +43,11 @@
    **media** y con la **mediana**, y vuelva a graficar los [histogramas](../../ayudas/histograma.md)
    y [gráficos de cajas](../../ayudas/grafico-cajas.md) de las variables imputadas.
    **¿Qué diferencias produce cada opción en la distribución?** Elimine registros o columnas
-   solo si la cantidad de nulos es demasiado alta. Revierta los cambios antes de comenzar la siguiente
-   actividad. Recuerde, puede sólo debe imputar los datos una vez haga la división en [**conjuntos
-   de entrenamiento y prueba**](../../ayudas/division-datos.md).
+   solo si la cantidad de nulos es demasiado alta. **Este paso es solo exploratorio:** no conserve
+   la imputación para la siguiente actividad. La imputación definitiva se hace después de dividir
+   los datos en [**conjuntos de entrenamiento y prueba**](../../ayudas/division-datos.md), con
+   valores calculados solo con el entrenamiento, para evitar la
+   [fuga de datos](../../glosario.md#fuga-de-datos).
 
 !!! success "Fin de la Actividad 1"
     Guarde los cambios en el notebook. Ya estamos listos para continuar con la siguiente actividad.

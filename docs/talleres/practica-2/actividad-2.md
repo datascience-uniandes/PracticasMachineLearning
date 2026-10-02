@@ -25,8 +25,11 @@
    seleccionadas. **¿Conviene tratar `products_number` como numérica o como categórica? ¿Por qué?**
 8. [**Divida los datos en entrenamiento, validación y prueba**](../../ayudas/division-datos.md#validacion)
    (60 %, 20 % y 20 %) de forma [**estratificada**](../../ayudas/division-datos.md#estratificada).
+   Luego [**impute los valores nulos**](../../ayudas/nulos.md) con la media o la mediana calculada
+   **solo con el conjunto de entrenamiento**, y aplique esos mismos valores a validación y prueba.
    **¿Qué proporción de clientes que abandonan hay en cada conjunto? ¿Por qué es importante
-   estratificar cuando hay [desbalance de clases](../../glosario.md#desbalance-de-clases)?**
+   estratificar cuando hay [desbalance de clases](../../glosario.md#desbalance-de-clases)? ¿Por qué
+   no se deben calcular los valores de imputación con todo el dataset?**
 
 !!! success "Fin de la Actividad 2"
     Guarde los cambios en el notebook. Ya estamos listos para continuar con la siguiente actividad.

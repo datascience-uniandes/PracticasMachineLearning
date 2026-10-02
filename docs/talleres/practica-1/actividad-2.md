@@ -13,11 +13,14 @@
    conserve solo una de cada par para evitar [multicolinealidad](../../glosario.md#multicolinealidad).
 3. Aplique [**codificación one-hot**](../../ayudas/one-hot.md) a las variables categóricas.
    **¿Cuántas columnas nuevas se generan? ¿Por qué se elimina una categoría de cada variable?**
-4. Divida los datos en [**conjuntos de entrenamiento y de prueba**](../../ayudas/division-datos.md)
-   y [**genere el modelo de regresión lineal**](../../ayudas/regresion-lineal.md) con las
-   variables seleccionadas.
+4. Divida los datos en [**conjuntos de entrenamiento y de prueba**](../../ayudas/division-datos.md).
+   Luego [**impute los valores nulos**](../../ayudas/nulos.md) con la media o la mediana
+   calculada **solo con el conjunto de entrenamiento**, y aplique esos mismos valores al conjunto
+   de prueba. Finalmente, [**genere el modelo de regresión lineal**](../../ayudas/regresion-lineal.md)
+   con las variables seleccionadas. **¿Por qué no se deben calcular los valores de imputación con
+   todo el dataset?**
 5. [**Interprete los coeficientes**](../../ayudas/interpretar-coeficientes.md) del modelo.
-   **¿Qué variables aumentan el área predicha y cuáles la disminuyen? ¿Cuánto cambia la
+   **¿Qué variables aumentan el precio predicho y cuáles lo disminuyen? ¿Cuánto cambia la
    predicción por cada unidad de cada variable? ¿Qué significan los coeficientes de los códigos
    postales respecto a la categoría de referencia? ¿Se pueden comparar las magnitudes directamente?**
 6. Calcule el [**R²**](../../ayudas/r2.md), el [**MAE**](../../ayudas/mae.md) y el
