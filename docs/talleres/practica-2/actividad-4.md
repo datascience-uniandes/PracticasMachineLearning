@@ -16,15 +16,9 @@
    balanceados. **¿Qué combinación resultó mejor? ¿Qué relación hay entre `learning_rate` y
    `n_estimators`?**
 4. [**Entrene modelos de votación**](../../ayudas/votacion.md) que combinen la regresión
-   logística, el árbol de decisión y el KNN optimizados en la Actividad 3:
-
-    - **a)** una votación dura (`voting="hard"`);
-    - **b)** una votación suave (`voting="soft"`);
-    - **c)** una votación suave que incluya también el Random Forest y el Gradient Boosting de los
-      pasos anteriores.
-
-    **¿Qué votación obtiene el mayor F1 de validación? ¿Por qué la votación suave suele superar a
-    la dura? ¿Agregar más modelos siempre mejora el resultado?** Para los pasos siguientes,
+   logística, el árbol de decisión y el KNN optimizados en la Actividad 3. Utilice una votación dura (`voting="hard"`);
+   y una votación suave (`voting="soft"`).  **¿Qué votación obtiene el mayor F1 de validación? 
+   ¿Por qué sucede esto? ¿Agregar más modelos mejora el resultado?** Para los pasos siguientes,
     conserve la mejor votación suave.
 
 5. [**Entrene un modelo de Stacking**](../../ayudas/stacking.md) que combine la regresión
