@@ -111,6 +111,48 @@ print(f"Silueta media: {silueta:.3f}")
   K-medias, todos los valores son `True` y no cambia nada.
 - `silueta` es la silueta media de los puntos agrupados.
 
+
+
+## Código: gráfico de silueta por clúster
+
+
+```python
+from sklearn.metrics import silhouette_score, silhouette_samples
+
+fig, ax = plt.subplots()
+labels = modelo.fit_predict(X_esc)
+sil_vals = silhouette_samples(X_esc, labels)
+sil_avg = silhouette_score(X_esc, labels)
+n_clusters = modelo.n_clusters
+y_lower = 10
+for j in range(n_clusters):
+    ith_sil_vals = sil_vals[labels == j]
+    ith_sil_vals.sort()
+    size_j = ith_sil_vals.shape[0]
+    y_upper = y_lower + size_j
+    color = plt.cm.nipy_spectral(float(j) / n_clusters)
+    ax.fill_betweenx(np.arange(y_lower, y_upper),
+                        0, ith_sil_vals,
+                        facecolor=color, edgecolor=color, alpha=0.7)
+    y_lower = y_upper + 10  # separation between clusters
+
+ax.set_title(f"Silhouette Plot for k = {n_clusters}")
+ax.axvline(x=sil_avg, color="red", linestyle="--")
+ax.set_xlabel("Silhouette Coefficient")
+if i == 0:
+    ax.set_ylabel("Cluster Label")
+ax.set_xlim([-0.1, 1])
+ax.set_ylim([0, len(X_est) + (n_clusters + 1) * 10])
+ 
+plt.tight_layout()
+plt.show()
+```
+- `modelo` es el modelo de agrupación ya entrenado.
+- `X_esc` son los datos ya escalados y `etiquetas` el grupo asignado a cada registro, por
+  ejemplo `modelo.labels_` o `modelo.fit_predict(X_esc)`, como arreglo de NumPy.
+
+
+
 Si usa [DBSCAN](dbscan.md) o [HDBSCAN](hdbscan.md), recuerde excluir el ruido como se muestra
 arriba. Con muchos registros, agregue `sample_size=` (y `random_state=` para que la muestra sea
 reproducible) a `silhouette_score`, como se explica en [Costo de cálculo](#costo-de-calculo).
