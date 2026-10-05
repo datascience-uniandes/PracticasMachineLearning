@@ -23,12 +23,12 @@
     - **b)** Grafique el [**coeficiente de silueta**](../../ayudas/silueta.md).
     - **c)** Elija el K con la mayor silueta.
 
-    **¿Los tres algoritmos coinciden en el número de grupos?**
+    **¿Los dos algoritmos coinciden en el número de grupos?**
 
-4. **Compare los tres algoritmos** con el K elegido: construya una tabla con la
+4. **Compare los dos algoritmos** con el K elegido: construya una tabla con la
    [**silueta**](../../ayudas/silueta.md), la [**inercia media**](../../ayudas/inercia.md) y el
    [**índice de Davies-Bouldin**](../../ayudas/davies-bouldin.md) de cada uno, y elija el **mejor
-   modelo** con la mayor silueta; si dos son muy parecidos, prefiera el de menor Davies-Bouldin.
+   modelo** con la mayor silueta; si los dos son muy parecidos, prefiera el de menor Davies-Bouldin.
    **¿Las tres métricas señalan el mismo modelo? ¿Por qué la inercia media no sirve, por sí sola,
    para comparar modelos con distinto número de grupos?**
 5. **Tamaño de los grupos:** calcule cuántos clientes hay en cada grupo del mejor modelo y qué
