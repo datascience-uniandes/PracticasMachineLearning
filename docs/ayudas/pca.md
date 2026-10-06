@@ -41,30 +41,30 @@ la combinación lineal. Las cargas permiten darle un significado a cada eje:
   de signo contrario se oponen. Un registro con un valor alto en la componente tiene valores
   altos en las variables de carga positiva y bajos en las de carga negativa.
 - **Nombre.** Con las variables que más pesan, describa cada componente con una frase, por
-  ejemplo, «uso de avances frente a compras». El signo global de una componente es arbitrario:
+  ejemplo, «valores altos de x3 y x4 frente a valores altos de x1». El signo global de una componente es arbitrario:
   invertir todas sus cargas no cambia su significado.
 
 ## Ejemplo del gráfico
 
-Gráfico de una agrupación en tres grupos de un conjunto de datos sintético de clientes de tarjetas
-de crédito, con seis variables. A la izquierda, los clientes en las dos primeras componentes; a
-la derecha, las cargas de cada variable:
+Gráfico de una agrupación en tres grupos de un conjunto de datos sintético con seis variables,
+`x1` a `x6`. A la izquierda, los registros en las dos primeras componentes; a la derecha, las
+cargas de cada variable:
 
-![A la izquierda, tres grupos bien separados en el plano de las dos primeras componentes; a la derecha, un mapa de calor con las cargas de seis variables en cada componente](../assets/img/ayudas/pca.png)
+![A la izquierda, tres grupos bien separados en el plano de las dos primeras componentes; a la derecha, un mapa de calor con las cargas de las variables x1 a x6 en cada componente](../assets/img/ayudas/pca.png)
 
 - **Cuánta información muestra.** Las dos componentes explican el 58 % y el 32 % de la variación,
   un 90 % en total: el gráfico representa bien los datos.
-- **Componente 1: avances frente a compras.** Tiene cargas positivas en `avances`,
-  `frecuencia_avances` y `saldo` (cerca de 0,47) y negativas en `compras` y `frecuencia_compras`
-  (cerca de −0,40). A la derecha del gráfico están los clientes que usan avances en efectivo y
-  mantienen saldo alto; a la izquierda, los que compran con frecuencia. `limite` casi no influye
-  (carga −0,01).
-- **Componente 2: tamaño de la cuenta.** Todas sus cargas son positivas y la mayor es la de
-  `limite` (0,68): arriba están los clientes con más límite y más actividad en general.
-- **Lectura de los grupos.** El grupo 0 (arriba a la izquierda) son compradores frecuentes con
-  límite alto; el grupo 1 (a la derecha), usuarios de avances en efectivo; el grupo 2 (abajo), clientes
-  con poco límite y poca actividad. Los tres grupos ocupan zonas distintas, así que están bien
-  separados.
+- **Componente 1: `x3`, `x4` y `x5` frente a `x1` y `x2`.** Tiene cargas positivas en `x3`, `x4` y
+  `x5` (cerca de 0,47) y negativas en `x1` y `x2` (cerca de −0,40). Los registros a la derecha del
+  gráfico tienen valores altos en `x3`, `x4` y `x5` y bajos en `x1` y `x2`; los de la izquierda,
+  lo contrario. `x6` casi no influye en esta componente (carga −0,01).
+- **Componente 2: nivel general, sobre todo de `x6`.** Todas sus cargas son positivas y la mayor
+  es la de `x6` (0,68): los registros de arriba tienen valores altos en casi todas las variables,
+  en especial en `x6`, y los de abajo, valores bajos.
+- **Lectura de los grupos.** El grupo 0 (arriba a la izquierda) tiene valores altos en `x1`, `x2`
+  y `x6`; el grupo 1 (a la derecha), valores altos en `x3`, `x4` y `x5`; el grupo 2 (abajo),
+  valores bajos en general, sobre todo en `x6`. Los tres grupos ocupan zonas distintas, así que
+  están bien separados.
 
 ## Código: graficar los grupos en dos dimensiones
 
