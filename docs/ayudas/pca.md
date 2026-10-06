@@ -30,6 +30,42 @@ componentes. Aplíquelo siempre sobre las variables [escaladas](escalar-variable
 - **Ejes.** Las componentes no tienen unidades ni un significado directo: son mezclas de todas las
   variables. Para describir los grupos use las variables originales, no las componentes.
 
+## Cómo leer las componentes: las cargas
+
+Cada componente tiene una **carga** por variable original: el peso con que esa variable entra en
+la combinación lineal. Las cargas permiten darle un significado a cada eje:
+
+- **Magnitud.** Las variables con cargas grandes en valor absoluto (por ejemplo, mayores que 0,3)
+  son las que definen la componente. Las cargas cercanas a 0 casi no influyen.
+- **Signo.** Las variables con el mismo signo se mueven juntas a lo largo de la componente; las
+  de signo contrario se oponen. Un registro con un valor alto en la componente tiene valores
+  altos en las variables de carga positiva y bajos en las de carga negativa.
+- **Nombre.** Con las variables que más pesan, describa cada componente con una frase, por
+  ejemplo, «uso de avances frente a compras». El signo global de una componente es arbitrario:
+  invertir todas sus cargas no cambia su significado.
+
+## Ejemplo del gráfico
+
+Gráfico de una agrupación en tres grupos de un conjunto de datos sintético de clientes de tarjetas
+de crédito, con seis variables. A la izquierda, los clientes en las dos primeras componentes; a
+la derecha, las cargas de cada variable:
+
+![A la izquierda, tres grupos bien separados en el plano de las dos primeras componentes; a la derecha, un mapa de calor con las cargas de seis variables en cada componente](../assets/img/ayudas/pca.png)
+
+- **Cuánta información muestra.** Las dos componentes explican el 58 % y el 32 % de la variación,
+  un 90 % en total: el gráfico representa bien los datos.
+- **Componente 1: avances frente a compras.** Tiene cargas positivas en `avances`,
+  `frecuencia_avances` y `saldo` (cerca de 0,47) y negativas en `compras` y `frecuencia_compras`
+  (cerca de −0,40). A la derecha del gráfico están los clientes que usan avances en efectivo y
+  mantienen saldo alto; a la izquierda, los que compran con frecuencia. `limite` casi no influye
+  (carga −0,01).
+- **Componente 2: tamaño de la cuenta.** Todas sus cargas son positivas y la mayor es la de
+  `limite` (0,68): arriba están los clientes con más límite y más actividad en general.
+- **Lectura de los grupos.** El grupo 0 (arriba a la izquierda) son compradores frecuentes con
+  límite alto; el grupo 1 (a la derecha), usuarios de avances en efectivo; el grupo 2 (abajo), clientes
+  con poco límite y poca actividad. Los tres grupos ocupan zonas distintas, así que están bien
+  separados.
+
 ## Código: graficar los grupos en dos dimensiones
 
 ```python
@@ -56,3 +92,20 @@ plt.show()
   suma indica cuánta información conserva el gráfico.
 - `c=etiquetas` colorea cada punto según su grupo y `s=5` reduce el tamaño de los puntos para que
   se vean mejor con muchos registros.
+
+## Código: ver las cargas de cada componente
+
+```python
+import pandas as pd
+
+cargas = pd.DataFrame(pca.components_, columns=columnas,
+                      index=["Componente 1", "Componente 2"])
+print(cargas.round(2))
+```
+
+- `pca` es el objeto ya ajustado en el código anterior.
+- `pca.components_` tiene una fila por componente y una columna por variable: son las cargas.
+- `columnas` es la lista con los nombres de las variables, en el mismo orden que las columnas de
+  `X_esc`.
+- Para verlas como en el ejemplo, grafique la tabla con
+  `sns.heatmap(cargas, annot=True, cmap="coolwarm", center=0)`.
