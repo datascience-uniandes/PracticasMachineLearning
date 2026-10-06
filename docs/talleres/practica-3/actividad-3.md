@@ -3,7 +3,7 @@
 ### Datos de trabajo: el notebook de la [Actividad 2](actividad-2.md), con las variables ya estandarizadas
 
 1. Retome las variables estandarizadas de la actividad anterior.
-2. **Prepare DBSCAN:** grafique la [**curva de k-distancia**](../../ayudas/dbscan.md) para
+2. **Prepare DBSCAN:** grafique la [**curva de k-distancia**](../../ayudas/k-distancia.md) para
    `min_samples` ∈ {10, 20, 34}. **¿A partir de qué distancia sube con fuerza cada curva? ¿Qué
    valores de `eps` sugiere?**
 3. [**Entrene DBSCAN**](../../ayudas/dbscan.md) con `eps` ∈ {1,0; 1,5; 2,0; 2,5; 3,0} y

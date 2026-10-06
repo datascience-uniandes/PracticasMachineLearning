@@ -16,6 +16,8 @@ exclude_docs: |
   ayudas/silueta.md
   ayudas/davies-bouldin.md
   ayudas/dbscan.md
+  ayudas/k-distancia.md
+  assets/img/ayudas/k-distancia.png
   ayudas/mean-shift.md
   ayudas/hdbscan.md
   ayudas/agrupacion-aglomerativa.md

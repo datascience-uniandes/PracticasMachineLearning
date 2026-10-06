@@ -66,47 +66,10 @@ Una regla práctica es usar `min_samples` ≈ 2 × número de variables (con un 
 4). Valores más altos exigen zonas más densas para formar un grupo, producen grupos más robustos y
 marcan más registros como ruido; valores más bajos producen más grupos pequeños.
 
-## Elegir `eps` con el gráfico de distancia k
+## Elegir `eps`
 
-Fijado `min_samples`, el **gráfico de distancia k** ayuda a elegir `eps`. Use en él el mismo
-valor de `min_samples` que usará en DBSCAN:
-
-1. Para cada registro, calcule la distancia a su vecino número `min_samples` (contando el propio
-   registro como el primero).
-2. Ordene esas distancias de menor a mayor y grafíquelas.
-3. Busque el **codo**: el punto donde la curva, plana al principio, empieza a subir con fuerza.
-
-Los registros a la izquierda del codo están en zonas densas (su vecino número `min_samples` está
-cerca); los de la derecha están aislados. La distancia en el codo es un buen valor inicial para
-`eps`. El codo rara vez es nítido, así que úselo como punto de partida y pruebe valores
-alrededor de él.
-
-## Comparar varias configuraciones
-
-Como el resultado cambia mucho con los hiperparámetros, pruebe una cuadrícula pequeña de valores
-de `eps` (alrededor del codo) y de `min_samples`, y registre para cada combinación:
-
-- el número de grupos;
-- el porcentaje de ruido;
-- el porcentaje de registros (sin ruido) que cae en el grupo más grande;
-- el [coeficiente de silueta](silueta.md) y el [índice de Davies-Bouldin](davies-bouldin.md).
-
-La silueta y Davies-Bouldin se calculan **sin los puntos de ruido**: el ruido no es un grupo y,
-si se incluyera con la etiqueta −1, se trataría como si lo fuera. Esas métricas solo existen
-cuando quedan al menos dos grupos. La [inercia](inercia.md) no se usa con DBSCAN, porque los
-grupos no tienen un centro.
-
-!!! warning "Una buena silueta no basta"
-    Al excluir el ruido, una configuración puede obtener una silueta alta simplemente porque dejó
-    fuera los registros difíciles. Descarte configuraciones como estas aunque sus métricas se vean
-    bien:
-
-    - un único grupo gigante que contiene casi todos los registros, más algo de ruido;
-    - un porcentaje de ruido muy alto (por ejemplo, la mitad de los datos);
-    - decenas de grupos diminutos.
-
-    Prefiera configuraciones con un número razonable de grupos, poco ruido y buenas métricas, y
-    confirme que los grupos tienen sentido revisando qué caracteriza a cada uno.
+Fijado `min_samples`, use la [curva de k-distancia](k-distancia.md) con ese mismo valor: la
+distancia en el codo de la curva es un buen valor inicial para `eps`.
 
 ## Código: agrupar con DBSCAN
 
