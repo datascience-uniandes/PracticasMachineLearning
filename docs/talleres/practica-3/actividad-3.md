@@ -6,7 +6,7 @@
 2. **Prepare DBSCAN:** grafique la [**curva de k-distancia**](../../ayudas/k-distancia.md) para
    `min_samples` ∈ {10, 20, 34}. **¿A partir de qué distancia sube con fuerza cada curva? ¿Qué
    valores de `eps` sugiere?**
-3. [**Entrene DBSCAN**](../../ayudas/dbscan.md) con `eps` ∈ {1,0; 1,5; 2,0; 2,5; 3,0} y
+3. [**Entrene DBSCAN**](../../ayudas/dbscan.md) con `eps` ∈ {1, 5, 10} + el `eps` del punto anterior y
    `min_samples` ∈ {10, 20, 34}. Para cada combinación construya una tabla con el número de
    grupos, el porcentaje de [ruido](../../glosario.md#ruido), la
    [**silueta**](../../ayudas/silueta.md), el [**índice de Davies-Bouldin**](../../ayudas/davies-bouldin.md)
