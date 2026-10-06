@@ -6,7 +6,7 @@ cuadrado entre el punto y el [centroide](../glosario.md#centroide) de su grupo. 
 cada grupo están cerca de su centro, la inercia es pequeña; si están dispersos, es grande.
 
 Sirve para cualquier algoritmo que entregue una etiqueta de grupo por punto: K-medias,
-K-medianas, K-medoides, DBSCAN, MeanShift, HDBSCAN o agrupamiento aglomerativo.
+K-medoides, DBSCAN, MeanShift, HDBSCAN o agrupamiento aglomerativo.
 
 ## Fórmula
 

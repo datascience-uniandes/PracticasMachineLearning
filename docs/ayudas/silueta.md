@@ -7,7 +7,7 @@ tan separado está de los demás. Su promedio sobre todos los puntos resume la c
 [agrupación](../glosario.md#agrupacion) en un solo número.
 
 Sirve para cualquier algoritmo que entregue una etiqueta de grupo por punto: K-medias,
-K-medianas, K-medoides, DBSCAN, MeanShift, HDBSCAN o agrupamiento aglomerativo.
+K-medoides, DBSCAN, MeanShift, HDBSCAN o agrupamiento aglomerativo.
 
 ## Fórmula
 

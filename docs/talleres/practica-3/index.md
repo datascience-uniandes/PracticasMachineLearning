@@ -4,7 +4,7 @@ En esta práctica se analiza el comportamiento de uso de los titulares de tarjet
 encontrar **grupos de clientes** con hábitos parecidos (segmentación). A diferencia de las
 prácticas anteriores, los datos no tienen [variable objetivo](../../glosario.md#variable-objetivo):
 es un problema de [agrupación](../../glosario.md#agrupacion). Se comparan tres familias de algoritmos:
-basados en centroides (K-medias, K-medianas y K-medoides), por densidad (DBSCAN y Mean Shift) y
+basados en centroides (K-medias y K-medoides), por densidad (DBSCAN y Mean Shift) y
 jerárquicos (HDBSCAN y agrupación aglomerativa).
 
 ### Datos de trabajo: [tarjetas.csv](../../datos/tarjetas.md)

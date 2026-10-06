@@ -6,9 +6,9 @@ que divide los registros en \( K \) grupos. Cada grupo se resume con un
 queda en el grupo cuyo centroide está más cerca. No usa una variable objetivo: los grupos salen
 solo de las variables que usted le entrega.
 
-Es el método de agrupación más usado por ser rápido y sencillo. Dos variantes cambian la forma de
-resumir cada grupo: [K-medianas](k-medianas.md) usa la mediana de cada variable y
-[K-medoides](k-medoides.md) usa un registro real del conjunto de datos.
+Es el método de agrupación más usado por ser rápido y sencillo. Una variante,
+[K-medoides](k-medoides.md), resume cada grupo con un registro real del conjunto de datos en lugar
+de la media.
 
 ## Cómo funciona
 
@@ -69,7 +69,7 @@ agrupar.
 
 - **Sensible a los valores atípicos.** La media se deja arrastrar por los valores extremos, y la
   distancia al cuadrado amplifica su efecto: unos pocos atípicos pueden mover un centroide o
-  formar un grupo propio. Si es un problema, use [K-medianas](k-medianas.md) o
+  formar un grupo propio. Si es un problema, use
   [K-medoides](k-medoides.md).
 - **Sensible a la escala.** Vea la sección anterior.
 - **Grupos más o menos esféricos y de tamaño parecido.** K-medias funciona bien cuando los grupos

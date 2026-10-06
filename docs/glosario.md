@@ -215,10 +215,6 @@ _Sin términos por ahora._
 
 Ver [validación cruzada](#validacion-cruzada).
 
-### K-medianas { #k-medianas }
-
-Variante de [K-medias](#k-medias) que representa cada grupo con la mediana de cada variable y usa la distancia de Manhattan. Es más robusta a los valores atípicos.
-
 ### K-medias { #k-medias }
 
 Algoritmo de [agrupación](#agrupacion) que divide los registros en K grupos asignando cada uno al [centroide](#centroide) más cercano y recalculando los centroides hasta que no cambian (_K-means_).

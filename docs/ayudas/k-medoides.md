@@ -7,9 +7,8 @@ cerca de todos los demás registros del grupo. A diferencia del
 [centroide](../glosario.md#centroide) de K-medias, el medoide no es un promedio sino una fila
 concreta del conjunto de datos, por ejemplo un cliente que existe.
 
-Comparado con las otras variantes: [K-medias](k-medias.md) usa la media de cada variable y
-[K-medianas](k-medianas.md) la mediana; en ambos casos el centro puede no coincidir con ningún
-registro.
+Comparado con [K-medias](k-medias.md), que usa la media de cada variable, el centro de K-medoides
+siempre es un registro real, mientras que el de K-medias puede no coincidir con ninguno.
 
 ## Qué optimiza
 

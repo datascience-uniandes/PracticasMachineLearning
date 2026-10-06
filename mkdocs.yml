@@ -9,7 +9,6 @@ exclude_docs: |
   talleres/practica-3/
   datos/tarjetas.*
   ayudas/k-medias.md
-  ayudas/k-medianas.md
   ayudas/k-medoides.md
   ayudas/inercia.md
   ayudas/metodo-codo.md

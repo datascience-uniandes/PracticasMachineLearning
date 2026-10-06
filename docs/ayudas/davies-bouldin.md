@@ -7,7 +7,7 @@ sus centros están cerca. Una buena [agrupación](../glosario.md#agrupacion) tie
 compactos y alejados entre sí, es decir, un índice bajo.
 
 Sirve para cualquier algoritmo que entregue una etiqueta de grupo por punto: K-medias,
-K-medianas, K-medoides, DBSCAN, MeanShift, HDBSCAN o agrupamiento aglomerativo.
+K-medoides, DBSCAN, MeanShift, HDBSCAN o agrupamiento aglomerativo.
 
 ## Fórmula
 

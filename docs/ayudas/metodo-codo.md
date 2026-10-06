@@ -6,7 +6,7 @@ varios valores de \( K \), calcular la [inercia](inercia.md) (o la inercia media
 resultado y graficarla contra \( K \). El valor elegido es el «codo» de la curva: el punto a
 partir del cual agregar más grupos casi no mejora la compacidad.
 
-Sirve para cualquier algoritmo en el que usted fije el número de grupos (K-medias, K-medianas,
+Sirve para cualquier algoritmo en el que usted fije el número de grupos (K-medias,
 K-medoides, agrupamiento aglomerativo) y, en general, para cualquier
 [hiperparámetro](../glosario.md#hiperparametro) que cambie el número de grupos resultantes.
 
