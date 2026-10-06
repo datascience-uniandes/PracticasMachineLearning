@@ -46,25 +46,27 @@ la combinación lineal. Las cargas permiten darle un significado a cada eje:
 
 ## Ejemplo del gráfico
 
-Gráfico de una agrupación en tres grupos de un conjunto de datos sintético con seis variables,
-`x1` a `x6`. A la izquierda, los registros en las dos primeras componentes; a la derecha, las
+Gráfico de una agrupación en cuatro grupos de un conjunto de datos sintético con cinco variables,
+`x1` a `x5`. A la izquierda, los registros en las dos primeras componentes; a la derecha, las
 cargas de cada variable:
 
-![A la izquierda, tres grupos bien separados en el plano de las dos primeras componentes; a la derecha, un mapa de calor con las cargas de las variables x1 a x6 en cada componente](../assets/img/ayudas/pca.png)
+![A la izquierda, cuatro grupos separados en el plano de las dos primeras componentes; a la derecha, un mapa de calor con las cargas de las variables x1 a x5 en cada componente](../assets/img/ayudas/pca-ejemplo.png)
 
-- **Cuánta información muestra.** Las dos componentes explican el 58 % y el 32 % de la variación,
-  un 90 % en total: el gráfico representa bien los datos.
-- **Componente 1: `x3`, `x4` y `x5` frente a `x1` y `x2`.** Tiene cargas positivas en `x3`, `x4` y
-  `x5` (cerca de 0,47) y negativas en `x1` y `x2` (cerca de −0,40). Los registros a la derecha del
-  gráfico tienen valores altos en `x3`, `x4` y `x5` y bajos en `x1` y `x2`; los de la izquierda,
-  lo contrario. `x6` casi no influye en esta componente (carga −0,01).
-- **Componente 2: nivel general, sobre todo de `x6`.** Todas sus cargas son positivas y la mayor
-  es la de `x6` (0,68): los registros de arriba tienen valores altos en casi todas las variables,
-  en especial en `x6`, y los de abajo, valores bajos.
-- **Lectura de los grupos.** El grupo 0 (arriba a la izquierda) tiene valores altos en `x1`, `x2`
-  y `x6`; el grupo 1 (a la derecha), valores altos en `x3`, `x4` y `x5`; el grupo 2 (abajo),
-  valores bajos en general, sobre todo en `x6`. Los tres grupos ocupan zonas distintas, así que
-  están bien separados.
+- **Cuánta información muestra.** Las dos componentes explican el 37 % y el 34 % de la variación,
+  un 71 % en total: el gráfico es una buena aproximación, pero deja fuera casi un tercio de la
+  información.
+- **Componente 1: sobre todo `x3` y `x4`.** Sus cargas más grandes son las de `x3` y `x4` (cerca de
+  0,63), y `x1` y `x2` pesan menos (0,32). Los registros a la derecha tienen valores altos en
+  `x3` y `x4`; los de la izquierda, valores bajos.
+- **Componente 2: `x1` y `x2` frente a `x3` y `x4`.** Tiene cargas positivas en `x1` y `x2` (0,63) y
+  negativas en `x3` y `x4` (cerca de −0,32). Los registros de arriba tienen valores altos en `x1`
+  y `x2`; los de abajo, valores bajos en esas variables o altos en `x3` y `x4`.
+- **`x5` no aporta.** Sus cargas son casi 0 en ambas componentes: esa variable no ayuda a separar
+  los grupos.
+- **Lectura de los grupos.** El grupo 0 (arriba a la derecha) tiene valores altos en `x1` y `x2`, y
+  el grupo 1 (abajo a la izquierda), valores bajos en esas mismas variables. El grupo 2 (abajo a
+  la derecha) tiene valores altos en `x3` y `x4`, y el grupo 3 (arriba a la izquierda), valores
+  bajos. Los cuatro grupos ocupan zonas distintas, así que están bien separados.
 
 ## Código: graficar los grupos en dos dimensiones
 
