@@ -118,6 +118,7 @@ nav:
       - Codificación one-hot: ayudas/one-hot.md
       - Coeficiente de determinación (R²): ayudas/r2.md
       - Comparar métricas entre conjuntos: ayudas/comparar-metricas.md
+      - Componentes principales (PCA): ayudas/pca.md
       - Compromiso sesgo-varianza: ayudas/compromiso-sesgo-varianza.md
       - Curva de aprendizaje: ayudas/curva-aprendizaje.md
       - Curva de precisión-sensibilidad: ayudas/curva-precision-sensibilidad.md

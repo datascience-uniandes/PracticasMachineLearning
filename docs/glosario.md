@@ -62,6 +62,12 @@ cuando esa variable aumenta en una unidad y las demás se mantienen constantes. 
 
 Métrica de [agrupación](#agrupacion) que compara, para cada registro, qué tan cerca está de su propio grupo frente al grupo vecino más cercano. Va de −1 a 1: valores cercanos a 1 indican grupos compactos y bien separados.
 
+### Componentes principales { #componentes-principales }
+
+Variables nuevas que resumen a las originales como combinaciones lineales de ellas, ordenadas
+según cuánta variación de los datos explican (_PCA_). Las dos primeras permiten dibujar en un
+plano datos con muchas variables.
+
 ### Compromiso sesgo-varianza { #compromiso-sesgo-varianza }
 
 Tensión entre el _sesgo_ (error por usar un modelo demasiado simple, que lleva al

@@ -25,14 +25,24 @@
    [Actividad 2](actividad-2.md). **¿Los algoritmos por densidad mejoran a los basados en
    centroides con estos datos? ¿Qué características del dataset (número de variables, forma de
    las distribuciones) pueden explicar el resultado?**
-7. **Tamaño de los grupos:** calcule cuántos clientes hay en cada grupo del mejor modelo por
-   densidad y qué porcentaje representan, incluido el [ruido](../../glosario.md#ruido) como una
-   categoría aparte. **¿Qué proporción de clientes no quedó en ningún grupo?**
-8. **Perfil de los grupos:** calcule la mediana de cada variable por grupo, y también la del ruido,
-   en las unidades originales, y grafique el perfil relativo en un mapa de calor.
-   **¿Qué tipo de clientes quedan marcados como ruido? ¿Los grupos se parecen a algún segmento de
-   la Actividad 2?**
-9. **Visualice los grupos y el ruido en dos dimensiones** con las dos primeras componentes de PCA.
+7. **Caracterice los grupos** del mejor modelo por densidad con estadística descriptiva, en las **unidades
+   originales** (no en las estandarizadas):
+
+    - **a)** **Tamaño:** cuántos clientes quedaron en cada grupo y qué porcentaje representan. Incluya el [ruido](../../glosario.md#ruido) como una
+      categoría aparte.
+    - **b)** **Mediana** de cada variable por grupo, en una tabla.
+    - **c)** [**Gráficos de cajas**](../../ayudas/graficos-por-clase.md) por grupo de las
+      principales características, para comparar los grupos entre sí.
+    - **d)** [**Distribuciones**](../../ayudas/graficos-por-clase.md) por grupo de las principales
+      variables (histogramas superpuestos o separados por grupo).
+    - **e)** **Quiénes quedaron en cada grupo:** revise algunos clientes de cada grupo y compruebe
+      que sus valores corresponden a lo que describen la tabla y los gráficos.
+
+    **¿Qué variables distinguen a cada grupo? ¿Algún grupo es demasiado pequeño o demasiado grande
+    para ser útil? ¿Qué tipo de clientes quedaron como ruido?**
+
+8. **Visualice los grupos y el ruido en dos dimensiones** con las dos primeras
+   [**componentes principales (PCA)**](../../ayudas/pca.md), coloreando cada cliente según su grupo.
    **¿Dónde se ubican los puntos de ruido frente a los grupos?**
 
 !!! success "Fin de la Actividad 3"

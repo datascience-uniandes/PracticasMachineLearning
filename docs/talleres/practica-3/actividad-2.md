@@ -31,19 +31,27 @@
    modelo** con la mayor silueta; si los dos son muy parecidos, prefiera el de menor Davies-Bouldin.
    **¿Las tres métricas señalan el mismo modelo? ¿Por qué la inercia media no sirve, por sí sola,
    para comparar modelos con distinto número de grupos?**
-5. **Tamaño de los grupos:** calcule cuántos clientes hay en cada grupo del mejor modelo y qué
-   porcentaje representan. **¿Algún grupo es demasiado pequeño o demasiado grande para ser útil?**
-6. **Perfil de los grupos:** calcule la mediana de cada variable por grupo en las **unidades
-   originales** (no en las estandarizadas) y grafique el perfil relativo de cada grupo frente al
-   total en un mapa de calor. **¿Qué variables distinguen a cada grupo?**
-7. Realice [**gráficos de cajas**](../../ayudas/grafico-cajas.md) por grupo de las variables que más
-   los diferencian. **¿Los grupos se separan con claridad en esas variables o se traslapan?**
-8. **Visualice los grupos en dos dimensiones** con las dos primeras componentes de PCA, coloreando
-   cada cliente según su grupo. **¿Los grupos se ven separados? ¿Por qué esta vista es solo una
-   aproximación?**
-9. **Nombre los segmentos:** asigne a cada grupo un nombre corto que describa su comportamiento
-    (por ejemplo, «compradores frecuentes» o «usuarios de avances en efectivo»).
-    **¿Qué acción comercial le propondría al banco para cada segmento?**
+5. **Caracterice los grupos** del mejor modelo con estadística descriptiva, en las **unidades
+   originales** (no en las estandarizadas):
+
+    - **a)** **Tamaño:** cuántos clientes quedaron en cada grupo y qué porcentaje representan.
+    - **b)** **Mediana** de cada variable por grupo, en una tabla.
+    - **c)** [**Gráficos de cajas**](../../ayudas/graficos-por-clase.md) por grupo de las
+      principales características, para comparar los grupos entre sí.
+    - **d)** [**Distribuciones**](../../ayudas/graficos-por-clase.md) por grupo de las principales
+      variables (histogramas superpuestos o separados por grupo).
+    - **e)** **Quiénes quedaron en cada grupo:** revise algunos clientes de cada grupo y compruebe
+      que sus valores corresponden a lo que describen la tabla y los gráficos.
+
+    **¿Qué variables distinguen a cada grupo? ¿Algún grupo es demasiado pequeño o demasiado grande
+    para ser útil?**
+
+6. **Visualice los grupos en dos dimensiones** con las dos primeras
+   [**componentes principales (PCA)**](../../ayudas/pca.md), coloreando cada cliente según su grupo.
+   **¿Los grupos se ven separados? ¿Por qué esta vista es solo una aproximación?**
+7. **Nombre los segmentos:** asigne a cada grupo un nombre corto que describa su comportamiento
+   (por ejemplo, «compradores frecuentes» o «usuarios de avances en efectivo»).
+   **¿Qué acción comercial le propondría al banco para cada segmento?**
 
 !!! success "Fin de la Actividad 2"
     Guarde los cambios en el notebook. Ya estamos listos para continuar con la siguiente actividad.
