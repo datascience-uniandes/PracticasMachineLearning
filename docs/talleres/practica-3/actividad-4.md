@@ -52,5 +52,22 @@
     entregaría al banco, considerando las métricas, el tamaño de los grupos y qué tan fácil es
     interpretarlos?**
 
+11. **Repita HDBSCAN sobre los datos transformados:**
+
+    - **a)** Aplique el logaritmo `np.log1p` a los montos y conteos (las variables con más
+      [sesgo](../../glosario.md#sesgo)) y vuelva a [estandarizar](../../ayudas/estandarizar.md).
+    - **b)** Reduzca los datos a las dos primeras
+      [**componentes principales (PCA)**](../../ayudas/pca.md).
+    - **c)** [**Entrene HDBSCAN**](../../ayudas/hdbscan.md) sobre esas dos componentes con
+      `min_cluster_size=200` y `min_samples=15`.
+    - **d)** Grafique los grupos y el [ruido](../../glosario.md#ruido) en el plano de las dos
+      componentes.
+    - **e)** Caracterice los grupos y el ruido (tamaño, porcentaje y mediana de las principales
+      variables en las unidades originales) y compárelos con la segmentación final del paso 10.
+
+    **¿Cambió el resultado frente al HDBSCAN del paso 2? ¿Qué comportamientos de los clientes
+    separa ahora? ¿Qué tipo de clientes quedaron como ruido? ¿Por qué el logaritmo y la reducción
+    de dimensiones ayudan a un algoritmo por densidad?**
+
 !!! success "Fin de la Práctica 3"
     Guarde los cambios en el notebook. Ha terminado la última actividad de la Práctica 3.

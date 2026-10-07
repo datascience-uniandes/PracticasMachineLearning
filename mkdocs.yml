@@ -21,6 +21,8 @@ exclude_docs: |
   ayudas/hdbscan.md
   ayudas/agrupacion-aglomerativa.md
   ayudas/dendrograma.md
+  assets/img/ayudas/dendrograma-escenarios.png
+  assets/img/ayudas/dendrograma-escalera.png
   assets/img/ayudas/metodo-codo.png
   assets/img/ayudas/silueta.png
   assets/img/ayudas/dbscan.png
