@@ -19,7 +19,6 @@ exclude_docs: |
   assets/img/ayudas/k-distancia.png
   ayudas/mean-shift.md
   ayudas/hdbscan.md
-  assets/img/ayudas/hdbscan-arbol.png
   ayudas/agrupacion-aglomerativa.md
   ayudas/dendrograma.md
   assets/img/ayudas/metodo-codo.png

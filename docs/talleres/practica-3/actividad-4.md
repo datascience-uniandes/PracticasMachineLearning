@@ -13,21 +13,18 @@
 3. **Elija la mejor configuración de HDBSCAN** con la misma regla de la Actividad 3: al menos dos
    grupos, menos del 30 % de ruido y la mayor silueta. **¿Alguna configuración cumple la regla?
    Si ninguna la cumple, ¿qué indica eso sobre la estructura de densidad de los datos?**
-4. Grafique el [**árbol condensado**](../../ayudas/hdbscan.md#graficar-la-jerarquia-el-arbol-condensado)
-   del mejor HDBSCAN. **¿En qué nivel de densidad se separan las ramas principales? ¿Qué ramas
-   eligió HDBSCAN como grupos? ¿Por qué descartó las demás?**
-5. [**Entrene la agrupación aglomerativa**](../../ayudas/agrupacion-aglomerativa.md) con
+4. [**Entrene la agrupación aglomerativa**](../../ayudas/agrupacion-aglomerativa.md) con
    `linkage` ∈ {`"ward"`, `"complete"`, `"average"`} y **K = 2, 3, …, 8**. Para cada combinación
    calcule la silueta, el índice de Davies-Bouldin, la inercia media y el tamaño del grupo más
    grande. **¿Qué enlaces dejan a casi todos los clientes en un solo grupo? ¿Por qué ocurre?**
-6. Grafique el [**dendrograma**](../../ayudas/dendrograma.md) asociado a cada enlace (`ward`,
+5. Grafique el [**dendrograma**](../../ayudas/dendrograma.md) asociado a cada enlace (`ward`,
    `complete` y `average`), truncado a los últimos 30 grupos. **¿Dónde hay un salto grande en la
    altura de las uniones? ¿Cuántos grupos sugiere cada dendrograma? ¿El dendrograma explica por
    qué algunos enlaces dejan a casi todos los clientes en un solo grupo?**
-7. **Elija la mejor configuración aglomerativa** con la mayor silueta entre las que no dejen más
+6. **Elija la mejor configuración aglomerativa** con la mayor silueta entre las que no dejen más
    del 80 % de los clientes en un mismo grupo, y compruebe que el número de grupos sea coherente
    con su dendrograma. **¿El número de grupos elegido coincide con el que sugería el dendrograma?**
-8. **Caracterice los grupos** del mejor modelo jerárquico con estadística descriptiva, en las **unidades
+7. **Caracterice los grupos** del mejor modelo jerárquico con estadística descriptiva, en las **unidades
    originales** (no en las estandarizadas):
 
     - **a)** **Tamaño:** cuántos clientes quedaron en cada grupo y qué porcentaje representan.
@@ -42,13 +39,13 @@
     **¿Qué variables distinguen a cada grupo? ¿Algún grupo es demasiado pequeño o demasiado grande
     para ser útil?**
 
-9. **Visualice los grupos en dos dimensiones** con las dos primeras
+8. **Visualice los grupos en dos dimensiones** con las dos primeras
    [**componentes principales (PCA)**](../../ayudas/pca.md), coloreando cada cliente según su grupo.
    **¿Los grupos se ven separados? ¿Por qué esta vista es solo una aproximación?**
-10. **Compare con la Actividad 2:** construya una tabla cruzada entre las etiquetas de este modelo y
-    las del mejor modelo de la Actividad 2. **¿Los dos modelos encuentran segmentos parecidos? ¿Qué
-    segmentos se mantienen y cuáles cambian?**
-11. **Comparación final:** construya una tabla con la silueta, el índice de Davies-Bouldin, la
+9. **Compare con la Actividad 2:** construya una tabla cruzada entre las etiquetas de este modelo y
+   las del mejor modelo de la Actividad 2. **¿Los dos modelos encuentran segmentos parecidos? ¿Qué
+   segmentos se mantienen y cuáles cambian?**
+10. **Comparación final:** construya una tabla con la silueta, el índice de Davies-Bouldin, la
     inercia media, el número de grupos y el porcentaje de ruido del mejor modelo de cada familia
     (centroides, densidad y jerárquico), y elija la **segmentación final**.
     **¿Qué familia de algoritmos funciona mejor con estos datos y por qué? ¿Qué segmentación le
