@@ -18,7 +18,8 @@
    vista, condición y calificación se concentran las casas? ¿Qué puede decir del balance entre
    categorías?**
 5. **Estudie la [variable objetivo](../../glosario.md#variable-objetivo)** `Precio`:
-   revise su [histograma](../../ayudas/histograma.md), su [gráfico de cajas](../../ayudas/grafico-cajas.md)
+   revise su [histograma](../../ayudas/histograma.md), su [gráfico de
+   cajas](../../ayudas/grafico-cajas.md)
    y sus valores. **¿Entre qué valores se mueven los precios? ¿Es una distribución simétrica?
    ¿Qué precios aparecen como atípicos?**
 6. Revise las [**dimensiones de calidad de los datos**](../../ayudas/dimensiones-calidad.md):
@@ -34,20 +35,27 @@
       variable. **¿Qué valores están fuera de los rangos del diccionario de datos?**
 7. **Tratamiento de duplicados:** [**elimine los registros duplicados**](../../ayudas/duplicados.md).
    **¿Cuántos registros quedan? ¿Las casas con el mismo `Id` y distinta `Fecha` son duplicados?**
-8. **Tratamiento de outliers:** revise los [outliers](../../glosario.md#outlier) y
+8. **Tratamiento de valores inválidos:** [**aplique clipping**](../../ayudas/valores-invalidos.md#recortar-al-rango-valido)
+   para llevar cada valor fuera de rango al límite más cercano del rango válido del diccionario de
+   datos (por ejemplo, `Vista` entre 0 y 4 y `Cuartos` entre 0 y 15). Las coordenadas sin punto
+   decimal no están fuera de rango por un error del valor, sino por un problema de formato:
+   corríjalas antes, sin recortarlas.
+   **¿Cuántos valores recortó en cada variable? ¿En qué casos el clipping no es adecuado y conviene
+   más marcar el valor como nulo?**
+9. **Tratamiento de outliers:** revise los [outliers](../../glosario.md#outlier) y
    [**aplique clipping**](../../ayudas/valores-atipicos.md) a la variable objetivo.
    **¿Qué percentiles utilizó? ¿Cómo cambian el gráfico de caja y las estadísticas descriptivas
    antes y después del tratamiento?**
-9. **Tratamiento de nulos:** [**repare los valores nulos**](../../ayudas/nulos.md).
-   Si los nulos son menos del 5 % de los datos, es importante imputarlos: pruebe con la
-   **media** y con la **mediana**, y vuelva a graficar los [histogramas](../../ayudas/histograma.md)
-   y [gráficos de cajas](../../ayudas/grafico-cajas.md) de las variables imputadas.
-   **¿Qué diferencias produce cada opción en la distribución?** Elimine registros o columnas
-   solo si la cantidad de nulos es demasiado alta. **Este paso es solo exploratorio:** no conserve
-   la imputación para la siguiente actividad. La imputación definitiva se hace después de dividir
-   los datos en [**conjuntos de entrenamiento y prueba**](../../ayudas/division-datos.md), con
-   valores calculados solo con el entrenamiento, para evitar la
-   [fuga de datos](../../glosario.md#fuga-de-datos).
+10. **Tratamiento de nulos:** [**repare los valores nulos**](../../ayudas/nulos.md).
+    Si los nulos son menos del 5 % de los datos, es importante imputarlos: pruebe con la
+    **media** y con la **mediana**, y vuelva a graficar los [histogramas](../../ayudas/histograma.md)
+    y [gráficos de cajas](../../ayudas/grafico-cajas.md) de las variables imputadas.
+    **¿Qué diferencias produce cada opción en la distribución?** Elimine registros o columnas
+    solo si la cantidad de nulos es demasiado alta. **Este paso es solo exploratorio:** no conserve
+    la imputación para la siguiente actividad. La imputación definitiva se hace después de dividir
+    los datos en [**conjuntos de entrenamiento y prueba**](../../ayudas/division-datos.md), con
+    valores calculados solo con el entrenamiento, para evitar la
+    [fuga de datos](../../glosario.md#fuga-de-datos).
 
 !!! success "Fin de la Actividad 1"
     Guarde los cambios en el notebook. Ya estamos listos para continuar con la siguiente actividad.

@@ -33,21 +33,28 @@
       variable. **¿Qué valores están fuera de los rangos del diccionario de datos?**
 7. **Tratamiento de duplicados:** [**elimine los registros duplicados**](../../ayudas/duplicados.md).
    **¿Cuántos registros quedan?**
-8. **Tratamiento de outliers:** revise los [outliers](../../glosario.md#outlier) y
+8. **Tratamiento de valores inválidos:** [**aplique clipping**](../../ayudas/valores-invalidos.md#recortar-al-rango-valido)
+   para llevar cada valor fuera de rango al límite más cercano del rango válido del diccionario de
+   datos (por ejemplo, `age` entre 18 y 100, `credit_score` entre 300 y 850, `tenure` entre 0 y
+   10 y `estimated_salary` mayor o igual que 0). Unifique también la escritura de las categorías
+   de `country` y `gender`.
+   **¿Cuántos valores recortó en cada variable? ¿En qué casos el clipping no es adecuado y conviene
+   más marcar el valor como nulo?**
+9. **Tratamiento de outliers:** revise los [outliers](../../glosario.md#outlier) y
    [**aplique clipping**](../../ayudas/valores-atipicos.md) a las variables continuas que los
    presenten. **¿Qué variables y qué percentiles utilizó? ¿Cómo cambian el gráfico de caja y las
    estadísticas descriptivas antes y después del tratamiento? ¿Por qué en este caso no se aplica
    clipping a la variable objetivo?**
-9. **Tratamiento de nulos:** [**repare los valores nulos**](../../ayudas/nulos.md).
-   Si los nulos son menos del 5 % de los datos, es importante imputarlos: pruebe con la
-   **media** y con la **mediana**, y vuelva a graficar los [histogramas](../../ayudas/histograma.md)
-   y [gráficos de cajas](../../ayudas/grafico-cajas.md) de las variables imputadas.
-   **¿Qué diferencias produce cada opción en la distribución?** Elimine registros o columnas
-   solo si la cantidad de nulos es demasiado alta. **Este paso es solo exploratorio:** no conserve
-   la imputación para la siguiente actividad. La imputación definitiva se hace después de dividir
-   los datos en [**conjuntos de entrenamiento y prueba**](../../ayudas/division-datos.md), con
-   valores calculados solo con el entrenamiento, para evitar la
-   [fuga de datos](../../glosario.md#fuga-de-datos).
+10. **Tratamiento de nulos:** [**repare los valores nulos**](../../ayudas/nulos.md).
+    Si los nulos son menos del 5 % de los datos, es importante imputarlos: pruebe con la
+    **media** y con la **mediana**, y vuelva a graficar los [histogramas](../../ayudas/histograma.md)
+    y [gráficos de cajas](../../ayudas/grafico-cajas.md) de las variables imputadas.
+    **¿Qué diferencias produce cada opción en la distribución?** Elimine registros o columnas
+    solo si la cantidad de nulos es demasiado alta. **Este paso es solo exploratorio:** no conserve
+    la imputación para la siguiente actividad. La imputación definitiva se hace después de dividir
+    los datos en [**conjuntos de entrenamiento y prueba**](../../ayudas/division-datos.md), con
+    valores calculados solo con el entrenamiento, para evitar la
+    [fuga de datos](../../glosario.md#fuga-de-datos).
 
 !!! success "Fin de la Actividad 1"
     Guarde los cambios en el notebook. Ya estamos listos para continuar con la siguiente actividad.

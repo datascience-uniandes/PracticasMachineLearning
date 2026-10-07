@@ -26,7 +26,30 @@ Cuente los registros que incumplen una regla:
 
 ## Tratar
 
-Marque el valor inválido como nulo y luego [trátelo como nulo](nulos.md):
+Hay tres formas de tratar un valor inválido. Elija según el tipo de error.
+
+### Recortar al rango válido (clipping) { #recortar-al-rango-valido }
+
+El [clipping](../glosario.md#clipping) lleva cada valor fuera de rango al límite más cercano del
+rango válido: un valor menor que el mínimo pasa a ser el mínimo y uno mayor que el máximo pasa a
+ser el máximo. No elimina registros.
+
+```python
+df["columna"] = df["columna"].clip(lower=minimo, upper=maximo)
+df["monto"] = df["monto"].clip(lower=0)       # solo límite inferior
+```
+
+`minimo` y `maximo` son los límites del rango válido, tomados del diccionario de datos. Si la
+variable solo tiene un límite, indique solo `lower` o solo `upper`.
+
+Es adecuado cuando el valor inválido está **cerca del límite** o cuando el límite es el valor más
+razonable, por ejemplo, un monto negativo pequeño (un saldo de −5 pasa a 0) o una proporción
+de 1,02 que pasa a 1.
+
+### Marcar como nulo
+
+Si el valor está muy lejos del rango (una edad de 210 años), recortarlo al límite inventa un
+dato: es mejor marcarlo como nulo y luego [tratarlo como nulo](nulos.md):
 
 ```python
 import numpy as np
@@ -34,8 +57,12 @@ import numpy as np
 df.loc[~df["columna"].between(minimo, maximo), "columna"] = np.nan
 ```
 
-Si el valor se puede corregir con certeza (por ejemplo, un porcentaje registrado como `0.45`
-en vez de `45`), corríjalo en lugar de borrarlo.
+### Corregir
+
+Si el valor se puede corregir con certeza, corríjalo. Por ejemplo, una proporción registrada en
+porcentaje (`45` en lugar de `0.45`) está en otra escala: divídala por 100 en lugar de
+recortarla, porque el clipping la convertiría en 1. Este tipo de error es una
+[inconsistencia](inconsistencias.md).
 
 !!! warning "Inválido no es lo mismo que atípico"
     Un valor muy grande pero posible (un ingreso muy alto) no es inválido: es un
