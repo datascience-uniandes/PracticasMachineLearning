@@ -72,3 +72,28 @@ Para cortar por distancia en lugar de por número de grupos, use
 `AgglomerativeClustering(n_clusters=None, distance_threshold=umbral, linkage="ward")`, donde
 `umbral` es la distancia máxima de unión; el número de grupos obtenido queda en
 `modelo.n_clusters_`.
+
+## Código: el dendrograma asociado
+
+Después de correr el modelo, grafique su [dendrograma](dendrograma.md) con el **mismo criterio de
+enlace**. Muestra la jerarquía que el algoritmo recorrió y ayuda a comprobar si el número de
+grupos `k` que eligió es razonable.
+
+```python
+import matplotlib.pyplot as plt
+from scipy.cluster.hierarchy import linkage, dendrogram
+
+jerarquia = linkage(X_esc, method="ward")
+dendrogram(jerarquia, truncate_mode="lastp", p=30)
+plt.ylabel("Distancia de unión")
+plt.show()
+```
+
+- `method` debe ser el mismo `linkage` usado en `AgglomerativeClustering` (`"ward"`,
+  `"complete"`, `"average"` o `"single"`); con el mismo enlace, SciPy y scikit-learn construyen
+  la misma jerarquía.
+- `truncate_mode="lastp", p=30` muestra solo las últimas 30 uniones, para que el gráfico sea
+  legible con muchos registros.
+- Si al cortar el dendrograma en el salto más grande obtiene un número de grupos distinto de `k`,
+  revise su elección de `k`.
+
