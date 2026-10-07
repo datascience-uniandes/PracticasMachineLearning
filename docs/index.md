@@ -27,11 +27,13 @@ desde la preparación de los datos hasta la evaluación de los modelos.
 
     [:octicons-arrow-right-24: Ir a la práctica](talleres/practica-2/index.md)
 
--   :material-numeric-3-circle:{ .lg .middle } **Práctica 3**
+-   :material-numeric-3-circle:{ .lg .middle } **Práctica 3: Agrupación**
 
     ---
 
-    _Tema por definir_
+    Segmentación de clientes de tarjetas de crédito con algoritmos basados en centroides, por densidad y jerárquicos.
+
+    [:octicons-arrow-right-24: Ir a la práctica](talleres/practica-3/index.md)
 
 -   :material-numeric-4-circle:{ .lg .middle } **Práctica 4**
 
@@ -76,6 +78,14 @@ desde la preparación de los datos hasta la evaluación de los modelos.
     10.000 clientes de un banco con datos demográficos y financieros, y si abandonaron el banco.
 
     [:octicons-arrow-right-24: Ver el dataset](datos/churn.md)
+
+-   :material-database:{ .lg .middle } **Clientes de tarjetas de crédito**
+
+    ---
+
+    9.000 titulares de tarjetas con su comportamiento de compras, avances y pagos. Sin variable objetivo.
+
+    [:octicons-arrow-right-24: Ver el dataset](datos/tarjetas.md)
 
 -   :material-database:{ .lg .middle } **Venta de inmuebles**
 

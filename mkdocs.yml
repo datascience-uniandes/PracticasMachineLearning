@@ -4,30 +4,6 @@ site_author: Juan Pablo Reyes
 site_url: https://datascience-uniandes.github.io/PracticasMachineLearning/
 copyright: Universidad de los Andes · Ciencia de Datos
 
-# Práctica 3 (agrupación) oculta por ahora: sus archivos no se publican.
-exclude_docs: |
-  talleres/practica-3/
-  datos/tarjetas.*
-  ayudas/k-medias.md
-  ayudas/k-medoides.md
-  ayudas/inercia.md
-  ayudas/metodo-codo.md
-  ayudas/silueta.md
-  ayudas/davies-bouldin.md
-  ayudas/dbscan.md
-  ayudas/k-distancia.md
-  assets/img/ayudas/k-distancia.png
-  ayudas/mean-shift.md
-  ayudas/hdbscan.md
-  ayudas/agrupacion-aglomerativa.md
-  ayudas/dendrograma.md
-  assets/img/ayudas/dendrograma-escenarios.png
-  assets/img/ayudas/dendrograma-escalera.png
-  assets/img/ayudas/metodo-codo.png
-  assets/img/ayudas/silueta.png
-  assets/img/ayudas/dbscan.png
-  assets/img/ayudas/mean-shift.png
-  assets/img/ayudas/dendrograma.png
 
 theme:
   name: material
@@ -112,19 +88,30 @@ nav:
           - "Actividad 3: Modelos de clasificación": talleres/practica-2/actividad-3.md
           - "Actividad 4: Ensambles": talleres/practica-2/actividad-4.md
           - "Actividad 5: Red neuronal": talleres/practica-2/actividad-5.md
+      - "Práctica 3: Agrupación":
+          - talleres/practica-3/index.md
+          - "Actividad 1: Entendimiento de datos": talleres/practica-3/actividad-1.md
+          - "Actividad 2: Agrupación basada en centroides": talleres/practica-3/actividad-2.md
+          - "Actividad 3: Agrupación por densidad": talleres/practica-3/actividad-3.md
+          - "Actividad 4: Agrupación jerárquica": talleres/practica-3/actividad-4.md
       - Práctica 4: talleres/practica-4.md
       - Práctica 5: talleres/practica-5.md
   - Ayudas:
+      - Agrupación aglomerativa: ayudas/agrupacion-aglomerativa.md
       - Árbol de decisión: ayudas/arbol-decision.md
       - Cargar un dataset: ayudas/cargar-dataset.md
       - Codificación one-hot: ayudas/one-hot.md
       - Coeficiente de determinación (R²): ayudas/r2.md
+      - Coeficiente de silueta: ayudas/silueta.md
       - Comparar métricas entre conjuntos: ayudas/comparar-metricas.md
       - Componentes principales (PCA): ayudas/pca.md
       - Compromiso sesgo-varianza: ayudas/compromiso-sesgo-varianza.md
       - Curva de aprendizaje: ayudas/curva-aprendizaje.md
+      - Curva de k-distancia: ayudas/k-distancia.md
       - Curva de precisión-sensibilidad: ayudas/curva-precision-sensibilidad.md
       - Curva ROC: ayudas/curva-roc.md
+      - DBSCAN: ayudas/dbscan.md
+      - Dendrograma: ayudas/dendrograma.md
       - Dimensiones de calidad de los datos: ayudas/dimensiones-calidad.md
       - Dividir en entrenamiento y prueba: ayudas/division-datos.md
       - Entrenar una red neuronal: ayudas/entrenar-red-neuronal.md
@@ -140,11 +127,18 @@ nav:
       - Gráfico de cajas: ayudas/grafico-cajas.md
       - Gráfico de dispersión: ayudas/grafico-dispersion.md
       - Gráfico Q-Q: ayudas/grafico-qq.md
+      - HDBSCAN: ayudas/hdbscan.md
       - Histograma: ayudas/histograma.md
+      - Índice de Davies-Bouldin: ayudas/davies-bouldin.md
+      - Inercia media: ayudas/inercia.md
       - Interpretar los coeficientes: ayudas/interpretar-coeficientes.md
       - K vecinos más cercanos (KNN): ayudas/knn.md
+      - K-medias (K-means): ayudas/k-medias.md
+      - K-medoides (K-medoids): ayudas/k-medoides.md
       - Matriz de confusión: ayudas/matriz-confusion.md
       - Matriz de correlación: ayudas/correlacion.md
+      - Mean Shift: ayudas/mean-shift.md
+      - Método del codo: ayudas/metodo-codo.md
       - Normalidad de los residuos: ayudas/normalidad-residuos.md
       - Optimizar hiperparámetros con GridSearchCV: ayudas/gridsearchcv.md
       - Precisión: ayudas/precision.md
@@ -176,5 +170,6 @@ nav:
       - Votación (VotingClassifier): ayudas/votacion.md
   - Conjuntos de datos:
       - Abandono de clientes bancarios: datos/churn.md
+      - Clientes de tarjetas de crédito: datos/tarjetas.md
       - Venta de inmuebles: datos/inmuebles.md
   - Glosario: glosario.md
