@@ -312,6 +312,11 @@ fuera de los bigotes, a más de 1,5 veces el rango intercuartílico de la caja.
 
 De los registros que el modelo predijo como positivos, proporción que realmente lo son: \(VP / (VP + FP)\).
 
+### Punto de equilibrio { #punto-equilibrio }
+
+Momento en el que el beneficio acumulado de un proyecto iguala la inversión: a partir de él, el
+proyecto empieza a dar retorno.
+
 ### Prueba A/B { #prueba-ab }
 
 Comparación entre dos alternativas, A y B, para decidir si la diferencia en una métrica es real o
@@ -388,8 +393,9 @@ mismas unidades que la variable objetivo.
 
 ### ROI { #roi }
 
-Retorno de la inversión: beneficio neto dividido por la inversión. Un ROI de 0,3 significa que
-cada 100 invertidos devuelven 130.
+Retorno de la inversión: beneficio acumulado menos la inversión, dividido por la inversión. Es
+negativo mientras no se recupera lo invertido, vale 0 en el [punto de equilibrio](#punto-equilibrio)
+y es positivo después.
 
 ### Ruido { #ruido }
 
