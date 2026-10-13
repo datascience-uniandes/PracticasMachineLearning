@@ -1,12 +1,13 @@
 # Prueba de McNemar
 
 La [prueba de McNemar](../glosario.md#prueba-mcnemar) compara dos clasificadores evaluados sobre
-el **mismo** conjunto de registros. No usa réplicas: mira, registro por registro, en qué casos
+el **mismo** conjunto de registros, por ejemplo, el de validación. No usa réplicas: mira,
+registro por registro, en qué casos
 acierta un modelo y se equivoca el otro.
 
 ## Tabla de contingencia
 
-Cruce los aciertos de los dos modelos en el conjunto de prueba:
+Cruce los aciertos de los dos modelos en el conjunto de evaluación:
 
 |  | B acierta | B se equivoca |
 |--|:---------:|:-------------:|
@@ -52,8 +53,8 @@ import numpy as np
 import pandas as pd
 from statsmodels.stats.contingency_tables import mcnemar
 
-acierta_a = np.asarray(y_pred_a) == np.asarray(y_test)
-acierta_b = np.asarray(y_pred_b) == np.asarray(y_test)
+acierta_a = np.asarray(y_pred_a) == np.asarray(y_val)
+acierta_b = np.asarray(y_pred_b) == np.asarray(y_val)
 
 tabla = pd.crosstab(acierta_a, acierta_b, rownames=["A acierta"], colnames=["B acierta"])
 print(tabla)
@@ -62,7 +63,8 @@ resultado = mcnemar(tabla.to_numpy(), exact=False, correction=True)
 print(f"McNemar: chi2 = {resultado.statistic:.2f}, p-valor = {resultado.pvalue:.4g}")
 ```
 
-- `y_test` es la clase real del conjunto de prueba; `y_pred_a` y `y_pred_b`, las clases
+- `y_val` es la clase real del conjunto de evaluación (validación o prueba); `y_pred_a` y
+  `y_pred_b`, las clases
   predichas por cada modelo.
 - `acierta_a` y `acierta_b` valen `True` en los registros que cada modelo clasifica bien.
 - `tabla` es la tabla de contingencia; las casillas fuera de la diagonal son los casos en

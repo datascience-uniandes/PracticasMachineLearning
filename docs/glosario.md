@@ -386,6 +386,11 @@ Raíz del error cuadrático medio (_Root Mean Squared Error_). Como eleva los er
 antes de promediarlos, penaliza más los errores grandes que el [MAE](#mae). Se expresa en las
 mismas unidades que la variable objetivo.
 
+### ROI { #roi }
+
+Retorno de la inversión: beneficio neto dividido por la inversión. Un ROI de 0,3 significa que
+cada 100 invertidos devuelven 130.
+
 ### Ruido { #ruido }
 
 En los algoritmos de agrupación por densidad, registros que no pertenecen a ningún grupo porque están en zonas poco densas. scikit-learn les asigna la etiqueta −1.

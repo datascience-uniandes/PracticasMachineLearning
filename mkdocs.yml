@@ -9,6 +9,7 @@ exclude_docs: |
   talleres/practica-4/
   ayudas/bootstrapping.md
   ayudas/caracteristicas-derivadas.md
+  ayudas/impacto-negocio.md
   ayudas/intervalo-confianza.md
   ayudas/prueba-ab.md
   ayudas/prueba-mcnemar.md

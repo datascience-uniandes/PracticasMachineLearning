@@ -1,10 +1,11 @@
 # Práctica 4: Interpretabilidad de resultados
 
 En esta práctica se retoma el problema de **abandono** (_churn_) de la Práctica 2 para responder
-una pregunta que las métricas por sí solas no responden: **¿la diferencia entre dos modelos es
-real o se debe al azar del conjunto de prueba?** Se construyen variantes del modelo con más o
-menos atributos, se eligen dos y se comparan con intervalos de confianza por bootstrapping,
-pruebas A/B independientes y pareadas, y la prueba de McNemar.
+dos preguntas que las métricas por sí solas no responden: **¿la diferencia entre dos modelos es
+real o se debe al azar de los datos?** y **¿cuánto dinero gana o pierde el banco al usar cada
+modelo?** Se comparan dos configuraciones, una que cambia la ingeniería de características y
+otra que cambia el tipo de modelo, con intervalos de confianza por bootstrapping, pruebas
+estadísticas y un cálculo de impacto.
 
 ### Datos de trabajo: [churn.csv](../../datos/churn.md)
 
@@ -12,9 +13,6 @@ Parta del dataset tratado en la [Actividad 1 de la Práctica 2](../practica-2/ac
 
 ## Actividades
 
-1. [Actividad 1: Ingeniería de características](actividad-1.md)
-2. [Actividad 2: Selección de modelos](actividad-2.md)
-3. [Actividad 3: Intervalos de confianza](actividad-3.md)
-4. [Actividad 4: Prueba A/B con grupos independientes](actividad-4.md)
-5. [Actividad 5: Prueba A/B pareada](actividad-5.md)
-6. [Actividad 6: Prueba de McNemar](actividad-6.md)
+1. [Actividad 1: Intervalos de confianza](actividad-1.md)
+2. [Actividad 2: Pruebas estadísticas](actividad-2.md)
+3. [Actividad 3: Cálculo de impacto](actividad-3.md)

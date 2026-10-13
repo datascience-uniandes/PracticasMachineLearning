@@ -1,13 +1,15 @@
 # Bootstrapping
 
-Una métrica calculada sobre el [conjunto de prueba](../glosario.md#conjunto-prueba) es una sola
-cifra: con otros clientes de prueba habría salido un poco distinta. El
+Una métrica calculada sobre el [conjunto de validación](../glosario.md#conjunto-validacion) o el
+de [prueba](../glosario.md#conjunto-prueba) es una sola cifra: con otros registros habría salido
+un poco distinta. El
 [bootstrapping](../glosario.md#bootstrapping) estima **cuánto podría variar** esa métrica sin
 necesidad de recolectar datos nuevos.
 
 ## Cómo funciona
 
-1. Tome una **muestra con reemplazo** del conjunto de prueba, del mismo tamaño que el original.
+1. Tome una **muestra con reemplazo** del conjunto de evaluación (validación o prueba), del
+   mismo tamaño que el original.
    Algunos registros salen repetidos y otros no salen.
 2. Calcule la métrica (por ejemplo, el [F1](f1.md)) sobre esa muestra.
 3. Repita los pasos 1 y 2 muchas veces, por ejemplo, \( B = 1000 \) réplicas.
@@ -19,7 +21,7 @@ ancho muestra la incertidumbre. Con esa distribución se calcula un
 ## Detalles importantes
 
 - **No se vuelve a entrenar el modelo.** Las predicciones se calculan una sola vez sobre el
-  conjunto de prueba; el bootstrapping solo remuestrea pares de clase real y clase predicha.
+  conjunto de evaluación; el bootstrapping solo remuestrea pares de clase real y clase predicha.
 - **El tamaño de cada réplica es igual al del conjunto original.** Muestras más pequeñas darían
   una variabilidad mayor que la real.
 - **Fije una semilla** (`np.random.default_rng(42)`) para poder reproducir los resultados.
@@ -33,7 +35,7 @@ import numpy as np
 from sklearn.metrics import f1_score
 
 rng = np.random.default_rng(42)
-y_real = np.asarray(y_test)
+y_real = np.asarray(y_val)
 y_pred = np.asarray(y_pred)
 n = len(y_real)
 B = 1000
@@ -45,8 +47,8 @@ for _ in range(B):
 f1_boot = np.array(f1_boot)
 ```
 
-- `y_test` es la clase real del conjunto de prueba y `y_pred` las clases predichas por el
-  modelo para esos mismos registros.
+- `y_val` es la clase real del conjunto de evaluación (validación o prueba) y `y_pred` las clases
+  predichas por el modelo para esos mismos registros.
 - `rng.integers(0, n, n)` sortea `n` posiciones entre 0 y `n - 1`, con reemplazo.
 - `f1_boot` tiene una métrica por réplica. Para otra métrica, cambie `f1_score` por la función
   que corresponda; para el [AUC](../glosario.md#auc), use `roc_auc_score` con las

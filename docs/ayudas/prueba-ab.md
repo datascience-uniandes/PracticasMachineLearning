@@ -24,7 +24,7 @@ versión.
 ## Muestras pareadas { #pareada }
 
 En cada réplica se toma **una sola muestra y se evalúan los dos modelos sobre los mismos
-registros**. Es lo que corresponde cuando A y B predicen sobre el mismo conjunto de prueba (vea
+registros**. Es lo que corresponde cuando A y B predicen sobre el mismo conjunto de evaluación (vea
 [muestras pareadas](../glosario.md#muestras-pareadas)).
 
 - La diferencia en cada réplica es \( d_b = m_A^{(b)} - m_B^{(b)} \), con las dos métricas sobre
@@ -49,7 +49,7 @@ mayor que 0,975), el 0 queda fuera del intervalo.
 
 !!! warning "El valor p de la prueba t depende del número de réplicas"
     La prueba t trata cada réplica como si fuera una observación independiente, pero las réplicas
-    salen todas del mismo conjunto de prueba. Por eso, al aumentar \( B \), el valor p se hace
+    salen todas del mismo conjunto de evaluación. Por eso, al aumentar \( B \), el valor p se hace
     cada vez más pequeño aunque la evidencia sea la misma: con miles de réplicas casi cualquier
     diferencia resulta «significativa». El intervalo de confianza de la diferencia, en cambio,
     se mantiene estable. Use el valor p como referencia y decida con el intervalo.
@@ -62,7 +62,7 @@ from scipy import stats
 from sklearn.metrics import f1_score
 
 rng = np.random.default_rng(42)
-y_real, pred_a, pred_b = np.asarray(y_test), np.asarray(y_pred_a), np.asarray(y_pred_b)
+y_real, pred_a, pred_b = np.asarray(y_val), np.asarray(y_pred_a), np.asarray(y_pred_b)
 n, B = len(y_real), 1000
 
 f1_a, f1_b = [], []
@@ -96,7 +96,8 @@ estadistico, p_valor = stats.ttest_rel(f1_a, f1_b)
 print(f"Prueba t pareada: t = {estadistico:.2f}, p-valor = {p_valor:.4g}")
 ```
 
-- `y_test` es la clase real del conjunto de prueba; `y_pred_a` y `y_pred_b`, las clases
+- `y_val` es la clase real del conjunto de evaluación (validación o prueba); `y_pred_a` y
+  `y_pred_b`, las clases
   predichas por cada modelo sobre esos mismos registros.
 - `idx_a` e `idx_b` son muestras distintas para cada modelo; `idx` es una sola muestra para los
   dos.

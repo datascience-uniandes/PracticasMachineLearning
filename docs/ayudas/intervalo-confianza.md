@@ -18,8 +18,8 @@ percentiles 5 y 95.
 ## Cómo interpretarlo
 
 - **Ancho.** Un intervalo estrecho indica una métrica estable; uno ancho, que con otra muestra
-  de prueba la métrica podría cambiar bastante. El ancho depende sobre todo del tamaño del
-  conjunto de prueba y, con clases desbalanceadas, de cuántos registros tiene la clase
+  la métrica podría cambiar bastante. El ancho depende sobre todo del tamaño del conjunto de
+  evaluación y, con clases desbalanceadas, de cuántos registros tiene la clase
   minoritaria.
 - **Comparar dos modelos por superposición.**
 
@@ -45,5 +45,5 @@ print(f"Métrica: {metrica:.3f}  IC 95 %: [{limite_inferior:.3f}; {limite_superi
 ```
 
 - `metrica_boot` es el arreglo con la métrica de cada réplica del bootstrapping.
-- `metrica` es la métrica calculada sobre el conjunto de prueba completo.
+- `metrica` es la métrica calculada sobre el conjunto de evaluación completo.
 - `limite_inferior` y `limite_superior` son los extremos del intervalo del 95 %.
