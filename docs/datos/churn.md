@@ -18,6 +18,26 @@ df = pd.read_csv("https://datascience-uniandes.github.io/PracticasMachineLearnin
     problemas de calidad (nulos, duplicados, valores inválidos e inconsistencias) para practicar su
     revisión y tratamiento. Úselo en lugar del original.
 
+## Contexto de la empresa
+
+El abandono de clientes es uno de los mayores costos de un banco: atraer a un cliente nuevo
+cuesta varias veces más que retener a uno actual, y un cliente que se va **no se recupera**.
+Un banco europeo con operación en **Francia, Alemania y España** tiene una cartera de unos
+10.000 clientes y cerca del **20 %** de ellos abandona el banco cada año; en Alemania, donde
+los saldos son más altos, la tasa de abandono es casi el doble que en los otros dos países.
+
+Suponga que el banco lanza cada mes una campaña de retención dirigida solo a los clientes
+que el modelo marca como riesgo de abandono, y que les ofrece un beneficio (un descuento en
+comisiones o un bono) para que se queden. La oferta convence al **50 %** de los clientes que
+iban a abandonar, pero se paga por **todos** los clientes contactados, abandonen o no. El
+valor de un cliente retenido y el costo de la oferta cambian según el país:
+
+| País | Valor de un cliente retenido \( V \) | Costo de la oferta por cliente contactado \( c \) |
+|------|:------------------------------------:|:-------------------------------------------------:|
+| Francia | 900 € | 220 € |
+| Alemania | 1.500 € | 300 € |
+| España | 850 € | 150 € |
+
 ## Diccionario de datos
 
 | Variable | Descripción | Tipo | Rango válido |

@@ -2,29 +2,14 @@
 
 ### Datos de trabajo: el notebook de la [Actividad 2](actividad-2.md)
 
-!!! abstract "Contexto de la empresa"
-    El abandono de clientes es uno de los mayores costos de un banco: atraer a un cliente nuevo
-    cuesta varias veces más que retener a uno actual, y un cliente que se va **no se recupera**.
-    Un banco europeo con operación en **Francia, Alemania y España** tiene una cartera de unos
-    10.000 clientes y cerca del **20 %** de ellos abandona el banco cada año; en Alemania, donde
-    los saldos son más altos, la tasa de abandono es casi el doble que en los otros dos países.
+Lea el [**contexto de la empresa**](../../datos/churn.md#contexto-de-la-empresa) en la página del
+dataset: allí están los supuestos de la campaña de retención y el valor del cliente y el costo de
+la oferta en cada país.
 
-    Suponga que el banco lanza cada mes una campaña de retención dirigida solo a los clientes
-    que el modelo marca como riesgo de abandono, y que les ofrece un beneficio (un descuento en
-    comisiones o un bono) para que se queden. La oferta convence al **50 %** de los clientes que
-    iban a abandonar, pero se paga por **todos** los clientes contactados, abandonen o no. El
-    valor de un cliente retenido y el costo de la oferta cambian según el país:
-
-    | País | Valor de un cliente retenido \( V \) | Costo de la oferta por cliente contactado \( c \) |
-    |------|:------------------------------------:|:-------------------------------------------------:|
-    | Francia | 900 € | 220 € |
-    | Alemania | 1.500 € | 300 € |
-    | España | 850 € | 150 € |
-
-    Si usted desarrolla el modelo de clasificación que predice qué clientes van a abandonar,
-    **¿cuánto gana el banco cada mes?, ¿a partir de qué momento el proyecto tiene un ROI de 0? y
-    ¿qué tan bueno tiene que ser el modelo para que se pague en tres meses?** Suponga que la tasa
-    de abandono del dataset es anual.
+Si usted desarrolla el modelo de clasificación que predice qué clientes van a abandonar,
+**¿cuánto gana el banco cada mes?, ¿a partir de qué momento el proyecto tiene un ROI de 0? y
+¿qué tan bueno tiene que ser el modelo para que se pague en tres meses?** Suponga que la tasa
+de abandono del dataset es anual.
 
 ## Parte 1: impacto global
 
