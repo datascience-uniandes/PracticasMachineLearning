@@ -58,8 +58,8 @@
    prueba?**
 10. **Analice el significado de los intervalos:** **¿Qué significa, en palabras para el banco,
     que el F1 de un modelo tenga un intervalo de confianza del 95 % de, por ejemplo, [0,54; 0,61]?
-    ¿Qué no significa? ¿De qué depende su ancho y qué pasaría si el conjunto de validación tuviera
-    el doble de clientes? ¿Por qué no basta con comparar dos cifras de F1 para elegir un
+    ¿De qué depende su ancho y qué pasaría si el conjunto de validación tuviera
+    el doble de clientes? ¿Cuáles son las limitaciones de comparar dos cifras de F1 para elegir un
     modelo?**
 
 !!! success "Fin de la Actividad 1"
