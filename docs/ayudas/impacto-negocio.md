@@ -101,6 +101,10 @@ Si el valor del cliente o el costo de retención cambian según un segmento (por
 calcule el beneficio de cada segmento por separado, con sus propios valores, y **sume** los
 resultados para obtener el beneficio total.
 
+Un cálculo global con un solo valor, por ejemplo, el promedio de cada segmento ponderado por su
+proporción de clientes, es más simple, pero puede subestimar o sobrestimar el beneficio cuando
+los segmentos más valiosos también tienen más abandonos o un modelo más preciso.
+
 ## Referencias
 
 - Provost, F. y Fawcett, T. (2013). _Data Science for Business_. O'Reilly. Capítulo 7: el marco

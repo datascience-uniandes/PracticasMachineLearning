@@ -57,6 +57,7 @@ markdown_extensions:
   - footnotes
   - def_list
   - abbr
+  - sane_lists
   - toc:
       permalink: true
   - pymdownx.details
