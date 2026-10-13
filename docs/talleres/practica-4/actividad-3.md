@@ -11,8 +11,6 @@ Si usted desarrolla el modelo de clasificación que predice qué clientes van a 
 ¿qué tan bueno tiene que ser el modelo para que se pague en tres meses?** Suponga que la tasa
 de abandono del dataset es anual.
 
-## Parte 1: impacto global
-
 1. **Presupueste el proyecto.** Construya una tabla con la
    [**inversión**](../../ayudas/impacto-negocio.md#retorno-de-la-inversion) del proyecto: perfiles
    del equipo (por ejemplo, científico de datos, ingeniero de datos, líder de negocio), su costo
@@ -57,8 +55,6 @@ de abandono del dataset es anual.
    el plano. **¿Qué modelos se pagan en tres meses? Para la precisión de su mejor modelo, ¿qué
    sensibilidad necesitaría? Y para su sensibilidad, ¿qué precisión? ¿Es realista alcanzar esos
    valores o hay que ajustar el presupuesto o el plazo?**
-
-## Parte 2: impacto por país
 
 8. **Segmente por país:** calcule los clientes que abandonan cada mes en cada país y repita el
    paso 3 por separado para Francia, Alemania y España, con los valores \( V_g \) y \( c_g \) de
