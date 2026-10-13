@@ -94,11 +94,19 @@ nav:
           - "Actividad 2: Agrupación basada en centroides": talleres/practica-3/actividad-2.md
           - "Actividad 3: Agrupación por densidad": talleres/practica-3/actividad-3.md
           - "Actividad 4: Agrupación jerárquica": talleres/practica-3/actividad-4.md
-      - Práctica 4: talleres/practica-4.md
+      - "Práctica 4: Interpretabilidad de resultados":
+          - talleres/practica-4/index.md
+          - "Actividad 1: Ingeniería de características": talleres/practica-4/actividad-1.md
+          - "Actividad 2: Selección de modelos": talleres/practica-4/actividad-2.md
+          - "Actividad 3: Intervalos de confianza": talleres/practica-4/actividad-3.md
+          - "Actividad 4: Prueba A/B con grupos independientes": talleres/practica-4/actividad-4.md
+          - "Actividad 5: Prueba A/B pareada": talleres/practica-4/actividad-5.md
+          - "Actividad 6: Prueba de McNemar": talleres/practica-4/actividad-6.md
       - Práctica 5: talleres/practica-5.md
   - Ayudas:
       - Agrupación aglomerativa: ayudas/agrupacion-aglomerativa.md
       - Árbol de decisión: ayudas/arbol-decision.md
+      - Bootstrapping: ayudas/bootstrapping.md
       - Cargar un dataset: ayudas/cargar-dataset.md
       - Codificación one-hot: ayudas/one-hot.md
       - Coeficiente de determinación (R²): ayudas/r2.md
@@ -106,6 +114,7 @@ nav:
       - Comparar métricas entre conjuntos: ayudas/comparar-metricas.md
       - Componentes principales (PCA): ayudas/pca.md
       - Compromiso sesgo-varianza: ayudas/compromiso-sesgo-varianza.md
+      - Crear características derivadas: ayudas/caracteristicas-derivadas.md
       - Curva de aprendizaje: ayudas/curva-aprendizaje.md
       - Curva de k-distancia: ayudas/k-distancia.md
       - Curva de precisión-sensibilidad: ayudas/curva-precision-sensibilidad.md
@@ -132,6 +141,7 @@ nav:
       - Índice de Davies-Bouldin: ayudas/davies-bouldin.md
       - Inercia media: ayudas/inercia.md
       - Interpretar los coeficientes: ayudas/interpretar-coeficientes.md
+      - Intervalo de confianza por bootstrapping: ayudas/intervalo-confianza.md
       - K vecinos más cercanos (KNN): ayudas/knn.md
       - K-medias (K-means): ayudas/k-medias.md
       - K-medoides (K-medoids): ayudas/k-medoides.md
@@ -142,7 +152,9 @@ nav:
       - Normalidad de los residuos: ayudas/normalidad-residuos.md
       - Optimizar hiperparámetros con GridSearchCV: ayudas/gridsearchcv.md
       - Precisión: ayudas/precision.md
+      - Prueba A/B entre dos modelos: ayudas/prueba-ab.md
       - Prueba chi-cuadrado de independencia: ayudas/chi-cuadrado.md
+      - Prueba de McNemar: ayudas/prueba-mcnemar.md
       - Prueba de Shapiro-Wilk: ayudas/shapiro-wilk.md
       - Prueba t-estudiante: ayudas/prueba-t.md
       - Prueba U de Mann-Whitney: ayudas/prueba-u.md

@@ -26,7 +26,10 @@ Modelo que clasifica mediante una secuencia de preguntas sobre las variables (po
 
 ## B
 
-_Sin términos por ahora._
+### Bootstrapping { #bootstrapping }
+
+Técnica que estima la variabilidad de una métrica tomando muchas muestras con reemplazo del
+mismo conjunto de datos y calculando la métrica en cada una.
 
 ## C
 
@@ -203,6 +206,16 @@ _heterocedasticidad_.
 
 ## I
 
+### Ingeniería de características { #ingenieria-caracteristicas }
+
+Creación de variables nuevas a partir de las existentes (indicadores, razones, interacciones)
+para que el modelo encuentre más fácil un patrón.
+
+### Intervalo de confianza { #intervalo-confianza }
+
+Rango de valores que, con un nivel de confianza dado (usualmente 95 %), contiene el valor real de
+una métrica o de un parámetro.
+
 ### Índice de Davies-Bouldin { #davies-bouldin }
 
 Métrica de [agrupación](#agrupacion) que promedia, para cada grupo, la relación entre la dispersión de los grupos y la distancia a su grupo más parecido. Es mayor o igual que 0: más bajo es mejor.
@@ -264,6 +277,12 @@ Registro real de un grupo cuya distancia total a los demás registros del grupo 
 
 Gráfico de la [inercia](#inercia) frente al número de grupos K. El valor de K donde la curva deja de bajar con fuerza (el codo) es un buen candidato.
 
+### Muestras pareadas { #muestras-pareadas }
+
+Mediciones tomadas sobre los mismos registros, por ejemplo, dos modelos evaluados sobre el mismo
+conjunto de prueba. Se comparan con pruebas pareadas, que analizan la diferencia registro a
+registro.
+
 ### Multicolinealidad { #multicolinealidad }
 
 Situación en la que dos o más variables independientes están muy correlacionadas entre sí.
@@ -292,6 +311,16 @@ fuera de los bigotes, a más de 1,5 veces el rango intercuartílico de la caja.
 ### Precisión { #precision }
 
 De los registros que el modelo predijo como positivos, proporción que realmente lo son: \(VP / (VP + FP)\).
+
+### Prueba A/B { #prueba-ab }
+
+Comparación entre dos alternativas, A y B, para decidir si la diferencia en una métrica es real o
+se debe al azar de la muestra.
+
+### Prueba de McNemar { #prueba-mcnemar }
+
+Prueba estadística que compara dos clasificadores evaluados sobre los mismos registros, usando
+solo los casos en los que uno acierta y el otro se equivoca.
 
 ### Prueba t-estudiante { #prueba-t }
 

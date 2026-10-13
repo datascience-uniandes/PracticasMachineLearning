@@ -35,13 +35,13 @@ desde la preparación de los datos hasta la evaluación de los modelos.
 
     [:octicons-arrow-right-24: Ir a la práctica](talleres/practica-3/index.md)
 
--   :material-numeric-4-circle:{ .lg .middle } **Práctica 4**
+-   :material-numeric-4-circle:{ .lg .middle } **Práctica 4: Interpretabilidad de resultados**
 
     ---
 
-    _Tema por definir_
+    Comparación estadística de modelos de abandono con intervalos de confianza por bootstrapping, pruebas A/B y la prueba de McNemar.
 
-    [:octicons-arrow-right-24: Ir a la práctica](talleres/practica-4.md)
+    [:octicons-arrow-right-24: Ir a la práctica](talleres/practica-4/index.md)
 
 -   :material-numeric-5-circle:{ .lg .middle } **Práctica 5**
 
