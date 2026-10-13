@@ -18,8 +18,7 @@
 
     Defina dos conjuntos de atributos: **original**, con todas las variables originales, y
     **ampliado**, con las originales más las derivadas. **¿Qué características derivadas
-    parecen separar mejor a los clientes que abandonan? ¿Por qué `products_number` se relaciona
-    con el abandono de una forma que un modelo lineal no puede captar con la variable original?**
+    parecen separar mejor a los clientes que abandonan?**
 
 3. [**Divida los datos en entrenamiento, validación y prueba**](../../ayudas/division-datos.md#validacion)
    (60 %, 20 % y 20 %) de forma [**estratificada**](../../ayudas/division-datos.md#estratificada)
