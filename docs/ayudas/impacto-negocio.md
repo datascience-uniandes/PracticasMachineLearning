@@ -107,21 +107,9 @@ oferta.
 
 ## Impacto por segmento
 
-Si el valor del cliente y el costo de retención cambian según un segmento (un país, un tipo de
-cliente), el cálculo se hace por segmento y luego se suma:
-
-\[
-B = \sum_{g} R_g \cdot M_g \left( r_g \cdot V_g - \frac{c_g}{P_g} \right)
-\qquad
-P^{*}_g = \frac{c_g}{r_g \cdot V_g}
-\]
-
-- Cada segmento \( g \) tiene su propia precisión de equilibrio \( P^{*}_g \): donde el cliente
-  vale más o la oferta cuesta menos, se puede aceptar un modelo menos preciso.
-- La precisión \( P_g \) y la sensibilidad \( R_g \) se miden **solo con los clientes de cada
-  segmento**: el mismo modelo puede ser rentable en un segmento y perder dinero en otro.
-- Si un segmento queda por debajo de su \( P^{*}_g \), conviene no hacer la campaña allí o usar
-  un **umbral de decisión distinto por segmento**.
+Si el valor del cliente o el costo de retención cambian según un segmento (por ejemplo, un país),
+calcule el beneficio de cada segmento por separado, con sus propios valores, y **sume** los
+resultados para obtener el beneficio total.
 
 ## Código: beneficio, ROI y punto de equilibrio
 
@@ -168,30 +156,3 @@ plt.show()
 - `recall_minimo` es la sensibilidad mínima para cada precisión.
 - `modelos` es un diccionario con el nombre de cada modelo y su par (precisión, sensibilidad),
   por ejemplo `{"Modelo A": (0.60, 0.67)}`.
-
-## Código: impacto por segmento
-
-```python
-import pandas as pd
-from sklearn.metrics import precision_score, recall_score
-
-filas = []
-for g, (V_g, c_g, M_g) in parametros.items():
-    mascara = (segmento == g)
-    P_g = precision_score(y_val[mascara], y_pred[mascara])
-    R_g = recall_score(y_val[mascara], y_pred[mascara])
-    filas.append({"segmento": g, "precision": P_g, "sensibilidad": R_g,
-                  "precision_equilibrio": c_g / (r * V_g),
-                  "beneficio_mensual": beneficio_mensual(P_g, R_g, M_g, V_g, r, c_g)})
-
-tabla = pd.DataFrame(filas)
-print(tabla)
-print("Beneficio mensual total:", tabla["beneficio_mensual"].sum())
-```
-
-- `parametros` es un diccionario con el valor del cliente, el costo de retención y los abandonos
-  mensuales de cada segmento, por ejemplo `{"France": (V_fr, c_fr, M_fr), ...}`.
-- `segmento` es un arreglo con el segmento de cada registro del conjunto de evaluación, en el
-  mismo orden que `y_val` y `y_pred`.
-- Si usa codificación one-hot, reconstruya el país a partir de las columnas codificadas o
-  guárdelo antes de codificar.
