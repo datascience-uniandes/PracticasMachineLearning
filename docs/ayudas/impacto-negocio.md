@@ -1,109 +1,99 @@
 # Calcular el impacto de un modelo
 
 Las métricas como el [F1](f1.md) dicen qué tan bien clasifica un modelo, pero no si el proyecto
-que lo usa **se paga**. El impacto traduce la [precisión](precision.md) y la
-[sensibilidad](sensibilidad.md) del modelo a dinero y responde tres preguntas: ¿cuánto gana la
-empresa cada mes?, ¿cuándo recupera lo invertido? y ¿qué tan bueno debe ser el modelo para
-recuperarlo en un plazo dado?
+que lo usa **se paga**. El impacto traduce los aciertos y errores del modelo a dinero y compara
+lo que el modelo genera con lo que costó construirlo.
 
-## Elementos del cálculo
-
-Para un proyecto de retención de clientes, en el que el modelo marca a los clientes con riesgo
-de abandonar y la empresa les hace una oferta:
-
-| Símbolo | Qué es | Quién lo define |
-|---------|--------|-----------------|
-| \( I \) | **Inversión del proyecto**: desarrollo, equipo, infraestructura e integración | Presupuesto propio |
-| \( c \) | Costo de la oferta por cliente contactado (descuento, bono, llamada) | Supuesto de negocio |
-| \( V \) | Valor de un cliente retenido: margen que deja mientras se queda | Estimado con los datos |
-| \( r \) | Tasa de éxito: proporción de los que iban a abandonar que se quedan al recibir la oferta | Supuesto de negocio |
-| \( M \) | Clientes que abandonan cada mes | Estimado con los datos |
-| \( P \), \( R \) | Precisión y sensibilidad (_recall_) del modelo | Medidas en validación o prueba |
-
-Se supone que la empresa **no recupera a los clientes que ya abandonaron**: cada abandono que el
-modelo no detecta es un cliente perdido.
-
-## Fórmula simplificada del beneficio
-
-Cada mes, el modelo detecta \( R \cdot M \) de los clientes que iban a abandonar (verdaderos
-positivos). Como su precisión es \( P \), para encontrarlos contacta en total a
-\( R \cdot M / P \) clientes. De los detectados se quedan \( r \cdot R \cdot M \), y cada
-contacto cuesta \( c \). El beneficio neto mensual es
+## Retorno de la inversión
 
 \[
-B = \underbrace{r \cdot V \cdot R \cdot M}_{\text{valor retenido}}
-  - \underbrace{c \cdot \frac{R \cdot M}{P}}_{\text{costo de la campaña}}
-  = R \cdot M \left( r \cdot V - \frac{c}{P} \right)
+\text{ROI} = \frac{\text{Retorno} - \text{Inversión}}{\text{Inversión}}
 \]
 
-- La **sensibilidad** \( R \) multiplica el beneficio: cuantos más abandonos detecta el modelo,
-  más gana la empresa, siempre que el paréntesis sea positivo.
-- La **precisión** \( P \) decide el signo del paréntesis: con una precisión baja, el costo de
-  contactar a clientes que no iban a abandonar se come el valor retenido.
+- **Retorno:** el beneficio que generan las predicciones (cuántas se hacen y cuánto vale cada
+  una) menos el costo de sus errores.
+- **Inversión:** los recursos necesarios para construir y poner en marcha el modelo (personas,
+  tiempo, infraestructura) multiplicados por su costo.
 
-## Precisión de equilibrio
+El ROI es 0 cuando el retorno iguala la inversión. Un proyecto puede tener mucho valor y aun así
+un ROI negativo si cuesta más de lo que genera.
 
-La campaña gana dinero solo si el paréntesis es positivo, es decir, si la precisión supera la
-**precisión de equilibrio**:
+## Fórmula de Provost: valor esperado
+
+Provost y Fawcett proponen asignar un valor en dinero a cada casilla de la
+[matriz de confusión](matriz-confusion.md) (la **matriz de costo-beneficio**) y ponderarlo por la
+probabilidad de cada casilla:
 
 \[
-P^{*} = \frac{c}{r \cdot V}
+\text{Valor esperado por registro} =
+p(VP)\,v_{VP} + p(FP)\,v_{FP} + p(FN)\,v_{FN} + p(VN)\,v_{VN}
 \]
 
-Por debajo de \( P^{*} \), cada mes de campaña pierde dinero sin importar la sensibilidad, y el
-proyecto nunca recupera la inversión.
+Cada probabilidad es la proporción de registros en esa casilla, por ejemplo,
+\( p(VP) = VP / n \). En una campaña de retención, frente a no hacer nada:
 
-## Retorno de la inversión y punto de equilibrio
+| Casilla | Qué pasa | Valor |
+|---------|----------|-------|
+| VP | Iba a abandonar, se le contacta y se queda con probabilidad \( r \) | \( r \cdot V - c \) |
+| FP | No iba a abandonar, pero se le contacta | \( -c \) |
+| FN | Abandona sin ser contactado (se pierde igual que sin modelo) | 0 |
+| VN | No iba a abandonar y no se le contacta | 0 |
 
-La inversión \( I \) se paga una sola vez; el beneficio \( B \) llega cada mes. Después de
-\( t \) meses:
+\( V \) es el valor de un cliente retenido, \( c \) el costo de la oferta por cliente contactado y
+\( r \) la tasa de éxito de la oferta.
+
+## Fórmula simplificada: ganancia por predicción ajustada
 
 \[
-\text{ROI}(t) = \frac{t \cdot B - I}{I}
-\qquad
-t^{*} = \frac{I}{B}
+\hat{a} = a - (1 - I) \cdot e
 \]
 
-- El [ROI](../glosario.md#roi) es negativo mientras la empresa no recupera lo invertido, vale 0
-  en el [punto de equilibrio](../glosario.md#punto-equilibrio) \( t^{*} \) y es positivo
-  después.
-- \( t^{*} \) es el **periodo de recuperación**: el número de meses necesarios para recuperar la
-  inversión. Si \( B \le 0 \), no hay punto de equilibrio: el proyecto nunca se paga.
-- Cuando no hay punto de equilibrio, busque **a partir de qué valor** de una variable aparece:
-  la precisión mínima (\( P > P^{*} \)), el costo máximo por contacto
-  (\( c < r \cdot V \cdot P \)) o la tasa de éxito mínima (\( r > c / (V \cdot P) \)).
+\( a \) es la ganancia de una predicción correcta, \( e \) lo que se pierde con cada error e
+\( I \) la proporción de aciertos. En la campaña de retención solo importan los clientes
+contactados, así que \( I \) es la [precisión](precision.md) \( P \), \( a = r \cdot V - c \) y
+\( e = r \cdot V \): un contacto equivocado paga la oferta sin retener a nadie. La ganancia
+mensual es \( \hat{a} \) por el número de clientes contactados en el mes.
+
+## Fórmula de equilibrio
+
+La precisión (o exactitud) **de equilibrio** es la mínima con la que el modelo produce
+beneficios, es decir, con la que \( \hat{a} = 0 \):
+
+\[
+I_e = 1 - \frac{a}{e}
+\qquad\text{que en la campaña de retención es}\qquad
+P_e = \frac{c}{r \cdot V}
+\]
+
+Por debajo de ella, cada predicción pierde dinero en promedio y el proyecto nunca recupera la
+inversión.
+
+## Punto de equilibrio y periodo de recuperación
+
+Si el modelo genera un beneficio \( B \) cada mes y la inversión fue \( I_{\text{proy}} \), el
+[punto de equilibrio](../glosario.md#punto-equilibrio), el mes en el que el
+[ROI](../glosario.md#roi) llega a 0, es
+
+\[
+t^{*} = \frac{I_{\text{proy}}}{B}
+\]
+
+Si \( B \le 0 \), no hay punto de equilibrio: busque a partir de qué precisión, costo por
+contacto o tasa de éxito aparecería.
 
 ## Qué modelo se necesita para recuperar la inversión en \( k \) meses
 
-Para recuperar la inversión en \( k \) meses se necesita \( k \cdot B \ge I \):
+Con \( M \) clientes que abandonan al mes, el beneficio mensual también se escribe
+\( B = R \cdot M \left( r \cdot V - c / P \right) \), donde \( R \) es la
+[sensibilidad](sensibilidad.md). Recuperar la inversión en \( k \) meses exige
+\( k \cdot B \ge I_{\text{proy}} \), así que la sensibilidad mínima para una precisión dada es
 
 \[
-R \left( r \cdot V - \frac{c}{P} \right) \ge \frac{I}{k \cdot M}
+R_{\min} = \frac{I_{\text{proy}}}{k \cdot M \left( r \cdot V - c / P \right)}
 \]
 
-Despejando, para una precisión dada la sensibilidad mínima es
-
-\[
-R_{\min}(P) = \frac{I}{k \cdot M \left( r \cdot V - c / P \right)}
-\qquad (P > P^{*})
-\]
-
-y para una sensibilidad dada la precisión mínima es
-
-\[
-P_{\min}(R) = \frac{c}{r \cdot V - \dfrac{I}{k \cdot M \cdot R}}
-\]
-
-\( R_{\min}(P) \) es una curva en el plano precisión-sensibilidad: los modelos que quedan **por
-encima** de ella recuperan la inversión en \( k \) meses o menos. Si \( R_{\min}(P) > 1 \) para
-toda precisión posible, ningún modelo lo logra y hay que revisar el presupuesto, el plazo o la
-oferta.
-
-!!! tip "Precisión y sensibilidad dependen del umbral"
-    Cada [umbral de decisión](../glosario.md#umbral-decision) da un par \( (P, R) \) distinto, así
-    que también da un beneficio distinto. Elija el umbral que maximiza \( B \) en el
-    [conjunto de validación](../glosario.md#conjunto-validacion) y repórtelo en el de
-    [prueba](../glosario.md#conjunto-prueba).
+Los modelos cuyo par (precisión, sensibilidad) queda por encima de esa curva se pagan en
+\( k \) meses o menos.
 
 ## Impacto por segmento
 
@@ -111,48 +101,7 @@ Si el valor del cliente o el costo de retención cambian según un segmento (por
 calcule el beneficio de cada segmento por separado, con sus propios valores, y **sume** los
 resultados para obtener el beneficio total.
 
-## Código: beneficio, ROI y punto de equilibrio
+## Referencias
 
-```python
-def beneficio_mensual(P, R, M, V, r, c):
-    return R * M * (r * V - c / P)
-
-B = beneficio_mensual(P, R, M, V, r, c)
-precision_equilibrio = c / (r * V)
-meses_equilibrio = I / B if B > 0 else float("inf")
-roi_12 = (12 * B - I) / I
-
-print(f"Beneficio mensual: {B:,.0f}")
-print(f"Precisión de equilibrio: {precision_equilibrio:.3f}")
-print(f"Meses para recuperar la inversión: {meses_equilibrio:.1f}")
-print(f"ROI a 12 meses: {roi_12:.1%}")
-```
-
-- `P` y `R` son la precisión y la sensibilidad del modelo.
-- `M`, `V`, `r`, `c` e `I` son los elementos de la tabla anterior.
-- `meses_equilibrio` es infinito cuando el beneficio mensual no es positivo.
-
-## Código: curva para recuperar la inversión en k meses
-
-```python
-import numpy as np
-import matplotlib.pyplot as plt
-
-k = 3
-precisiones = np.linspace(c / (r * V) + 0.01, 1, 200)
-recall_minimo = I / (k * M * (r * V - c / precisiones))
-
-plt.plot(precisiones, recall_minimo, label=f"Recuperar en {k} meses")
-for nombre, (p, s) in modelos.items():
-    plt.scatter(p, s, label=nombre)
-plt.ylim(0, 1)
-plt.xlabel("Precisión")
-plt.ylabel("Sensibilidad mínima")
-plt.legend()
-plt.show()
-```
-
-- `precisiones` recorre las precisiones por encima de la de equilibrio.
-- `recall_minimo` es la sensibilidad mínima para cada precisión.
-- `modelos` es un diccionario con el nombre de cada modelo y su par (precisión, sensibilidad),
-  por ejemplo `{"Modelo A": (0.60, 0.67)}`.
+- Provost, F. y Fawcett, T. (2013). _Data Science for Business_. O'Reilly. Capítulo 7: el marco
+  del valor esperado y la matriz de costo-beneficio.

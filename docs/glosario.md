@@ -393,8 +393,8 @@ mismas unidades que la variable objetivo.
 
 ### ROI { #roi }
 
-Retorno de la inversión: beneficio acumulado menos la inversión, dividido por la inversión. Es
-negativo mientras no se recupera lo invertido, vale 0 en el [punto de equilibrio](#punto-equilibrio)
+Retorno de la inversión: lo que genera un proyecto menos lo que costó, dividido por lo que costó.
+Es negativo mientras no se recupera lo invertido, vale 0 en el [punto de equilibrio](#punto-equilibrio)
 y es positivo después.
 
 ### Ruido { #ruido }
