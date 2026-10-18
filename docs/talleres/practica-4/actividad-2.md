@@ -76,12 +76,10 @@
    Actividad 1 no calculó los intervalos de alguna métrica, obténgalos con las réplicas de cada
    modelo del paso 4.
 
-    **¿En qué métricas y diseños coinciden los análisis? ¿En cuáles no, y por qué? Tenga en
-    cuenta qué métrica compara cada prueba y si trata las muestras como pareadas. ¿Por qué la
+    **¿En qué métricas y diseños coinciden los análisis? ¿En cuáles no, y por qué? ¿Por qué la
     superposición de intervalos es más conservadora que el intervalo de la diferencia? ¿La
     ingeniería de características o el cambio de tipo de modelo tuvo un efecto más claro? ¿Qué
-    modelo elegiría en cada configuración? ¿La elección hecha en validación en la Actividad 1 se
-    confirma en prueba?**
+    modelo elegiría en cada configuración?**
 
 !!! success "Fin de la Actividad 2"
     Guarde los cambios en el notebook. Ya estamos listos para continuar con la siguiente actividad.
