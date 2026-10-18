@@ -4,17 +4,6 @@ site_author: Juan Pablo Reyes
 site_url: https://datascience-uniandes.github.io/PracticasMachineLearning/
 copyright: Universidad de los Andes · Ciencia de Datos
 
-# Práctica 4 (interpretabilidad de resultados) oculta por ahora: sus archivos no se publican.
-exclude_docs: |
-  talleres/practica-4/
-  ayudas/bootstrapping.md
-  ayudas/caracteristicas-derivadas.md
-  ayudas/impacto-negocio.md
-  ayudas/intervalo-confianza.md
-  ayudas/prueba-ab.md
-  ayudas/prueba-mcnemar.md
-
-
 theme:
   name: material
   language: es
@@ -105,10 +94,17 @@ nav:
           - "Actividad 2: Agrupación basada en centroides": talleres/practica-3/actividad-2.md
           - "Actividad 3: Agrupación por densidad": talleres/practica-3/actividad-3.md
           - "Actividad 4: Agrupación jerárquica": talleres/practica-3/actividad-4.md
+      - "Práctica 4: Interpretabilidad de resultados":
+          - talleres/practica-4/index.md
+          - "Actividad 1: Intervalos de confianza": talleres/practica-4/actividad-1.md
+          - "Actividad 2: Pruebas estadísticas": talleres/practica-4/actividad-2.md
+          - "Actividad 3: Cálculo de impacto": talleres/practica-4/actividad-3.md
       - Práctica 5: talleres/practica-5.md
   - Ayudas:
       - Agrupación aglomerativa: ayudas/agrupacion-aglomerativa.md
       - Árbol de decisión: ayudas/arbol-decision.md
+      - Bootstrapping: ayudas/bootstrapping.md
+      - Calcular el impacto de un modelo: ayudas/impacto-negocio.md
       - Cargar un dataset: ayudas/cargar-dataset.md
       - Codificación one-hot: ayudas/one-hot.md
       - Coeficiente de determinación (R²): ayudas/r2.md
@@ -116,6 +112,7 @@ nav:
       - Comparar métricas entre conjuntos: ayudas/comparar-metricas.md
       - Componentes principales (PCA): ayudas/pca.md
       - Compromiso sesgo-varianza: ayudas/compromiso-sesgo-varianza.md
+      - Crear características derivadas: ayudas/caracteristicas-derivadas.md
       - Curva de aprendizaje: ayudas/curva-aprendizaje.md
       - Curva de k-distancia: ayudas/k-distancia.md
       - Curva de precisión-recall: ayudas/curva-precision-recall.md
@@ -142,6 +139,7 @@ nav:
       - Índice de Davies-Bouldin: ayudas/davies-bouldin.md
       - Inercia media: ayudas/inercia.md
       - Interpretar los coeficientes: ayudas/interpretar-coeficientes.md
+      - Intervalo de confianza por bootstrapping: ayudas/intervalo-confianza.md
       - K vecinos más cercanos (KNN): ayudas/knn.md
       - K-medias (K-means): ayudas/k-medias.md
       - K-medoides (K-medoids): ayudas/k-medoides.md
@@ -152,7 +150,9 @@ nav:
       - Normalidad de los residuos: ayudas/normalidad-residuos.md
       - Optimizar hiperparámetros con GridSearchCV: ayudas/gridsearchcv.md
       - Precisión: ayudas/precision.md
+      - Prueba A/B entre dos modelos: ayudas/prueba-ab.md
       - Prueba chi-cuadrado de independencia: ayudas/chi-cuadrado.md
+      - Prueba de McNemar: ayudas/prueba-mcnemar.md
       - Prueba de Shapiro-Wilk: ayudas/shapiro-wilk.md
       - Prueba t-estudiante: ayudas/prueba-t.md
       - Prueba U de Mann-Whitney: ayudas/prueba-u.md
