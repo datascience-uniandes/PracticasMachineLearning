@@ -4,6 +4,10 @@ site_author: Juan Pablo Reyes
 site_url: https://datascience-uniandes.github.io/PracticasMachineLearning/
 copyright: Universidad de los Andes · Ciencia de Datos
 
+# Práctica 5 oculta por ahora: su archivo no se publica.
+exclude_docs: |
+  talleres/practica-5.md
+
 theme:
   name: material
   language: es
@@ -94,12 +98,11 @@ nav:
           - "Actividad 2: Agrupación basada en centroides": talleres/practica-3/actividad-2.md
           - "Actividad 3: Agrupación por densidad": talleres/practica-3/actividad-3.md
           - "Actividad 4: Agrupación jerárquica": talleres/practica-3/actividad-4.md
-      - "Práctica 4: Interpretabilidad de resultados":
+      - "Práctica 4: Pruebas A/B":
           - talleres/practica-4/index.md
           - "Actividad 1: Intervalos de confianza": talleres/practica-4/actividad-1.md
           - "Actividad 2: Pruebas estadísticas": talleres/practica-4/actividad-2.md
           - "Actividad 3: Cálculo de impacto": talleres/practica-4/actividad-3.md
-      - Práctica 5: talleres/practica-5.md
   - Ayudas:
       - Agrupación aglomerativa: ayudas/agrupacion-aglomerativa.md
       - Árbol de decisión: ayudas/arbol-decision.md

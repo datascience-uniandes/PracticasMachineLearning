@@ -35,7 +35,7 @@ desde la preparación de los datos hasta la evaluación de los modelos.
 
     [:octicons-arrow-right-24: Ir a la práctica](talleres/practica-3/index.md)
 
--   :material-numeric-4-circle:{ .lg .middle } **Práctica 4: Interpretabilidad de resultados**
+-   :material-numeric-4-circle:{ .lg .middle } **Práctica 4: Pruebas A/B**
 
     ---
 
@@ -43,13 +43,6 @@ desde la preparación de los datos hasta la evaluación de los modelos.
 
     [:octicons-arrow-right-24: Ir a la práctica](talleres/practica-4/index.md)
 
--   :material-numeric-5-circle:{ .lg .middle } **Práctica 5**
-
-    ---
-
-    _Tema por definir_
-
-    [:octicons-arrow-right-24: Ir a la práctica](talleres/practica-5.md)
 
 </div>
 

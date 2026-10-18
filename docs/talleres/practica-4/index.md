@@ -1,4 +1,4 @@
-# Práctica 4: Interpretabilidad de resultados
+# Práctica 4: Pruebas A/B
 
 En esta práctica se retoma el problema de **abandono** (_churn_) de la Práctica 2 para responder
 dos preguntas que las métricas por sí solas no responden: **¿la diferencia entre dos modelos es
