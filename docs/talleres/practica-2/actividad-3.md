@@ -24,22 +24,22 @@
 
     - **a)** Grafique la [**matriz de confusión**](../../ayudas/matriz-confusion.md) de cada modelo.
     - **b)** Calcule y grafique la [**exactitud**](../../ayudas/exactitud.md), la
-      [**precisión**](../../ayudas/precision.md), la [**sensibilidad**](../../ayudas/sensibilidad.md)
+      [**precisión**](../../ayudas/precision.md), el [**recall**](../../ayudas/recall.md)
       y el [**F1**](../../ayudas/f1.md) de cada modelo.
 
     **¿Cuántos clientes que abandonan detecta cada modelo y cuántas falsas alarmas genera? ¿Qué
     modelo muestra más diferencia entre entrenamiento y validación? ¿Qué ocurre con las métricas
     de entrenamiento de KNN y qué explica ese resultado?**
 
-6. Grafique las [**curvas de precisión-sensibilidad**](../../ayudas/curva-precision-sensibilidad.md)
+6. Grafique las [**curvas de precisión-recall**](../../ayudas/curva-precision-recall.md)
    de los tres modelos, una figura para entrenamiento y otra para validación. **¿Dónde está la
    línea base? ¿Qué modelo tiene la mayor precisión promedio (AP) en validación?**
 7. Grafique las [**curvas ROC**](../../ayudas/curva-roc.md) de los tres modelos, en entrenamiento
    y en validación. **¿Qué modelo tiene el mayor [AUC](../../glosario.md#auc) en validación? ¿Qué
    modelo cambia más entre entrenamiento y validación? ¿Por qué estas curvas se ven más
-   optimistas que las de precisión-sensibilidad?**
+   optimistas que las de precisión-recall?**
 8. **Elija el mejor modelo con las métricas de validación:** construya una tabla con la exactitud,
-   la precisión, la sensibilidad, el F1, el AUC y el AP de los tres modelos en validación.
+   la precisión, el recall, el F1, el AUC y el AP de los tres modelos en validación.
    Elija el modelo con el **mayor F1 de validación**; si dos modelos son muy parecidos, prefiera
    el más simple o el que tenga menos diferencia entre entrenamiento y validación.
    **¿Qué modelo eligió? ¿Cambiaría su elección si para el banco fuera más costoso no detectar a
@@ -48,9 +48,9 @@
    que hasta ahora no se ha usado:
 
     - **a)** Grafique su [**matriz de confusión**](../../ayudas/matriz-confusion.md).
-    - **b)** Calcule la exactitud, la precisión, la sensibilidad y el F1, y
+    - **b)** Calcule la exactitud, la precisión, el recall y el F1, y
       [**compárelos**](../../ayudas/comparar-metricas.md) con los de validación.
-    - **c)** Grafique su [**curva de precisión-sensibilidad**](../../ayudas/curva-precision-sensibilidad.md)
+    - **c)** Grafique su [**curva de precisión-recall**](../../ayudas/curva-precision-recall.md)
       y su [**curva ROC**](../../ayudas/curva-roc.md) en prueba.
     - **d)** Compare su exactitud con la de un modelo que siempre predice que el cliente **no**
       abandona.

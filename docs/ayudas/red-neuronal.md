@@ -129,7 +129,7 @@ y_pred = (y_prob >= 0.5).astype(int)
 - Con `y_val`, `y_pred` y `y_prob` puede usar las mismas funciones de scikit-learn que con
   cualquier otro clasificador: la [matriz de confusión](matriz-confusion.md), el [F1](f1.md), la
   [curva ROC](curva-roc.md) y la
-  [curva de precisión-sensibilidad](curva-precision-sensibilidad.md) (esta última también sirve
+  [curva de precisión-recall](curva-precision-recall.md) (esta última también sirve
   para elegir un umbral distinto de 0,5).
 
 ## Hiperparámetros principales

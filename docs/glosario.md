@@ -99,13 +99,13 @@ Medida de qué tanto varían juntas dos variables. El coeficiente de Pearson (\(
 (relación lineal inversa perfecta) a 1 (relación lineal directa perfecta); 0 indica que no hay
 relación lineal.
 
-### Curva de precisión-sensibilidad { #curva-precision-sensibilidad }
+### Curva de precisión-recall { #curva-precision-recall }
 
-Gráfico de la [precisión](#precision) frente a la [sensibilidad](#sensibilidad) de un clasificador para todos los [umbrales de decisión](#umbral-decision). Es más informativa que la curva ROC cuando hay [desbalance de clases](#desbalance-de-clases).
+Gráfico de la [precisión](#precision) frente al [recall](#recall) de un clasificador para todos los [umbrales de decisión](#umbral-decision). Es más informativa que la curva ROC cuando hay [desbalance de clases](#desbalance-de-clases).
 
 ### Curva ROC { #curva-roc }
 
-Gráfico de la tasa de verdaderos positivos frente a la tasa de falsos positivos de un clasificador para todos los [umbrales de decisión](#umbral-decision). Su área es el [AUC](#auc).
+Gráfico de la tasa de verdaderos positivos ([recall](#recall)) frente a la tasa de falsos positivos de un clasificador para todos los [umbrales de decisión](#umbral-decision). Su área es el [AUC](#auc).
 
 ## D
 
@@ -168,7 +168,7 @@ Proporción de predicciones correctas de un clasificador (_accuracy_). Con [desb
 
 ### F1 { #f1 }
 
-Media armónica de la [precisión](#precision) y la [sensibilidad](#sensibilidad). Solo es alta cuando ambas lo son.
+Media armónica de la [precisión](#precision) y el [recall](#recall). Solo es alta cuando ambos lo son.
 
 ### Fuga de datos { #fuga-de-datos }
 
@@ -350,6 +350,11 @@ el modelo. Vale 1 si el modelo predice perfectamente y 0 si no mejora a predecir
 
 [Ensamble](#ensamble) de muchos [árboles de decisión](#arbol-decision), cada uno entrenado con una muestra distinta de los datos y de las variables. La predicción final es la votación de todos los árboles.
 
+### Recall { #recall }
+
+De los registros realmente positivos, proporción que el modelo detecta: \(VP / (VP + FN)\).
+También se conoce como sensibilidad o tasa de verdaderos positivos (TPR).
+
 ### Red neuronal { #red-neuronal }
 
 Modelo formado por capas de neuronas conectadas. En una red densamente conectada, cada neurona de una capa recibe la salida de todas las neuronas de la capa anterior.
@@ -403,10 +408,6 @@ En los algoritmos de agrupación por densidad, registros que no pertenecen a nin
 
 ## S
 
-### Sensibilidad { #sensibilidad }
-
-De los registros realmente positivos, proporción que el modelo detecta (_recall_): \(VP / (VP + FN)\).
-
 ### Sesgo { #sesgo }
 
 Asimetría de una distribución. Con sesgo a la derecha, la mayoría de valores son pequeños
@@ -438,7 +439,7 @@ de una variable dependa del valor de la otra.
 
 ### Umbral de decisión { #umbral-decision }
 
-Probabilidad a partir de la cual un clasificador asigna la clase positiva. Por defecto es 0,5; moverlo cambia el equilibrio entre [precisión](#precision) y [sensibilidad](#sensibilidad).
+Probabilidad a partir de la cual un clasificador asigna la clase positiva. Por defecto es 0,5; moverlo cambia el equilibrio entre [precisión](#precision) y [recall](#recall).
 
 ## V
 

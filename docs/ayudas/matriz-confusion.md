@@ -4,7 +4,7 @@ La [matriz de confusión](../glosario.md#matriz-confusion) cuenta, para un probl
 [clasificación](../glosario.md#clasificacion), cuántos registros de cada clase real fueron
 asignados a cada clase predicha. Es el punto de partida de casi todas las métricas de
 clasificación: [exactitud](exactitud.md), [precisión](precision.md),
-[sensibilidad](sensibilidad.md) y [F1](f1.md).
+[recall](recall.md) y [F1](f1.md).
 
 ## Las cuatro casillas
 
@@ -60,7 +60,7 @@ plt.show()
 
 Con `normalize="true"` cada fila se divide por su total, de modo que cada casilla muestra la
 proporción de registros de esa clase real que cayó en cada predicción. La diagonal de la matriz
-normalizada es la [sensibilidad](sensibilidad.md) de cada clase.
+normalizada es el [recall](recall.md) de cada clase.
 
 ## Cómo interpretarla
 
@@ -75,12 +75,12 @@ normalizada es la [sensibilidad](sensibilidad.md) de cada clase.
   positivo es "el cliente se va a ir", un FN es un cliente que se pierde sin haber intentado
   retenerlo, mientras que un FP es una oferta de retención enviada a alguien que se iba a quedar.
   Si perder un cliente cuesta mucho más que la oferta, conviene reducir los FN aunque aumenten
-  los FP; en ese caso importa más la [sensibilidad](sensibilidad.md). Si cada alarma falsa es
+  los FP; en ese caso importa más el [recall](recall.md). Si cada alarma falsa es
   costosa, importa más la [precisión](precision.md).
 - **La matriz depende del [umbral de decisión](../glosario.md#umbral-decision)**: `predict`
   usa por defecto un umbral de 0,5 sobre la probabilidad de la clase positiva. Al cambiar el
   umbral, los registros se mueven entre casillas (vea [curva ROC](curva-roc.md) y
-  [curva de precisión-sensibilidad](curva-precision-sensibilidad.md)).
+  [curva de precisión-recall](curva-precision-recall.md)).
 
 !!! tip "Compare la matriz de entrenamiento con la de validación"
     Si la matriz del [conjunto de entrenamiento](../glosario.md#conjunto-entrenamiento) casi no

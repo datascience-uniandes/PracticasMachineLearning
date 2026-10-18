@@ -12,7 +12,7 @@ evalúa todos a la vez.
 \text{TPR} = \frac{VP}{VP + FN} \qquad\qquad \text{FPR} = \frac{FP}{FP + VN}
 \]
 
-- **Eje vertical, TPR** (tasa de verdaderos positivos): es la [sensibilidad](sensibilidad.md),
+- **Eje vertical, TPR** (tasa de verdaderos positivos): es el [recall](recall.md),
   la proporción de positivos reales que el modelo detecta.
 - **Eje horizontal, FPR** (tasa de falsos positivos): la proporción de negativos reales que el
   modelo marca como positivos por error.
@@ -163,5 +163,5 @@ plt.show()
     Con [desbalance de clases](../glosario.md#desbalance-de-clases), hay tantos negativos que
     incluso muchos falsos positivos producen una FPR pequeña, y la curva ROC se ve muy bien
     aunque la mayoría de las predicciones positivas sean errores. En ese caso use también la
-    [curva de precisión-sensibilidad](curva-precision-sensibilidad.md), que sí refleja ese
+    [curva de precisión-recall](curva-precision-recall.md), que sí refleja ese
     problema.

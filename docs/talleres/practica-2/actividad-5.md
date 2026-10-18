@@ -25,16 +25,16 @@
 
     - **a)** Grafique su [**matriz de confusión**](../../ayudas/matriz-confusion.md).
     - **b)** Calcule y grafique la [**exactitud**](../../ayudas/exactitud.md), la
-      [**precisión**](../../ayudas/precision.md), la [**sensibilidad**](../../ayudas/sensibilidad.md)
+      [**precisión**](../../ayudas/precision.md), el [**recall**](../../ayudas/recall.md)
       y el [**F1**](../../ayudas/f1.md).
-    - **c)** Grafique su [**curva de precisión-sensibilidad**](../../ayudas/curva-precision-sensibilidad.md#desde-predicciones)
+    - **c)** Grafique su [**curva de precisión-recall**](../../ayudas/curva-precision-recall.md#desde-predicciones)
       y su [**curva ROC**](../../ayudas/curva-roc.md#desde-predicciones) en entrenamiento y en validación. Como la red
       no es un estimador de scikit-learn, grafíquelas desde las predicciones.
 
-5. **Comparación final en validación:** construya una tabla con la exactitud, la precisión, la
-   sensibilidad, el F1, el AUC y el AP en validación del mejor modelo básico (Actividad 3), del
+5. **Comparación final en validación:** construya una tabla con la exactitud, la precisión, el
+   recall, el F1, el AUC y el AP en validación del mejor modelo básico (Actividad 3), del
    mejor ensamble (Actividad 4) y de la mejor red neuronal. Grafique en una misma figura sus
-   curvas de precisión-sensibilidad de validación. Elija el **modelo final** con el mayor F1 de
+   curvas de precisión-recall de validación. Elija el **modelo final** con el mayor F1 de
    validación. **¿Qué modelo eligió? ¿Qué ventajas y desventajas tiene frente a los otros dos?**
 6. **Evalúe la red en el [conjunto de prueba](../../glosario.md#conjunto-prueba)** y agregue a la
    tabla anterior las métricas en prueba de los tres modelos finalistas.

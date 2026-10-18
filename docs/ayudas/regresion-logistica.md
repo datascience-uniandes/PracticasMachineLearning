@@ -36,7 +36,7 @@ negativa.
 es el [umbral de decisión](../glosario.md#umbral-decision) por defecto. Puede moverlo usando las
 probabilidades de `predict_proba`; un umbral más bajo detecta más positivos a cambio de más
 falsos positivos. Vea la [matriz de confusión](matriz-confusion.md), la
-[curva ROC](curva-roc.md) y la [curva precisión-sensibilidad](curva-precision-sensibilidad.md)
+[curva ROC](curva-roc.md) y la [curva precisión-recall](curva-precision-recall.md)
 para evaluar distintos umbrales.
 
 ## Escalado
@@ -77,7 +77,7 @@ y_prob = modelo.predict_proba(X_val_esc)[:, 1]
   defecto (100), en ocasiones aparece una advertencia `ConvergenceWarning`.
 - `y_pred` contiene la clase predicha (0 o 1) de cada registro, usando el umbral 0,5.
 - `predict_proba` devuelve una columna por clase; `[:, 1]` toma la probabilidad de la clase
-  positiva. `y_prob` es lo que necesitan la curva ROC y la curva precisión-sensibilidad.
+  positiva. `y_prob` es lo que necesitan la curva ROC y la curva precisión-recall.
 
 ## Hiperparámetros principales
 
@@ -97,4 +97,4 @@ y_prob = modelo.predict_proba(X_val_esc)[:, 1]
     Si una clase es mucho menos frecuente que la otra, el modelo tiende a predecir casi siempre
     la clase mayoritaria. `class_weight="balanced"` pondera cada clase de forma inversamente
     proporcional a su frecuencia. Evalúe el modelo con métricas como F1 o la curva
-    precisión-sensibilidad, no solo con *accuracy*.
+    precisión-recall, no solo con *accuracy*.

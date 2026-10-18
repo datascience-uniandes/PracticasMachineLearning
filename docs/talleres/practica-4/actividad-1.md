@@ -38,8 +38,8 @@
    hiperparámetros, y entrénelos con el mismo conjunto de atributos: el que obtenga el mayor F1
    de validación en la configuración 1. **¿Qué cambia entre los dos modelos?**
 6. **Compare los modelos en [validación](../../glosario.md#conjunto-validacion):** construya una
-   tabla con la [**precisión**](../../ayudas/precision.md), la
-   [**sensibilidad**](../../ayudas/sensibilidad.md) y el [**F1**](../../ayudas/f1.md) de los
+   tabla con la [**precisión**](../../ayudas/precision.md), el
+   [**recall**](../../ayudas/recall.md) y el [**F1**](../../ayudas/f1.md) de los
    cuatro modelos en validación. El conjunto de validación se usa **para comparar y elegir**: en
    cada configuración, el modelo con mayor F1 de validación es el elegido. **¿Qué modelo gana en
    cada configuración? ¿Las diferencias parecen grandes o pequeñas?**

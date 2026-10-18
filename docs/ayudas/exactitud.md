@@ -48,8 +48,8 @@ frecuente. Esa proporción es la exactitud de un modelo que no aprendió nada.
 - **Trata igual todos los errores**: un FP y un FN pesan lo mismo, aunque en el problema uno
   sea mucho más costoso que el otro (vea [matriz de confusión](matriz-confusion.md)).
 - **Cuándo usarla**: es adecuada cuando las clases están más o menos balanceadas y los dos tipos
-  de error cuestan parecido. En otro caso, complemente con la [precisión](precision.md), la
-  [sensibilidad](sensibilidad.md) y el [F1](f1.md).
+  de error cuestan parecido. En otro caso, complemente con la [precisión](precision.md), el
+  [recall](recall.md) y el [F1](f1.md).
 - Una exactitud mucho mayor en el
   [conjunto de entrenamiento](../glosario.md#conjunto-entrenamiento) que en validación indica
   [sobreajuste](../glosario.md#sobreajuste) (vea [comparar métricas](comparar-metricas.md)).

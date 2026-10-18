@@ -12,8 +12,8 @@ lo que el modelo genera con lo que costó construirlo.
 
 - **Retorno:** el beneficio que generan las predicciones (cuántas se hacen y cuánto vale cada
   una) menos el costo de sus errores.
-- **Inversión:** los recursos necesarios para construir y poner en marcha el modelo (personas,
-  tiempo, infraestructura) multiplicados por su costo.
+- **Inversión:** el presupuesto del proyecto: los recursos necesarios para construir y poner en
+  marcha el modelo (personas, tiempo, infraestructura) multiplicados por su costo.
 
 El ROI es 0 cuando el retorno iguala la inversión. Un proyecto puede tener mucho valor y aun así
 un ROI negativo si cuesta más de lo que genera.
@@ -85,14 +85,14 @@ contacto o tasa de éxito aparecería.
 
 Con \( M \) clientes que abandonan al mes, el beneficio mensual también se escribe
 \( B = R \cdot M \left( r \cdot V - c / P \right) \), donde \( R \) es la
-[sensibilidad](sensibilidad.md). Recuperar la inversión en \( k \) meses exige
-\( k \cdot B \ge I_{\text{proy}} \), así que la sensibilidad mínima para una precisión dada es
+[recall](recall.md). Recuperar la inversión en \( k \) meses exige
+\( k \cdot B \ge I_{\text{proy}} \), así que el recall mínimo para una precisión dada es
 
 \[
 R_{\min} = \frac{I_{\text{proy}}}{k \cdot M \left( r \cdot V - c / P \right)}
 \]
 
-Los modelos cuyo par (precisión, sensibilidad) queda por encima de esa curva se pagan en
+Los modelos cuyo par (precisión, recall) queda por encima de esa curva se pagan en
 \( k \) meses o menos.
 
 ## Impacto por segmento

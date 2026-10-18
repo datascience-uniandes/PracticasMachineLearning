@@ -118,7 +118,7 @@ nav:
       - Compromiso sesgo-varianza: ayudas/compromiso-sesgo-varianza.md
       - Curva de aprendizaje: ayudas/curva-aprendizaje.md
       - Curva de k-distancia: ayudas/k-distancia.md
-      - Curva de precisión-sensibilidad: ayudas/curva-precision-sensibilidad.md
+      - Curva de precisión-recall: ayudas/curva-precision-recall.md
       - Curva ROC: ayudas/curva-roc.md
       - DBSCAN: ayudas/dbscan.md
       - Dendrograma: ayudas/dendrograma.md
@@ -158,6 +158,7 @@ nav:
       - Prueba U de Mann-Whitney: ayudas/prueba-u.md
       - Raíz del error cuadrático medio (RMSE): ayudas/rmse.md
       - Random Forest: ayudas/random-forest.md
+      - Recall: ayudas/recall.md
       - Red neuronal densamente conectada: ayudas/red-neuronal.md
       - Regresión Lasso y Ridge: ayudas/lasso-ridge.md
       - Regresión lineal: ayudas/regresion-lineal.md
@@ -172,7 +173,6 @@ nav:
       - Revisar y tratar valores atípicos: ayudas/valores-atipicos.md
       - Revisar y tratar valores inválidos: ayudas/valores-invalidos.md
       - Seleccionar hiperparámetros con validación: ayudas/seleccion-hiperparametros.md
-      - Sensibilidad (recall): ayudas/sensibilidad.md
       - Stacking: ayudas/stacking.md
       - Validación cruzada K-fold: ayudas/validacion-cruzada.md
       - Valores reales vs. predichos: ayudas/reales-vs-predichos.md

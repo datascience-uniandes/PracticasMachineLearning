@@ -1,24 +1,24 @@
-# Curva de precisión-sensibilidad
+# Curva de precisión-recall
 
-La [curva de precisión-sensibilidad](../glosario.md#curva-precision-sensibilidad) muestra cómo
-cambian la [precisión](precision.md) y la [sensibilidad](sensibilidad.md) de un clasificador
+La [curva de precisión-recall](../glosario.md#curva-precision-recall) muestra cómo
+cambian la [precisión](precision.md) y el [recall](recall.md) de un clasificador
 binario al mover el [umbral de decisión](../glosario.md#umbral-decision). Se concentra en la
 clase positiva, por eso es más informativa que la [curva ROC](curva-roc.md) cuando hay
 [desbalance de clases](../glosario.md#desbalance-de-clases).
 
 ## Qué se grafica
 
-- **Eje horizontal, sensibilidad**: proporción de positivos reales que el modelo detecta,
+- **Eje horizontal, recall**: proporción de positivos reales que el modelo detecta,
   \( VP / (VP + FN) \).
 - **Eje vertical, precisión**: proporción de predicciones positivas que son correctas,
   \( VP / (VP + FP) \).
 
 Cada punto de la curva es un umbral distinto. Con un umbral alto el modelo predice positivo
-pocas veces: la sensibilidad es baja y la precisión suele ser alta (izquierda de la curva). Al
-bajar el umbral detecta más positivos, pero también comete más falsas alarmas: la sensibilidad
+pocas veces: el recall es bajo y la precisión suele ser alta (izquierda de la curva). Al
+bajar el umbral detecta más positivos, pero también comete más falsas alarmas: el recall
 sube y la precisión baja (derecha de la curva).
 
-![Curvas de precisión-sensibilidad conceptuales con la línea base de la proporción de positivos](../assets/img/ayudas/curva-precision-sensibilidad.png){ width="460" }
+![Curvas de precisión-recall conceptuales con la línea base de la proporción de positivos](../assets/img/ayudas/curva-precision-sensibilidad.png){ width="460" }
 
 ## La precisión promedio (AP) y la línea base
 
@@ -26,7 +26,7 @@ La **precisión promedio** (AP, *average precision*) resume la curva en un solo 
 parecida al área bajo ella. Va de 0 a 1 y mayor es mejor.
 
 La **línea base** es la proporción de la clase positiva en los datos. Un modelo que predice al
-azar tiene una precisión igual a esa proporción para cualquier sensibilidad, de modo que su
+azar tiene una precisión igual a esa proporción para cualquier recall, de modo que su
 curva es una línea horizontal a esa altura. Por eso, a diferencia del [AUC](../glosario.md#auc),
 el valor de referencia de la AP **no es 0,5**: si solo el 10 % de los registros es positivo, una
 AP de 0,4 ya es cuatro veces mejor que el azar.
@@ -136,11 +136,11 @@ plt.show()
 
 ## Cómo interpretarla
 
-- **Más cerca de la esquina superior derecha es mejor**: ese punto (sensibilidad 1,
+- **Más cerca de la esquina superior derecha es mejor**: ese punto (recall 1,
   precisión 1) es un modelo que detecta todos los positivos sin falsas alarmas.
 - **Compare con la línea base**: una curva pegada a ella no aporta nada frente al azar.
 - **Compare modelos con el gráfico de validación**: el modelo con la curva más alta (y mayor AP)
-  logra más precisión para la misma sensibilidad.
+  logra más precisión para el mismo recall.
 - **Una brecha grande entre entrenamiento y validación indica
   [sobreajuste](../glosario.md#sobreajuste)** (vea [comparar métricas](comparar-metricas.md)).
 - **La curva suele ser escalonada e irregular**, sobre todo con pocos positivos; no es un error.

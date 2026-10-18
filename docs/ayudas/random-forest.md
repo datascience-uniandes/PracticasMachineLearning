@@ -60,7 +60,7 @@ y_prob = modelo.predict_proba(X_val)[:, 1]
 - `y_pred` es la clase predicha con umbral 0,5.
 - `y_prob` es el promedio de las probabilidades de los árboles. A diferencia de un árbol
   individual, toma muchos valores intermedios, lo que permite construir
-  [curvas ROC](curva-roc.md) y [curvas de precisión-sensibilidad](curva-precision-sensibilidad.md)
+  [curvas ROC](curva-roc.md) y [curvas de precisión-recall](curva-precision-recall.md)
   más informativas.
 
 ## Hiperparámetros principales
@@ -86,6 +86,6 @@ y_prob = modelo.predict_proba(X_val)[:, 1]
 - A cambio, se pierde la interpretabilidad del árbol individual: no se puede dibujar un solo
   árbol que explique las predicciones.
 - Con desbalance de clases, además de `class_weight`, puede ajustar el umbral de decisión usando
-  `y_prob` y la [curva de precisión-sensibilidad](curva-precision-sensibilidad.md).
+  `y_prob` y la [curva de precisión-recall](curva-precision-recall.md).
 - Evalúe siempre con la [matriz de confusión](matriz-confusion.md) y métricas adecuadas en el
   conjunto de validación, no con el desempeño de entrenamiento.

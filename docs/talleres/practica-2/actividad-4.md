@@ -30,29 +30,29 @@
 
     - **a)** Grafique la [**matriz de confusión**](../../ayudas/matriz-confusion.md) de cada modelo.
     - **b)** Calcule y grafique la [**exactitud**](../../ayudas/exactitud.md), la
-      [**precisión**](../../ayudas/precision.md), la [**sensibilidad**](../../ayudas/sensibilidad.md)
+      [**precisión**](../../ayudas/precision.md), el [**recall**](../../ayudas/recall.md)
       y el [**F1**](../../ayudas/f1.md) de cada modelo.
 
     **¿Cuántos clientes que abandonan detecta cada ensamble y cuántas falsas alarmas genera? ¿Qué
     ensamble muestra más [sobreajuste](../../glosario.md#sobreajuste)?**
 
-7. Grafique las [**curvas de precisión-sensibilidad**](../../ayudas/curva-precision-sensibilidad.md)
+7. Grafique las [**curvas de precisión-recall**](../../ayudas/curva-precision-recall.md)
    de los cuatro ensambles, una figura para entrenamiento y otra para validación.
    **¿Qué ensamble tiene la mayor precisión promedio (AP) en validación?**
 8. Grafique las [**curvas ROC**](../../ayudas/curva-roc.md) de los cuatro ensambles, en
    entrenamiento y en validación. **¿Qué ensamble tiene el mayor [AUC](../../glosario.md#auc) en
    validación?**
 9. **Elija el mejor ensamble con las métricas de validación:** construya una tabla con la exactitud,
-   la precisión, la sensibilidad, el F1, el AUC y el AP de los cuatro ensambles en validación y
+   la precisión, el recall, el F1, el AUC y el AP de los cuatro ensambles en validación y
    agregue el mejor modelo de la Actividad 3. Elija el ensamble con el **mayor F1 de validación**.
    **¿Los ensambles mejoran al mejor modelo básico? ¿La mejora justifica el costo en tiempo de
    entrenamiento y en interpretabilidad?**
 10. **Evalúe el ensamble elegido en el [conjunto de prueba](../../glosario.md#conjunto-prueba):**
 
     - **a)** Grafique su [**matriz de confusión**](../../ayudas/matriz-confusion.md).
-    - **b)** Calcule la exactitud, la precisión, la sensibilidad y el F1, y
+    - **b)** Calcule la exactitud, la precisión, el recall y el F1, y
       [**compárelos**](../../ayudas/comparar-metricas.md) con los de validación.
-    - **c)** Grafique su [**curva de precisión-sensibilidad**](../../ayudas/curva-precision-sensibilidad.md)
+    - **c)** Grafique su [**curva de precisión-recall**](../../ayudas/curva-precision-recall.md)
       y su [**curva ROC**](../../ayudas/curva-roc.md) en prueba.
 
     **¿Las métricas se mantienen respecto a validación? ¿Cómo se compara con el resultado en

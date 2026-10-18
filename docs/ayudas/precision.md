@@ -34,15 +34,15 @@ etiqueta, indíquela con `pos_label`, por ejemplo `precision_score(y_val, y_pred
   registros señalados como positivos lo son de verdad.
 - **Solo mira las predicciones positivas**: no dice nada de los positivos que el modelo dejó
   pasar (FN). Un modelo que predice positivo una sola vez y acierta tiene precisión 1, aunque
-  se le escapen casi todos los positivos. Por eso se reporta junto a la
-  [sensibilidad](sensibilidad.md).
+  se le escapen casi todos los positivos. Por eso se reporta junto a el
+  [recall](recall.md).
 - **Cuándo importa**: cuando los falsos positivos son costosos. Por ejemplo, si cada caso
   señalado implica una acción cara (una visita, una oferta, una revisión manual) o molesta a una
   persona que no lo necesitaba.
 - **Depende del [umbral de decisión](../glosario.md#umbral-decision)**: subir el umbral hace que
   el modelo prediga positivo solo cuando está muy seguro, lo que suele aumentar la precisión y
-  reducir la sensibilidad (vea
-  [curva de precisión-sensibilidad](curva-precision-sensibilidad.md)).
+  reducir el recall (vea
+  [curva de precisión-recall](curva-precision-recall.md)).
 - **Con [desbalance de clases](../glosario.md#desbalance-de-clases)**, la precisión de la clase
   minoritaria suele ser baja aunque la [exactitud](exactitud.md) sea alta. Compárela con la
   proporción de positivos: un modelo que señala positivos al azar tiene una precisión igual a

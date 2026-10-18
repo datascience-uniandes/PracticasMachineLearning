@@ -16,7 +16,7 @@ los modelos pesan lo mismo, o lo que usted indique.
 
 La votación suave exige que todos los modelos tengan `predict_proba`. La votación dura no entrega
 probabilidades, así que con ella no se pueden graficar la
-[curva ROC](curva-roc.md) ni la [curva de precisión-sensibilidad](curva-precision-sensibilidad.md).
+[curva ROC](curva-roc.md) ni la [curva de precisión-recall](curva-precision-recall.md).
 
 ## Escalado
 
