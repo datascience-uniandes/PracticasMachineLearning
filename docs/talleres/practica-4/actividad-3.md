@@ -93,9 +93,8 @@ de abandono del dataset es anual.
 
     **¿El modelo con mejor F1 es también el de mayor impacto? ¿Por qué dos modelos con un F1
     parecido pueden producir un impacto distinto? ¿Qué se gana y qué se pierde al hacer el
-    cálculo global en lugar de segmentarlo? ¿Cambia el mes de equilibrio si usa el beneficio por
-    país? ¿Qué modelo, qué umbral y qué países le recomendaría a la gerencia? ¿El proyecto se
-    paga en el plazo que pide?**
+    cálculo global en lugar de segmentarlo? ¿Qué modelo, qué umbral y qué países le recomendaría a la gerencia? 
+    ¿El proyecto se paga en el plazo que pide?**
 
 !!! success "Fin de la Práctica 4"
     Guarde los cambios en el notebook. Ha completado todas las actividades de esta práctica.
