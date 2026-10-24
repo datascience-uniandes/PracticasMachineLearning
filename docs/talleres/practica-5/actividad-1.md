@@ -39,8 +39,10 @@
         4. Agrega una celda que compruebe con np.allclose que pipeline.predict(X_test) es igual
            a predecir_precio(X_test) y que pipeline.predict_proba(X_test)[:, 1] es igual a
            predecir_abandono(X_test).
-        5. Muestra cómo usar cada pipeline como función de predicción para gráficos ICE, LIME y
-           SHAP, convirtiendo la entrada en un DataFrame con los nombres de las columnas.
+        5. Muestra cómo pasar cada pipeline directamente a PartialDependenceDisplay de
+           sklearn.inspection (kind="individual") para los gráficos ICE, y cómo usarlo como
+           función de predicción para LIME y SHAP, convirtiendo la entrada en un DataFrame con
+           los nombres de las columnas.
         6. Explica brevemente cada paso del código.
         ```
 
@@ -48,23 +50,28 @@
         paso es distinto? ¿Qué ventajas tiene el pipeline frente a la función al llevar el modelo
         a producción?**
 
-2. **ICE de regresión:** con una muestra de 200 casas de prueba,
-   [**grafique las curvas ICE**](../../ayudas/grafico-ice.md) de `AreaHabitable`.
+2. **ICE de regresión:** envuelva cada función de predicción en un
+   [**estimador de scikit-learn**](../../ayudas/grafico-ice.md#codigo) para poder usar
+   `PartialDependenceDisplay` (si construyó el _pipeline_ opcional, use el _pipeline_). Con una
+   muestra de 200 casas de prueba, [**grafique las curvas ICE**](../../ayudas/grafico-ice.md) de
+   `AreaHabitable` con `PartialDependenceDisplay.from_estimator` y `kind="individual"`.
    **¿Qué forma tiene el efecto del área sobre el precio? ¿Se nota la curvatura del polinomio?
    ¿Las curvas son paralelas o se cruzan, y qué indica eso?**
 3. Repita el gráfico con `Calificación` y con `Latitud`. **¿Cuál de las tres variables cambia
    más el precio a lo largo de su rango? ¿Hay zonas donde el efecto se aplana o cambia de
    dirección?**
 4. [**ICE centrado:**](../../ayudas/grafico-ice.md#ice-centrado) grafique las curvas de
-   `AreaHabitable` centradas en su primer valor. **¿Todas las casas responden igual al área? Si
+   `AreaHabitable` centradas en su primer valor (`centered=True`). **¿Todas las casas responden igual al área? Si
    no, ¿qué otra variable podría explicar la diferencia?**
 5. **ICE de clasificación:** con una muestra de 200 clientes de prueba, grafique las curvas ICE
-   de la probabilidad de abandono frente a `age`, `balance` y `products_number` (para
-   `products_number`, use como rejilla sus valores posibles, de 1 a 4). **¿En qué rango de edad
+   de la probabilidad de abandono frente a `age`, `balance` y `products_number` en una sola
+   llamada a `PartialDependenceDisplay` (para `products_number`, la rejilla son sus valores
+   posibles, de 1 a 4). **¿En qué rango de edad
    sube más el riesgo de abandono? ¿Qué pasa con la probabilidad al pasar de uno a dos productos
    y de dos a tres o más? ¿El saldo influye tanto como la edad?**
 6. [**Colorear por subgrupo:**](../../ayudas/grafico-ice.md#colorear-por-subgrupo) repita el ICE
-   de `age` coloreando las curvas según `active_member`. **¿El efecto de la edad es el mismo para
+   de `age` coloreando las curvas según `active_member`: grafique cada subgrupo con su color
+   (`ice_lines_kw`) sobre los mismos ejes y con la misma rejilla (`custom_values`). **¿El efecto de la edad es el mismo para
    los miembros activos y los inactivos? ¿Qué
    [interacción](../../glosario.md#termino-interaccion) revela el gráfico?**
 7. [**Limitaciones:**](../../ayudas/grafico-ice.md#limitaciones) **al variar `AreaHabitable`,
