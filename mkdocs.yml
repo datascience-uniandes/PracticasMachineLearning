@@ -4,9 +4,14 @@ site_author: Juan Pablo Reyes
 site_url: https://datascience-uniandes.github.io/PracticasMachineLearning/
 copyright: Universidad de los Andes · Ciencia de Datos
 
-# Práctica 5 oculta por ahora: su archivo no se publica.
+# Práctica 5 (interpretabilidad) oculta por ahora: sus archivos no se publican.
 exclude_docs: |
-  talleres/practica-5.md
+  talleres/practica-5/
+  ayudas/funcion-prediccion.md
+  ayudas/grafico-ice.md
+  ayudas/lime.md
+  ayudas/shap.md
+  ayudas/graficos-shap.md
 
 theme:
   name: material

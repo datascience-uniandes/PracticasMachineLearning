@@ -1,0 +1,85 @@
+# Valores SHAP
+
+Los valores SHAP (_SHapley Additive exPlanations_) reparten una predicción entre las variables:
+indican cuánto aportó cada variable a llevar la predicción desde un valor de referencia hasta el
+valor final. Se basan en los [valores de Shapley](../glosario.md#shap) de la teoría de juegos,
+que reparten la ganancia de un equipo entre sus jugadores según su aporte.
+
+## Valor base y aditividad
+
+- El **[valor base](../glosario.md#valor-base)** es la predicción promedio del modelo sobre una
+  **muestra de fondo** de registros de entrenamiento: lo que el modelo predice «sin saber nada»
+  de un registro en particular.
+- Para cada registro, la suma del valor base y de los valores SHAP de todas sus variables es
+  **exactamente** la predicción:
+
+\[
+\text{predicción} = \text{valor base} + \sum_{j} \text{SHAP}_j
+\]
+
+- Un valor SHAP positivo indica que la variable **subió** la predicción frente al valor base; uno
+  negativo, que la **bajó**.
+- Los valores están en las unidades de la salida del modelo: en el precio para la regresión y en
+  probabilidad cuando la salida es la probabilidad de la clase positiva.
+
+## Local y global
+
+Los valores SHAP son una [explicación local](../glosario.md#explicacion-local): uno por variable
+y por registro. Al reunirlos para muchos registros dan una
+[explicación global](../glosario.md#explicacion-global): las variables con valores SHAP grandes
+en promedio son las que más influyen en el modelo. Los [gráficos SHAP](graficos-shap.md)
+muestran las dos miradas.
+
+## Qué explicador usar
+
+- **Explicador general:** recibe la [función de predicción](funcion-prediccion.md) y una
+  muestra de fondo (por ejemplo, 100 registros de entrenamiento). Sirve para cualquier modelo,
+  pero es lento con muchas variables o con modelos costosos.
+- **Explicador de árboles (`TreeExplainer`):** para modelos de árboles, como el
+  [Random Forest](random-forest.md), calcula los valores exactos en segundos usando la
+  estructura de los árboles. Recibe el modelo, no la función, así que se le pasan los datos ya
+  transformados (por ejemplo, escalados); después se reemplazan los datos que se muestran en los
+  gráficos por los originales. En clasificación devuelve los valores de cada clase; se usa la
+  clase positiva. Su valor base es el promedio de las predicciones del modelo en
+  entrenamiento.
+
+## Limitaciones
+
+- La muestra de fondo define el valor base: otra muestra da otros valores.
+- Como LIME y los gráficos ICE, puede evaluar combinaciones irreales de variables
+  correlacionadas.
+- Explica el modelo, no la realidad: no muestra causalidad.
+
+## Código
+
+Explicador general (por ejemplo, para la regresión polinomial):
+
+```python
+import shap
+
+X_fondo = X_train.sample(100, random_state=42)
+X_muestra = X_test.sample(300, random_state=42)
+
+explicador = shap.Explainer(predecir, X_fondo)
+valores = explicador(X_muestra)
+```
+
+Explicador de árboles para un clasificador entrenado con datos escalados:
+
+```python
+explicador = shap.TreeExplainer(modelo_clas)
+valores = explicador(escalador_clas.transform(X_muestra))[:, :, 1]
+valores.data = X_muestra.to_numpy()
+valores.feature_names = list(X_muestra.columns)
+```
+
+- `predecir` es la [función de predicción](funcion-prediccion.md) y `X_fondo`, la muestra de
+  fondo.
+- `valores` contiene, para cada registro de `X_muestra`, los valores SHAP (`valores.values`), el
+  valor base (`valores.base_values`) y los datos (`valores.data`).
+- `[:, :, 1]` toma los valores de la clase positiva.
+- Las dos últimas líneas reemplazan los datos escalados por los originales, para que los gráficos
+  muestren, por ejemplo, la edad en años.
+- Para comprobar la aditividad del registro `i`:
+  `valores.base_values[i] + valores.values[i].sum()` debe ser igual a su predicción.
+- La librería `shap` suele venir instalada en Google Colab; si no, use `!pip install shap`.

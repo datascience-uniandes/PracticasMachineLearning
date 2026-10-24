@@ -164,6 +164,16 @@ Forma de dividir los datos que conserva en cada conjunto la misma proporción de
 
 Proporción de predicciones correctas de un clasificador (_accuracy_). Con [desbalance de clases](#desbalance-de-clases) puede ser alta aunque el modelo no detecte la clase minoritaria.
 
+### Explicación global { #explicacion-global }
+
+Descripción del comportamiento de un modelo en todos los registros: qué variables influyen más y en qué
+dirección, en general.
+
+### Explicación local { #explicacion-local }
+
+Descripción de por qué un modelo hizo una predicción concreta para un registro: qué variables la
+subieron y cuáles la bajaron.
+
 ## F
 
 ### F1 { #f1 }
@@ -206,10 +216,20 @@ _heterocedasticidad_.
 
 ## I
 
+### ICE { #ice }
+
+_Individual Conditional Expectation_. Gráfico con una curva por registro que muestra cómo cambia
+la predicción al variar una sola variable, dejando fijas las demás.
+
 ### Ingeniería de características { #ingenieria-caracteristicas }
 
 Creación de variables nuevas a partir de las existentes (indicadores, razones, interacciones)
 para que el modelo encuentre más fácil un patrón.
+
+### Interpretabilidad { #interpretabilidad }
+
+Capacidad de entender por qué un modelo hace sus predicciones: qué variables usa y cómo influyen
+en el resultado.
 
 ### Intervalo de confianza { #intervalo-confianza }
 
@@ -254,6 +274,11 @@ K vecinos más cercanos (_K-Nearest Neighbors_): clasifica cada registro según 
 (penalización L1). Con un alfa suficientemente grande lleva algunos coeficientes exactamente a 0, así
 que también selecciona variables.
 
+### LIME { #lime }
+
+_Local Interpretable Model-agnostic Explanations_. Técnica que explica una predicción ajustando un
+[modelo sustituto](#modelo-sustituto) lineal sobre registros parecidos al que se quiere explicar.
+
 ## M
 
 ### MAE { #mae }
@@ -276,6 +301,11 @@ Registro real de un grupo cuya distancia total a los demás registros del grupo 
 ### Método del codo { #metodo-codo }
 
 Gráfico de la [inercia](#inercia) frente al número de grupos K. El valor de K donde la curva deja de bajar con fuerza (el codo) es un buen candidato.
+
+### Modelo sustituto { #modelo-sustituto }
+
+Modelo simple e interpretable, por ejemplo, lineal, que imita a un modelo complejo para
+explicarlo, ya sea cerca de un registro o en todos los datos.
 
 ### Muestras pareadas { #muestras-pareadas }
 
@@ -413,6 +443,12 @@ En los algoritmos de agrupación por densidad, registros que no pertenecen a nin
 Asimetría de una distribución. Con sesgo a la derecha, la mayoría de valores son pequeños
 y unos pocos muy grandes alargan la cola derecha.
 
+### SHAP { #shap }
+
+_SHapley Additive exPlanations_. Técnica que reparte una predicción entre las variables usando los
+valores de Shapley de la teoría de juegos: el [valor base](#valor-base) más la suma de los
+aportes de todas las variables es igual a la predicción.
+
 ### Sobreajuste { #sobreajuste }
 
 Cuando un modelo se ajusta demasiado a los datos de entrenamiento y no generaliza: tiene un error
@@ -448,6 +484,11 @@ Probabilidad a partir de la cual un clasificador asigna la clase positiva. Por d
 Técnica que divide el conjunto de entrenamiento en \(K\) partes (_folds_), entrena \(K\) veces
 dejando una parte distinta para validar y promedia las métricas. Permite elegir
 [hiperparámetros](#hiperparametro) sin gastar el conjunto de prueba.
+
+### Valor base { #valor-base }
+
+En SHAP, predicción promedio del modelo sobre una muestra de referencia. Es el punto de partida al
+que se suman los aportes de las variables para llegar a cada predicción.
 
 ### Valor nulo { #valor-nulo }
 
