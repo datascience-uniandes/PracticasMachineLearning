@@ -32,9 +32,10 @@ muestran las dos miradas.
 
 ## Qué explicador usar
 
-- **Explicador general:** recibe la [función de predicción](funcion-prediccion.md) y una
+- **Explicador agnóstico:** recibe la [función de predicción](funcion-prediccion.md) y una
   muestra de fondo (por ejemplo, 100 registros de entrenamiento). Sirve para cualquier modelo,
-  pero es lento con muchas variables o con modelos costosos.
+  de regresión o de clasificación, porque solo necesita sus predicciones, pero es lento con
+  muchas variables o con modelos costosos, como un Random Forest con cientos de árboles.
 - **Explicador de árboles (`TreeExplainer`):** para modelos de árboles, como el
   [Random Forest](random-forest.md), calcula los valores exactos en segundos usando la
   estructura de los árboles. Recibe el modelo, no la función, así que se le pasan los datos ya
@@ -52,19 +53,37 @@ muestran las dos miradas.
 
 ## Código
 
-Explicador general (por ejemplo, para la regresión polinomial):
+### Muestra de fondo y muestra a explicar
 
 ```python
 import shap
 
 X_fondo = X_train.sample(100, random_state=42)
 X_muestra = X_test.sample(300, random_state=42)
+```
 
+- `X_fondo` es la muestra de fondo: registros de entrenamiento con las variables originales.
+  Define el valor base del explicador agnóstico.
+- `X_muestra` son los registros de prueba que se van a explicar, también con las variables
+  originales.
+
+### Explicador agnóstico
+
+```python
 explicador = shap.Explainer(predecir, X_fondo)
 valores = explicador(X_muestra)
 ```
 
-Explicador de árboles para un clasificador entrenado con datos escalados:
+- `predecir` es la [función de predicción](funcion-prediccion.md): para un regresor devuelve la
+  predicción (por ejemplo, `predecir_precio`) y para un clasificador, la probabilidad de la clase
+  positiva (por ejemplo, `predecir_abandono`). Con un clasificador, los valores SHAP quedan en
+  probabilidad.
+- `valores` contiene, para cada registro de `X_muestra`, los valores SHAP (`valores.values`), el
+  valor base (`valores.base_values`) y los datos (`valores.data`).
+- Con un modelo costoso, reduzca `X_muestra` (por ejemplo, a 100 registros) para que el cálculo
+  no tarde varios minutos.
+
+### Explicador de árboles para un clasificador
 
 ```python
 explicador = shap.TreeExplainer(modelo_clas)
@@ -73,13 +92,22 @@ valores.data = X_muestra.to_numpy()
 valores.feature_names = list(X_muestra.columns)
 ```
 
-- `predecir` es la [función de predicción](funcion-prediccion.md) y `X_fondo`, la muestra de
-  fondo.
-- `valores` contiene, para cada registro de `X_muestra`, los valores SHAP (`valores.values`), el
-  valor base (`valores.base_values`) y los datos (`valores.data`).
-- `[:, :, 1]` toma los valores de la clase positiva.
+- `modelo_clas` es el clasificador de árboles ya entrenado, por ejemplo, el
+  [Random Forest](random-forest.md), y `escalador_clas` el escalador con el que se entrenó. Si el
+  modelo se entrenó sin escalar, pase `X_muestra` directamente.
+- No usa `X_fondo`: el valor base sale de los propios árboles y es el promedio de las
+  predicciones del modelo en entrenamiento.
+- `[:, :, 1]` toma los valores de la clase positiva, en probabilidad.
 - Las dos últimas líneas reemplazan los datos escalados por los originales, para que los gráficos
   muestren, por ejemplo, la edad en años.
-- Para comprobar la aditividad del registro `i`:
-  `valores.base_values[i] + valores.values[i].sum()` debe ser igual a su predicción.
+
+### Comprobar la aditividad
+
+```python
+i = 0
+print(valores.base_values[i] + valores.values[i].sum(), predecir(X_muestra.iloc[[i]])[0])
+```
+
+- Los dos números deben ser iguales: el valor base más la suma de los valores SHAP del registro
+  `i` es su predicción. Con el explicador de árboles, use `predecir_abandono` como `predecir`.
 - La librería `shap` suele venir instalada en Google Colab; si no, use `!pip install shap`.

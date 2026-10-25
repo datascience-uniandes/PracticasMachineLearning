@@ -4,7 +4,7 @@
 
 1. [**Cree un explicador SHAP**](../../ayudas/shap.md#que-explicador-usar) para cada modelo y
    [**calcule los valores SHAP**](../../ayudas/shap.md#codigo) de una muestra de 300 casas y de
-   300 clientes de prueba: use el explicador general con la función de predicción para la
+   300 clientes de prueba: use el explicador agnóstico con la función de predicción para la
    regresión polinomial, con una muestra de fondo de 100 casas de entrenamiento, y el explicador
    de árboles para el Random Forest. **¿Qué representa el
    [valor base](../../glosario.md#valor-base) de cada modelo? ¿El valor base del Random Forest
