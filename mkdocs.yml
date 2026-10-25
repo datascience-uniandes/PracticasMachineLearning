@@ -12,6 +12,7 @@ exclude_docs: |
   ayudas/lime.md
   ayudas/shap.md
   ayudas/graficos-shap.md
+  ayudas/pipeline.md
 
 theme:
   name: material

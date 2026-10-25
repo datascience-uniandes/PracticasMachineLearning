@@ -11,48 +11,12 @@
    probabilidad de abandono. Compruebe que sus predicciones en el conjunto de prueba son iguales
    a las del modelo. **¿Qué transformaciones aplica cada función? ¿Por qué dentro de ella se usa
    `transform` y no `fit`? ¿Por qué no se pueden interpretar directamente las columnas del
-   polinomio?**
-
-    ??? tip "Paso opcional: construya un pipeline con un asistente de IA"
-        En lugar de la función de predicción, puede encapsular el preprocesamiento y el modelo en
-        un `Pipeline` de scikit-learn. Copie este prompt en un asistente de IA (por ejemplo, el
-        de Google Colab), pegue su código donde se indica y revise con cuidado el resultado antes
-        de usarlo:
-
-        ```text
-        Tengo dos modelos entrenados en Python con scikit-learn, sin pipelines. Este es el código
-        con el que preparé los datos y entrené cada modelo:
-
-        [PEGUE AQUÍ SU CÓDIGO: tratamiento de datos, codificación one-hot, división en
-        entrenamiento, validación y prueba, imputación, polinomio, escalado y entrenamiento]
-
-        Reescribe ese código como dos objetos Pipeline de scikit-learn que reciban las variables
-        originales (antes del polinomio y del escalado) y cumplan estas condiciones:
-
-        1. Regresión: un ColumnTransformer que aplique PolynomialFeatures (mismo grado,
-           include_bias=False) solo a las variables continuas y deje las columnas one-hot sin
-           cambios, seguido de StandardScaler y de LinearRegression.
-        2. Clasificación: StandardScaler seguido de RandomForestClassifier con exactamente los
-           mismos hiperparámetros y el mismo random_state.
-        3. No cambies la división de los datos ni la imputación; entrena cada pipeline solo con
-           el conjunto de entrenamiento.
-        4. Agrega una celda que compruebe con np.allclose que pipeline.predict(X_test) es igual
-           a predecir_precio(X_test) y que pipeline.predict_proba(X_test)[:, 1] es igual a
-           predecir_abandono(X_test).
-        5. Muestra cómo pasar cada pipeline directamente a PartialDependenceDisplay de
-           sklearn.inspection (kind="individual") para los gráficos ICE, y cómo usarlo como
-           función de predicción para LIME y SHAP, convirtiendo la entrada en un DataFrame con
-           los nombres de las columnas.
-        6. Explica brevemente cada paso del código.
-        ```
-
-        **¿El pipeline predice exactamente lo mismo que su función de predicción? Si no, ¿qué
-        paso es distinto? ¿Qué ventajas tiene el pipeline frente a la función al llevar el modelo
-        a producción?**
-
+   polinomio?** En lugar de las funciones, también puede
+   [**crear un pipeline**](../../ayudas/pipeline.md) para cada modelo, con código o con un
+   asistente de IA generativa.
 2. **ICE de regresión:** envuelva cada función de predicción en un
    [**estimador de scikit-learn**](../../ayudas/grafico-ice.md#codigo) para poder usar
-   `PartialDependenceDisplay` (si construyó el _pipeline_ opcional, use el _pipeline_). Con una
+   `PartialDependenceDisplay` (si construyó un _pipeline_, úselo directamente). Con una
    muestra de 200 casas de prueba, [**grafique las curvas ICE**](../../ayudas/grafico-ice.md) de
    `AreaHabitable` con `PartialDependenceDisplay.from_estimator` y `kind="individual"`.
    **¿Qué forma tiene el efecto del área sobre el precio? ¿Se nota la curvatura del polinomio?
