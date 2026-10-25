@@ -74,11 +74,8 @@
    (`ice_lines_kw`) sobre los mismos ejes y con la misma rejilla (`custom_values`). **¿El efecto de la edad es el mismo para
    los miembros activos y los inactivos? ¿Qué
    [interacción](../../glosario.md#termino-interaccion) revela el gráfico?**
-7. [**Limitaciones:**](../../ayudas/grafico-ice.md#limitaciones) **al variar `AreaHabitable`,
-   ¿qué pasa con las casas cuyo `AreaHabitable15` o `AreaLote` no son compatibles con el área
-   asignada? ¿Por qué las variables [correlacionadas](../../glosario.md#correlacion) generan
-   combinaciones irreales? ¿Un gráfico ICE muestra una relación causal entre la variable y el
-   precio o el abandono?**
+7. Escriba una breve explicación, apoyada por los gráficos de ICE, que indiquen como
+   funciona la predicción del modelo de regresión y cómo funciona la predicción del modelo de clasificación.
 
 !!! success "Fin de la Actividad 1"
     Guarde los cambios en el notebook. Ya estamos listos para continuar con la siguiente actividad.
