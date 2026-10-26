@@ -40,6 +40,22 @@ Por defecto, LIME convierte cada variable continua en intervalos (por ejemplo,
 - Las perturbaciones pueden crear combinaciones irreales de variables correlacionadas.
 - Explica el modelo, no la realidad: no muestra causalidad.
 
+!!! warning "Envíe los datos numéricos en la escala que espera el modelo"
+    El modelo se entrenó con las variables numéricas **escaladas**, así que debe recibirlas
+    escaladas, igual que en el entrenamiento; si no, sus predicciones y la explicación no tienen
+    sentido. Quién hace el escalado depende de lo que le pase a LIME:
+
+    - **La [función de predicción](funcion-prediccion.md) o un [pipeline](pipeline.md):** envíe
+      los datos **originales, sin escalar**, tanto al crear el explicador como al explicar un
+      registro. La función o el _pipeline_ los escalan; si los envía ya escalados, se escalan dos
+      veces.
+    - **El modelo directamente** (por ejemplo, `modelo.predict_proba`): envíe los datos
+      **escalados** con el escalador del entrenamiento (`escalador.transform`), tanto en el
+      explicador como en el registro. En ese caso, la explicación queda en unidades escaladas.
+
+    Para comprobarlo, la predicción de la función que recibe LIME para el registro debe ser igual a
+    la del modelo, y `local_pred` debe estar cerca de ella.
+
 ## Código
 
 ```python

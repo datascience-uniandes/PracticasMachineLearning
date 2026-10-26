@@ -51,6 +51,21 @@ muestran las dos miradas.
   correlacionadas.
 - Explica el modelo, no la realidad: no muestra causalidad.
 
+!!! warning "Envíe los datos numéricos en la escala que espera el modelo"
+    El modelo se entrenó con las variables numéricas **escaladas**, así que debe recibirlas
+    escaladas, igual que en el entrenamiento; si no, sus predicciones y los valores SHAP no tienen
+    sentido. Quién hace el escalado depende del explicador:
+
+    - **Explicador agnóstico** con la [función de predicción](funcion-prediccion.md) o un
+      [pipeline](pipeline.md): envíe `X_fondo` y `X_muestra` **originales, sin escalar**. La
+      función o el _pipeline_ los escalan; si los envía ya escalados, se escalan dos veces.
+    - **Explicador de árboles**, que recibe el modelo directamente: envíe los datos **escalados**
+      con el escalador del entrenamiento (`escalador_clas.transform(X_muestra)`) y luego reemplace
+      `valores.data` por los datos originales para los gráficos.
+
+    Para comprobarlo, use la [comprobación de la aditividad](#comprobar-la-aditividad): el valor
+    base más la suma de los valores SHAP debe ser igual a la predicción del modelo.
+
 ## Código
 
 ### Muestra de fondo y muestra a explicar
