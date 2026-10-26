@@ -57,3 +57,4 @@ columnas traducidos al español.
 ## Usado en
 
 - [Práctica 1: Regresión lineal](../talleres/practica-1/index.md)
+- [Práctica 5: Interpretabilidad](../talleres/practica-5/index.md)

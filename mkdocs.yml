@@ -4,16 +4,6 @@ site_author: Juan Pablo Reyes
 site_url: https://datascience-uniandes.github.io/PracticasMachineLearning/
 copyright: Universidad de los Andes · Ciencia de Datos
 
-# Práctica 5 (interpretabilidad) oculta por ahora: sus archivos no se publican.
-exclude_docs: |
-  talleres/practica-5/
-  ayudas/funcion-prediccion.md
-  ayudas/grafico-ice.md
-  ayudas/lime.md
-  ayudas/shap.md
-  ayudas/graficos-shap.md
-  ayudas/pipeline.md
-
 theme:
   name: material
   language: es
@@ -109,6 +99,11 @@ nav:
           - "Actividad 1: Intervalos de confianza": talleres/practica-4/actividad-1.md
           - "Actividad 2: Pruebas estadísticas": talleres/practica-4/actividad-2.md
           - "Actividad 3: Cálculo de impacto": talleres/practica-4/actividad-3.md
+      - "Práctica 5: Interpretabilidad":
+          - talleres/practica-5/index.md
+          - "Actividad 1: Gráficos ICE": talleres/practica-5/actividad-1.md
+          - "Actividad 2: LIME": talleres/practica-5/actividad-2.md
+          - "Actividad 3: Valores SHAP": talleres/practica-5/actividad-3.md
   - Ayudas:
       - Agrupación aglomerativa: ayudas/agrupacion-aglomerativa.md
       - Árbol de decisión: ayudas/arbol-decision.md
@@ -122,6 +117,7 @@ nav:
       - Componentes principales (PCA): ayudas/pca.md
       - Compromiso sesgo-varianza: ayudas/compromiso-sesgo-varianza.md
       - Crear características derivadas: ayudas/caracteristicas-derivadas.md
+      - Crear un pipeline: ayudas/pipeline.md
       - Curva de aprendizaje: ayudas/curva-aprendizaje.md
       - Curva de k-distancia: ayudas/k-distancia.md
       - Curva de precisión-recall: ayudas/curva-precision-recall.md
@@ -138,11 +134,14 @@ nav:
       - Exactitud (accuracy): ayudas/exactitud.md
       - Explorar la estructura de un dataset: ayudas/explorar-estructura.md
       - F1: ayudas/f1.md
+      - Función de predicción para interpretar: ayudas/funcion-prediccion.md
       - Gradient Boosting: ayudas/gradient-boosting.md
       - Gráfico de barras: ayudas/grafico-barras.md
       - Gráfico de cajas: ayudas/grafico-cajas.md
       - Gráfico de dispersión: ayudas/grafico-dispersion.md
+      - Gráfico ICE: ayudas/grafico-ice.md
       - Gráfico Q-Q: ayudas/grafico-qq.md
+      - Gráficos SHAP: ayudas/graficos-shap.md
       - HDBSCAN: ayudas/hdbscan.md
       - Histograma: ayudas/histograma.md
       - Índice de Davies-Bouldin: ayudas/davies-bouldin.md
@@ -152,6 +151,7 @@ nav:
       - K vecinos más cercanos (KNN): ayudas/knn.md
       - K-medias (K-means): ayudas/k-medias.md
       - K-medoides (K-medoids): ayudas/k-medoides.md
+      - LIME: ayudas/lime.md
       - Matriz de confusión: ayudas/matriz-confusion.md
       - Matriz de correlación: ayudas/correlacion.md
       - Mean Shift: ayudas/mean-shift.md
@@ -185,6 +185,7 @@ nav:
       - Stacking: ayudas/stacking.md
       - Validación cruzada K-fold: ayudas/validacion-cruzada.md
       - Valores reales vs. predichos: ayudas/reales-vs-predichos.md
+      - Valores SHAP: ayudas/shap.md
       - Ver los coeficientes: ayudas/ver-coeficientes.md
       - Votación (VotingClassifier): ayudas/votacion.md
   - Conjuntos de datos:

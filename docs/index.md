@@ -43,6 +43,13 @@ desde la preparación de los datos hasta la evaluación de los modelos.
 
     [:octicons-arrow-right-24: Ir a la práctica](talleres/practica-4/index.md)
 
+-   :material-numeric-5-circle:{ .lg .middle } **Práctica 5: Interpretabilidad**
+
+    ---
+
+    Interpretación de la regresión polinomial de precios de casas y del Random Forest de abandono de clientes con gráficos ICE, LIME y valores SHAP.
+
+    [:octicons-arrow-right-24: Ir a la práctica](talleres/practica-5/index.md)
 
 </div>
 
