@@ -4,14 +4,6 @@ site_author: Juan Pablo Reyes
 site_url: https://datascience-uniandes.github.io/PracticasMachineLearning/
 copyright: Universidad de los Andes · Ciencia de Datos
 
-# Práctica 6 (despliegue) oculta por ahora: sus archivos no se publican.
-exclude_docs: |
-  talleres/practica-6/
-  ayudas/guardar-modelo.md
-  ayudas/api-fastapi.md
-  ayudas/docker.md
-  ayudas/docker-compose.md
-
 theme:
   name: material
   language: es
@@ -112,6 +104,11 @@ nav:
           - "Actividad 1: Gráficos ICE": talleres/practica-5/actividad-1.md
           - "Actividad 2: LIME": talleres/practica-5/actividad-2.md
           - "Actividad 3: Valores SHAP": talleres/practica-5/actividad-3.md
+      - "Práctica 6: Despliegue":
+          - talleres/practica-6/index.md
+          - "Actividad 1: Pipeline del modelo": talleres/practica-6/actividad-1.md
+          - "Actividad 2: API con FastAPI": talleres/practica-6/actividad-2.md
+          - "Actividad 3: Despliegue con Docker": talleres/practica-6/actividad-3.md
   - Ayudas:
       - Agrupación aglomerativa: ayudas/agrupacion-aglomerativa.md
       - Árbol de decisión: ayudas/arbol-decision.md
@@ -126,6 +123,7 @@ nav:
       - Compromiso sesgo-varianza: ayudas/compromiso-sesgo-varianza.md
       - Crear características derivadas: ayudas/caracteristicas-derivadas.md
       - Crear un pipeline: ayudas/pipeline.md
+      - Crear una API con FastAPI: ayudas/api-fastapi.md
       - Curva de aprendizaje: ayudas/curva-aprendizaje.md
       - Curva de k-distancia: ayudas/k-distancia.md
       - Curva de precisión-recall: ayudas/curva-precision-recall.md
@@ -134,6 +132,8 @@ nav:
       - Dendrograma: ayudas/dendrograma.md
       - Dimensiones de calidad de los datos: ayudas/dimensiones-calidad.md
       - Dividir en entrenamiento y prueba: ayudas/division-datos.md
+      - Docker: ayudas/docker.md
+      - Docker Compose: ayudas/docker-compose.md
       - Entrenar una red neuronal: ayudas/entrenar-red-neuronal.md
       - Error absoluto medio (MAE): ayudas/mae.md
       - Escalar con RobustScaler: ayudas/robust-scaler.md
@@ -150,6 +150,7 @@ nav:
       - Gráfico ICE: ayudas/grafico-ice.md
       - Gráfico Q-Q: ayudas/grafico-qq.md
       - Gráficos SHAP: ayudas/graficos-shap.md
+      - Guardar y cargar un modelo: ayudas/guardar-modelo.md
       - HDBSCAN: ayudas/hdbscan.md
       - Histograma: ayudas/histograma.md
       - Índice de Davies-Bouldin: ayudas/davies-bouldin.md

@@ -51,6 +51,14 @@ desde la preparación de los datos hasta la evaluación de los modelos.
 
     [:octicons-arrow-right-24: Ir a la práctica](talleres/practica-5/index.md)
 
+-   :material-numeric-6-circle:{ .lg .middle } **Práctica 6: Despliegue**
+
+    ---
+
+    Despliegue del modelo de abandono de clientes: pipeline con todo el preprocesamiento, API con FastAPI y contenedor con Docker y Docker Compose.
+
+    [:octicons-arrow-right-24: Ir a la práctica](talleres/practica-6/index.md)
+
 </div>
 
 ## Ayudas
