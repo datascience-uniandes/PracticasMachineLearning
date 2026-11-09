@@ -16,6 +16,12 @@ una [variable objetivo](#variable-objetivo) (_clustering_).
 
 [Agrupación](#agrupacion) que construye una jerarquía de grupos anidados, uniendo los registros más parecidos paso a paso (aglomerativa) o dividiendo un grupo grande (divisiva). Se representa con un [dendrograma](#dendrograma).
 
+### API { #api }
+
+_Application Programming Interface_. Interfaz que permite que otros programas usen un servicio,
+por ejemplo, un modelo, enviando peticiones por internet y recibiendo respuestas, sin conocer
+cómo está construido.
+
 ### Árbol de decisión { #arbol-decision }
 
 Modelo que clasifica mediante una secuencia de preguntas sobre las variables (por ejemplo, ¿edad > 45?), organizadas como un árbol. Cada hoja asigna una clase. Los árboles muy profundos tienden al [sobreajuste](#sobreajuste).
@@ -93,6 +99,11 @@ entrenamiento.
 Parte de los datos que se usa para comparar modelos o elegir [hiperparámetros](#hiperparametro),
 separada del conjunto de entrenamiento y del de prueba.
 
+### Contenedor { #contenedor }
+
+Una [imagen de Docker](#imagen-docker) en ejecución: un proceso aislado que incluye el código y
+todas sus dependencias, y se ejecuta igual en cualquier equipo.
+
 ### Correlación { #correlacion }
 
 Medida de qué tanto varían juntas dos variables. El coeficiente de Pearson (\(r\)) va de −1
@@ -128,6 +139,11 @@ hay que evaluarlo con métricas que consideren ambas clases.
 Forma en que se reparten los valores de una variable: dónde se concentran, qué tan dispersos están
 y si son simétricos.
 
+### Dockerfile { #dockerfile }
+
+Archivo de instrucciones con el que Docker construye una [imagen](#imagen-docker): imagen base,
+instalación de dependencias, copia del código y comando de inicio.
+
 ### Duplicado { #duplicado }
 
 Registro idéntico a otro en todas sus columnas, o en las columnas que se comparan.
@@ -137,6 +153,11 @@ Registro idéntico a otro en todas sus columnas, o en las columnas que se compar
 ### Early stopping { #early-stopping }
 
 Técnica que detiene el entrenamiento de una [red neuronal](#red-neuronal) cuando el error en validación deja de mejorar durante varias [épocas](#epoca), para evitar el [sobreajuste](#sobreajuste).
+
+### Endpoint { #endpoint }
+
+Dirección de una [API](#api) que responde a un tipo de petición, por ejemplo, `POST /predict`
+para pedir una predicción.
 
 ### Enlace { #enlace }
 
@@ -220,6 +241,11 @@ _heterocedasticidad_.
 
 _Individual Conditional Expectation_. Gráfico con una curva por registro que muestra cómo cambia
 la predicción al variar una sola variable, dejando fijas las demás.
+
+### Imagen de Docker { #imagen-docker }
+
+Plantilla inmutable, organizada por capas, con el sistema base, las dependencias y el código de
+una aplicación. A partir de ella se ejecutan los [contenedores](#contenedor).
 
 ### Ingeniería de características { #ingenieria-caracteristicas }
 

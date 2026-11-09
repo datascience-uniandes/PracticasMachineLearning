@@ -4,6 +4,14 @@ site_author: Juan Pablo Reyes
 site_url: https://datascience-uniandes.github.io/PracticasMachineLearning/
 copyright: Universidad de los Andes · Ciencia de Datos
 
+# Práctica 6 (despliegue) oculta por ahora: sus archivos no se publican.
+exclude_docs: |
+  talleres/practica-6/
+  ayudas/guardar-modelo.md
+  ayudas/api-fastapi.md
+  ayudas/docker.md
+  ayudas/docker-compose.md
+
 theme:
   name: material
   language: es

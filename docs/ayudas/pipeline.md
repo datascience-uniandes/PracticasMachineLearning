@@ -117,3 +117,30 @@ print(np.allclose(pipeline_clas.predict_proba(X_test_clas)[:, 1], predecir_aband
   `lambda X: pipeline_reg.predict(pd.DataFrame(X, columns=columnas))` o
   `lambda X: pipeline_clas.predict_proba(pd.DataFrame(X, columns=columnas))`, donde `columnas`
   es la lista de columnas originales en su orden.
+
+Variables numéricas y categóricas, con imputación dentro del _pipeline_:
+
+```python
+from sklearn.impute import SimpleImputer
+from sklearn.preprocessing import OneHotEncoder
+
+preprocesamiento = ColumnTransformer([
+    ("numericas", Pipeline([("imputacion", SimpleImputer(strategy="median")),
+                            ("escalado", StandardScaler())]), columnas_numericas),
+    ("categoricas", Pipeline([("imputacion", SimpleImputer(strategy="most_frequent")),
+                              ("onehot", OneHotEncoder(handle_unknown="ignore"))]),
+     columnas_categoricas),
+])
+
+pipeline = Pipeline([
+    ("preprocesamiento", preprocesamiento),
+    ("modelo", RandomForestClassifier(n_estimators=400, max_depth=10, random_state=42)),
+])
+pipeline.fit(X_train, y_train)
+```
+
+- `columnas_numericas` y `columnas_categoricas` son las listas de columnas de cada tipo; `X_train`
+  tiene las variables originales, con las categorías como texto y con valores faltantes.
+- Cada rama es a su vez un _pipeline_: primero imputa y luego escala o codifica.
+- `handle_unknown="ignore"` evita un error si al predecir llega una categoría que no apareció en
+  el entrenamiento: sus columnas one-hot quedan en 0.
