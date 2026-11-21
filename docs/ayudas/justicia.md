@@ -24,7 +24,9 @@ sea tratada según lo que es y no según el grupo al que pertenece.
 
 En este curso, una **diferencia mayor que 5 puntos porcentuales** (0,05) entre los grupos indica
 que el clasificador **no es justo** según esa definición. En la discriminación causal, la regla se
-aplica al porcentaje de individuos cuya decisión cambia.
+aplica al porcentaje de individuos cuya decisión cambia. En la calibración no se aplica: se busca
+el rango de intervalos de la probabilidad predicha en el que las curvas de los grupos coinciden
+entre sí y con la diagonal, es decir, en el que el clasificador es justo.
 
 ## Definiciones
 

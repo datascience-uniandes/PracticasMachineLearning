@@ -5,7 +5,8 @@
 En cada definición, calcule la medida para mujeres y para hombres y concluya con la
 [**regla del 5 %**](../../ayudas/justicia.md#regla-de-decision): si la diferencia entre los dos
 grupos es mayor que 5 puntos porcentuales (0,05), el clasificador **no es justo** según esa
-definición.
+definición. La calibración es la excepción: en ella se identifica el rango de probabilidades en
+el que el clasificador es justo.
 
 1. **Prepare los datos:** retome el _pipeline_ entrenado y el conjunto de prueba, y descarte los
    clientes sin sexo registrado. Calcule para cada cliente la probabilidad de abandono \( S \) y
@@ -34,9 +35,11 @@ definición.
    mismo para mujeres y hombres? Según la regla del 5 %, ¿el clasificador es justo?**
 6. [**Calibración:**](../../ayudas/justicia.md#calibracion) agrupe la probabilidad predicha en 10
    intervalos de 0,1 y calcule, en cada intervalo y para cada sexo, la proporción real de clientes
-   que abandonan; grafique la curva de calibración de cada sexo junto a la diagonal y aplique la
-   regla en cada intervalo. **¿El clasificador predice lo mismo para mujeres y hombres? Según la
-   regla del 5 %, ¿el clasificador es justo?**
+   que abandonan; grafique la curva de calibración de cada sexo junto a la diagonal. En esta
+   definición no se aplica la regla del 5 %: el clasificador es justo en los intervalos en los que
+   las curvas de los dos sexos coinciden entre sí y con la diagonal. **¿El clasificador predice lo
+   mismo para mujeres y hombres? ¿En qué rango de intervalos de la probabilidad predicha el
+   clasificador es justo?**
 7. [**Discriminación causal:**](../../ayudas/justicia.md#discriminacion-causal) cree una copia
    idéntica del conjunto de prueba en la que se intercambie el sexo de cada cliente (`"Female"`
    por `"Male"` y al revés), calcule las nuevas decisiones y el porcentaje de clientes cuya
@@ -44,7 +47,7 @@ definición.
    mujeres y hombres? Según la regla del 5 %, ¿el clasificador es justo?**
 8. **Conclusiones:** construya una tabla con una fila por definición y las columnas: valor para
    mujeres, valor para hombres (o porcentaje de decisiones que cambian), diferencia y conclusión
-   (justo o no justo).
+   (justo o no justo; en la calibración, el rango de probabilidades en el que es justo).
 
     **¿Con cuántas definiciones el clasificador es justo y con cuántas no? ¿Por qué no es posible
     cumplir todas a la vez cuando las tasas reales de abandono son distintas? Para el banco, ¿qué
