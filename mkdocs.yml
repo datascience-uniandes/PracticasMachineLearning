@@ -4,11 +4,6 @@ site_author: Juan Pablo Reyes
 site_url: https://datascience-uniandes.github.io/PracticasMachineLearning/
 copyright: Universidad de los Andes · Ciencia de Datos
 
-# Práctica 7 (justicia) oculta por ahora: sus archivos no se publican.
-exclude_docs: |
-  talleres/practica-7/
-  ayudas/justicia.md
-
 theme:
   name: material
   language: es
@@ -114,6 +109,9 @@ nav:
           - "Actividad 1: Pipeline del modelo": talleres/practica-6/actividad-1.md
           - "Actividad 2: API con FastAPI": talleres/practica-6/actividad-2.md
           - "Actividad 3: Despliegue con Docker": talleres/practica-6/actividad-3.md
+      - "Práctica 7: Justicia":
+          - talleres/practica-7/index.md
+          - "Actividad 1: Definiciones de justicia": talleres/practica-7/actividad-1.md
   - Ayudas:
       - Agrupación aglomerativa: ayudas/agrupacion-aglomerativa.md
       - Árbol de decisión: ayudas/arbol-decision.md
@@ -169,6 +167,7 @@ nav:
       - Matriz de confusión: ayudas/matriz-confusion.md
       - Matriz de correlación: ayudas/correlacion.md
       - Mean Shift: ayudas/mean-shift.md
+      - Medir la justicia de un clasificador: ayudas/justicia.md
       - Método del codo: ayudas/metodo-codo.md
       - Normalidad de los residuos: ayudas/normalidad-residuos.md
       - Optimizar hiperparámetros con GridSearchCV: ayudas/gridsearchcv.md

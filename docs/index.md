@@ -59,6 +59,14 @@ desde la preparación de los datos hasta la evaluación de los modelos.
 
     [:octicons-arrow-right-24: Ir a la práctica](talleres/practica-6/index.md)
 
+-   :material-numeric-7-circle:{ .lg .middle } **Práctica 7: Justicia**
+
+    ---
+
+    Evaluación de la justicia del modelo de abandono de clientes frente al sexo: paridad estadística, paridad condicional, paridad de predicción, igualdad de exactitud, calibración y discriminación causal.
+
+    [:octicons-arrow-right-24: Ir a la práctica](talleres/practica-7/index.md)
+
 </div>
 
 ## Ayudas

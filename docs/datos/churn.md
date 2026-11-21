@@ -65,3 +65,4 @@ _Bank Customer Churn Dataset_ publicado en
 - [Práctica 4: Pruebas A/B](../talleres/practica-4/index.md)
 - [Práctica 5: Interpretabilidad](../talleres/practica-5/index.md)
 - [Práctica 6: Despliegue](../talleres/practica-6/index.md)
+- [Práctica 7: Justicia](../talleres/practica-7/index.md)
