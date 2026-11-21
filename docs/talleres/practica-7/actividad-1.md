@@ -16,37 +16,32 @@ definición.
    banco le hará una oferta de retención. Calcule también la proporción **real** de abandono de
    cada sexo. **¿Cuántos clientes hay de cada sexo? ¿La tasa real de abandono es igual para
    mujeres y hombres? ¿Por qué esto importa para interpretar las definiciones?**
-2. [**Paridad estadística:**](../../ayudas/justicia.md#paridad-estadistica) calcule la
-   proporción de clientes con \( d = 1 \) en cada sexo. **¿Qué sexo recibe con más probabilidad
-   la oferta de retención? Según la regla del 5 %, ¿el clasificador es justo? ¿La diferencia se
-   explica por la diferencia en las tasas reales de abandono?**
-3. [**Paridad estadística condicional:**](../../ayudas/justicia.md#paridad-estadistica-condicional)
-   tome como factores legítimos \( L \) la edad, agrupada en tres rangos (18 a 35, 36 a 50 y 51 o
-   más), y el número de productos (1, 2 y 3 o más). Calcule la proporción de \( d = 1 \) de cada
-   sexo **dentro de cada combinación** de edad y productos, con el número de clientes de cada una.
-   **¿En cuántas combinaciones la diferencia supera el 5 %? ¿En cuáles es mayor? ¿Hay
-   combinaciones con tan pocos clientes que la diferencia no sea confiable? ¿El clasificador es
-   justo con esta definición?**
+2. [**Paridad estadística:**](../../ayudas/justicia.md#paridad-estadistica) calcule la proporción
+   de clientes con \( d = 1 \) en cada sexo. **¿El clasificador predice lo mismo para mujeres y
+   hombres? Según la regla del 5 %, ¿el clasificador es justo?**
+3. [**Paridad estadística
+   condicional:**](../../ayudas/justicia.md#paridad-estadistica-condicional) tome como factores
+   legítimos \( L \) la edad, agrupada en tres rangos (18 a 35, 36 a 50 y 51 o más), y el número
+   de productos (1, 2 y 3 o más). Calcule la proporción de \( d = 1 \) de cada sexo **dentro de
+   cada combinación** de edad y productos, con el número de clientes de cada una, y aplique la
+   regla en cada combinación. **¿El clasificador predice lo mismo para mujeres y hombres? Según la
+   regla del 5 %, ¿el clasificador es justo?**
 4. [**Paridad de predicción:**](../../ayudas/justicia.md#paridad-de-prediccion) calcule la
-   [precisión](../../ayudas/precision.md) del modelo en cada sexo. **De los clientes a quienes el
-   modelo les haría la oferta, ¿la misma proporción abandona realmente en los dos sexos? ¿El
-   clasificador es justo con esta definición?**
+   [precisión](../../ayudas/precision.md) del modelo en cada sexo. **¿El clasificador predice lo
+   mismo para mujeres y hombres? Según la regla del 5 %, ¿el clasificador es justo?**
 5. [**Igualdad de exactitud:**](../../ayudas/justicia.md#igualdad-de-exactitud) calcule la
-   [exactitud](../../ayudas/exactitud.md) del modelo en cada sexo. **¿El modelo se equivoca más
-   con un sexo que con el otro? ¿El clasificador es justo con esta definición?**
-6. [**Calibración:**](../../ayudas/justicia.md#calibracion) agrupe la probabilidad predicha en
-   10 intervalos de 0,1 y calcule, en cada intervalo y para cada sexo, la proporción real de
-   clientes que abandonan; grafique la curva de calibración de cada sexo junto a la diagonal.
-   **¿En cuántos intervalos la diferencia entre sexos supera el 5 %? ¿La proporción real se
-   parece a la probabilidad predicha (el centro del intervalo)? ¿Por qué un modelo entrenado con
-   `class_weight="balanced"` puede estar descalibrado? ¿El clasificador es justo con esta
-   definición?**
+   [exactitud](../../ayudas/exactitud.md) del modelo en cada sexo. **¿El clasificador predice lo
+   mismo para mujeres y hombres? Según la regla del 5 %, ¿el clasificador es justo?**
+6. [**Calibración:**](../../ayudas/justicia.md#calibracion) agrupe la probabilidad predicha en 10
+   intervalos de 0,1 y calcule, en cada intervalo y para cada sexo, la proporción real de clientes
+   que abandonan; grafique la curva de calibración de cada sexo junto a la diagonal y aplique la
+   regla en cada intervalo. **¿El clasificador predice lo mismo para mujeres y hombres? Según la
+   regla del 5 %, ¿el clasificador es justo?**
 7. [**Discriminación causal:**](../../ayudas/justicia.md#discriminacion-causal) cree una copia
-   idéntica del conjunto de prueba en la que se intercambie el sexo de cada cliente
-   (`"Female"` por `"Male"` y al revés), calcule las nuevas decisiones y el porcentaje de clientes
-   cuya decisión cambia. **¿A qué porcentaje de clientes les cambia la decisión solo por su sexo?
-   ¿Al cambiar de mujer a hombre la probabilidad de abandono sube o baja? Según la regla del 5 %,
-   ¿el clasificador es justo?**
+   idéntica del conjunto de prueba en la que se intercambie el sexo de cada cliente (`"Female"`
+   por `"Male"` y al revés), calcule las nuevas decisiones y el porcentaje de clientes cuya
+   decisión cambia; aplique la regla a ese porcentaje. **¿El clasificador predice lo mismo para
+   mujeres y hombres? Según la regla del 5 %, ¿el clasificador es justo?**
 8. **Conclusiones:** construya una tabla con una fila por definición y las columnas: valor para
    mujeres, valor para hombres (o porcentaje de decisiones que cambian), diferencia y conclusión
    (justo o no justo).
