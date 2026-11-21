@@ -4,6 +4,11 @@ site_author: Juan Pablo Reyes
 site_url: https://datascience-uniandes.github.io/PracticasMachineLearning/
 copyright: Universidad de los Andes · Ciencia de Datos
 
+# Práctica 7 (justicia) oculta por ahora: sus archivos no se publican.
+exclude_docs: |
+  talleres/practica-7/
+  ayudas/justicia.md
+
 theme:
   name: material
   language: es

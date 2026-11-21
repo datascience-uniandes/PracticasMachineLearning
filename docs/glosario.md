@@ -26,6 +26,11 @@ cómo está construido.
 
 Modelo que clasifica mediante una secuencia de preguntas sobre las variables (por ejemplo, ¿edad > 45?), organizadas como un árbol. Cada hoja asigna una clase. Los árboles muy profundos tienden al [sobreajuste](#sobreajuste).
 
+### Atributo sensible { #atributo-sensible }
+
+Atributo protegido, como el sexo, la edad o el origen, frente al cual se evalúa si un modelo
+trata a las personas de manera igualitaria.
+
 ### AUC { #auc }
 
 Área bajo la [curva ROC](#curva-roc) (_Area Under the Curve_). Resume en un número entre 0 y 1 la capacidad de un clasificador para ordenar los positivos por encima de los negativos: 0,5 equivale a adivinar al azar y 1 a un clasificador perfecto.
@@ -38,6 +43,12 @@ Técnica que estima la variabilidad de una métrica tomando muchas muestras con 
 mismo conjunto de datos y calculando la métrica en cada una.
 
 ## C
+
+### Calibración { #calibracion }
+
+Propiedad de un clasificador cuyas probabilidades predichas coinciden con la proporción real de
+positivos: de los individuos con probabilidad 0,7, el 70 % es realmente positivo. Como medida de
+justicia, exige que esto se cumpla por igual en todos los grupos.
 
 ### Centroide { #centroide }
 
@@ -133,6 +144,11 @@ Diagrama en forma de árbol que muestra en qué orden y a qué distancia se unen
 En un problema de clasificación, situación en la que una clase tiene muchos más registros que la
 otra. Un modelo puede obtener una exactitud alta prediciendo siempre la clase mayoritaria, así que
 hay que evaluarlo con métricas que consideren ambas clases.
+
+### Discriminación causal { #discriminacion-causal }
+
+Medida de justicia que exige que dos individuos con los mismos atributos, que solo difieren en el
+[atributo sensible](#atributo-sensible), reciban la misma decisión.
 
 ### Distribución { #distribucion }
 
@@ -242,6 +258,11 @@ _heterocedasticidad_.
 _Individual Conditional Expectation_. Gráfico con una curva por registro que muestra cómo cambia
 la predicción al variar una sola variable, dejando fijas las demás.
 
+### Igualdad de exactitud { #igualdad-exactitud }
+
+Medida de justicia que exige que el clasificador tenga la misma [exactitud](#exactitud) en todos
+los grupos del [atributo sensible](#atributo-sensible).
+
 ### Imagen de Docker { #imagen-docker }
 
 Plantilla inmutable, organizada por capas, con el sistema base, las dependencias y el código de
@@ -272,7 +293,10 @@ Suma de las distancias al cuadrado de cada registro al [centroide](#centroide) d
 
 ## J
 
-_Sin términos por ahora._
+### Justicia algorítmica { #justicia-algoritmica }
+
+Conjunto de medidas que evalúan si un modelo predice de manera igualitaria para todos los valores
+de un [atributo sensible](#atributo-sensible), y de técnicas para corregir sus sesgos.
 
 ## K
 
@@ -363,6 +387,21 @@ Valor atípico: un registro muy alejado del resto. En un gráfico de caja aparec
 fuera de los bigotes, a más de 1,5 veces el rango intercuartílico de la caja.
 
 ## P
+
+### Paridad de predicción { #paridad-prediccion }
+
+Medida de justicia que exige que el clasificador tenga la misma [precisión](#precision) en todos
+los grupos del [atributo sensible](#atributo-sensible).
+
+### Paridad estadística { #paridad-estadistica }
+
+Medida de justicia que exige que todos los grupos del [atributo sensible](#atributo-sensible)
+tengan la misma probabilidad de ser asignados a la clase positiva.
+
+### Paridad estadística condicional { #paridad-estadistica-condicional }
+
+Variante de la [paridad estadística](#paridad-estadistica) que compara los grupos solo entre
+individuos con los mismos factores legítimos, por ejemplo, el mismo rango de edad.
 
 ### Precisión { #precision }
 
